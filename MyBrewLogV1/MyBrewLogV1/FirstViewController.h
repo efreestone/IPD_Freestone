@@ -4,16 +4,17 @@
 // March 18th, 2015
 
 //
-//  SecondViewController.h
-//  My Brew Log V1
+//  FirstViewController.h
+//  MyBrewLogV1
 //
 //  Created by Elijah Freestone on 3/18/15.
 //  Copyright (c) 2015 Elijah Freestone. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
+#import <Parse/Parse.h>
 
-@interface SecondViewController : UIViewController
+@interface FirstViewController : UIViewController
 
 
 @end

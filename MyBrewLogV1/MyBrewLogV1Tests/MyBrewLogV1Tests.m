@@ -1,6 +1,6 @@
 //
-//  My_Brew_Log_V1Tests.m
-//  My Brew Log V1Tests
+//  MyBrewLogV1Tests.m
+//  MyBrewLogV1Tests
 //
 //  Created by Elijah Freestone on 3/18/15.
 //  Copyright (c) 2015 Elijah Freestone. All rights reserved.
@@ -9,11 +9,11 @@
 #import <UIKit/UIKit.h>
 #import <XCTest/XCTest.h>
 
-@interface My_Brew_Log_V1Tests : XCTestCase
+@interface MyBrewLogV1Tests : XCTestCase
 
 @end
 
-@implementation My_Brew_Log_V1Tests
+@implementation MyBrewLogV1Tests
 
 - (void)setUp {
     [super setUp];
