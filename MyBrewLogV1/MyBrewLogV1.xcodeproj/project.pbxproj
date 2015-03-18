@@ -524,6 +524,7 @@
 				B852C83D1ABA230500D7BFD4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		B852C83E1ABA230500D7BFD4 /* Build configuration list for PBXNativeTarget "MyBrewLogV1Tests" */ = {
 			isa = XCConfigurationList;
@@ -532,6 +533,7 @@
 				B852C8401ABA230500D7BFD4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
