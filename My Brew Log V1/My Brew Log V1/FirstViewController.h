@@ -1,3 +1,8 @@
+// Elijah Freestone
+// IPD1 1503
+// Week 3
+// March 18th, 2015
+
 //
 //  FirstViewController.h
 //  My Brew Log V1
@@ -7,6 +12,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <Parse/Parse.h>
 
 @interface FirstViewController : UIViewController
 

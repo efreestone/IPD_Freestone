@@ -1,3 +1,8 @@
+// Elijah Freestone
+// IPD1 1503
+// Week 3
+// March 18th, 2015
+
 //
 //  FirstViewController.m
 //  My Brew Log V1
@@ -16,7 +21,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+    
+    //Test parse
+    PFObject *testObject = [PFObject objectWithClassName:@"TestObject"];
+    testObject[@"foo"] = @"bar";
+    [testObject saveInBackground];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -1,3 +1,8 @@
+// Elijah Freestone
+// IPD1 1503
+// Week 3
+// March 18th, 2015
+
 //
 //  SecondViewController.m
 //  My Brew Log V1
