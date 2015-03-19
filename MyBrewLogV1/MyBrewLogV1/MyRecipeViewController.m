@@ -11,13 +11,13 @@
 //  Copyright (c) 2015 Elijah Freestone. All rights reserved.
 //
 
-#import "FirstViewController.h"
+#import "MyRecipeViewController.h"
 
-@interface FirstViewController ()
+@interface MyRecipeViewController ()
 
 @end
 
-@implementation FirstViewController
+@implementation MyRecipeViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];

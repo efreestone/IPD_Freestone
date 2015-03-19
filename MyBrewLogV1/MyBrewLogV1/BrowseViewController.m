@@ -11,13 +11,13 @@
 //  Copyright (c) 2015 Elijah Freestone. All rights reserved.
 //
 
-#import "SecondViewController.h"
+#import "BrowseViewController.h"
 
-@interface SecondViewController ()
+@interface BrowseViewController ()
 
 @end
 
-@implementation SecondViewController
+@implementation BrowseViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];

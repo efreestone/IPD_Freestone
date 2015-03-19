@@ -13,7 +13,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SecondViewController : UIViewController
+@interface BrowseViewController : UIViewController
 
 
 @end

@@ -9,8 +9,8 @@
 /* Begin PBXBuildFile section */
 		B852C81B1ABA230500D7BFD4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B852C81A1ABA230500D7BFD4 /* main.m */; };
 		B852C81E1ABA230500D7BFD4 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B852C81D1ABA230500D7BFD4 /* AppDelegate.m */; };
-		B852C8211ABA230500D7BFD4 /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B852C8201ABA230500D7BFD4 /* FirstViewController.m */; };
-		B852C8241ABA230500D7BFD4 /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B852C8231ABA230500D7BFD4 /* SecondViewController.m */; };
+		B852C8211ABA230500D7BFD4 /* MyRecipeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B852C8201ABA230500D7BFD4 /* MyRecipeViewController.m */; };
+		B852C8241ABA230500D7BFD4 /* BrowseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B852C8231ABA230500D7BFD4 /* BrowseViewController.m */; };
 		B852C8271ABA230500D7BFD4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B852C8251ABA230500D7BFD4 /* Main.storyboard */; };
 		B852C8291ABA230500D7BFD4 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B852C8281ABA230500D7BFD4 /* Images.xcassets */; };
 		B852C82C1ABA230500D7BFD4 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = B852C82A1ABA230500D7BFD4 /* LaunchScreen.xib */; };
@@ -53,10 +53,10 @@
 		B852C81A1ABA230500D7BFD4 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		B852C81C1ABA230500D7BFD4 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		B852C81D1ABA230500D7BFD4 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		B852C81F1ABA230500D7BFD4 /* FirstViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FirstViewController.h; sourceTree = "<group>"; };
-		B852C8201ABA230500D7BFD4 /* FirstViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
-		B852C8221ABA230500D7BFD4 /* SecondViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SecondViewController.h; sourceTree = "<group>"; };
-		B852C8231ABA230500D7BFD4 /* SecondViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SecondViewController.m; sourceTree = "<group>"; };
+		B852C81F1ABA230500D7BFD4 /* MyRecipeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyRecipeViewController.h; sourceTree = "<group>"; };
+		B852C8201ABA230500D7BFD4 /* MyRecipeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyRecipeViewController.m; sourceTree = "<group>"; };
+		B852C8221ABA230500D7BFD4 /* BrowseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BrowseViewController.h; sourceTree = "<group>"; };
+		B852C8231ABA230500D7BFD4 /* BrowseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BrowseViewController.m; sourceTree = "<group>"; };
 		B852C8261ABA230500D7BFD4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B852C8281ABA230500D7BFD4 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		B852C82B1ABA230500D7BFD4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -144,10 +144,10 @@
 				B852C8471ABA234A00D7BFD4 /* images */,
 				B852C81C1ABA230500D7BFD4 /* AppDelegate.h */,
 				B852C81D1ABA230500D7BFD4 /* AppDelegate.m */,
-				B852C81F1ABA230500D7BFD4 /* FirstViewController.h */,
-				B852C8201ABA230500D7BFD4 /* FirstViewController.m */,
-				B852C8221ABA230500D7BFD4 /* SecondViewController.h */,
-				B852C8231ABA230500D7BFD4 /* SecondViewController.m */,
+				B852C81F1ABA230500D7BFD4 /* MyRecipeViewController.h */,
+				B852C8201ABA230500D7BFD4 /* MyRecipeViewController.m */,
+				B852C8221ABA230500D7BFD4 /* BrowseViewController.h */,
+				B852C8231ABA230500D7BFD4 /* BrowseViewController.m */,
 				B852C8251ABA230500D7BFD4 /* Main.storyboard */,
 				B852C8281ABA230500D7BFD4 /* Images.xcassets */,
 				B852C82A1ABA230500D7BFD4 /* LaunchScreen.xib */,
@@ -320,9 +320,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B852C8241ABA230500D7BFD4 /* SecondViewController.m in Sources */,
+				B852C8241ABA230500D7BFD4 /* BrowseViewController.m in Sources */,
 				B852C81E1ABA230500D7BFD4 /* AppDelegate.m in Sources */,
-				B852C8211ABA230500D7BFD4 /* FirstViewController.m in Sources */,
+				B852C8211ABA230500D7BFD4 /* MyRecipeViewController.m in Sources */,
 				B852C81B1ABA230500D7BFD4 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
