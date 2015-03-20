@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="13F1066" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="49e-Tb-3d3">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Timers-->
@@ -29,13 +30,25 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OiA-gH-U6C">
+                                <rect key="frame" x="0.0" y="20" width="600" height="44"/>
+                                <items>
+                                    <navigationItem title="Timers" id="uF7-mC-UO3">
+                                        <barButtonItem key="leftBarButtonItem" title="Item" id="QfE-wW-1jt"/>
+                                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="h7f-s2-fmY"/>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="centerY" secondItem="05k-bv-dQu" secondAttribute="centerY" id="6pU-uS-V0l"/>
+                            <constraint firstAttribute="centerX" secondItem="OiA-gH-U6C" secondAttribute="centerX" id="F8g-DB-Zt1"/>
+                            <constraint firstItem="OiA-gH-U6C" firstAttribute="width" secondItem="kBi-Xn-1r4" secondAttribute="width" id="Fcj-kd-q6m"/>
                             <constraint firstAttribute="centerX" secondItem="05k-bv-dQu" secondAttribute="centerX" id="Mp5-W2-5hr"/>
                             <constraint firstItem="05k-bv-dQu" firstAttribute="centerX" secondItem="7pg-Aq-aTD" secondAttribute="centerX" id="T8R-mF-NGl"/>
                             <constraint firstItem="7pg-Aq-aTD" firstAttribute="top" secondItem="05k-bv-dQu" secondAttribute="bottom" id="mSb-9i-4fc"/>
+                            <constraint firstItem="OiA-gH-U6C" firstAttribute="top" secondItem="kBi-Xn-1r4" secondAttribute="top" constant="20" id="ymR-Md-ae0"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Timer" image="first" id="vnW-FC-FXO"/>
@@ -72,20 +85,37 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LUi-Vp-T1J">
+                                <rect key="frame" x="0.0" y="20" width="600" height="44"/>
+                                <items>
+                                    <navigationItem title="My Recipes" id="jQD-qe-Bt0">
+                                        <barButtonItem key="leftBarButtonItem" title="Item" id="5Lb-YX-P0B"/>
+                                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="wDn-0P-q11"/>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="centerX" secondItem="KQZ-1w-vlD" secondAttribute="centerX" id="6BV-lF-sBN"/>
+                            <constraint firstItem="LUi-Vp-T1J" firstAttribute="top" secondItem="tsR-hK-woN" secondAttribute="topMargin" constant="20" id="Cyb-gj-4Ar"/>
+                            <constraint firstAttribute="centerX" secondItem="LUi-Vp-T1J" secondAttribute="centerX" id="Erk-Jy-h5k"/>
                             <constraint firstItem="A5M-7J-77L" firstAttribute="top" secondItem="KQZ-1w-vlD" secondAttribute="bottom" constant="8" symbolic="YES" id="cfb-er-3JN"/>
                             <constraint firstItem="A5M-7J-77L" firstAttribute="centerX" secondItem="KQZ-1w-vlD" secondAttribute="centerX" id="e1l-AV-tCB"/>
                             <constraint firstAttribute="centerY" secondItem="KQZ-1w-vlD" secondAttribute="centerY" id="exm-UA-ej4"/>
+                            <constraint firstAttribute="width" secondItem="LUi-Vp-T1J" secondAttribute="width" id="fPa-cm-Hgx"/>
+                            <constraint firstAttribute="centerX" secondItem="LUi-Vp-T1J" secondAttribute="centerX" id="t2b-r2-lrI"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="My Recipes" image="first" id="acW-dT-cKf"/>
+                    <toolbarItems>
+                        <barButtonItem title="Item" id="5u1-Cv-iiQ"/>
+                    </toolbarItems>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="750" y="-958"/>
+            <point key="canvasLocation" x="764" y="-941"/>
         </scene>
         <!--Settings-->
         <scene sceneID="rp4-mR-Xfx">
@@ -112,6 +142,15 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TWS-aP-QbL">
+                                <rect key="frame" x="0.0" y="20" width="600" height="44"/>
+                                <items>
+                                    <navigationItem title="Settings" id="w3L-cx-rX9">
+                                        <barButtonItem key="leftBarButtonItem" title="Item" id="p8B-f2-BZu"/>
+                                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="N0w-1r-Xn8"/>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -119,6 +158,9 @@
                             <constraint firstAttribute="centerX" secondItem="Bmn-TJ-oeC" secondAttribute="centerX" id="N8H-ec-VMw"/>
                             <constraint firstAttribute="centerX" secondItem="0pM-lP-0bb" secondAttribute="centerX" id="SpX-CD-cWH"/>
                             <constraint firstItem="Bmn-TJ-oeC" firstAttribute="top" secondItem="0pM-lP-0bb" secondAttribute="bottom" id="UPx-cs-kXq"/>
+                            <constraint firstItem="TWS-aP-QbL" firstAttribute="width" secondItem="V5r-Uo-HLl" secondAttribute="width" id="XeV-pX-3EB"/>
+                            <constraint firstAttribute="centerX" secondItem="TWS-aP-QbL" secondAttribute="centerX" id="ZZY-us-W76"/>
+                            <constraint firstItem="TWS-aP-QbL" firstAttribute="top" secondItem="V5r-Uo-HLl" secondAttribute="top" constant="20" id="mOx-cH-Uua"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Settings" image="second" id="1CR-hf-7Pb"/>
@@ -152,11 +194,23 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0Gt-zg-p4X">
+                                <rect key="frame" x="0.0" y="20" width="600" height="44"/>
+                                <items>
+                                    <navigationItem title="Browse" id="vTm-P8-6oR">
+                                        <barButtonItem key="leftBarButtonItem" systemItem="organize" id="1Co-jO-WLX"/>
+                                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="pQN-fh-cdk"/>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="NDk-cv-Gan" firstAttribute="top" secondItem="zEq-FU-wV5" secondAttribute="bottom" constant="8" symbolic="YES" id="Day-4N-Vmt"/>
                             <constraint firstItem="NDk-cv-Gan" firstAttribute="centerX" secondItem="zEq-FU-wV5" secondAttribute="centerX" id="JgO-Fn-dHn"/>
+                            <constraint firstAttribute="centerX" secondItem="0Gt-zg-p4X" secondAttribute="centerX" id="Olv-E1-3Xs"/>
+                            <constraint firstAttribute="width" secondItem="0Gt-zg-p4X" secondAttribute="width" id="drh-Ia-WaX"/>
+                            <constraint firstItem="0Gt-zg-p4X" firstAttribute="top" secondItem="QS5-Rx-YEW" secondAttribute="top" constant="20" id="gdG-h8-4MK"/>
                             <constraint firstAttribute="centerX" secondItem="zEq-FU-wV5" secondAttribute="centerX" id="qqM-NS-xev"/>
                             <constraint firstAttribute="centerY" secondItem="zEq-FU-wV5" secondAttribute="centerY" id="qzY-Ky-pLD"/>
                         </constraints>

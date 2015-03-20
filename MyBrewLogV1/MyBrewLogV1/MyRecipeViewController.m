@@ -67,10 +67,10 @@
 /**** 
  Log user out when view disappears. This is only to test log out 
  ****/
--(void)viewDidDisappear:(BOOL)animated {
-    [PFUser logOut];
-    NSLog(@"User logged out");
-}
+//-(void)viewDidDisappear:(BOOL)animated {
+//    [PFUser logOut];
+//    NSLog(@"User logged out");
+//}
 
 #pragma mark - PFLogInViewControllerDelegate
 
