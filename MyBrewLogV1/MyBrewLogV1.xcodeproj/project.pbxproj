@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B80274671ABCCE8E00CF5540 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B80274661ABCCE8E00CF5540 /* Social.framework */; };
+		B80274691ABCCE9500CF5540 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B80274681ABCCE9500CF5540 /* Accounts.framework */; };
 		B852C81B1ABA230500D7BFD4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B852C81A1ABA230500D7BFD4 /* main.m */; };
 		B852C81E1ABA230500D7BFD4 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B852C81D1ABA230500D7BFD4 /* AppDelegate.m */; };
 		B852C8211ABA230500D7BFD4 /* MyRecipeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B852C8201ABA230500D7BFD4 /* MyRecipeViewController.m */; };
@@ -50,6 +52,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B80274661ABCCE8E00CF5540 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		B80274681ABCCE9500CF5540 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		B852C8151ABA230500D7BFD4 /* MyBrewLogV1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyBrewLogV1.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B852C8191ABA230500D7BFD4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B852C81A1ABA230500D7BFD4 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -96,6 +100,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B80274691ABCCE9500CF5540 /* Accounts.framework in Frameworks */,
+				B80274671ABCCE8E00CF5540 /* Social.framework in Frameworks */,
 				B852C8741ABA247F00D7BFD4 /* libsqlite3.dylib in Frameworks */,
 				B852C8721ABA247600D7BFD4 /* libz.dylib in Frameworks */,
 				B852C8701ABA247000D7BFD4 /* SystemConfiguration.framework in Frameworks */,
@@ -128,6 +134,8 @@
 		B852C80C1ABA230500D7BFD4 = {
 			isa = PBXGroup;
 			children = (
+				B80274681ABCCE9500CF5540 /* Accounts.framework */,
+				B80274661ABCCE8E00CF5540 /* Social.framework */,
 				B852C8171ABA230500D7BFD4 /* MyBrewLogV1 */,
 				B852C8341ABA230500D7BFD4 /* MyBrewLogV1Tests */,
 				B852C8161ABA230500D7BFD4 /* Products */,
