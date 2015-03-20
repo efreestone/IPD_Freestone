@@ -35,6 +35,8 @@
 		B852C8701ABA247000D7BFD4 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B852C86F1ABA247000D7BFD4 /* SystemConfiguration.framework */; };
 		B852C8721ABA247600D7BFD4 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B852C8711ABA247600D7BFD4 /* libz.dylib */; };
 		B852C8741ABA247F00D7BFD4 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B852C8731ABA247F00D7BFD4 /* libsqlite3.dylib */; };
+		B8DDE1991ABB7E840006A013 /* TimersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B8DDE1981ABB7E840006A013 /* TimersViewController.m */; };
+		B8DDE19C1ABB7F000006A013 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B8DDE19B1ABB7F000006A013 /* SettingsViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,6 +85,10 @@
 		B852C86F1ABA247000D7BFD4 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		B852C8711ABA247600D7BFD4 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		B852C8731ABA247F00D7BFD4 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		B8DDE1971ABB7E840006A013 /* TimersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimersViewController.h; sourceTree = "<group>"; };
+		B8DDE1981ABB7E840006A013 /* TimersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimersViewController.m; sourceTree = "<group>"; };
+		B8DDE19A1ABB7F000006A013 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
+		B8DDE19B1ABB7F000006A013 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -148,6 +154,10 @@
 				B852C8201ABA230500D7BFD4 /* MyRecipeViewController.m */,
 				B852C8221ABA230500D7BFD4 /* BrowseViewController.h */,
 				B852C8231ABA230500D7BFD4 /* BrowseViewController.m */,
+				B8DDE1971ABB7E840006A013 /* TimersViewController.h */,
+				B8DDE1981ABB7E840006A013 /* TimersViewController.m */,
+				B8DDE19A1ABB7F000006A013 /* SettingsViewController.h */,
+				B8DDE19B1ABB7F000006A013 /* SettingsViewController.m */,
 				B852C8251ABA230500D7BFD4 /* Main.storyboard */,
 				B852C8281ABA230500D7BFD4 /* Images.xcassets */,
 				B852C82A1ABA230500D7BFD4 /* LaunchScreen.xib */,
@@ -320,8 +330,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B8DDE1991ABB7E840006A013 /* TimersViewController.m in Sources */,
 				B852C8241ABA230500D7BFD4 /* BrowseViewController.m in Sources */,
 				B852C81E1ABA230500D7BFD4 /* AppDelegate.m in Sources */,
+				B8DDE19C1ABB7F000006A013 /* SettingsViewController.m in Sources */,
 				B852C8211ABA230500D7BFD4 /* MyRecipeViewController.m in Sources */,
 				B852C81B1ABA230500D7BFD4 /* main.m in Sources */,
 			);
