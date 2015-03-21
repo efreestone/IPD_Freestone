@@ -14,14 +14,18 @@
 #import "MyRecipeViewController.h"
 #import <ParseUI/ParseUI.h>
 
-@interface MyRecipeViewController () <PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate>
+@interface MyRecipeViewController () <UITableViewDelegate, UITableViewDataSource, PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate>
 
 @end
 
-@implementation MyRecipeViewController
+@implementation MyRecipeViewController {
+    NSArray *recipesArray;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    recipesArray = [NSArray arrayWithObjects:@"Egg Benedict", @"Mushroom Risotto", @"Full Breakfast", @"Hamburger", @"Ham and Egg Sandwich", @"Creme Brelee", @"White Chocolate Donut", @"Starbucks Coffee", @"Vegetable Curry", @"Instant Noodle with Egg", @"Noodle with BBQ Pork", @"Japanese Noodle with Pork", @"Green Tea", @"Thai Shrimp Cake", @"Angry Birds Cake", @"Ham and Cheese Panini", nil];
     
     //Grab user and username
     PFUser *user = [PFUser currentUser];
@@ -71,6 +75,29 @@
 //    [PFUser logOut];
 //    NSLog(@"User logged out");
 //}
+
+#pragma mark - Table view data source
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return [recipesArray count];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *cellID = @"MyRecipeCell";
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
+    
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
+    }
+    
+    cell.textLabel.text = [recipesArray objectAtIndex:indexPath.row];
+    cell.imageView.image = [UIImage imageNamed:@"glasses.jpg"];
+    
+    return cell;
+}
 
 #pragma mark - PFLogInViewControllerDelegate
 
