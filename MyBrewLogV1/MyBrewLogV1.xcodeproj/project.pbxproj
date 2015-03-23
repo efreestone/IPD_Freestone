@@ -14,6 +14,7 @@
 		B82A34FD1ABE2867001CAFC0 /* Calibri Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B82A34FA1ABE2867001CAFC0 /* Calibri Bold.ttf */; };
 		B82A34FE1ABE2867001CAFC0 /* Calibri.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B82A34FB1ABE2867001CAFC0 /* Calibri.ttf */; };
 		B82A35011ABE2998001CAFC0 /* CooperBlackStd.otf in Resources */ = {isa = PBXBuildFile; fileRef = B82A35001ABE2998001CAFC0 /* CooperBlackStd.otf */; };
+		B84352CD1AC0D7210075750E /* barrels.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B84352CC1AC0D7210075750E /* barrels.jpg */; };
 		B852C81B1ABA230500D7BFD4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B852C81A1ABA230500D7BFD4 /* main.m */; };
 		B852C81E1ABA230500D7BFD4 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B852C81D1ABA230500D7BFD4 /* AppDelegate.m */; };
 		B852C8211ABA230500D7BFD4 /* MyRecipeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B852C8201ABA230500D7BFD4 /* MyRecipeViewController.m */; };
@@ -67,6 +68,7 @@
 		B82A34FA1ABE2867001CAFC0 /* Calibri Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Calibri Bold.ttf"; sourceTree = "<group>"; };
 		B82A34FB1ABE2867001CAFC0 /* Calibri.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Calibri.ttf; sourceTree = "<group>"; };
 		B82A35001ABE2998001CAFC0 /* CooperBlackStd.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = CooperBlackStd.otf; sourceTree = "<group>"; };
+		B84352CC1AC0D7210075750E /* barrels.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = barrels.jpg; sourceTree = "<group>"; };
 		B852C8151ABA230500D7BFD4 /* MyBrewLogV1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyBrewLogV1.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B852C8191ABA230500D7BFD4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B852C81A1ABA230500D7BFD4 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -257,6 +259,7 @@
 		B852C8471ABA234A00D7BFD4 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				B84352CC1AC0D7210075750E /* barrels.jpg */,
 				B8B3D47F1ABFCBBF00BDC1C6 /* splash-logo.png */,
 				B82A34F41ABE1AB0001CAFC0 /* glasses.jpg */,
 				B852C8481ABA234A00D7BFD4 /* Icon-76.png */,
@@ -359,6 +362,7 @@
 				B82A34F51ABE1AB0001CAFC0 /* glasses.jpg in Resources */,
 				B82A35011ABE2998001CAFC0 /* CooperBlackStd.otf in Resources */,
 				B82A34FE1ABE2867001CAFC0 /* Calibri.ttf in Resources */,
+				B84352CD1AC0D7210075750E /* barrels.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

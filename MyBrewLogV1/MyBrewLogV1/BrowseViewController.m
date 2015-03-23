@@ -20,6 +20,7 @@
 
 @implementation BrowseViewController {
     NSArray *recipesArray;
+    IBOutlet UISearchBar *searchBar;
 }
 
 - (void)viewDidLoad {
@@ -27,12 +28,29 @@
     
     recipesArray = [NSArray arrayWithObjects:@"Egg Benedict", @"Mushroom Risotto", @"Full Breakfast", @"Hamburger", @"Ham and Egg Sandwich", @"Creme Brelee", @"White Chocolate Donut", @"Starbucks Coffee", @"Vegetable Curry", @"Instant Noodle with Egg", @"Noodle with BBQ Pork", @"Japanese Noodle with Pork", @"Green Tea", @"Thai Shrimp Cake", @"Angry Birds Cake", @"Ham and Cheese Panini", nil];
     
+    //Set offset and hide search bar
+    self.tableView.contentOffset = CGPointMake(0, (searchBar.frame.size.height) - self.tableView.contentOffset.y);
+    searchBar.hidden = YES;
+    
     // Do any additional setup after loading the view, typically from a nib.
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(IBAction)onSortClick:(id)sender {
+    if (searchBar.isHidden) {
+        self.tableView.contentOffset = CGPointMake(0, -searchBar.frame.size.height + self.tableView.contentOffset.y);
+        searchBar.hidden = NO;
+        NSLog(@"show");
+    } else if (!searchBar.isHidden) {
+        self.tableView.contentOffset = CGPointMake(0, searchBar.frame.size.height + self.tableView.contentOffset.y);
+        searchBar.hidden = YES;
+        NSLog(@"hidden");
+    }
+    
 }
 
 #pragma mark - Table view data source
@@ -63,12 +81,11 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *cellID = @"BrowseCell";
-    
-    //UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
+
     CustomTableViewCell *cell = (CustomTableViewCell *) [tableView dequeueReusableCellWithIdentifier:cellID];
     
     cell.recipeNameLabel.text = [recipesArray objectAtIndex:indexPath.row];
-    cell.cellImage.image = [UIImage imageNamed:@"glasses.jpg"];
+    cell.cellImage.image = [UIImage imageNamed:@"barrels.jpg"];
     
     //Override to remove extra seperator lines after the last cell
     [self.tableView setTableFooterView:[[UIView alloc] initWithFrame:CGRectMake(0,0,0,0)]];
