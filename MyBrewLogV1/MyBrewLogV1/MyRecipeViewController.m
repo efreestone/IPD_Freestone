@@ -12,20 +12,38 @@
 //
 
 #import "MyRecipeViewController.h"
+#import "CustomTableViewCell.h"
+#import "AppDelegate.h"
 #import <ParseUI/ParseUI.h>
 
-@interface MyRecipeViewController () <UITableViewDelegate, UITableViewDataSource, PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate>
+@interface MyRecipeViewController () <UITableViewDelegate, UITableViewDataSource, PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate> 
 
 @end
 
 @implementation MyRecipeViewController {
     NSArray *recipesArray;
+    IBOutlet UISearchBar *searchBar;
+    CGRect originalSearchFrameRect;
+    CGRect searchFrameRect;
+    CGFloat zeroFloat;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    originalSearchFrameRect = searchBar.frame;
+    searchFrameRect = searchBar.frame;
+    zeroFloat = 0;
+    
+    searchFrameRect.size.height = zeroFloat;
+    
+//    myRecipeVC = self;
+    
     recipesArray = [NSArray arrayWithObjects:@"Egg Benedict", @"Mushroom Risotto", @"Full Breakfast", @"Hamburger", @"Ham and Egg Sandwich", @"Creme Brelee", @"White Chocolate Donut", @"Starbucks Coffee", @"Vegetable Curry", @"Instant Noodle with Egg", @"Noodle with BBQ Pork", @"Japanese Noodle with Pork", @"Green Tea", @"Thai Shrimp Cake", @"Angry Birds Cake", @"Ham and Cheese Panini", nil];
+    
+    self.tableView.contentOffset = CGPointMake(0, (searchBar.frame.size.height) - self.tableView.contentOffset.y);
+    searchBar.hidden = YES;
+    //searchBar.frame = searchFrameRect;
     
     //Grab user and username
     PFUser *user = [PFUser currentUser];
@@ -44,7 +62,34 @@
 
 -(void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    //Check if user is logged in, in viewDidAppear to be checked whenever this tab is shown
+    //This is used to present the login again after the user logs out on settings
+    [self isUserLoggedIn];
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+-(IBAction)onSortClick:(id)sender {
+    if (searchBar.isHidden) {
+        self.tableView.contentOffset = CGPointMake(0, -searchBar.frame.size.height + self.tableView.contentOffset.y);
+        searchBar.hidden = NO;
+        //searchBar.frame = originalSearchFrameRect;
+    } else if (!searchBar.isHidden) {
+//        CGFloat zero = 0;
+//        searchFrameRect.size.height = zero;
+        self.tableView.contentOffset = CGPointMake(0, searchBar.frame.size.height + self.tableView.contentOffset.y);
+        searchBar.hidden = YES;
+//        searchBar.frame = searchFrameRect;
+    }
     
+}
+
+//Check if user is logged in, present login if not
+-(void)isUserLoggedIn {
+    NSLog(@"isUserLoggedIn called");
     if (![PFUser currentUser]) { // No user logged in
         NSLog(@"No user logged in");
         // Create the log in view controller
@@ -60,21 +105,10 @@
         
         // Present the log in view controller
         [self presentViewController:logInViewController animated:YES completion:NULL];
+    } else {
+        NSLog(@"User is logged in from isUserLoggedIn");
     }
 }
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-/**** 
- Log user out when view disappears. This is only to test log out 
- ****/
-//-(void)viewDidDisappear:(BOOL)animated {
-//    [PFUser logOut];
-//    NSLog(@"User logged out");
-//}
 
 #pragma mark - Table view data source
 
@@ -83,18 +117,36 @@
     return [recipesArray count];
 }
 
+-(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // Remove seperator inset
+    if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
+        [cell setSeparatorInset:UIEdgeInsetsZero];
+    }
+    
+    // Prevent the cell from inheriting the Table View's margin settings
+    if ([cell respondsToSelector:@selector(setPreservesSuperviewLayoutMargins:)]) {
+        [cell setPreservesSuperviewLayoutMargins:NO];
+    }
+    
+    // Explictly set your cell's layout margins
+    if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
+        [cell setLayoutMargins:UIEdgeInsetsZero];
+    }
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *cellID = @"MyRecipeCell";
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
+    //UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
+    CustomTableViewCell *cell = (CustomTableViewCell *) [tableView dequeueReusableCellWithIdentifier:cellID];
     
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
-    }
+    cell.recipeNameLabel.text = [recipesArray objectAtIndex:indexPath.row];
+    cell.cellImage.image = [UIImage imageNamed:@"glasses.jpg"];
     
-    cell.textLabel.text = [recipesArray objectAtIndex:indexPath.row];
-    cell.imageView.image = [UIImage imageNamed:@"glasses.jpg"];
+    //Override to remove extra seperator lines after the last cell
+    [self.tableView setTableFooterView:[[UIView alloc] initWithFrame:CGRectMake(0,0,0,0)]];
     
     return cell;
 }

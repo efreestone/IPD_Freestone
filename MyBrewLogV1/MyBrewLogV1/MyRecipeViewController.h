@@ -14,8 +14,12 @@
 #import <UIKit/UIKit.h>
 #import <Parse/Parse.h>
 
-@interface MyRecipeViewController : UITableViewController 
+@interface MyRecipeViewController : UITableViewController
 
+//Declare table view
+@property (strong, nonatomic) IBOutlet UITableView *myTableView;
 
 @end
+
+
 

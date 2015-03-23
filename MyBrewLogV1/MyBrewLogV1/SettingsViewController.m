@@ -12,14 +12,24 @@
 //
 
 #import "SettingsViewController.h"
+#import "MyRecipeViewController.h"
+#import <Parse/Parse.h>
 
 @interface SettingsViewController ()
 
 @end
 
-@implementation SettingsViewController
+@implementation SettingsViewController {
+    MyRecipeViewController *myRecipes;
+}
 
 - (void)viewDidLoad {
+//    myRecipes = (MyRecipeViewController*)self.window.rootViewController;
+//    UIViewController *rootVC = self.parentViewController;
+//    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main"
+//                                                         bundle: nil];
+//    myRecipes = [storyboard instantiateViewControllerWithIdentifier:@"MyRecipe"];
+    
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 }
@@ -27,6 +37,14 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(IBAction)onLogOutClick:(id)sender {
+    //Change tab to My Recipes and log out user. This also triggers presenting the login screen
+    [self.tabBarController setSelectedIndex:0];
+    [PFUser logOut];
+    
+    NSLog(@"user logged out from settings");
 }
 
 /*
