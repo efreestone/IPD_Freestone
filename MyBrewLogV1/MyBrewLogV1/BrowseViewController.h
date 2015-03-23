@@ -13,7 +13,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface BrowseViewController : UIViewController
+@interface BrowseViewController : UITableViewController
+
+//Declare table view
+@property (strong, nonatomic) IBOutlet UITableView *browseTableView;
 
 
 @end

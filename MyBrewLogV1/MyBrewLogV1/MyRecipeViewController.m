@@ -26,6 +26,7 @@
     CGRect originalSearchFrameRect;
     CGRect searchFrameRect;
     CGFloat zeroFloat;
+    BOOL scopeButtonsHidden;
 }
 
 - (void)viewDidLoad {
@@ -44,6 +45,8 @@
     self.tableView.contentOffset = CGPointMake(0, (searchBar.frame.size.height) - self.tableView.contentOffset.y);
     searchBar.hidden = YES;
     //searchBar.frame = searchFrameRect;
+    scopeButtonsHidden = YES;
+    
     
     //Grab user and username
     PFUser *user = [PFUser currentUser];
@@ -76,12 +79,19 @@
     if (searchBar.isHidden) {
         self.tableView.contentOffset = CGPointMake(0, -searchBar.frame.size.height + self.tableView.contentOffset.y);
         searchBar.hidden = NO;
+//        searchBar.showsScopeBar = YES;
+//        [searchBar sizeToFit];
+        scopeButtonsHidden = NO;
+        NSLog(@"show");
         //searchBar.frame = originalSearchFrameRect;
     } else if (!searchBar.isHidden) {
 //        CGFloat zero = 0;
 //        searchFrameRect.size.height = zero;
         self.tableView.contentOffset = CGPointMake(0, searchBar.frame.size.height + self.tableView.contentOffset.y);
         searchBar.hidden = YES;
+//        searchBar.showsScopeBar = NO;
+//        scopeButtonsHidden = YES;
+        NSLog(@"hidden");
 //        searchBar.frame = searchFrameRect;
     }
     

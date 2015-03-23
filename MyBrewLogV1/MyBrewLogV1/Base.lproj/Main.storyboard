@@ -7,8 +7,10 @@
     <customFonts key="customFonts">
         <mutableArray key="Calibri Bold.ttf">
             <string>Calibri-Bold</string>
+            <string>Calibri-Bold</string>
         </mutableArray>
         <mutableArray key="Calibri.ttf">
+            <string>Calibri</string>
             <string>Calibri</string>
         </mutableArray>
     </customFonts>
@@ -136,61 +138,86 @@
             <point key="canvasLocation" x="750" y="1049"/>
         </scene>
         <!--Browse-->
-        <scene sceneID="wg7-f3-ORb">
+        <scene sceneID="O9d-5t-e8a">
             <objects>
-                <viewController id="8rJ-Kc-sve" customClass="BrowseViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="L7p-HK-0SC"/>
-                        <viewControllerLayoutGuide type="bottom" id="Djb-ko-YwX"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="QS5-Rx-YEW">
+                <tableViewController title="Browse" id="B1g-Qh-ijo" customClass="BrowseViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="60" sectionHeaderHeight="22" sectionFooterHeight="22" id="wUY-fu-lMd">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" text="Browse View" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="zEq-FU-wV5">
-                                <rect key="frame" x="196" y="279" width="208" height="42"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="36"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loaded by BrowseViewController" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NDk-cv-Gan">
-                                <rect key="frame" x="193" y="329" width="215" height="17"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0Gt-zg-p4X">
-                                <rect key="frame" x="0.0" y="20" width="600" height="44"/>
-                                <items>
-                                    <navigationItem title="Browse" id="vTm-P8-6oR">
-                                        <barButtonItem key="leftBarButtonItem" systemItem="organize" id="1Co-jO-WLX"/>
-                                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="pQN-fh-cdk"/>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="NDk-cv-Gan" firstAttribute="top" secondItem="zEq-FU-wV5" secondAttribute="bottom" constant="8" symbolic="YES" id="Day-4N-Vmt"/>
-                            <constraint firstItem="NDk-cv-Gan" firstAttribute="centerX" secondItem="zEq-FU-wV5" secondAttribute="centerX" id="JgO-Fn-dHn"/>
-                            <constraint firstAttribute="centerX" secondItem="0Gt-zg-p4X" secondAttribute="centerX" id="Olv-E1-3Xs"/>
-                            <constraint firstAttribute="width" secondItem="0Gt-zg-p4X" secondAttribute="width" id="drh-Ia-WaX"/>
-                            <constraint firstItem="0Gt-zg-p4X" firstAttribute="top" secondItem="QS5-Rx-YEW" secondAttribute="top" constant="20" id="gdG-h8-4MK"/>
-                            <constraint firstAttribute="centerX" secondItem="zEq-FU-wV5" secondAttribute="centerX" id="qqM-NS-xev"/>
-                            <constraint firstAttribute="centerY" secondItem="zEq-FU-wV5" secondAttribute="centerY" id="qzY-Ky-pLD"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" title="Browse" id="tUL-Fo-6LW">
-                        <barButtonItem key="leftBarButtonItem" title="Item" id="IZ5-0r-uRh"/>
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="Y3a-bW-27b">
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="BrowseCell" rowHeight="60" id="2Wa-DO-55n" customClass="CustomTableViewCell">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="2Wa-DO-55n" id="uk5-7O-ogw">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WOz-4g-hgF">
+                                            <rect key="frame" x="0.0" y="0.0" width="68" height="60"/>
+                                            <color key="backgroundColor" red="0.72156864399999998" green="0.0" blue="0.094117656349999995" alpha="1" colorSpace="deviceRGB"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Details" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bGk-Ej-U5b">
+                                            <rect key="frame" x="275" y="36" width="50" height="22"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="22" id="Qq8-1N-VBT"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" name="Calibri" family="Calibri" pointSize="18"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="MaR-Fh-sbs">
+                                            <rect key="frame" x="13" y="5" width="50" height="50"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="50" id="HR8-tk-dPb"/>
+                                                <constraint firstAttribute="height" constant="50" id="xzt-dK-KX0"/>
+                                            </constraints>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recipe Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YKN-UQ-hXC">
+                                            <rect key="frame" x="73" y="5" width="126" height="28"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="28" id="fJ9-jT-Ltd"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" name="Calibri-Bold" family="Calibri" pointSize="23"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="MaR-Fh-sbs" firstAttribute="leading" secondItem="uk5-7O-ogw" secondAttribute="leadingMargin" constant="5" id="5YU-qy-cn1"/>
+                                        <constraint firstItem="YKN-UQ-hXC" firstAttribute="leading" secondItem="MaR-Fh-sbs" secondAttribute="trailing" constant="10" id="5az-ku-Tz0"/>
+                                        <constraint firstAttribute="centerY" secondItem="MaR-Fh-sbs" secondAttribute="centerY" id="EL8-j8-g17"/>
+                                        <constraint firstItem="YKN-UQ-hXC" firstAttribute="top" secondItem="uk5-7O-ogw" secondAttribute="top" constant="5" id="mnr-Ti-0QQ"/>
+                                        <constraint firstAttribute="centerX" secondItem="bGk-Ej-U5b" secondAttribute="centerX" id="rnF-gt-h9W"/>
+                                        <constraint firstAttribute="bottom" secondItem="bGk-Ej-U5b" secondAttribute="bottom" constant="1" id="uIv-x6-Bld"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="cellImage" destination="MaR-Fh-sbs" id="7Z4-Gu-RlG"/>
+                                    <outlet property="detailsLabel" destination="bGk-Ej-U5b" id="sPg-Mn-Rix"/>
+                                    <outlet property="recipeNameLabel" destination="YKN-UQ-hXC" id="K7K-fz-dF8"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="B1g-Qh-ijo" id="FOO-sX-byq"/>
+                            <outlet property="delegate" destination="B1g-Qh-ijo" id="e5R-El-7aw"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Browse" id="552-s1-krd">
+                        <barButtonItem key="leftBarButtonItem" title="Sort" id="Mtt-9y-iKr"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="R9I-J2-NgA">
                             <connections>
-                                <segue destination="8Wm-S4-3lb" kind="presentation" id="l26-dE-6vN"/>
+                                <segue destination="8Wm-S4-3lb" kind="presentation" id="Rhg-DK-ehR"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>
+                    <connections>
+                        <outlet property="browseTableView" destination="wUY-fu-lMd" id="z0s-xf-Nd8"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zfO-oC-WVF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1402" y="-286"/>
         </scene>
@@ -273,6 +300,7 @@
                                 <string>Newest</string>
                                 <string>Oldest</string>
                                 <string>Name</string>
+                                <string>Active</string>
                             </scopeButtonTitles>
                         </searchBar>
                         <prototypes>
@@ -342,9 +370,7 @@
                             <outlet property="delegate" destination="smT-7w-2oa" id="Fak-aL-dJg"/>
                         </connections>
                     </tableView>
-                    <toolbarItems>
-                        <barButtonItem title="Item" id="ghL-c1-KNP"/>
-                    </toolbarItems>
+                    <toolbarItems/>
                     <navigationItem key="navigationItem" title="My Recipes" id="Jes-a0-yT6">
                         <barButtonItem key="leftBarButtonItem" title="Sort" id="oRc-eF-Cii">
                             <connections>
@@ -410,7 +436,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="8rJ-Kc-sve" kind="relationship" relationship="rootViewController" id="AE0-e0-IOr"/>
+                        <segue destination="B1g-Qh-ijo" kind="relationship" relationship="rootViewController" id="wfp-wL-O2r"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EIO-4Z-vVL" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -423,6 +449,6 @@
         <image name="second" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="nUX-dN-Hxy"/>
+        <segue reference="Rhg-DK-ehR"/>
     </inferredMetricsTieBreakers>
 </document>
