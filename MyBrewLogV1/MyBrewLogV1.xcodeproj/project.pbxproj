@@ -44,6 +44,9 @@
 		B852C8721ABA247600D7BFD4 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B852C8711ABA247600D7BFD4 /* libz.dylib */; };
 		B852C8741ABA247F00D7BFD4 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B852C8731ABA247F00D7BFD4 /* libsqlite3.dylib */; };
 		B8756F951ABF7BF600B93839 /* NewRecipeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B8756F941ABF7BF600B93839 /* NewRecipeViewController.m */; };
+		B87CD6121AC35E81006BEBCE /* wine-glass.png in Resources */ = {isa = PBXBuildFile; fileRef = B87CD6111AC35E81006BEBCE /* wine-glass.png */; };
+		B87CD6161AC36158006BEBCE /* beer-bottle.png in Resources */ = {isa = PBXBuildFile; fileRef = B87CD6151AC36158006BEBCE /* beer-bottle.png */; };
+		B87CD6181AC363D5006BEBCE /* other-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = B87CD6171AC363D5006BEBCE /* other-icon.png */; };
 		B8B3D4801ABFCBBF00BDC1C6 /* splash-logo.png in Resources */ = {isa = PBXBuildFile; fileRef = B8B3D47F1ABFCBBF00BDC1C6 /* splash-logo.png */; };
 		B8DDE1991ABB7E840006A013 /* TimersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B8DDE1981ABB7E840006A013 /* TimersViewController.m */; };
 		B8DDE19C1ABB7F000006A013 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B8DDE19B1ABB7F000006A013 /* SettingsViewController.m */; };
@@ -106,6 +109,9 @@
 		B852C8731ABA247F00D7BFD4 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		B8756F931ABF7BF600B93839 /* NewRecipeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewRecipeViewController.h; sourceTree = "<group>"; };
 		B8756F941ABF7BF600B93839 /* NewRecipeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewRecipeViewController.m; sourceTree = "<group>"; };
+		B87CD6111AC35E81006BEBCE /* wine-glass.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wine-glass.png"; sourceTree = "<group>"; };
+		B87CD6151AC36158006BEBCE /* beer-bottle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "beer-bottle.png"; sourceTree = "<group>"; };
+		B87CD6171AC363D5006BEBCE /* other-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "other-icon.png"; sourceTree = "<group>"; };
 		B8B3D47F1ABFCBBF00BDC1C6 /* splash-logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "splash-logo.png"; sourceTree = "<group>"; };
 		B8DDE1971ABB7E840006A013 /* TimersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimersViewController.h; sourceTree = "<group>"; };
 		B8DDE1981ABB7E840006A013 /* TimersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimersViewController.m; sourceTree = "<group>"; };
@@ -162,8 +168,6 @@
 		B852C80C1ABA230500D7BFD4 = {
 			isa = PBXGroup;
 			children = (
-				B80274681ABCCE9500CF5540 /* Accounts.framework */,
-				B80274661ABCCE8E00CF5540 /* Social.framework */,
 				B852C8171ABA230500D7BFD4 /* MyBrewLogV1 */,
 				B852C8341ABA230500D7BFD4 /* MyBrewLogV1Tests */,
 				B852C8161ABA230500D7BFD4 /* Products */,
@@ -236,6 +240,8 @@
 		B852C8411ABA234A00D7BFD4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B80274681ABCCE9500CF5540 /* Accounts.framework */,
+				B80274661ABCCE8E00CF5540 /* Social.framework */,
 				B852C8731ABA247F00D7BFD4 /* libsqlite3.dylib */,
 				B852C8711ABA247600D7BFD4 /* libz.dylib */,
 				B852C86F1ABA247000D7BFD4 /* SystemConfiguration.framework */,
@@ -259,6 +265,9 @@
 		B852C8471ABA234A00D7BFD4 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				B87CD6171AC363D5006BEBCE /* other-icon.png */,
+				B87CD6151AC36158006BEBCE /* beer-bottle.png */,
+				B87CD6111AC35E81006BEBCE /* wine-glass.png */,
 				B84352CC1AC0D7210075750E /* barrels.jpg */,
 				B8B3D47F1ABFCBBF00BDC1C6 /* splash-logo.png */,
 				B82A34F41ABE1AB0001CAFC0 /* glasses.jpg */,
@@ -356,13 +365,16 @@
 				B8B3D4801ABFCBBF00BDC1C6 /* splash-logo.png in Resources */,
 				B852C8531ABA234A00D7BFD4 /* icon.png in Resources */,
 				B82A34FD1ABE2867001CAFC0 /* Calibri Bold.ttf in Resources */,
+				B87CD6161AC36158006BEBCE /* beer-bottle.png in Resources */,
 				B852C82C1ABA230500D7BFD4 /* LaunchScreen.xib in Resources */,
 				B852C8521ABA234A00D7BFD4 /* Icon-76@2x.png in Resources */,
+				B87CD6181AC363D5006BEBCE /* other-icon.png in Resources */,
 				B852C8291ABA230500D7BFD4 /* Images.xcassets in Resources */,
 				B82A34F51ABE1AB0001CAFC0 /* glasses.jpg in Resources */,
 				B82A35011ABE2998001CAFC0 /* CooperBlackStd.otf in Resources */,
 				B82A34FE1ABE2867001CAFC0 /* Calibri.ttf in Resources */,
 				B84352CD1AC0D7210075750E /* barrels.jpg in Resources */,
+				B87CD6121AC35E81006BEBCE /* wine-glass.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -22,6 +22,7 @@
 
 @implementation MyRecipeViewController {
     NSArray *recipesArray;
+    NSArray *imageArray;
     IBOutlet UISearchBar *searchBar;
     CGRect originalSearchFrameRect;
     CGRect searchFrameRect;
@@ -41,6 +42,8 @@
 //    myRecipeVC = self;
     
     recipesArray = [NSArray arrayWithObjects:@"Egg Benedict", @"Mushroom Risotto", @"Full Breakfast", @"Hamburger", @"Ham and Egg Sandwich", @"Creme Brelee", @"White Chocolate Donut", @"Starbucks Coffee", @"Vegetable Curry", @"Instant Noodle with Egg", @"Noodle with BBQ Pork", @"Japanese Noodle with Pork", @"Green Tea", @"Thai Shrimp Cake", @"Angry Birds Cake", @"Ham and Cheese Panini", nil];
+    
+    imageArray = [NSArray arrayWithObjects:@"beer-bottle.png", @"wine-glass.png", @"other-icon.png", @"beer-bottle.png", @"wine-glass.png", @"other-icon.png", @"beer-bottle.png", @"wine-glass.png", @"other-icon.png",@"beer-bottle.png", @"wine-glass.png", @"other-icon.png", @"beer-bottle.png", @"wine-glass.png", @"other-icon.png", @"beer-bottle.png", nil];
     
     //Set offset and hide search bar
     self.tableView.contentOffset = CGPointMake(0, (searchBar.frame.size.height) - self.tableView.contentOffset.y);
@@ -154,7 +157,8 @@
     CustomTableViewCell *cell = (CustomTableViewCell *) [tableView dequeueReusableCellWithIdentifier:cellID];
     
     cell.recipeNameLabel.text = [recipesArray objectAtIndex:indexPath.row];
-    cell.cellImage.image = [UIImage imageNamed:@"glasses.jpg"];
+    //cell.cellImage.image = [UIImage imageNamed:@"glasses.jpg"];
+    cell.cellImage.image = [UIImage imageNamed:[imageArray objectAtIndex:indexPath.row]];
     
 //    CAGradientLayer *gradient = [CAGradientLayer layer];
 //    gradient.frame = cell.bounds;

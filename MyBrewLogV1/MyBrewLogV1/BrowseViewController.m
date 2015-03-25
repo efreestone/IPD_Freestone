@@ -20,6 +20,7 @@
 
 @implementation BrowseViewController {
     NSArray *recipesArray;
+    NSArray *imageArray;
     IBOutlet UISearchBar *searchBar;
 }
 
@@ -27,6 +28,8 @@
     [super viewDidLoad];
     
     recipesArray = [NSArray arrayWithObjects:@"Egg Benedict", @"Mushroom Risotto", @"Full Breakfast", @"Hamburger", @"Ham and Egg Sandwich", @"Creme Brelee", @"White Chocolate Donut", @"Starbucks Coffee", @"Vegetable Curry", @"Instant Noodle with Egg", @"Noodle with BBQ Pork", @"Japanese Noodle with Pork", @"Green Tea", @"Thai Shrimp Cake", @"Angry Birds Cake", @"Ham and Cheese Panini", nil];
+    
+    imageArray = [NSArray arrayWithObjects:@"beer-bottle.png", @"wine-glass.png", @"other-icon.png", @"beer-bottle.png", @"wine-glass.png", @"other-icon.png", @"beer-bottle.png", @"wine-glass.png", @"other-icon.png",@"beer-bottle.png", @"wine-glass.png", @"other-icon.png", @"beer-bottle.png", @"wine-glass.png", @"other-icon.png", @"beer-bottle.png", nil];
     
     //Set offset and hide search bar
     self.tableView.contentOffset = CGPointMake(0, (searchBar.frame.size.height) - self.tableView.contentOffset.y);
@@ -85,7 +88,8 @@
     CustomTableViewCell *cell = (CustomTableViewCell *) [tableView dequeueReusableCellWithIdentifier:cellID];
     
     cell.recipeNameLabel.text = [recipesArray objectAtIndex:indexPath.row];
-    cell.cellImage.image = [UIImage imageNamed:@"barrels.jpg"];
+    //cell.cellImage.image = [UIImage imageNamed:@"barrels.jpg"];
+    cell.cellImage.image = [UIImage imageNamed:[imageArray objectAtIndex:indexPath.row]];
     
     //Override to remove extra seperator lines after the last cell
     [self.tableView setTableFooterView:[[UIView alloc] initWithFrame:CGRectMake(0,0,0,0)]];
