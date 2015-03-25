@@ -14,7 +14,7 @@
 #import <UIKit/UIKit.h>
 #import "MyRecipeViewController.h"
 
-@interface SettingsViewController : UIViewController
+@interface SettingsViewController : UITableViewController
 
 @property (strong, nonatomic) IBOutlet UIButton *logOutButton;
 

@@ -156,6 +156,11 @@
     cell.recipeNameLabel.text = [recipesArray objectAtIndex:indexPath.row];
     cell.cellImage.image = [UIImage imageNamed:@"glasses.jpg"];
     
+//    CAGradientLayer *gradient = [CAGradientLayer layer];
+//    gradient.frame = cell.bounds;
+//    gradient.colors = [NSArray arrayWithObjects:(id)[[UIColor whiteColor]CGColor], (id)[[UIColor redColor]CGColor], nil];
+//    [cell.layer addSublayer:gradient];
+    
     //Override to remove extra seperator lines after the last cell
     [self.tableView setTableFooterView:[[UIView alloc] initWithFrame:CGRectMake(0,0,0,0)]];
     
