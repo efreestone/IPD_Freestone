@@ -66,7 +66,7 @@
                             <constraint firstItem="OiA-gH-U6C" firstAttribute="top" secondItem="kBi-Xn-1r4" secondAttribute="top" constant="20" id="ymR-Md-ae0"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Timer" image="first" id="vnW-FC-FXO"/>
+                    <tabBarItem key="tabBarItem" title="Timer" image="timer-tab.png" id="vnW-FC-FXO"/>
                     <connections>
                         <outlet property="loadedLabel" destination="7pg-Aq-aTD" id="DpV-3v-fDt"/>
                     </connections>
@@ -341,7 +341,7 @@
         <scene sceneID="gAE-1Q-CgI">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="2xo-Vl-DZm" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="My Recipes" image="first" id="UA5-Wl-bxr"/>
+                    <tabBarItem key="tabBarItem" title="My Recipes" image="my-recipes-tab.png" id="UA5-Wl-bxr"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="hhT-GA-PSe">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -363,7 +363,7 @@
         <scene sceneID="D2f-QB-ERH">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="rbv-aZ-EzX" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Browse" image="second" id="cPa-gy-q4n"/>
+                    <tabBarItem key="tabBarItem" title="Browse" image="browse-tab.png" id="cPa-gy-q4n"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="sqs-QJ-1Io">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -382,7 +382,7 @@
         <scene sceneID="CdQ-Qi-DzV">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="qGw-LO-XI8" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Settings" image="second" id="1CR-hf-7Pb"/>
+                    <tabBarItem key="tabBarItem" title="Settings" image="settings-tab.png" id="1CR-hf-7Pb"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="8ip-hQ-AFM">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -582,8 +582,10 @@
         </scene>
     </scenes>
     <resources>
-        <image name="first" width="30" height="30"/>
-        <image name="second" width="30" height="30"/>
+        <image name="browse-tab.png" width="30" height="30"/>
+        <image name="my-recipes-tab.png" width="30" height="30"/>
+        <image name="settings-tab.png" width="30" height="30"/>
+        <image name="timer-tab.png" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="nUX-dN-Hxy"/>

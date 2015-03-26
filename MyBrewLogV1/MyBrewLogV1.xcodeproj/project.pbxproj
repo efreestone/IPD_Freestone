@@ -14,6 +14,8 @@
 		B82A34FD1ABE2867001CAFC0 /* Calibri Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B82A34FA1ABE2867001CAFC0 /* Calibri Bold.ttf */; };
 		B82A34FE1ABE2867001CAFC0 /* Calibri.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B82A34FB1ABE2867001CAFC0 /* Calibri.ttf */; };
 		B82A35011ABE2998001CAFC0 /* CooperBlackStd.otf in Resources */ = {isa = PBXBuildFile; fileRef = B82A35001ABE2998001CAFC0 /* CooperBlackStd.otf */; };
+		B82B6D9D1AC39CD800B11EC2 /* browse-tab.png in Resources */ = {isa = PBXBuildFile; fileRef = B82B6D9B1AC39CD800B11EC2 /* browse-tab.png */; };
+		B82B6D9E1AC39CD800B11EC2 /* browse-tab@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B82B6D9C1AC39CD800B11EC2 /* browse-tab@2x.png */; };
 		B84352CD1AC0D7210075750E /* barrels.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B84352CC1AC0D7210075750E /* barrels.jpg */; };
 		B852C81B1ABA230500D7BFD4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B852C81A1ABA230500D7BFD4 /* main.m */; };
 		B852C81E1ABA230500D7BFD4 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B852C81D1ABA230500D7BFD4 /* AppDelegate.m */; };
@@ -47,6 +49,12 @@
 		B87CD6121AC35E81006BEBCE /* wine-glass.png in Resources */ = {isa = PBXBuildFile; fileRef = B87CD6111AC35E81006BEBCE /* wine-glass.png */; };
 		B87CD6161AC36158006BEBCE /* beer-bottle.png in Resources */ = {isa = PBXBuildFile; fileRef = B87CD6151AC36158006BEBCE /* beer-bottle.png */; };
 		B87CD6181AC363D5006BEBCE /* other-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = B87CD6171AC363D5006BEBCE /* other-icon.png */; };
+		B87CD61B1AC37416006BEBCE /* settings-tab.png in Resources */ = {isa = PBXBuildFile; fileRef = B87CD6191AC37416006BEBCE /* settings-tab.png */; };
+		B87CD61C1AC37416006BEBCE /* settings-tab@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B87CD61A1AC37416006BEBCE /* settings-tab@2x.png */; };
+		B87CD61F1AC37421006BEBCE /* timer-tab.png in Resources */ = {isa = PBXBuildFile; fileRef = B87CD61D1AC37421006BEBCE /* timer-tab.png */; };
+		B87CD6201AC37421006BEBCE /* timer-tab@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B87CD61E1AC37421006BEBCE /* timer-tab@2x.png */; };
+		B87CD6231AC37AD0006BEBCE /* my-recipes-tab.png in Resources */ = {isa = PBXBuildFile; fileRef = B87CD6211AC37AD0006BEBCE /* my-recipes-tab.png */; };
+		B87CD6241AC37AD0006BEBCE /* my-recipes-tab@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B87CD6221AC37AD0006BEBCE /* my-recipes-tab@2x.png */; };
 		B8B3D4801ABFCBBF00BDC1C6 /* splash-logo.png in Resources */ = {isa = PBXBuildFile; fileRef = B8B3D47F1ABFCBBF00BDC1C6 /* splash-logo.png */; };
 		B8DDE1991ABB7E840006A013 /* TimersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B8DDE1981ABB7E840006A013 /* TimersViewController.m */; };
 		B8DDE19C1ABB7F000006A013 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B8DDE19B1ABB7F000006A013 /* SettingsViewController.m */; };
@@ -71,6 +79,8 @@
 		B82A34FA1ABE2867001CAFC0 /* Calibri Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Calibri Bold.ttf"; sourceTree = "<group>"; };
 		B82A34FB1ABE2867001CAFC0 /* Calibri.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Calibri.ttf; sourceTree = "<group>"; };
 		B82A35001ABE2998001CAFC0 /* CooperBlackStd.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = CooperBlackStd.otf; sourceTree = "<group>"; };
+		B82B6D9B1AC39CD800B11EC2 /* browse-tab.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "browse-tab.png"; sourceTree = "<group>"; };
+		B82B6D9C1AC39CD800B11EC2 /* browse-tab@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "browse-tab@2x.png"; sourceTree = "<group>"; };
 		B84352CC1AC0D7210075750E /* barrels.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = barrels.jpg; sourceTree = "<group>"; };
 		B852C8151ABA230500D7BFD4 /* MyBrewLogV1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyBrewLogV1.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B852C8191ABA230500D7BFD4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -112,6 +122,12 @@
 		B87CD6111AC35E81006BEBCE /* wine-glass.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wine-glass.png"; sourceTree = "<group>"; };
 		B87CD6151AC36158006BEBCE /* beer-bottle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "beer-bottle.png"; sourceTree = "<group>"; };
 		B87CD6171AC363D5006BEBCE /* other-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "other-icon.png"; sourceTree = "<group>"; };
+		B87CD6191AC37416006BEBCE /* settings-tab.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "settings-tab.png"; sourceTree = "<group>"; };
+		B87CD61A1AC37416006BEBCE /* settings-tab@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "settings-tab@2x.png"; sourceTree = "<group>"; };
+		B87CD61D1AC37421006BEBCE /* timer-tab.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "timer-tab.png"; sourceTree = "<group>"; };
+		B87CD61E1AC37421006BEBCE /* timer-tab@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "timer-tab@2x.png"; sourceTree = "<group>"; };
+		B87CD6211AC37AD0006BEBCE /* my-recipes-tab.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "my-recipes-tab.png"; sourceTree = "<group>"; };
+		B87CD6221AC37AD0006BEBCE /* my-recipes-tab@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "my-recipes-tab@2x.png"; sourceTree = "<group>"; };
 		B8B3D47F1ABFCBBF00BDC1C6 /* splash-logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "splash-logo.png"; sourceTree = "<group>"; };
 		B8DDE1971ABB7E840006A013 /* TimersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimersViewController.h; sourceTree = "<group>"; };
 		B8DDE1981ABB7E840006A013 /* TimersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimersViewController.m; sourceTree = "<group>"; };
@@ -265,6 +281,14 @@
 		B852C8471ABA234A00D7BFD4 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				B82B6D9B1AC39CD800B11EC2 /* browse-tab.png */,
+				B82B6D9C1AC39CD800B11EC2 /* browse-tab@2x.png */,
+				B87CD6211AC37AD0006BEBCE /* my-recipes-tab.png */,
+				B87CD6221AC37AD0006BEBCE /* my-recipes-tab@2x.png */,
+				B87CD61D1AC37421006BEBCE /* timer-tab.png */,
+				B87CD61E1AC37421006BEBCE /* timer-tab@2x.png */,
+				B87CD6191AC37416006BEBCE /* settings-tab.png */,
+				B87CD61A1AC37416006BEBCE /* settings-tab@2x.png */,
 				B87CD6171AC363D5006BEBCE /* other-icon.png */,
 				B87CD6151AC36158006BEBCE /* beer-bottle.png */,
 				B87CD6111AC35E81006BEBCE /* wine-glass.png */,
@@ -359,8 +383,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B87CD61B1AC37416006BEBCE /* settings-tab.png in Resources */,
 				B852C8271ABA230500D7BFD4 /* Main.storyboard in Resources */,
+				B82B6D9D1AC39CD800B11EC2 /* browse-tab.png in Resources */,
+				B87CD6231AC37AD0006BEBCE /* my-recipes-tab.png in Resources */,
+				B82B6D9E1AC39CD800B11EC2 /* browse-tab@2x.png in Resources */,
+				B87CD61F1AC37421006BEBCE /* timer-tab.png in Resources */,
 				B852C8511ABA234A00D7BFD4 /* Icon-76.png in Resources */,
+				B87CD61C1AC37416006BEBCE /* settings-tab@2x.png in Resources */,
+				B87CD6241AC37AD0006BEBCE /* my-recipes-tab@2x.png in Resources */,
 				B852C8541ABA234A00D7BFD4 /* Icon@2x.png in Resources */,
 				B8B3D4801ABFCBBF00BDC1C6 /* splash-logo.png in Resources */,
 				B852C8531ABA234A00D7BFD4 /* icon.png in Resources */,
@@ -370,6 +401,7 @@
 				B852C8521ABA234A00D7BFD4 /* Icon-76@2x.png in Resources */,
 				B87CD6181AC363D5006BEBCE /* other-icon.png in Resources */,
 				B852C8291ABA230500D7BFD4 /* Images.xcassets in Resources */,
+				B87CD6201AC37421006BEBCE /* timer-tab@2x.png in Resources */,
 				B82A34F51ABE1AB0001CAFC0 /* glasses.jpg in Resources */,
 				B82A35011ABE2998001CAFC0 /* CooperBlackStd.otf in Resources */,
 				B82A34FE1ABE2867001CAFC0 /* Calibri.ttf in Resources */,
