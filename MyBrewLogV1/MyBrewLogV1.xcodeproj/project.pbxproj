@@ -9,12 +9,11 @@
 /* Begin PBXBuildFile section */
 		B80274671ABCCE8E00CF5540 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B80274661ABCCE8E00CF5540 /* Social.framework */; };
 		B80274691ABCCE9500CF5540 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B80274681ABCCE9500CF5540 /* Accounts.framework */; };
-		B813EC4D1AC48E4A00E1DC1B /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = B813EBC11AC48E4A00E1DC1B /* .gitignore */; };
 		B813EC4E1AC48E4A00E1DC1B /* .travis.yml in Resources */ = {isa = PBXBuildFile; fileRef = B813EBC21AC48E4A00E1DC1B /* .travis.yml */; };
 		B813EC4F1AC48E4A00E1DC1B /* ActionSheetPicker-3.0.podspec in Resources */ = {isa = PBXBuildFile; fileRef = B813EBC31AC48E4A00E1DC1B /* ActionSheetPicker-3.0.podspec */; };
-		B813EC501AC48E4A00E1DC1B /* AUTHORS.md in Sources */ = {isa = PBXBuildFile; fileRef = B813EBC41AC48E4A00E1DC1B /* AUTHORS.md */; };
-		B813EC511AC48E4A00E1DC1B /* CHANGELOG.md in Sources */ = {isa = PBXBuildFile; fileRef = B813EBC51AC48E4A00E1DC1B /* CHANGELOG.md */; };
-		B813EC521AC48E4A00E1DC1B /* CONTRIBUTING.md in Sources */ = {isa = PBXBuildFile; fileRef = B813EBC61AC48E4A00E1DC1B /* CONTRIBUTING.md */; };
+		B813EC501AC48E4A00E1DC1B /* AUTHORS.md in Resources */ = {isa = PBXBuildFile; fileRef = B813EBC41AC48E4A00E1DC1B /* AUTHORS.md */; };
+		B813EC511AC48E4A00E1DC1B /* CHANGELOG.md in Resources */ = {isa = PBXBuildFile; fileRef = B813EBC51AC48E4A00E1DC1B /* CHANGELOG.md */; };
+		B813EC521AC48E4A00E1DC1B /* CONTRIBUTING.md in Resources */ = {isa = PBXBuildFile; fileRef = B813EBC61AC48E4A00E1DC1B /* CONTRIBUTING.md */; };
 		B813EC671AC48E4A00E1DC1B /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = B813EBF01AC48E4A00E1DC1B /* LICENSE */; };
 		B813EC821AC48E4A00E1DC1B /* AbstractActionSheetPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = B813EC211AC48E4A00E1DC1B /* AbstractActionSheetPicker.m */; };
 		B813EC831AC48E4A00E1DC1B /* ActionSheetCustomPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = B813EC231AC48E4A00E1DC1B /* ActionSheetCustomPicker.m */; };
@@ -24,7 +23,8 @@
 		B813EC871AC48E4A00E1DC1B /* ActionSheetStringPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = B813EC2D1AC48E4A00E1DC1B /* ActionSheetStringPicker.m */; };
 		B813EC881AC48E4A00E1DC1B /* DistancePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = B813EC2F1AC48E4A00E1DC1B /* DistancePickerView.m */; };
 		B813EC891AC48E4A00E1DC1B /* SWActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = B813EC311AC48E4A00E1DC1B /* SWActionSheet.m */; };
-		B813EC8A1AC48E4A00E1DC1B /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = B813EC321AC48E4A00E1DC1B /* README.md */; };
+		B813EC8A1AC48E4A00E1DC1B /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = B813EC321AC48E4A00E1DC1B /* README.md */; };
+		B813ECB21AC4A6A700E1DC1B /* CustomPickerDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B813ECB11AC4A6A700E1DC1B /* CustomPickerDelegate.m */; };
 		B82A34F51ABE1AB0001CAFC0 /* glasses.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B82A34F41ABE1AB0001CAFC0 /* glasses.jpg */; };
 		B82A34F81ABE1CEF001CAFC0 /* CustomTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B82A34F71ABE1CEF001CAFC0 /* CustomTableViewCell.m */; };
 		B82A34FD1ABE2867001CAFC0 /* Calibri Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B82A34FA1ABE2867001CAFC0 /* Calibri Bold.ttf */; };
@@ -89,7 +89,6 @@
 /* Begin PBXFileReference section */
 		B80274661ABCCE8E00CF5540 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		B80274681ABCCE9500CF5540 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
-		B813EBC11AC48E4A00E1DC1B /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		B813EBC21AC48E4A00E1DC1B /* .travis.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .travis.yml; sourceTree = "<group>"; };
 		B813EBC31AC48E4A00E1DC1B /* ActionSheetPicker-3.0.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "ActionSheetPicker-3.0.podspec"; sourceTree = "<group>"; };
 		B813EBC41AC48E4A00E1DC1B /* AUTHORS.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = AUTHORS.md; sourceTree = "<group>"; };
@@ -115,6 +114,8 @@
 		B813EC301AC48E4A00E1DC1B /* SWActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWActionSheet.h; sourceTree = "<group>"; };
 		B813EC311AC48E4A00E1DC1B /* SWActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWActionSheet.m; sourceTree = "<group>"; };
 		B813EC321AC48E4A00E1DC1B /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		B813ECB01AC4A6A700E1DC1B /* CustomPickerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomPickerDelegate.h; sourceTree = "<group>"; };
+		B813ECB11AC4A6A700E1DC1B /* CustomPickerDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomPickerDelegate.m; sourceTree = "<group>"; };
 		B82A34F41ABE1AB0001CAFC0 /* glasses.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = glasses.jpg; sourceTree = "<group>"; };
 		B82A34F61ABE1CEF001CAFC0 /* CustomTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomTableViewCell.h; sourceTree = "<group>"; };
 		B82A34F71ABE1CEF001CAFC0 /* CustomTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomTableViewCell.m; sourceTree = "<group>"; };
@@ -216,7 +217,6 @@
 		B813EBC01AC48E4A00E1DC1B /* ActionSheetPicker-3.0-master */ = {
 			isa = PBXGroup;
 			children = (
-				B813EBC11AC48E4A00E1DC1B /* .gitignore */,
 				B813EBC21AC48E4A00E1DC1B /* .travis.yml */,
 				B813EBC31AC48E4A00E1DC1B /* ActionSheetPicker-3.0.podspec */,
 				B813EBC41AC48E4A00E1DC1B /* AUTHORS.md */,
@@ -307,6 +307,8 @@
 				B82A34F71ABE1CEF001CAFC0 /* CustomTableViewCell.m */,
 				B8756F931ABF7BF600B93839 /* NewRecipeViewController.h */,
 				B8756F941ABF7BF600B93839 /* NewRecipeViewController.m */,
+				B813ECB01AC4A6A700E1DC1B /* CustomPickerDelegate.h */,
+				B813ECB11AC4A6A700E1DC1B /* CustomPickerDelegate.m */,
 			);
 			path = MyBrewLogV1;
 			sourceTree = "<group>";
@@ -467,6 +469,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B813EC501AC48E4A00E1DC1B /* AUTHORS.md in Resources */,
+				B813EC511AC48E4A00E1DC1B /* CHANGELOG.md in Resources */,
 				B87CD61B1AC37416006BEBCE /* settings-tab.png in Resources */,
 				B852C8271ABA230500D7BFD4 /* Main.storyboard in Resources */,
 				B82B6D9D1AC39CD800B11EC2 /* browse-tab.png in Resources */,
@@ -478,7 +482,6 @@
 				B87CD6241AC37AD0006BEBCE /* my-recipes-tab@2x.png in Resources */,
 				B813EC4F1AC48E4A00E1DC1B /* ActionSheetPicker-3.0.podspec in Resources */,
 				B852C8541ABA234A00D7BFD4 /* Icon@2x.png in Resources */,
-				B813EC4D1AC48E4A00E1DC1B /* .gitignore in Resources */,
 				B8B3D4801ABFCBBF00BDC1C6 /* splash-logo.png in Resources */,
 				B852C8531ABA234A00D7BFD4 /* icon.png in Resources */,
 				B82A34FD1ABE2867001CAFC0 /* Calibri Bold.ttf in Resources */,
@@ -487,6 +490,7 @@
 				B852C82C1ABA230500D7BFD4 /* LaunchScreen.xib in Resources */,
 				B852C8521ABA234A00D7BFD4 /* Icon-76@2x.png in Resources */,
 				B87CD6181AC363D5006BEBCE /* other-icon.png in Resources */,
+				B813EC8A1AC48E4A00E1DC1B /* README.md in Resources */,
 				B813EC671AC48E4A00E1DC1B /* LICENSE in Resources */,
 				B852C8291ABA230500D7BFD4 /* Images.xcassets in Resources */,
 				B87CD6201AC37421006BEBCE /* timer-tab@2x.png in Resources */,
@@ -494,6 +498,7 @@
 				B82A35011ABE2998001CAFC0 /* CooperBlackStd.otf in Resources */,
 				B82A34FE1ABE2867001CAFC0 /* Calibri.ttf in Resources */,
 				B84352CD1AC0D7210075750E /* barrels.jpg in Resources */,
+				B813EC521AC48E4A00E1DC1B /* CONTRIBUTING.md in Resources */,
 				B87CD6121AC35E81006BEBCE /* wine-glass.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -514,17 +519,14 @@
 			files = (
 				B8DDE1991ABB7E840006A013 /* TimersViewController.m in Sources */,
 				B813EC831AC48E4A00E1DC1B /* ActionSheetCustomPicker.m in Sources */,
-				B813EC511AC48E4A00E1DC1B /* CHANGELOG.md in Sources */,
 				B813EC881AC48E4A00E1DC1B /* DistancePickerView.m in Sources */,
-				B813EC501AC48E4A00E1DC1B /* AUTHORS.md in Sources */,
 				B82A34F81ABE1CEF001CAFC0 /* CustomTableViewCell.m in Sources */,
 				B852C8241ABA230500D7BFD4 /* BrowseViewController.m in Sources */,
-				B813EC521AC48E4A00E1DC1B /* CONTRIBUTING.md in Sources */,
 				B813EC851AC48E4A00E1DC1B /* ActionSheetDistancePicker.m in Sources */,
 				B852C81E1ABA230500D7BFD4 /* AppDelegate.m in Sources */,
-				B813EC8A1AC48E4A00E1DC1B /* README.md in Sources */,
 				B813EC871AC48E4A00E1DC1B /* ActionSheetStringPicker.m in Sources */,
 				B813EC891AC48E4A00E1DC1B /* SWActionSheet.m in Sources */,
+				B813ECB21AC4A6A700E1DC1B /* CustomPickerDelegate.m in Sources */,
 				B8DDE19C1ABB7F000006A013 /* SettingsViewController.m in Sources */,
 				B813EC841AC48E4A00E1DC1B /* ActionSheetDatePicker.m in Sources */,
 				B8756F951ABF7BF600B93839 /* NewRecipeViewController.m in Sources */,

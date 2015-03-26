@@ -16,6 +16,9 @@
 @interface NewRecipeViewController : UIViewController
 
 -(IBAction)onCancel:(id)sender;
--(IBAction)picker:(id)sender;
+-(IBAction)showRecipeTypePicker:(id)sender;
+-(IBAction)showIngredientPicker:(id)sender;
+-(IBAction)showTimerPicker:(id)sender;
+-(IBAction)showTempPicker:(id)sender;
 
 @end
