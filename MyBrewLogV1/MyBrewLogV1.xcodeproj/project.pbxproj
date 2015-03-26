@@ -9,6 +9,22 @@
 /* Begin PBXBuildFile section */
 		B80274671ABCCE8E00CF5540 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B80274661ABCCE8E00CF5540 /* Social.framework */; };
 		B80274691ABCCE9500CF5540 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B80274681ABCCE9500CF5540 /* Accounts.framework */; };
+		B813EC4D1AC48E4A00E1DC1B /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = B813EBC11AC48E4A00E1DC1B /* .gitignore */; };
+		B813EC4E1AC48E4A00E1DC1B /* .travis.yml in Resources */ = {isa = PBXBuildFile; fileRef = B813EBC21AC48E4A00E1DC1B /* .travis.yml */; };
+		B813EC4F1AC48E4A00E1DC1B /* ActionSheetPicker-3.0.podspec in Resources */ = {isa = PBXBuildFile; fileRef = B813EBC31AC48E4A00E1DC1B /* ActionSheetPicker-3.0.podspec */; };
+		B813EC501AC48E4A00E1DC1B /* AUTHORS.md in Sources */ = {isa = PBXBuildFile; fileRef = B813EBC41AC48E4A00E1DC1B /* AUTHORS.md */; };
+		B813EC511AC48E4A00E1DC1B /* CHANGELOG.md in Sources */ = {isa = PBXBuildFile; fileRef = B813EBC51AC48E4A00E1DC1B /* CHANGELOG.md */; };
+		B813EC521AC48E4A00E1DC1B /* CONTRIBUTING.md in Sources */ = {isa = PBXBuildFile; fileRef = B813EBC61AC48E4A00E1DC1B /* CONTRIBUTING.md */; };
+		B813EC671AC48E4A00E1DC1B /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = B813EBF01AC48E4A00E1DC1B /* LICENSE */; };
+		B813EC821AC48E4A00E1DC1B /* AbstractActionSheetPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = B813EC211AC48E4A00E1DC1B /* AbstractActionSheetPicker.m */; };
+		B813EC831AC48E4A00E1DC1B /* ActionSheetCustomPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = B813EC231AC48E4A00E1DC1B /* ActionSheetCustomPicker.m */; };
+		B813EC841AC48E4A00E1DC1B /* ActionSheetDatePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = B813EC261AC48E4A00E1DC1B /* ActionSheetDatePicker.m */; };
+		B813EC851AC48E4A00E1DC1B /* ActionSheetDistancePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = B813EC281AC48E4A00E1DC1B /* ActionSheetDistancePicker.m */; };
+		B813EC861AC48E4A00E1DC1B /* ActionSheetLocalePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = B813EC2A1AC48E4A00E1DC1B /* ActionSheetLocalePicker.m */; };
+		B813EC871AC48E4A00E1DC1B /* ActionSheetStringPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = B813EC2D1AC48E4A00E1DC1B /* ActionSheetStringPicker.m */; };
+		B813EC881AC48E4A00E1DC1B /* DistancePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = B813EC2F1AC48E4A00E1DC1B /* DistancePickerView.m */; };
+		B813EC891AC48E4A00E1DC1B /* SWActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = B813EC311AC48E4A00E1DC1B /* SWActionSheet.m */; };
+		B813EC8A1AC48E4A00E1DC1B /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = B813EC321AC48E4A00E1DC1B /* README.md */; };
 		B82A34F51ABE1AB0001CAFC0 /* glasses.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B82A34F41ABE1AB0001CAFC0 /* glasses.jpg */; };
 		B82A34F81ABE1CEF001CAFC0 /* CustomTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B82A34F71ABE1CEF001CAFC0 /* CustomTableViewCell.m */; };
 		B82A34FD1ABE2867001CAFC0 /* Calibri Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B82A34FA1ABE2867001CAFC0 /* Calibri Bold.ttf */; };
@@ -73,6 +89,32 @@
 /* Begin PBXFileReference section */
 		B80274661ABCCE8E00CF5540 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		B80274681ABCCE9500CF5540 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
+		B813EBC11AC48E4A00E1DC1B /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		B813EBC21AC48E4A00E1DC1B /* .travis.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .travis.yml; sourceTree = "<group>"; };
+		B813EBC31AC48E4A00E1DC1B /* ActionSheetPicker-3.0.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "ActionSheetPicker-3.0.podspec"; sourceTree = "<group>"; };
+		B813EBC41AC48E4A00E1DC1B /* AUTHORS.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = AUTHORS.md; sourceTree = "<group>"; };
+		B813EBC51AC48E4A00E1DC1B /* CHANGELOG.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = "<group>"; };
+		B813EBC61AC48E4A00E1DC1B /* CONTRIBUTING.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = CONTRIBUTING.md; sourceTree = "<group>"; };
+		B813EBF01AC48E4A00E1DC1B /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		B813EC201AC48E4A00E1DC1B /* AbstractActionSheetPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AbstractActionSheetPicker.h; sourceTree = "<group>"; };
+		B813EC211AC48E4A00E1DC1B /* AbstractActionSheetPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AbstractActionSheetPicker.m; sourceTree = "<group>"; };
+		B813EC221AC48E4A00E1DC1B /* ActionSheetCustomPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionSheetCustomPicker.h; sourceTree = "<group>"; };
+		B813EC231AC48E4A00E1DC1B /* ActionSheetCustomPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionSheetCustomPicker.m; sourceTree = "<group>"; };
+		B813EC241AC48E4A00E1DC1B /* ActionSheetCustomPickerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionSheetCustomPickerDelegate.h; sourceTree = "<group>"; };
+		B813EC251AC48E4A00E1DC1B /* ActionSheetDatePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionSheetDatePicker.h; sourceTree = "<group>"; };
+		B813EC261AC48E4A00E1DC1B /* ActionSheetDatePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionSheetDatePicker.m; sourceTree = "<group>"; };
+		B813EC271AC48E4A00E1DC1B /* ActionSheetDistancePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionSheetDistancePicker.h; sourceTree = "<group>"; };
+		B813EC281AC48E4A00E1DC1B /* ActionSheetDistancePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionSheetDistancePicker.m; sourceTree = "<group>"; };
+		B813EC291AC48E4A00E1DC1B /* ActionSheetLocalePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionSheetLocalePicker.h; sourceTree = "<group>"; };
+		B813EC2A1AC48E4A00E1DC1B /* ActionSheetLocalePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionSheetLocalePicker.m; sourceTree = "<group>"; };
+		B813EC2B1AC48E4A00E1DC1B /* ActionSheetPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionSheetPicker.h; sourceTree = "<group>"; };
+		B813EC2C1AC48E4A00E1DC1B /* ActionSheetStringPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionSheetStringPicker.h; sourceTree = "<group>"; };
+		B813EC2D1AC48E4A00E1DC1B /* ActionSheetStringPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionSheetStringPicker.m; sourceTree = "<group>"; };
+		B813EC2E1AC48E4A00E1DC1B /* DistancePickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DistancePickerView.h; sourceTree = "<group>"; };
+		B813EC2F1AC48E4A00E1DC1B /* DistancePickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DistancePickerView.m; sourceTree = "<group>"; };
+		B813EC301AC48E4A00E1DC1B /* SWActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWActionSheet.h; sourceTree = "<group>"; };
+		B813EC311AC48E4A00E1DC1B /* SWActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWActionSheet.m; sourceTree = "<group>"; };
+		B813EC321AC48E4A00E1DC1B /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		B82A34F41ABE1AB0001CAFC0 /* glasses.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = glasses.jpg; sourceTree = "<group>"; };
 		B82A34F61ABE1CEF001CAFC0 /* CustomTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomTableViewCell.h; sourceTree = "<group>"; };
 		B82A34F71ABE1CEF001CAFC0 /* CustomTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomTableViewCell.m; sourceTree = "<group>"; };
@@ -171,6 +213,47 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B813EBC01AC48E4A00E1DC1B /* ActionSheetPicker-3.0-master */ = {
+			isa = PBXGroup;
+			children = (
+				B813EBC11AC48E4A00E1DC1B /* .gitignore */,
+				B813EBC21AC48E4A00E1DC1B /* .travis.yml */,
+				B813EBC31AC48E4A00E1DC1B /* ActionSheetPicker-3.0.podspec */,
+				B813EBC41AC48E4A00E1DC1B /* AUTHORS.md */,
+				B813EBC51AC48E4A00E1DC1B /* CHANGELOG.md */,
+				B813EBC61AC48E4A00E1DC1B /* CONTRIBUTING.md */,
+				B813EBF01AC48E4A00E1DC1B /* LICENSE */,
+				B813EC1F1AC48E4A00E1DC1B /* Pickers */,
+				B813EC321AC48E4A00E1DC1B /* README.md */,
+			);
+			path = "ActionSheetPicker-3.0-master";
+			sourceTree = "<group>";
+		};
+		B813EC1F1AC48E4A00E1DC1B /* Pickers */ = {
+			isa = PBXGroup;
+			children = (
+				B813EC201AC48E4A00E1DC1B /* AbstractActionSheetPicker.h */,
+				B813EC211AC48E4A00E1DC1B /* AbstractActionSheetPicker.m */,
+				B813EC221AC48E4A00E1DC1B /* ActionSheetCustomPicker.h */,
+				B813EC231AC48E4A00E1DC1B /* ActionSheetCustomPicker.m */,
+				B813EC241AC48E4A00E1DC1B /* ActionSheetCustomPickerDelegate.h */,
+				B813EC251AC48E4A00E1DC1B /* ActionSheetDatePicker.h */,
+				B813EC261AC48E4A00E1DC1B /* ActionSheetDatePicker.m */,
+				B813EC271AC48E4A00E1DC1B /* ActionSheetDistancePicker.h */,
+				B813EC281AC48E4A00E1DC1B /* ActionSheetDistancePicker.m */,
+				B813EC291AC48E4A00E1DC1B /* ActionSheetLocalePicker.h */,
+				B813EC2A1AC48E4A00E1DC1B /* ActionSheetLocalePicker.m */,
+				B813EC2B1AC48E4A00E1DC1B /* ActionSheetPicker.h */,
+				B813EC2C1AC48E4A00E1DC1B /* ActionSheetStringPicker.h */,
+				B813EC2D1AC48E4A00E1DC1B /* ActionSheetStringPicker.m */,
+				B813EC2E1AC48E4A00E1DC1B /* DistancePickerView.h */,
+				B813EC2F1AC48E4A00E1DC1B /* DistancePickerView.m */,
+				B813EC301AC48E4A00E1DC1B /* SWActionSheet.h */,
+				B813EC311AC48E4A00E1DC1B /* SWActionSheet.m */,
+			);
+			path = Pickers;
+			sourceTree = "<group>";
+		};
 		B82A34F91ABE2867001CAFC0 /* resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -202,6 +285,7 @@
 		B852C8171ABA230500D7BFD4 /* MyBrewLogV1 */ = {
 			isa = PBXGroup;
 			children = (
+				B813EBC01AC48E4A00E1DC1B /* ActionSheetPicker-3.0-master */,
 				B82A34F91ABE2867001CAFC0 /* resources */,
 				B852C8411ABA234A00D7BFD4 /* Frameworks */,
 				B852C8471ABA234A00D7BFD4 /* images */,
@@ -392,14 +476,18 @@
 				B852C8511ABA234A00D7BFD4 /* Icon-76.png in Resources */,
 				B87CD61C1AC37416006BEBCE /* settings-tab@2x.png in Resources */,
 				B87CD6241AC37AD0006BEBCE /* my-recipes-tab@2x.png in Resources */,
+				B813EC4F1AC48E4A00E1DC1B /* ActionSheetPicker-3.0.podspec in Resources */,
 				B852C8541ABA234A00D7BFD4 /* Icon@2x.png in Resources */,
+				B813EC4D1AC48E4A00E1DC1B /* .gitignore in Resources */,
 				B8B3D4801ABFCBBF00BDC1C6 /* splash-logo.png in Resources */,
 				B852C8531ABA234A00D7BFD4 /* icon.png in Resources */,
 				B82A34FD1ABE2867001CAFC0 /* Calibri Bold.ttf in Resources */,
+				B813EC4E1AC48E4A00E1DC1B /* .travis.yml in Resources */,
 				B87CD6161AC36158006BEBCE /* beer-bottle.png in Resources */,
 				B852C82C1ABA230500D7BFD4 /* LaunchScreen.xib in Resources */,
 				B852C8521ABA234A00D7BFD4 /* Icon-76@2x.png in Resources */,
 				B87CD6181AC363D5006BEBCE /* other-icon.png in Resources */,
+				B813EC671AC48E4A00E1DC1B /* LICENSE in Resources */,
 				B852C8291ABA230500D7BFD4 /* Images.xcassets in Resources */,
 				B87CD6201AC37421006BEBCE /* timer-tab@2x.png in Resources */,
 				B82A34F51ABE1AB0001CAFC0 /* glasses.jpg in Resources */,
@@ -425,13 +513,25 @@
 			buildActionMask = 2147483647;
 			files = (
 				B8DDE1991ABB7E840006A013 /* TimersViewController.m in Sources */,
+				B813EC831AC48E4A00E1DC1B /* ActionSheetCustomPicker.m in Sources */,
+				B813EC511AC48E4A00E1DC1B /* CHANGELOG.md in Sources */,
+				B813EC881AC48E4A00E1DC1B /* DistancePickerView.m in Sources */,
+				B813EC501AC48E4A00E1DC1B /* AUTHORS.md in Sources */,
 				B82A34F81ABE1CEF001CAFC0 /* CustomTableViewCell.m in Sources */,
 				B852C8241ABA230500D7BFD4 /* BrowseViewController.m in Sources */,
+				B813EC521AC48E4A00E1DC1B /* CONTRIBUTING.md in Sources */,
+				B813EC851AC48E4A00E1DC1B /* ActionSheetDistancePicker.m in Sources */,
 				B852C81E1ABA230500D7BFD4 /* AppDelegate.m in Sources */,
+				B813EC8A1AC48E4A00E1DC1B /* README.md in Sources */,
+				B813EC871AC48E4A00E1DC1B /* ActionSheetStringPicker.m in Sources */,
+				B813EC891AC48E4A00E1DC1B /* SWActionSheet.m in Sources */,
 				B8DDE19C1ABB7F000006A013 /* SettingsViewController.m in Sources */,
+				B813EC841AC48E4A00E1DC1B /* ActionSheetDatePicker.m in Sources */,
 				B8756F951ABF7BF600B93839 /* NewRecipeViewController.m in Sources */,
 				B852C8211ABA230500D7BFD4 /* MyRecipeViewController.m in Sources */,
+				B813EC861AC48E4A00E1DC1B /* ActionSheetLocalePicker.m in Sources */,
 				B852C81B1ABA230500D7BFD4 /* main.m in Sources */,
+				B813EC821AC48E4A00E1DC1B /* AbstractActionSheetPicker.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -558,6 +658,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/MyBrewLogV1/Frameworks",
+					"$(PROJECT_DIR)/MyBrewLogV1/ActionSheetPicker-3.0-master/ObjC-Example",
 				);
 				INFOPLIST_FILE = MyBrewLogV1/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -572,6 +673,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/MyBrewLogV1/Frameworks",
+					"$(PROJECT_DIR)/MyBrewLogV1/ActionSheetPicker-3.0-master/ObjC-Example",
 				);
 				INFOPLIST_FILE = MyBrewLogV1/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

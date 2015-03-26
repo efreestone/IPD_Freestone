@@ -12,6 +12,7 @@
 //
 
 #import "NewRecipeViewController.h"
+#import "ActionSheetStringPicker.h"
 
 @interface NewRecipeViewController ()
 
@@ -32,6 +33,24 @@
 -(IBAction)onCancel:(id)sender {
     //Dismiss view controller
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+-(IBAction)picker:(id)sender {
+    // Create an array of strings you want to show in the picker:
+    NSArray *colors = [NSArray arrayWithObjects:@"Red", @"Green", @"Blue", @"Orange", nil];
+    
+    [ActionSheetStringPicker showPickerWithTitle:@"Select a Color"
+                                            rows:colors
+                                initialSelection:0
+                                       doneBlock:^(ActionSheetStringPicker *picker, NSInteger selectedIndex, id selectedValue) {
+                                           NSLog(@"Picker: %@", picker);
+                                           NSLog(@"Selected Index: %ld", (long)selectedIndex);
+                                           NSLog(@"Selected Value: %@", selectedValue);
+                                       }
+                                     cancelBlock:^(ActionSheetStringPicker *picker) {
+                                         NSLog(@"Block Picker Canceled");
+                                     }
+                                          origin:sender];
 }
 
 /*
