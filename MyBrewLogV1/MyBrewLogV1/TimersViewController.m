@@ -24,7 +24,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    loadedLabel.textColor = [UIColor redColor];
 }
 
 - (void)didReceiveMemoryWarning {
