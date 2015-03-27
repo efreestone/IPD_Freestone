@@ -45,6 +45,7 @@
             <string>Calibri</string>
             <string>Calibri</string>
             <string>Calibri</string>
+            <string>Calibri</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -682,16 +683,29 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IhE-0a-e9G">
-                                <rect key="frame" x="10" y="338" width="580" height="164"/>
+                                <rect key="frame" x="10" y="338" width="580" height="169"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="spo-NX-UiB">
-                                <rect key="frame" x="266" y="502" width="69" height="49"/>
+                                <rect key="frame" x="150" y="507" width="100" height="49"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="tx5-RO-07n"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="Calibri" family="Calibri" pointSize="30"/>
                                 <state key="normal" title="Share">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="coD-ip-PBe">
+                                <rect key="frame" x="350" y="507" width="100" height="49"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="Msk-wf-NiO"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Calibri" family="Calibri" pointSize="30"/>
+                                <state key="normal" title="Favorite">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
@@ -706,8 +720,8 @@
                         <constraints>
                             <constraint firstAttribute="centerX" secondItem="M51-aG-fQ2" secondAttribute="centerX" id="6XT-O1-2rZ"/>
                             <constraint firstItem="spo-NX-UiB" firstAttribute="top" secondItem="IhE-0a-e9G" secondAttribute="bottom" id="B0D-5p-Z8C"/>
-                            <constraint firstAttribute="centerX" secondItem="spo-NX-UiB" secondAttribute="centerX" id="EKm-Tp-JZX"/>
                             <constraint firstAttribute="trailing" secondItem="Y1p-Sp-l4E" secondAttribute="trailing" constant="10" id="KyO-3q-9rJ"/>
+                            <constraint firstAttribute="centerX" secondItem="coD-ip-PBe" secondAttribute="centerX" constant="-100" id="MJn-xK-M7W"/>
                             <constraint firstItem="7ns-P9-Zti" firstAttribute="top" secondItem="FaO-c9-7od" secondAttribute="bottom" id="PPH-9V-0b8"/>
                             <constraint firstAttribute="trailing" secondItem="IhE-0a-e9G" secondAttribute="trailing" constant="10" id="QRn-T5-EbZ"/>
                             <constraint firstAttribute="centerX" secondItem="Bbi-19-fVH" secondAttribute="centerX" id="U2O-KV-2KG"/>
@@ -717,11 +731,13 @@
                             <constraint firstItem="IhE-0a-e9G" firstAttribute="top" secondItem="Bbi-19-fVH" secondAttribute="bottom" constant="5" id="gRa-ko-AWk"/>
                             <constraint firstAttribute="centerX" secondItem="IhE-0a-e9G" secondAttribute="centerX" id="hOT-ye-4Zb"/>
                             <constraint firstItem="Y1p-Sp-l4E" firstAttribute="top" secondItem="M51-aG-fQ2" secondAttribute="bottom" constant="5" id="ieb-3x-onY"/>
+                            <constraint firstAttribute="centerX" secondItem="spo-NX-UiB" secondAttribute="centerX" constant="100" id="nKT-My-ngN"/>
                             <constraint firstItem="Bbi-19-fVH" firstAttribute="top" secondItem="Y1p-Sp-l4E" secondAttribute="bottom" constant="5" id="ofj-SF-fMK"/>
                             <constraint firstItem="hh7-tM-QRq" firstAttribute="top" secondItem="spo-NX-UiB" secondAttribute="bottom" id="ojt-0Z-GrF"/>
                             <constraint firstItem="IhE-0a-e9G" firstAttribute="leading" secondItem="LqL-zS-wsO" secondAttribute="leading" constant="10" id="qNc-Vu-c7S"/>
                             <constraint firstItem="M51-aG-fQ2" firstAttribute="top" secondItem="e0U-56-K5Q" secondAttribute="bottom" constant="5" id="rxc-Gt-x9e"/>
                             <constraint firstItem="Y1p-Sp-l4E" firstAttribute="leading" secondItem="LqL-zS-wsO" secondAttribute="leading" constant="10" id="sF4-iO-fjf"/>
+                            <constraint firstItem="coD-ip-PBe" firstAttribute="top" secondItem="IhE-0a-e9G" secondAttribute="bottom" id="wih-Li-Y7d"/>
                         </constraints>
                     </view>
                     <toolbarItems/>
@@ -732,6 +748,7 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="b7D-Pn-I3z" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -801,7 +818,7 @@
         <scene sceneID="8zI-n9-qIs">
             <objects>
                 <tableViewController id="Woz-ZB-XNv" customClass="SettingsViewController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="ua8-ZJ-37R">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="ua8-ZJ-37R">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -889,7 +906,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="7dS-U1-3qJ">
-                                                    <rect key="frame" x="213" y="61" width="175" height="29"/>
+                                                    <rect key="frame" x="213" y="62" width="175" height="29"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="175" id="FML-PH-sfm"/>
                                                     </constraints>
