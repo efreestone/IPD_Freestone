@@ -15,6 +15,8 @@
 #import "CustomTableViewCell.h"
 #import "AppDelegate.h"
 #import <ParseUI/ParseUI.h>
+#import "CustomPFLoginViewController.h"
+#import "CustomPFSignUpViewController.h"
 
 @interface MyRecipeViewController () <UITableViewDelegate, UITableViewDataSource, PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate> 
 
@@ -79,6 +81,7 @@
     // Dispose of any resources that can be recreated.
 }
 
+//Show search bar and scope buttons
 -(IBAction)onSortClick:(id)sender {
     if (searchBar.isHidden) {
         self.tableView.contentOffset = CGPointMake(0, -searchBar.frame.size.height + self.tableView.contentOffset.y);
@@ -107,11 +110,14 @@
     if (![PFUser currentUser]) { // No user logged in
         NSLog(@"No user logged in");
         // Create the log in view controller
-        PFLogInViewController *logInViewController = [[PFLogInViewController alloc] init];
+        CustomPFLoginViewController *logInViewController = [[CustomPFLoginViewController alloc] init];
+//        logInViewController.logInView.logo = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"splash-logo.png"]];
+//        logInViewController.logInView.logo.frame = CGRectMake(0, 0, 370, 170.6);
+        
         [logInViewController setDelegate:self]; // Set ourselves as the delegate
         
         // Create the sign up view controller
-        PFSignUpViewController *signUpViewController = [[PFSignUpViewController alloc] init];
+        CustomPFSignUpViewController *signUpViewController = [[CustomPFSignUpViewController alloc] init];
         [signUpViewController setDelegate:self]; // Set ourselves as the delegate
         
         // Assign our sign up controller to be displayed from the login controller
