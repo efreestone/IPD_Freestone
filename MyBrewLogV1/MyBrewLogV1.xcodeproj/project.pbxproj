@@ -679,6 +679,7 @@
 					"$(PROJECT_DIR)/MyBrewLogV1/ActionSheetPicker-3.0-master/ObjC-Example",
 				);
 				INFOPLIST_FILE = MyBrewLogV1/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -694,6 +695,7 @@
 					"$(PROJECT_DIR)/MyBrewLogV1/ActionSheetPicker-3.0-master/ObjC-Example",
 				);
 				INFOPLIST_FILE = MyBrewLogV1/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
