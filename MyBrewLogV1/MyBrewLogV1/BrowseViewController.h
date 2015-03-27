@@ -4,7 +4,7 @@
 // March 18th, 2015
 
 //
-//  FirstViewController.h
+//  SecondViewController.h
 //  MyBrewLogV1
 //
 //  Created by Elijah Freestone on 3/18/15.
@@ -12,9 +12,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <Parse/Parse.h>
 
-@interface FirstViewController : UIViewController
+@interface BrowseViewController : UITableViewController
+
+//Declare table view
+@property (strong, nonatomic) IBOutlet UITableView *browseTableView;
 
 
 @end
