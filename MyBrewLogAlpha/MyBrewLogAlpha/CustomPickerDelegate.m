@@ -1,15 +1,15 @@
 /*NOTE: This is from the ActionSsheetPicker obj-c example project found at https://github.com/skywinder/ActionSheetPicker-3.0/blob/master/ObjC-Example/Example/Classes/ActionSheetPickerViewController.m#L171 and it is in the process of being modified and utilized within my project. The documentation for this open source library isn't great but the coding style is fairly easy to read so I am working it out on my own.*/
 
 // Elijah Freestone
-// IPD1 1503
-// Week 3
-// March 18th, 2015
+// IPY 1504
+// Week 1 - Alpha
+// March 30th, 2015
 
 //
 //  CustomPickerDelegate.m
-//  MyBrewLogV1
+//  MyBrewLogAlpha
 //
-//  Created by Elijah Freestone on 3/26/15.
+//  Created by Elijah Freestone on 3/30/15.
 //  Copyright (c) 2015 Elijah Freestone. All rights reserved.
 //
 

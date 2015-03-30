@@ -1,3 +1,8 @@
+// Elijah Freestone
+// IPY 1504
+// Week 1 - Alpha
+// March 30th, 2015
+
 //
 //  BrowseViewController.h
 //  MyBrewLogAlpha
@@ -9,5 +14,9 @@
 #import <UIKit/UIKit.h>
 
 @interface BrowseViewController : UITableViewController
+
+//Declare table view
+@property (strong, nonatomic) IBOutlet UITableView *browseTableView;
+
 
 @end

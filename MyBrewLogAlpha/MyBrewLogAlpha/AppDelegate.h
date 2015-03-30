@@ -1,3 +1,8 @@
+// Elijah Freestone
+// IPY 1504
+// Week 1 - Alpha
+// March 30th, 2015
+
 //
 //  AppDelegate.h
 //  MyBrewLogAlpha
@@ -14,4 +19,5 @@
 
 
 @end
+
 

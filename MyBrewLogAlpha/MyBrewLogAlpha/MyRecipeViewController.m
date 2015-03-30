@@ -1,3 +1,8 @@
+// Elijah Freestone
+// IPY 1504
+// Week 1 - Alpha
+// March 30th, 2015
+
 //
 //  MyRecipeViewController.m
 //  MyBrewLogAlpha
@@ -7,21 +12,68 @@
 //
 
 #import "MyRecipeViewController.h"
+#import "CustomTableViewCell.h"
+#import "AppDelegate.h"
+#import <ParseUI/ParseUI.h>
+#import "CustomPFLoginViewController.h"
+#import "CustomPFSignUpViewController.h"
 
-@interface MyRecipeViewController ()
+@interface MyRecipeViewController () <UITableViewDelegate, UITableViewDataSource, PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate>
 
 @end
 
-@implementation MyRecipeViewController
+@implementation MyRecipeViewController {
+    NSArray *recipesArray;
+    NSArray *imageArray;
+    IBOutlet UISearchBar *searchBar;
+    CGRect originalSearchFrameRect;
+    CGRect searchFrameRect;
+    CGFloat zeroFloat;
+    BOOL scopeButtonsHidden;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
+    originalSearchFrameRect = searchBar.frame;
+    searchFrameRect = searchBar.frame;
+    zeroFloat = 0;
     
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    searchFrameRect.size.height = zeroFloat;
+    
+    //    myRecipeVC = self;
+    
+    recipesArray = [NSArray arrayWithObjects:@"Secret IPA", @"Dry Red Wine", @"Cali Style Sourdough", @"My Choco Stout", @"Peach Wine #1", @"Yogurt Base", @"Super Lager", @"Sweet Apple Pie Mead", @"Green Tea Kombucha", @"Strawberry Blonde", @"My White Zin", @"Plum Sake", @"Earl Grey Kombucha", @"Just good ol' Ale", @"Raspberry Suprise", @"Moms Sourdough Bread", nil];
+    
+    imageArray = [NSArray arrayWithObjects:@"beer-bottle.png", @"wine-glass.png", @"other-icon.png", @"beer-bottle.png", @"wine-glass.png", @"other-icon.png", @"beer-bottle.png", @"wine-glass.png", @"other-icon.png",@"beer-bottle.png", @"wine-glass.png", @"other-icon.png", @"beer-bottle.png", @"wine-glass.png", @"other-icon.png", @"beer-bottle.png", nil];
+    
+    //Set offset and hide search bar
+    self.tableView.contentOffset = CGPointMake(0, (searchBar.frame.size.height) - self.tableView.contentOffset.y);
+    searchBar.hidden = YES;
+    //searchBar.frame = searchFrameRect;
+    scopeButtonsHidden = YES;
+    
+    
+    //Grab user and username
+    PFUser *user = [PFUser currentUser];
+    NSString *usernameString = [user objectForKey:@"username"];
+    
+    if ([PFUser currentUser]) {
+        //Log username if user is logged in
+        NSLog(@"%@ is logged in", usernameString);
+    }
+    
+    //Test parse
+    //    PFObject *testObject = [PFObject objectWithClassName:@"TestObject"];
+    //    testObject[@"foo"] = @"bar";
+    //    [testObject saveInBackground];
+}
+
+-(void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    //Check if user is logged in, in viewDidAppear to be checked whenever this tab is shown
+    //This is used to present the login again after the user logs out on settings
+    [self isUserLoggedIn];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -29,29 +81,169 @@
     // Dispose of any resources that can be recreated.
 }
 
+//Show search bar and scope buttons
+-(IBAction)onSortClick:(id)sender {
+    if (searchBar.isHidden) {
+        self.tableView.contentOffset = CGPointMake(0, -searchBar.frame.size.height + self.tableView.contentOffset.y);
+        searchBar.hidden = NO;
+        //        searchBar.showsScopeBar = YES;
+        //        [searchBar sizeToFit];
+        scopeButtonsHidden = NO;
+        NSLog(@"show");
+        //searchBar.frame = originalSearchFrameRect;
+    } else if (!searchBar.isHidden) {
+        //        CGFloat zero = 0;
+        //        searchFrameRect.size.height = zero;
+        self.tableView.contentOffset = CGPointMake(0, searchBar.frame.size.height + self.tableView.contentOffset.y);
+        searchBar.hidden = YES;
+        //        searchBar.showsScopeBar = NO;
+        //        scopeButtonsHidden = YES;
+        NSLog(@"hidden");
+        //        searchBar.frame = searchFrameRect;
+    }
+    
+}
+
+//Check if user is logged in, present login if not
+-(void)isUserLoggedIn {
+    NSLog(@"isUserLoggedIn called");
+    if (![PFUser currentUser]) { // No user logged in
+        NSLog(@"No user logged in");
+        // Create the log in view controller
+        CustomPFLoginViewController *logInViewController = [[CustomPFLoginViewController alloc] init];
+        //        logInViewController.logInView.logo = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"splash-logo.png"]];
+        //        logInViewController.logInView.logo.frame = CGRectMake(0, 0, 370, 170.6);
+        
+        [logInViewController setDelegate:self]; // Set ourselves as the delegate
+        
+        // Create the sign up view controller
+        CustomPFSignUpViewController *signUpViewController = [[CustomPFSignUpViewController alloc] init];
+        [signUpViewController setDelegate:self]; // Set ourselves as the delegate
+        
+        // Assign our sign up controller to be displayed from the login controller
+        [logInViewController setSignUpController:signUpViewController];
+        
+        // Present the log in view controller
+        [self presentViewController:logInViewController animated:YES completion:NULL];
+    } else {
+        NSLog(@"User is logged in from isUserLoggedIn");
+    }
+}
+
 #pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-#warning Potentially incomplete method implementation.
-    // Return the number of sections.
-    return 0;
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return [recipesArray count];
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete method implementation.
-    // Return the number of rows in the section.
-    return 0;
-}
-
-/*
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
+-(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // Remove seperator inset
+    if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
+        [cell setSeparatorInset:UIEdgeInsetsZero];
+    }
     
-    // Configure the cell...
+    // Prevent the cell from inheriting the Table View's margin settings
+    if ([cell respondsToSelector:@selector(setPreservesSuperviewLayoutMargins:)]) {
+        [cell setPreservesSuperviewLayoutMargins:NO];
+    }
+    
+    // Explictly set your cell's layout margins
+    if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
+        [cell setLayoutMargins:UIEdgeInsetsZero];
+    }
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *cellID = @"MyRecipeCell";
+    
+    //UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
+    CustomTableViewCell *cell = (CustomTableViewCell *) [tableView dequeueReusableCellWithIdentifier:cellID];
+    
+    cell.recipeNameLabel.text = [recipesArray objectAtIndex:indexPath.row];
+    //cell.cellImage.image = [UIImage imageNamed:@"glasses.jpg"];
+    cell.cellImage.image = [UIImage imageNamed:[imageArray objectAtIndex:indexPath.row]];
+    
+    //    CAGradientLayer *gradient = [CAGradientLayer layer];
+    //    gradient.frame = cell.bounds;
+    //    gradient.colors = [NSArray arrayWithObjects:(id)[[UIColor whiteColor]CGColor], (id)[[UIColor redColor]CGColor], nil];
+    //    [cell.layer addSublayer:gradient];
+    
+    //Override to remove extra seperator lines after the last cell
+    [self.tableView setTableFooterView:[[UIView alloc] initWithFrame:CGRectMake(0,0,0,0)]];
     
     return cell;
 }
-*/
+
+#pragma mark - PFLogInViewControllerDelegate
+
+//These are defualt delegate methods for the Parse Login and are essentially unmodified. Added to get basic use of the login/signup framework Parse provides
+// Sent to the delegate to determine whether the log in request should be submitted to the server.
+- (BOOL)logInViewController:(PFLogInViewController *)logInController shouldBeginLogInWithUsername:(NSString *)username password:(NSString *)password {
+    // Check if both fields are completed
+    if (username && password && username.length && password.length) {
+        return YES; // Begin login process
+    }
+    
+    [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Missing Information", nil) message:NSLocalizedString(@"Make sure you fill out all of the information!", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles:nil] show];
+    return NO; // Interrupt login process
+}
+
+// Sent to the delegate when a PFUser is logged in.
+- (void)logInViewController:(PFLogInViewController *)logInController didLogInUser:(PFUser *)user {
+    [self dismissViewControllerAnimated:YES completion:NULL];
+}
+
+// Sent to the delegate when the log in attempt fails.
+- (void)logInViewController:(PFLogInViewController *)logInController didFailToLogInWithError:(NSError *)error {
+    NSLog(@"Failed to log in...");
+}
+
+// Sent to the delegate when the log in screen is dismissed.
+- (void)logInViewControllerDidCancelLogIn:(PFLogInViewController *)logInController {
+    NSLog(@"User dismissed the logInViewController");
+}
+
+#pragma mark - PFSignUpViewControllerDelegate
+
+//These are defualt delegate methods for the Parse Signup and are essentially unmodified. Added to get basic use of the login/signup framework Parse provides
+// Sent to the delegate to determine whether the sign up request should be submitted to the server.
+- (BOOL)signUpViewController:(PFSignUpViewController *)signUpController shouldBeginSignUp:(NSDictionary *)info {
+    BOOL informationComplete = YES;
+    
+    // loop through all of the submitted data
+    for (id key in info) {
+        NSString *field = [info objectForKey:key];
+        if (!field || !field.length) { // check completion
+            informationComplete = NO;
+            break;
+        }
+    }
+    
+    // Display an alert if a field wasn't completed
+    if (!informationComplete) {
+        [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Missing Information", nil) message:NSLocalizedString(@"Make sure you fill out all of the information!", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles:nil] show];
+    }
+    
+    return informationComplete;
+}
+
+// Sent to the delegate when a PFUser is signed up.
+- (void)signUpViewController:(PFSignUpViewController *)signUpController didSignUpUser:(PFUser *)user {
+    [self dismissViewControllerAnimated:YES completion:NULL];
+}
+
+// Sent to the delegate when the sign up attempt fails.
+- (void)signUpViewController:(PFSignUpViewController *)signUpController didFailToSignUpWithError:(NSError *)error {
+    NSLog(@"Failed to sign up...");
+}
+
+// Sent to the delegate when the sign up screen is dismissed.
+- (void)signUpViewControllerDidCancelSignUp:(PFSignUpViewController *)signUpController {
+    NSLog(@"User dismissed the signUpViewController");
+}
 
 /*
 // Override to support conditional editing of the table view.

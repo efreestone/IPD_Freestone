@@ -1,3 +1,8 @@
+// Elijah Freestone
+// IPY 1504
+// Week 1 - Alpha
+// March 30th, 2015
+
 //
 //  MyRecipeViewController.h
 //  MyBrewLogAlpha
@@ -7,7 +12,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <Parse/Parse.h>
 
 @interface MyRecipeViewController : UITableViewController
+
+//Declare table view
+@property (strong, nonatomic) IBOutlet UITableView *myTableView;
 
 @end
