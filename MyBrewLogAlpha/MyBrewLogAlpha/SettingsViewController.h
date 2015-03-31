@@ -17,5 +17,7 @@
 @interface SettingsViewController : UITableViewController
 
 @property (strong, nonatomic) IBOutlet UIButton *logOutButton;
+@property (strong, nonatomic) IBOutlet UIButton *editUserButton;
+@property (strong, nonatomic) IBOutlet UIButton *infoButton;
 
 @end

@@ -77,6 +77,8 @@
 		B89EB5D81AC9EA9A00BDC399 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B89EB5D71AC9EA9A00BDC399 /* CoreGraphics.framework */; };
 		B89EB5DA1AC9EAA300BDC399 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B89EB5D91AC9EAA300BDC399 /* CFNetwork.framework */; };
 		B89EB5DC1AC9EAAC00BDC399 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B89EB5DB1AC9EAAC00BDC399 /* AudioToolbox.framework */; };
+		B8F237D51ACA37CD00C749D2 /* BrowseDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B8F237D41ACA37CD00C749D2 /* BrowseDetailsViewController.m */; };
+		B8F237D81ACA37FC00C749D2 /* RecipeDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B8F237D71ACA37FC00C749D2 /* RecipeDetailsViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -107,7 +109,6 @@
 		B89EB53F1AC9E54900BDC399 /* CHANGELOG.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = "<group>"; };
 		B89EB5401AC9E54900BDC399 /* CONTRIBUTING.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = CONTRIBUTING.md; sourceTree = "<group>"; };
 		B89EB5411AC9E54900BDC399 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
-		B89EB5431AC9E54900BDC399 /* CoreActionSheetPicker.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CoreActionSheetPicker.framework; sourceTree = "<group>"; };
 		B89EB5451AC9E54900BDC399 /* AbstractActionSheetPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AbstractActionSheetPicker.h; sourceTree = "<group>"; };
 		B89EB5461AC9E54900BDC399 /* AbstractActionSheetPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AbstractActionSheetPicker.m; sourceTree = "<group>"; };
 		B89EB5471AC9E54900BDC399 /* ActionSheetCustomPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionSheetCustomPicker.h; sourceTree = "<group>"; };
@@ -185,6 +186,10 @@
 		B89EB5D71AC9EA9A00BDC399 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		B89EB5D91AC9EAA300BDC399 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		B89EB5DB1AC9EAAC00BDC399 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		B8F237D31ACA37CD00C749D2 /* BrowseDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrowseDetailsViewController.h; sourceTree = "<group>"; };
+		B8F237D41ACA37CD00C749D2 /* BrowseDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrowseDetailsViewController.m; sourceTree = "<group>"; };
+		B8F237D61ACA37FC00C749D2 /* RecipeDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecipeDetailsViewController.h; sourceTree = "<group>"; };
+		B8F237D71ACA37FC00C749D2 /* RecipeDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecipeDetailsViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -252,8 +257,12 @@
 				B89EB5171AC9E3FF00BDC399 /* AppDelegate.m */,
 				B89EB5A81AC9E60400BDC399 /* MyRecipeViewController.h */,
 				B89EB5A91AC9E60400BDC399 /* MyRecipeViewController.m */,
+				B8F237D61ACA37FC00C749D2 /* RecipeDetailsViewController.h */,
+				B8F237D71ACA37FC00C749D2 /* RecipeDetailsViewController.m */,
 				B89EB5AB1AC9E64F00BDC399 /* BrowseViewController.h */,
 				B89EB5AC1AC9E64F00BDC399 /* BrowseViewController.m */,
+				B8F237D31ACA37CD00C749D2 /* BrowseDetailsViewController.h */,
+				B8F237D41ACA37CD00C749D2 /* BrowseDetailsViewController.m */,
 				B89EB5B01AC9E78900BDC399 /* TimersViewController.h */,
 				B89EB5B11AC9E78900BDC399 /* TimersViewController.m */,
 				B89EB5AE1AC9E78900BDC399 /* SettingsViewController.h */,
@@ -311,19 +320,10 @@
 				B89EB53F1AC9E54900BDC399 /* CHANGELOG.md */,
 				B89EB5401AC9E54900BDC399 /* CONTRIBUTING.md */,
 				B89EB5411AC9E54900BDC399 /* LICENSE */,
-				B89EB5421AC9E54900BDC399 /* ObjC-Example */,
 				B89EB5441AC9E54900BDC399 /* Pickers */,
 				B89EB5571AC9E54900BDC399 /* README.md */,
 			);
 			path = "ActionSheetPicker-3.0-master";
-			sourceTree = "<group>";
-		};
-		B89EB5421AC9E54900BDC399 /* ObjC-Example */ = {
-			isa = PBXGroup;
-			children = (
-				B89EB5431AC9E54900BDC399 /* CoreActionSheetPicker.framework */,
-			);
-			path = "ObjC-Example";
 			sourceTree = "<group>";
 		};
 		B89EB5441AC9E54900BDC399 /* Pickers */ = {
@@ -552,6 +552,8 @@
 				B89EB5661AC9E54900BDC399 /* SWActionSheet.m in Sources */,
 				B89EB5641AC9E54900BDC399 /* ActionSheetStringPicker.m in Sources */,
 				B89EB5B21AC9E78900BDC399 /* SettingsViewController.m in Sources */,
+				B8F237D81ACA37FC00C749D2 /* RecipeDetailsViewController.m in Sources */,
+				B8F237D51ACA37CD00C749D2 /* BrowseDetailsViewController.m in Sources */,
 				B89EB5B31AC9E78900BDC399 /* TimersViewController.m in Sources */,
 				B89EB5181AC9E3FF00BDC399 /* AppDelegate.m in Sources */,
 				B89EB5151AC9E3FF00BDC399 /* main.m in Sources */,
@@ -685,7 +687,6 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/MyBrewLogAlpha/ActionSheetPicker-3.0-master/ObjC-Example",
 					"$(PROJECT_DIR)/MyBrewLogAlpha/Frameworks",
 				);
 				INFOPLIST_FILE = MyBrewLogAlpha/Info.plist;
@@ -700,7 +701,6 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/MyBrewLogAlpha/ActionSheetPicker-3.0-master/ObjC-Example",
 					"$(PROJECT_DIR)/MyBrewLogAlpha/Frameworks",
 				);
 				INFOPLIST_FILE = MyBrewLogAlpha/Info.plist;
@@ -762,6 +762,7 @@
 				B89EB5371AC9E3FF00BDC399 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		B89EB5381AC9E3FF00BDC399 /* Build configuration list for PBXNativeTarget "MyBrewLogAlphaTests" */ = {
 			isa = XCConfigurationList;
@@ -770,6 +771,7 @@
 				B89EB53A1AC9E3FF00BDC399 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
