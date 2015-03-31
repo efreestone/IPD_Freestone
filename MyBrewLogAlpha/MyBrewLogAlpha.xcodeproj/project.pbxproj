@@ -79,6 +79,7 @@
 		B89EB5DC1AC9EAAC00BDC399 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B89EB5DB1AC9EAAC00BDC399 /* AudioToolbox.framework */; };
 		B8F237D51ACA37CD00C749D2 /* BrowseDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B8F237D41ACA37CD00C749D2 /* BrowseDetailsViewController.m */; };
 		B8F237D81ACA37FC00C749D2 /* RecipeDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B8F237D71ACA37FC00C749D2 /* RecipeDetailsViewController.m */; };
+		B8F237DB1ACA548200C749D2 /* CustomTimerPickerDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B8F237DA1ACA548200C749D2 /* CustomTimerPickerDelegate.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -190,6 +191,8 @@
 		B8F237D41ACA37CD00C749D2 /* BrowseDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrowseDetailsViewController.m; sourceTree = "<group>"; };
 		B8F237D61ACA37FC00C749D2 /* RecipeDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecipeDetailsViewController.h; sourceTree = "<group>"; };
 		B8F237D71ACA37FC00C749D2 /* RecipeDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecipeDetailsViewController.m; sourceTree = "<group>"; };
+		B8F237D91ACA548200C749D2 /* CustomTimerPickerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomTimerPickerDelegate.h; sourceTree = "<group>"; };
+		B8F237DA1ACA548200C749D2 /* CustomTimerPickerDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomTimerPickerDelegate.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -253,6 +256,7 @@
 				B89EB5A11AC9E59C00BDC399 /* resources */,
 				B89EB56F1AC9E59300BDC399 /* Frameworks */,
 				B89EB5751AC9E59300BDC399 /* images */,
+				B89EB51F1AC9E3FF00BDC399 /* Main.storyboard */,
 				B89EB5161AC9E3FF00BDC399 /* AppDelegate.h */,
 				B89EB5171AC9E3FF00BDC399 /* AppDelegate.m */,
 				B89EB5A81AC9E60400BDC399 /* MyRecipeViewController.h */,
@@ -267,20 +271,21 @@
 				B89EB5B11AC9E78900BDC399 /* TimersViewController.m */,
 				B89EB5AE1AC9E78900BDC399 /* SettingsViewController.h */,
 				B89EB5AF1AC9E78900BDC399 /* SettingsViewController.m */,
-				B89EB51F1AC9E3FF00BDC399 /* Main.storyboard */,
-				B89EB5221AC9E3FF00BDC399 /* Images.xcassets */,
-				B89EB5241AC9E3FF00BDC399 /* LaunchScreen.xib */,
-				B89EB5121AC9E3FF00BDC399 /* Supporting Files */,
-				B89EB5B41AC9E7F300BDC399 /* CustomTableViewCell.h */,
-				B89EB5B51AC9E7F300BDC399 /* CustomTableViewCell.m */,
 				B89EB5B71AC9E90000BDC399 /* NewRecipeViewController.h */,
 				B89EB5B81AC9E90000BDC399 /* NewRecipeViewController.m */,
+				B89EB5221AC9E3FF00BDC399 /* Images.xcassets */,
+				B89EB5241AC9E3FF00BDC399 /* LaunchScreen.xib */,
+				B89EB5B41AC9E7F300BDC399 /* CustomTableViewCell.h */,
+				B89EB5B51AC9E7F300BDC399 /* CustomTableViewCell.m */,
 				B89EB5BE1AC9E94400BDC399 /* CustomPickerDelegate.h */,
 				B89EB5BF1AC9E94400BDC399 /* CustomPickerDelegate.m */,
+				B8F237D91ACA548200C749D2 /* CustomTimerPickerDelegate.h */,
+				B8F237DA1ACA548200C749D2 /* CustomTimerPickerDelegate.m */,
 				B89EB5BA1AC9E94300BDC399 /* CustomPFLoginViewController.h */,
 				B89EB5BB1AC9E94400BDC399 /* CustomPFLoginViewController.m */,
 				B89EB5BC1AC9E94400BDC399 /* CustomPFSignUpViewController.h */,
 				B89EB5BD1AC9E94400BDC399 /* CustomPFSignUpViewController.m */,
+				B89EB5121AC9E3FF00BDC399 /* Supporting Files */,
 			);
 			path = MyBrewLogAlpha;
 			sourceTree = "<group>";
@@ -542,6 +547,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B89EB5C01AC9E94400BDC399 /* CustomPFLoginViewController.m in Sources */,
+				B8F237DB1ACA548200C749D2 /* CustomTimerPickerDelegate.m in Sources */,
 				B89EB5AA1AC9E60400BDC399 /* MyRecipeViewController.m in Sources */,
 				B89EB5C21AC9E94400BDC399 /* CustomPickerDelegate.m in Sources */,
 				B89EB5B91AC9E90000BDC399 /* NewRecipeViewController.m in Sources */,

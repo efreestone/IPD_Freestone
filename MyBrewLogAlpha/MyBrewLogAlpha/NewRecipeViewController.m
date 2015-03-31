@@ -19,10 +19,12 @@
 #import "ActionSheetDistancePicker.h"
 #import "DistancePickerView.h"
 #import "CustomPickerDelegate.h"
+#import "CustomTimerPickerDelegate.h"
 
 @interface NewRecipeViewController () {
     NSArray *recipeTypes;
     NSArray *ingredientArray;
+    NSDate *selectedDate;
     NSDate *selectedTime;
     AbstractActionSheetPicker *actionSheetPicker;
     
@@ -37,6 +39,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    selectedDate = [NSDate date];
+    selectedTime = [NSDate date];
     
     //Create arrays for pickers
     recipeTypes = [NSArray arrayWithObjects:@"Beer", @"Wine", @"Other", nil];
@@ -103,21 +108,34 @@
 
 //Show Timer Picker
 -(IBAction)showTimerPicker:(id)sender {
-    //Create picker and set to temer mode
-    actionSheetPicker = [[ActionSheetDatePicker alloc] initWithTitle:@""
-                                  datePickerMode:UIDatePickerModeCountDownTimer
-                                    selectedDate:nil
-                                       doneBlock:^(ActionSheetDatePicker *picker, id selectedDate, id origin) {
-                                           NSLog(@"selectedDate: %@", selectedDate);
-//                                           self.counDownTextField.text = [selectedDate stringValue];
-                                           NSLog(@"picker.countDownDuration, %f", picker.countDownDuration);
-//                                           self.counDownTextField.text = [NSString stringWithFormat:@"%f", picker.countDownDuration];
-                                       } cancelBlock:^(ActionSheetDatePicker *picker) {
-                                           NSLog(@"Cancel clicked");
-                                       } origin:sender];
-    [(ActionSheetDatePicker *) actionSheetPicker setCountDownDuration:120];
-    //actionSheetPicker.hideCancel = YES;
-    [actionSheetPicker showActionSheetPicker];
+//    //Create picker and set to temer mode
+//    actionSheetPicker = [[ActionSheetDatePicker alloc] initWithTitle:@""
+//                                  datePickerMode:UIDatePickerModeCountDownTimer
+//                                    selectedDate:nil
+//                                       doneBlock:^(ActionSheetDatePicker *picker, id selectedDate, id origin) {
+//                                           NSLog(@"selectedDate: %@", selectedDate);
+////                                           self.counDownTextField.text = [selectedDate stringValue];
+//                                           NSLog(@"picker.countDownDuration, %f", picker.countDownDuration);
+////                                           self.counDownTextField.text = [NSString stringWithFormat:@"%f", picker.countDownDuration];
+//                                       } cancelBlock:^(ActionSheetDatePicker *picker) {
+//                                           NSLog(@"Cancel clicked");
+//                                       } origin:sender];
+//    [(ActionSheetDatePicker *) actionSheetPicker setCountDownDuration:120];
+//    //actionSheetPicker.hideCancel = YES;
+//    [actionSheetPicker showActionSheetPicker];
+    
+    CustomTimerPickerDelegate *timerDelegate = [[CustomTimerPickerDelegate alloc] init];
+    NSNumber *yass0 = @0;
+    NSNumber *yass1 = @0;
+    NSNumber *yass2 = @0;
+    NSNumber *yass3 = @0;
+    NSNumber *yass4 = @60;
+    NSArray *initialSelections = @[yass0, yass1, yass2, yass3, yass4];
+    [ActionSheetCustomPicker showPickerWithTitle:@"Select Time"
+                                        delegate:timerDelegate
+                                showCancelButton:YES
+                                          origin:sender
+                               initialSelections:initialSelections];
     
 }
 
