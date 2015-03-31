@@ -21,7 +21,7 @@
 #import "CustomPickerDelegate.h"
 #import "CustomTimerPickerDelegate.h"
 
-@interface NewRecipeViewController () {
+@interface NewRecipeViewController () <UIActionSheetDelegate> {
     NSArray *recipeTypes;
     NSArray *ingredientArray;
     NSDate *selectedDate;
@@ -64,18 +64,33 @@
 //Show Recipe Type Picker
 -(IBAction)showRecipeTypePicker:(id)sender {
     //Create picker and fill with Recipe Type array
-    [ActionSheetStringPicker showPickerWithTitle:@"Select a Recipe Type"
-                                            rows:recipeTypes
-                                initialSelection:0
-                                       doneBlock:^(ActionSheetStringPicker *picker, NSInteger selectedIndex, id selectedValue) {
-//                                           NSLog(@"Picker: %@", picker);
-//                                           NSLog(@"Selected Index: %ld", (long)selectedIndex);
-                                           NSLog(@"Selected Value: %@", selectedValue);
-                                       }
-                                     cancelBlock:^(ActionSheetStringPicker *picker) {
-                                         NSLog(@"Block Picker Canceled");
-                                     }
-                                          origin:sender];
+//    [ActionSheetStringPicker showPickerWithTitle:@"Select a Recipe Type"
+//                                            rows:recipeTypes
+//                                initialSelection:0
+//                                       doneBlock:^(ActionSheetStringPicker *picker, NSInteger selectedIndex, id selectedValue) {
+////                                           NSLog(@"Picker: %@", picker);
+////                                           NSLog(@"Selected Index: %ld", (long)selectedIndex);
+//                                           NSLog(@"Selected Value: %@", selectedValue);
+//                                       }
+//                                     cancelBlock:^(ActionSheetStringPicker *picker) {
+//                                         NSLog(@"Block Picker Canceled");
+//                                     }
+//                                          origin:sender];
+    
+    //Create ActionSheet for recipe types
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Recipe Type"
+                                                             delegate:self
+                                                    cancelButtonTitle:@"Cancel"
+                                               destructiveButtonTitle:nil
+                                                    otherButtonTitles:nil];
+    //Fast enum recipe types and apply to "other" button
+    for (NSString *title in recipeTypes) {
+        [actionSheet addButtonWithTitle:title];
+    }
+    
+    actionSheet.tag = 100;
+    
+    [actionSheet showInView:self.view];
     
 }
 
@@ -124,18 +139,28 @@
 //    //actionSheetPicker.hideCancel = YES;
 //    [actionSheetPicker showActionSheetPicker];
     
-    CustomTimerPickerDelegate *timerDelegate = [[CustomTimerPickerDelegate alloc] init];
-    NSNumber *yass0 = @0;
-    NSNumber *yass1 = @0;
-    NSNumber *yass2 = @0;
-    NSNumber *yass3 = @0;
-    NSNumber *yass4 = @60;
-    NSArray *initialSelections = @[yass0, yass1, yass2, yass3, yass4];
-    [ActionSheetCustomPicker showPickerWithTitle:@"Select Time"
-                                        delegate:timerDelegate
-                                showCancelButton:YES
-                                          origin:sender
-                               initialSelections:initialSelections];
+//    CustomTimerPickerDelegate *timerDelegate = [[CustomTimerPickerDelegate alloc] init];
+//    NSNumber *yass0 = @0;
+//    NSNumber *yass1 = @0;
+//    NSNumber *yass2 = @0;
+//    NSNumber *yass3 = @0;
+//    NSNumber *yass4 = @60;
+//    NSArray *initialSelections = @[yass0, yass1, yass2, yass3, yass4];
+//    [ActionSheetCustomPicker showPickerWithTitle:@"Select Time"
+//                                        delegate:timerDelegate
+//                                showCancelButton:YES
+//                                          origin:sender
+//                               initialSelections:initialSelections];
+    
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Is timer over 24 hours?"
+                                                             delegate:self
+                                                    cancelButtonTitle:@"Cancel"
+                                               destructiveButtonTitle:nil
+                                                    otherButtonTitles:@"Yes", @"No", nil];
+    
+    actionSheet.tag = 200;
+    
+    [actionSheet showInView:self.view];
     
 }
 
@@ -157,6 +182,20 @@
 
 -(void)tempSelected {
     NSLog(@"Temp selected");
+}
+
+#pragma mark - action sheet delegate
+
+-(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (actionSheet.tag == 100) {
+        NSLog(@"Recipe Type");
+    } else if (actionSheet.tag == 200) {
+        NSLog(@"Timer length");
+    } else {
+        NSLog(@"Something else selected");
+    }
+    
+    NSLog(@"Index = %ld - Title = %@", (long)buttonIndex, [actionSheet buttonTitleAtIndex:buttonIndex]);
 }
 
 /*
