@@ -22,6 +22,14 @@
     if (self = [super init]) {
         measurementArray = [NSArray arrayWithObjects:@"qt", @"cup", @"gal", @"oz", @"lbs", nil];
         ingredientArray = [NSArray arrayWithObjects:@"Ingedient 1", @"Ingedient 2", @"Ingedient 3", @"Ingedient 4", @"Ingedient 5", @"Ingedient 6", @"Other", nil];
+        amountArray = [[NSMutableArray alloc] init];
+        
+        for(int i = 0; i < 1000; i++) {
+            NSString *stringVal = [NSString stringWithFormat:@"%d", i];
+            [amountArray addObject:stringVal];
+            
+        }
+        
     }
     return self;
 }
@@ -51,8 +59,8 @@
 {
     // Returns
     switch (component) {
-        case 0: return [measurementArray count];
-        case 1: return [ingredientArray count];
+        case 0: return [amountArray count];
+        case 1: return [measurementArray count];
         default:break;
     }
     return 0;
@@ -64,8 +72,8 @@
 - (CGFloat)pickerView:(UIPickerView *)pickerView widthForComponent:(NSInteger)component
 {
     switch (component) {
-        case 0: return 60.0f;
-        case 1: return 260.0f;
+        case 0: return 100.0f;
+        case 1: return 200.0f;
         default:break;
     }
     return 0;
@@ -81,8 +89,8 @@
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
     switch (component) {
-        case 0: return measurementArray[(NSUInteger) row];
-        case 1: return ingredientArray[(NSUInteger) row];
+        case 0: return amountArray[(NSUInteger) row];
+        case 1: return measurementArray[(NSUInteger) row];
         default:break;
     }
     return nil;
@@ -93,10 +101,10 @@
     NSLog(@"Row %li selected in component %li", (long)row, (long)component);
     switch (component) {
         case 0:
-            self.selectedMeasurement = measurementArray[(NSUInteger) row];
+            self.selectedMeasurement = amountArray[(NSUInteger) row];
             return;
         case 1:
-            self.selectedIngredient = ingredientArray[(NSUInteger) row];
+            self.selectedIngredient = measurementArray[(NSUInteger) row];
             return;
         default:break;
     }

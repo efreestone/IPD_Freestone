@@ -17,6 +17,7 @@
 @interface CustomPickerDelegate : NSObject <ActionSheetCustomPickerDelegate> {
     NSArray *measurementArray;
     NSArray *ingredientArray;
+    NSMutableArray *amountArray;
 }
 
 @property (nonatomic, strong) NSString *selectedMeasurement;

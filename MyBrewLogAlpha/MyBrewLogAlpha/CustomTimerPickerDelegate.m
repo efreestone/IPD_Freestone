@@ -24,8 +24,7 @@
 //        hourArray = [[NSMutableArray alloc] init];
 //        minuteArray = [[NSMutableArray alloc] init];
         
-        for(int i=0; i<61; i++)
-        {
+        for(int i = 0; i < 13; i++) {
             NSString *stringVal = [NSString stringWithFormat:@"%d", i];
             //Create array with 12 months
             if (i < 13)
@@ -122,31 +121,5 @@
     }
     return nil;
 }
-
-//- (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view {
-//    UILabel *retval = (id)view;
-//    if (!retval) {
-//        retval= [[UILabel alloc] initWithFrame:CGRectMake(0.0f, 0.0f, [pickerView rowSizeForComponent:component].width, [pickerView rowSizeForComponent:component].height)];
-//    }
-//    
-//    switch (component) {
-//        case 0:
-//            return monthArray[row];
-//        case 1:
-//            return @"Month";
-//        case 2:
-//            return weekArray[row];
-//        case 3:
-//            return @"Week";
-//        case 4:
-//            return dayArray[row];
-//        default:
-//            break;
-//    }
-//    
-//    retval.adjustsFontSizeToFitWidth = YES;
-//    retval.minimumFontSize = 14;
-//    return retval;
-//}
 
 @end

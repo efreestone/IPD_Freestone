@@ -60,7 +60,7 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-#pragma mark - Pickers
+#pragma mark - Pickers and Action Sheets
 //Using ActionSheetPicker, an open source lib. Found at https://github.com/skywinder/ActionSheetPicker-3.0
 
 //Show Recipe Type Picker
@@ -112,12 +112,13 @@
 
 }
 
+//Show custom quantity picker. Triggered after selecting ingredient
 -(void)showQuantityPicker:(id)sender {
     CustomPickerDelegate *delegate = [[CustomPickerDelegate alloc] init];
     NSNumber *yass1 = @0;
     NSNumber *yass2 = @0;
     NSArray *initialSelections = @[yass1, yass2];
-    [ActionSheetCustomPicker showPickerWithTitle:@"Select Ingredient"
+    [ActionSheetCustomPicker showPickerWithTitle:@"Select Quantity"
                                         delegate:delegate
                                 showCancelButton:YES
                                           origin:sender
@@ -128,34 +129,6 @@
 //Show Timer Picker
 -(IBAction)showTimerPicker:(id)sender {
     buttonSender = sender;
-//    //Create picker and set to temer mode
-//    actionSheetPicker = [[ActionSheetDatePicker alloc] initWithTitle:@""
-//                                  datePickerMode:UIDatePickerModeCountDownTimer
-//                                    selectedDate:nil
-//                                       doneBlock:^(ActionSheetDatePicker *picker, id selectedDate, id origin) {
-//                                           NSLog(@"selectedDate: %@", selectedDate);
-////                                           self.counDownTextField.text = [selectedDate stringValue];
-//                                           NSLog(@"picker.countDownDuration, %f", picker.countDownDuration);
-////                                           self.counDownTextField.text = [NSString stringWithFormat:@"%f", picker.countDownDuration];
-//                                       } cancelBlock:^(ActionSheetDatePicker *picker) {
-//                                           NSLog(@"Cancel clicked");
-//                                       } origin:sender];
-//    [(ActionSheetDatePicker *) actionSheetPicker setCountDownDuration:120];
-//    //actionSheetPicker.hideCancel = YES;
-//    [actionSheetPicker showActionSheetPicker];
-    
-//    CustomTimerPickerDelegate *timerDelegate = [[CustomTimerPickerDelegate alloc] init];
-//    NSNumber *yass0 = @0;
-//    NSNumber *yass1 = @0;
-//    NSNumber *yass2 = @0;
-//    NSNumber *yass3 = @0;
-//    NSNumber *yass4 = @60;
-//    NSArray *initialSelections = @[yass0, yass1, yass2, yass3, yass4];
-//    [ActionSheetCustomPicker showPickerWithTitle:@"Select Time"
-//                                        delegate:timerDelegate
-//                                showCancelButton:YES
-//                                          origin:sender
-//                               initialSelections:initialSelections];
     
     UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Is timer over 24 hours?"
                                                              delegate:self
@@ -191,6 +164,7 @@
 
 #pragma mark - action sheet delegate
 
+//Grab action sheet actions via delegate method
 -(void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex{
     if (actionSheet.tag == 100) {
         NSLog(@"Recipe Type");
@@ -198,9 +172,11 @@
         NSLog(@"Timer length");
         //Yes or No selected in first timer action sheet
         if ([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:@"No"]) {
+            //Under 24 selected, show countdown picker
             NSLog(@"Under 24 hours");
             [self showCountdownPicker:buttonSender];
         } else if ([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:@"Yes"]) {
+            //Over 24 selected, show custom M/W/D picker
             NSLog(@"Over 24 hours");
             [self showCustomTimePicker:buttonSender];
         } else {
@@ -214,6 +190,7 @@
     NSLog(@"Index = %ld - Title = %@", (long)buttonIndex, [actionSheet buttonTitleAtIndex:buttonIndex]);
 }
 
+//Show countdown picker. Triggered from selecting No to over 24 hour ActionSheet
 -(void)showCountdownPicker:(id)sender {
     //Create picker and set to temer mode
     actionSheetPicker = [[ActionSheetDatePicker alloc] initWithTitle:@"Under 24 hours"
@@ -233,6 +210,7 @@
     
 }
 
+//Show custom picker. Triggered from selecting Yes to over 24 hour ActionSheet
 -(void)showCustomTimePicker:(id)sender {
     CustomTimerPickerDelegate *timerDelegate = [[CustomTimerPickerDelegate alloc] init];
     NSNumber *comp0 = @0;
