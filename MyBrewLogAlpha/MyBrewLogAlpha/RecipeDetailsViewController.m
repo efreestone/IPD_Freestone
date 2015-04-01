@@ -13,7 +13,7 @@
 
 #import "RecipeDetailsViewController.h"
 
-@interface RecipeDetailsViewController ()
+@interface RecipeDetailsViewController () 
 
 @end
 

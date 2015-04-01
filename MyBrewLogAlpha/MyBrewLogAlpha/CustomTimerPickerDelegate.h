@@ -18,4 +18,8 @@
     
 }
 
+@property (nonatomic, assign) NSInteger monthDigits;
+@property (nonatomic, assign) NSInteger weekDigits;
+@property (nonatomic, assign) NSInteger dayDigits;
+
 @end

@@ -14,7 +14,7 @@
 #import "BrowseViewController.h"
 #import "CustomTableViewCell.h"
 
-@interface BrowseViewController () <UITableViewDelegate, UITableViewDataSource>
+@interface BrowseViewController () <UITableViewDelegate, UITableViewDataSource, UIActionSheetDelegate>
 
 @end
 
@@ -95,6 +95,19 @@
     [self.tableView setTableFooterView:[[UIView alloc] initWithFrame:CGRectMake(0,0,0,0)]];
     
     return cell;
+}
+
+# pragma mark - ActionSheet (sort)
+
+-(IBAction)showSortActionSheet:(id)sender {
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Sort Recipes by:"
+                                                             delegate:self
+                                                    cancelButtonTitle:@"Cancel"
+                                               destructiveButtonTitle:nil
+                                                    otherButtonTitles:@"Favorites", @"Username", @"Type", @"Newest", @"Oldest", nil];
+    
+    [actionSheet showInView:self.view];
+    
 }
 
 /*

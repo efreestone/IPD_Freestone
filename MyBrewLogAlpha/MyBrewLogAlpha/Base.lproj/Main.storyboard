@@ -181,17 +181,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <searchBar key="tableHeaderView" contentMode="redraw" searchBarStyle="minimal" showsCancelButton="YES" showsScopeBar="YES" id="H4L-Bc-PLp">
-                            <rect key="frame" x="0.0" y="64" width="600" height="88"/>
+                        <searchBar key="tableHeaderView" contentMode="redraw" searchBarStyle="minimal" showsCancelButton="YES" id="H4L-Bc-PLp">
+                            <rect key="frame" x="0.0" y="64" width="600" height="44"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <color key="barTintColor" red="1" green="1" blue="1" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
                             <textInputTraits key="textInputTraits"/>
-                            <scopeButtonTitles>
-                                <string>Newest</string>
-                                <string>Oldest</string>
-                                <string>Username</string>
-                                <string>Favorites</string>
-                            </scopeButtonTitles>
                         </searchBar>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="BrowseCell" rowHeight="60" id="2Wa-DO-55n" customClass="CustomTableViewCell">
@@ -250,7 +244,7 @@
                     <navigationItem key="navigationItem" title="Browse" id="552-s1-krd">
                         <barButtonItem key="leftBarButtonItem" title="Sort" id="Mtt-9y-iKr">
                             <connections>
-                                <action selector="onSortClick:" destination="B1g-Qh-ijo" id="8gr-yj-Rty"/>
+                                <action selector="showSortActionSheet:" destination="B1g-Qh-ijo" id="bhS-so-48p"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="R9I-J2-NgA">
@@ -261,7 +255,6 @@
                     </navigationItem>
                     <connections>
                         <outlet property="browseTableView" destination="wUY-fu-lMd" id="z0s-xf-Nd8"/>
-                        <outlet property="searchBar" destination="H4L-Bc-PLp" id="kAM-FV-DaM"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zfO-oC-WVF" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -461,17 +454,11 @@
                         <rect key="frame" x="0.0" y="64" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <searchBar key="tableHeaderView" contentMode="redraw" searchBarStyle="minimal" showsCancelButton="YES" showsScopeBar="YES" id="0bZ-Ny-wyH">
-                            <rect key="frame" x="0.0" y="64" width="600" height="88"/>
+                        <searchBar key="tableHeaderView" contentMode="redraw" searchBarStyle="minimal" showsCancelButton="YES" id="0bZ-Ny-wyH">
+                            <rect key="frame" x="0.0" y="64" width="600" height="44"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <color key="barTintColor" red="1" green="1" blue="1" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
                             <textInputTraits key="textInputTraits"/>
-                            <scopeButtonTitles>
-                                <string>Newest</string>
-                                <string>Oldest</string>
-                                <string>Name</string>
-                                <string>Active</string>
-                            </scopeButtonTitles>
                         </searchBar>
                         <prototypes>
                             <tableViewCell opaque="NO" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MyRecipeCell" rowHeight="60" id="Gss-EB-OVZ" customClass="CustomTableViewCell">
@@ -531,7 +518,7 @@
                     <navigationItem key="navigationItem" title="My Recipes" id="Jes-a0-yT6">
                         <barButtonItem key="leftBarButtonItem" title="Sort" id="oRc-eF-Cii">
                             <connections>
-                                <action selector="onSortClick:" destination="smT-7w-2oa" id="P4u-iY-xRu"/>
+                                <action selector="showSortActionSheet:" destination="smT-7w-2oa" id="bD6-6e-Rrg"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="nff-l0-opt">
@@ -1049,6 +1036,6 @@
         <image name="timer-tab.png" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="YLU-RP-Sri"/>
+        <segue reference="Rhg-DK-ehR"/>
     </inferredMetricsTieBreakers>
 </document>

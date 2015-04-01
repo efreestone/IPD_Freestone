@@ -18,7 +18,7 @@
 #import "CustomPFLoginViewController.h"
 #import "CustomPFSignUpViewController.h"
 
-@interface MyRecipeViewController () <UITableViewDelegate, UITableViewDataSource, PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate>
+@interface MyRecipeViewController () <UITableViewDelegate, UITableViewDataSource, PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate, UIActionSheetDelegate>
 
 @end
 
@@ -35,24 +35,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    originalSearchFrameRect = searchBar.frame;
-    searchFrameRect = searchBar.frame;
-    zeroFloat = 0;
-    
-    searchFrameRect.size.height = zeroFloat;
-    
-    //    myRecipeVC = self;
-    
     recipesArray = [NSArray arrayWithObjects:@"Secret IPA", @"Dry Red Wine", @"Cali Style Sourdough", @"My Choco Stout", @"Peach Wine #1", @"Yogurt Base", @"Super Lager", @"Sweet Apple Pie Mead", @"Green Tea Kombucha", @"Strawberry Blonde", @"My White Zin", @"Plum Sake", @"Earl Grey Kombucha", @"Just good ol' Ale", @"Raspberry Suprise", @"Moms Sourdough Bread", nil];
     
     imageArray = [NSArray arrayWithObjects:@"beer-bottle.png", @"wine-glass.png", @"other-icon.png", @"beer-bottle.png", @"wine-glass.png", @"other-icon.png", @"beer-bottle.png", @"wine-glass.png", @"other-icon.png",@"beer-bottle.png", @"wine-glass.png", @"other-icon.png", @"beer-bottle.png", @"wine-glass.png", @"other-icon.png", @"beer-bottle.png", nil];
     
-    //Set offset and hide search bar
-    self.tableView.contentOffset = CGPointMake(0, (searchBar.frame.size.height) - self.tableView.contentOffset.y);
-    searchBar.hidden = YES;
-    //searchBar.frame = searchFrameRect;
-    scopeButtonsHidden = YES;
-    
+//    //Set offset and hide search bar
+//    self.tableView.contentOffset = CGPointMake(0, (searchBar.frame.size.height) - self.tableView.contentOffset.y);
+//    searchBar.hidden = YES;
+//    //searchBar.frame = searchFrameRect;
+//    scopeButtonsHidden = YES;
     
     //Grab user and username
     PFUser *user = [PFUser currentUser];
@@ -175,6 +166,19 @@
     [self.tableView setTableFooterView:[[UIView alloc] initWithFrame:CGRectMake(0,0,0,0)]];
     
     return cell;
+}
+
+# pragma mark - ActionSheet (sort)
+
+-(IBAction)showSortActionSheet:(id)sender {
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Sort Recipes by:"
+                                                             delegate:self
+                                                    cancelButtonTitle:@"Cancel"
+                                               destructiveButtonTitle:nil
+                                                    otherButtonTitles:@"Active", @"Name", @"Type", @"Newest", @"Oldest", nil];
+    
+    [actionSheet showInView:self.view];
+    
 }
 
 #pragma mark - PFLogInViewControllerDelegate

@@ -30,6 +30,8 @@
     
     NSInteger selectedBigUnit;
     NSInteger selectedSmallUnit;
+    
+    id buttonSender;
 }
 
 @end
@@ -63,20 +65,6 @@
 
 //Show Recipe Type Picker
 -(IBAction)showRecipeTypePicker:(id)sender {
-    //Create picker and fill with Recipe Type array
-//    [ActionSheetStringPicker showPickerWithTitle:@"Select a Recipe Type"
-//                                            rows:recipeTypes
-//                                initialSelection:0
-//                                       doneBlock:^(ActionSheetStringPicker *picker, NSInteger selectedIndex, id selectedValue) {
-////                                           NSLog(@"Picker: %@", picker);
-////                                           NSLog(@"Selected Index: %ld", (long)selectedIndex);
-//                                           NSLog(@"Selected Value: %@", selectedValue);
-//                                       }
-//                                     cancelBlock:^(ActionSheetStringPicker *picker) {
-//                                         NSLog(@"Block Picker Canceled");
-//                                     }
-//                                          origin:sender];
-    
     //Create ActionSheet for recipe types
     UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Recipe Type"
                                                              delegate:self
@@ -123,6 +111,7 @@
 
 //Show Timer Picker
 -(IBAction)showTimerPicker:(id)sender {
+    buttonSender = sender;
 //    //Create picker and set to temer mode
 //    actionSheetPicker = [[ActionSheetDatePicker alloc] initWithTitle:@""
 //                                  datePickerMode:UIDatePickerModeCountDownTimer
@@ -186,16 +175,66 @@
 
 #pragma mark - action sheet delegate
 
--(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
+-(void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex{
     if (actionSheet.tag == 100) {
         NSLog(@"Recipe Type");
     } else if (actionSheet.tag == 200) {
         NSLog(@"Timer length");
+        //Yes or No selected in first timer action sheet
+        if ([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:@"No"]) {
+            NSLog(@"Under 24 hours");
+            [self showCountdownPicker:buttonSender];
+        } else if ([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:@"Yes"]) {
+            NSLog(@"Over 24 hours");
+            [self showCustomTimePicker:buttonSender];
+        } else {
+            NSLog(@"Button title is NOT yes or no");
+        }
+        
     } else {
         NSLog(@"Something else selected");
     }
     
     NSLog(@"Index = %ld - Title = %@", (long)buttonIndex, [actionSheet buttonTitleAtIndex:buttonIndex]);
+}
+
+-(void)showCountdownPicker:(id)sender {
+    //Create picker and set to temer mode
+    actionSheetPicker = [[ActionSheetDatePicker alloc] initWithTitle:@"Under 24 hours"
+                                                      datePickerMode:UIDatePickerModeCountDownTimer
+                                                        selectedDate:nil
+                                                           doneBlock:^(ActionSheetDatePicker *picker, id dateSelected, id origin) {
+                                                               NSLog(@"dateSelected: %@", dateSelected);
+                                                               //                                           self.counDownTextField.text = [selectedDate stringValue];
+                                                               NSLog(@"picker.countDownDuration, %f", picker.countDownDuration);
+                                                               //                                           self.counDownTextField.text = [NSString stringWithFormat:@"%f", picker.countDownDuration];
+                                                           } cancelBlock:^(ActionSheetDatePicker *picker) {
+                                                               NSLog(@"Cancel clicked");
+                                                           } origin:sender];
+    [(ActionSheetDatePicker *) actionSheetPicker setCountDownDuration:120];
+    //actionSheetPicker.hideCancel = YES;
+    [actionSheetPicker showActionSheetPicker];
+    
+}
+
+-(void)showCustomTimePicker:(id)sender {
+    CustomTimerPickerDelegate *timerDelegate = [[CustomTimerPickerDelegate alloc] init];
+    NSNumber *comp0 = @0;
+    NSNumber *comp1 = @0;
+    NSNumber *comp2 = @0;
+    NSNumber *comp3 = @0;
+    NSNumber *comp4 = @0;
+    NSNumber *comp5 = @0;
+    NSArray *initialSelections = @[comp0, comp1, comp2, comp3, comp4, comp5];
+//    [ActionSheetCustomPicker showPickerWithTitle:@"Select Time"
+//                                        delegate:timerDelegate
+//                                showCancelButton:YES
+//                                          origin:sender
+//                               initialSelections:initialSelections];
+    ActionSheetCustomPicker *customPicker = [[ActionSheetCustomPicker alloc] initWithTitle:@"Select Time" delegate:timerDelegate showCancelButton:YES origin:sender initialSelections:initialSelections];
+    
+    [customPicker showActionSheetPicker];
+    
 }
 
 /*
