@@ -13,7 +13,6 @@
 		B89EB5231AC9E3FF00BDC399 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B89EB5221AC9E3FF00BDC399 /* Images.xcassets */; };
 		B89EB5261AC9E3FF00BDC399 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = B89EB5241AC9E3FF00BDC399 /* LaunchScreen.xib */; };
 		B89EB5321AC9E3FF00BDC399 /* MyBrewLogAlphaTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B89EB5311AC9E3FF00BDC399 /* MyBrewLogAlphaTests.m */; };
-		B89EB5581AC9E54900BDC399 /* .travis.yml in Resources */ = {isa = PBXBuildFile; fileRef = B89EB53C1AC9E54900BDC399 /* .travis.yml */; };
 		B89EB5591AC9E54900BDC399 /* ActionSheetPicker-3.0.podspec in Resources */ = {isa = PBXBuildFile; fileRef = B89EB53D1AC9E54900BDC399 /* ActionSheetPicker-3.0.podspec */; };
 		B89EB55A1AC9E54900BDC399 /* AUTHORS.md in Resources */ = {isa = PBXBuildFile; fileRef = B89EB53E1AC9E54900BDC399 /* AUTHORS.md */; };
 		B89EB55B1AC9E54900BDC399 /* CHANGELOG.md in Resources */ = {isa = PBXBuildFile; fileRef = B89EB53F1AC9E54900BDC399 /* CHANGELOG.md */; };
@@ -37,7 +36,6 @@
 		B89EB58F1AC9E59300BDC399 /* beer-bottle.png in Resources */ = {isa = PBXBuildFile; fileRef = B89EB5771AC9E59300BDC399 /* beer-bottle.png */; };
 		B89EB5901AC9E59300BDC399 /* browse-tab.png in Resources */ = {isa = PBXBuildFile; fileRef = B89EB5781AC9E59300BDC399 /* browse-tab.png */; };
 		B89EB5911AC9E59300BDC399 /* browse-tab@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B89EB5791AC9E59300BDC399 /* browse-tab@2x.png */; };
-		B89EB5921AC9E59300BDC399 /* glasses.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B89EB57A1AC9E59300BDC399 /* glasses.jpg */; };
 		B89EB5931AC9E59300BDC399 /* Icon-76.png in Resources */ = {isa = PBXBuildFile; fileRef = B89EB57B1AC9E59300BDC399 /* Icon-76.png */; };
 		B89EB5941AC9E59300BDC399 /* Icon-76@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B89EB57C1AC9E59300BDC399 /* Icon-76@2x.png */; };
 		B89EB5951AC9E59300BDC399 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = B89EB57D1AC9E59300BDC399 /* icon.png */; };
@@ -52,9 +50,6 @@
 		B89EB59E1AC9E59300BDC399 /* timer-tab.png in Resources */ = {isa = PBXBuildFile; fileRef = B89EB5861AC9E59300BDC399 /* timer-tab.png */; };
 		B89EB59F1AC9E59300BDC399 /* timer-tab@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B89EB5871AC9E59300BDC399 /* timer-tab@2x.png */; };
 		B89EB5A01AC9E59300BDC399 /* wine-glass.png in Resources */ = {isa = PBXBuildFile; fileRef = B89EB5881AC9E59300BDC399 /* wine-glass.png */; };
-		B89EB5A51AC9E59C00BDC399 /* Calibri Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B89EB5A21AC9E59C00BDC399 /* Calibri Bold.ttf */; };
-		B89EB5A61AC9E59C00BDC399 /* Calibri.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B89EB5A31AC9E59C00BDC399 /* Calibri.ttf */; };
-		B89EB5A71AC9E59C00BDC399 /* CooperBlackStd.otf in Resources */ = {isa = PBXBuildFile; fileRef = B89EB5A41AC9E59C00BDC399 /* CooperBlackStd.otf */; };
 		B89EB5AA1AC9E60400BDC399 /* MyRecipeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B89EB5A91AC9E60400BDC399 /* MyRecipeViewController.m */; };
 		B89EB5AD1AC9E64F00BDC399 /* BrowseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B89EB5AC1AC9E64F00BDC399 /* BrowseViewController.m */; };
 		B89EB5B21AC9E78900BDC399 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B89EB5AF1AC9E78900BDC399 /* SettingsViewController.m */; };
@@ -77,6 +72,9 @@
 		B89EB5D81AC9EA9A00BDC399 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B89EB5D71AC9EA9A00BDC399 /* CoreGraphics.framework */; };
 		B89EB5DA1AC9EAA300BDC399 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B89EB5D91AC9EAA300BDC399 /* CFNetwork.framework */; };
 		B89EB5DC1AC9EAAC00BDC399 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B89EB5DB1AC9EAAC00BDC399 /* AudioToolbox.framework */; };
+		B8B1F8701ACB98500073B729 /* Calibri Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B8B1F86D1ACB98500073B729 /* Calibri Bold.ttf */; };
+		B8B1F8711ACB98500073B729 /* Calibri.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B8B1F86E1ACB98500073B729 /* Calibri.ttf */; };
+		B8B1F8721ACB98500073B729 /* CooperBlackStd.otf in Resources */ = {isa = PBXBuildFile; fileRef = B8B1F86F1ACB98500073B729 /* CooperBlackStd.otf */; };
 		B8F237D51ACA37CD00C749D2 /* BrowseDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B8F237D41ACA37CD00C749D2 /* BrowseDetailsViewController.m */; };
 		B8F237D81ACA37FC00C749D2 /* RecipeDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B8F237D71ACA37FC00C749D2 /* RecipeDetailsViewController.m */; };
 		B8F237DB1ACA548200C749D2 /* CustomTimerPickerDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B8F237DA1ACA548200C749D2 /* CustomTimerPickerDelegate.m */; };
@@ -104,7 +102,6 @@
 		B89EB52B1AC9E3FF00BDC399 /* MyBrewLogAlphaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MyBrewLogAlphaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B89EB5301AC9E3FF00BDC399 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B89EB5311AC9E3FF00BDC399 /* MyBrewLogAlphaTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyBrewLogAlphaTests.m; sourceTree = "<group>"; };
-		B89EB53C1AC9E54900BDC399 /* .travis.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .travis.yml; sourceTree = "<group>"; };
 		B89EB53D1AC9E54900BDC399 /* ActionSheetPicker-3.0.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "ActionSheetPicker-3.0.podspec"; sourceTree = "<group>"; };
 		B89EB53E1AC9E54900BDC399 /* AUTHORS.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = AUTHORS.md; sourceTree = "<group>"; };
 		B89EB53F1AC9E54900BDC399 /* CHANGELOG.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = "<group>"; };
@@ -138,7 +135,6 @@
 		B89EB5771AC9E59300BDC399 /* beer-bottle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "beer-bottle.png"; sourceTree = "<group>"; };
 		B89EB5781AC9E59300BDC399 /* browse-tab.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "browse-tab.png"; sourceTree = "<group>"; };
 		B89EB5791AC9E59300BDC399 /* browse-tab@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "browse-tab@2x.png"; sourceTree = "<group>"; };
-		B89EB57A1AC9E59300BDC399 /* glasses.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = glasses.jpg; sourceTree = "<group>"; };
 		B89EB57B1AC9E59300BDC399 /* Icon-76.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-76.png"; sourceTree = "<group>"; };
 		B89EB57C1AC9E59300BDC399 /* Icon-76@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-76@2x.png"; sourceTree = "<group>"; };
 		B89EB57D1AC9E59300BDC399 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
@@ -153,9 +149,6 @@
 		B89EB5861AC9E59300BDC399 /* timer-tab.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "timer-tab.png"; sourceTree = "<group>"; };
 		B89EB5871AC9E59300BDC399 /* timer-tab@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "timer-tab@2x.png"; sourceTree = "<group>"; };
 		B89EB5881AC9E59300BDC399 /* wine-glass.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wine-glass.png"; sourceTree = "<group>"; };
-		B89EB5A21AC9E59C00BDC399 /* Calibri Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Calibri Bold.ttf"; sourceTree = "<group>"; };
-		B89EB5A31AC9E59C00BDC399 /* Calibri.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Calibri.ttf; sourceTree = "<group>"; };
-		B89EB5A41AC9E59C00BDC399 /* CooperBlackStd.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = CooperBlackStd.otf; sourceTree = "<group>"; };
 		B89EB5A81AC9E60400BDC399 /* MyRecipeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyRecipeViewController.h; sourceTree = "<group>"; };
 		B89EB5A91AC9E60400BDC399 /* MyRecipeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyRecipeViewController.m; sourceTree = "<group>"; };
 		B89EB5AB1AC9E64F00BDC399 /* BrowseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrowseViewController.h; sourceTree = "<group>"; };
@@ -187,6 +180,9 @@
 		B89EB5D71AC9EA9A00BDC399 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		B89EB5D91AC9EAA300BDC399 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		B89EB5DB1AC9EAAC00BDC399 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		B8B1F86D1ACB98500073B729 /* Calibri Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Calibri Bold.ttf"; path = "MyBrewLogAlpha/Calibri Bold.ttf"; sourceTree = SOURCE_ROOT; };
+		B8B1F86E1ACB98500073B729 /* Calibri.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Calibri.ttf; path = MyBrewLogAlpha/Calibri.ttf; sourceTree = SOURCE_ROOT; };
+		B8B1F86F1ACB98500073B729 /* CooperBlackStd.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = CooperBlackStd.otf; path = MyBrewLogAlpha/CooperBlackStd.otf; sourceTree = SOURCE_ROOT; };
 		B8F237D31ACA37CD00C749D2 /* BrowseDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrowseDetailsViewController.h; sourceTree = "<group>"; };
 		B8F237D41ACA37CD00C749D2 /* BrowseDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrowseDetailsViewController.m; sourceTree = "<group>"; };
 		B8F237D61ACA37FC00C749D2 /* RecipeDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecipeDetailsViewController.h; sourceTree = "<group>"; };
@@ -319,7 +315,6 @@
 		B89EB53B1AC9E54900BDC399 /* ActionSheetPicker-3.0-master */ = {
 			isa = PBXGroup;
 			children = (
-				B89EB53C1AC9E54900BDC399 /* .travis.yml */,
 				B89EB53D1AC9E54900BDC399 /* ActionSheetPicker-3.0.podspec */,
 				B89EB53E1AC9E54900BDC399 /* AUTHORS.md */,
 				B89EB53F1AC9E54900BDC399 /* CHANGELOG.md */,
@@ -388,7 +383,6 @@
 				B89EB5771AC9E59300BDC399 /* beer-bottle.png */,
 				B89EB5781AC9E59300BDC399 /* browse-tab.png */,
 				B89EB5791AC9E59300BDC399 /* browse-tab@2x.png */,
-				B89EB57A1AC9E59300BDC399 /* glasses.jpg */,
 				B89EB57B1AC9E59300BDC399 /* Icon-76.png */,
 				B89EB57C1AC9E59300BDC399 /* Icon-76@2x.png */,
 				B89EB57D1AC9E59300BDC399 /* icon.png */,
@@ -410,9 +404,9 @@
 		B89EB5A11AC9E59C00BDC399 /* resources */ = {
 			isa = PBXGroup;
 			children = (
-				B89EB5A21AC9E59C00BDC399 /* Calibri Bold.ttf */,
-				B89EB5A31AC9E59C00BDC399 /* Calibri.ttf */,
-				B89EB5A41AC9E59C00BDC399 /* CooperBlackStd.otf */,
+				B8B1F86D1ACB98500073B729 /* Calibri Bold.ttf */,
+				B8B1F86E1ACB98500073B729 /* Calibri.ttf */,
+				B8B1F86F1ACB98500073B729 /* CooperBlackStd.otf */,
 			);
 			path = resources;
 			sourceTree = "<group>";
@@ -502,6 +496,7 @@
 				B89EB55B1AC9E54900BDC399 /* CHANGELOG.md in Resources */,
 				B89EB55C1AC9E54900BDC399 /* CONTRIBUTING.md in Resources */,
 				B89EB59C1AC9E59300BDC399 /* settings-tab@2x.png in Resources */,
+				B8B1F8701ACB98500073B729 /* Calibri Bold.ttf in Resources */,
 				B89EB59D1AC9E59300BDC399 /* splash-logo.png in Resources */,
 				B89EB5991AC9E59300BDC399 /* my-recipes-tab@2x.png in Resources */,
 				B89EB59E1AC9E59300BDC399 /* timer-tab.png in Resources */,
@@ -511,23 +506,20 @@
 				B89EB59B1AC9E59300BDC399 /* settings-tab.png in Resources */,
 				B89EB59A1AC9E59300BDC399 /* other-icon.png in Resources */,
 				B89EB58E1AC9E59300BDC399 /* barrels.jpg in Resources */,
+				B8B1F8721ACB98500073B729 /* CooperBlackStd.otf in Resources */,
 				B89EB5941AC9E59300BDC399 /* Icon-76@2x.png in Resources */,
 				B89EB5961AC9E59300BDC399 /* Icon@2x.png in Resources */,
 				B89EB5901AC9E59300BDC399 /* browse-tab.png in Resources */,
 				B89EB5911AC9E59300BDC399 /* browse-tab@2x.png in Resources */,
+				B8B1F8711ACB98500073B729 /* Calibri.ttf in Resources */,
 				B89EB5931AC9E59300BDC399 /* Icon-76.png in Resources */,
 				B89EB5261AC9E3FF00BDC399 /* LaunchScreen.xib in Resources */,
 				B89EB5951AC9E59300BDC399 /* icon.png in Resources */,
-				B89EB5A51AC9E59C00BDC399 /* Calibri Bold.ttf in Resources */,
-				B89EB5581AC9E54900BDC399 /* .travis.yml in Resources */,
 				B89EB59F1AC9E59300BDC399 /* timer-tab@2x.png in Resources */,
 				B89EB5591AC9E54900BDC399 /* ActionSheetPicker-3.0.podspec in Resources */,
-				B89EB5A71AC9E59C00BDC399 /* CooperBlackStd.otf in Resources */,
 				B89EB5231AC9E3FF00BDC399 /* Images.xcassets in Resources */,
-				B89EB5921AC9E59300BDC399 /* glasses.jpg in Resources */,
 				B89EB5A01AC9E59300BDC399 /* wine-glass.png in Resources */,
 				B89EB5981AC9E59300BDC399 /* my-recipes-tab.png in Resources */,
-				B89EB5A61AC9E59C00BDC399 /* Calibri.ttf in Resources */,
 				B89EB58F1AC9E59300BDC399 /* beer-bottle.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
