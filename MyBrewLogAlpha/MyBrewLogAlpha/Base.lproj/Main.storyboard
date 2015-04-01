@@ -361,7 +361,6 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="125" id="OH2-2g-ms4"/>
                                 </constraints>
-                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </string>
                                 <color key="textColor" red="0.12549020349979401" green="0.12549020349979401" blue="0.12549020349979401" alpha="1" colorSpace="deviceRGB"/>
                                 <fontDescription key="fontDescription" name="Calibri" family="Calibri" pointSize="16"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -369,7 +368,6 @@
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SZI-4q-cln">
                                 <rect key="frame" x="15" y="404" width="570" height="186"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <string key="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</string>
                                 <color key="textColor" red="0.12549020349979401" green="0.12549020349979401" blue="0.12549020349979401" alpha="1" colorSpace="deviceRGB"/>
                                 <fontDescription key="fontDescription" name="Calibri" family="Calibri" pointSize="16"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -420,6 +418,10 @@
                             <constraint firstItem="47T-Sj-dJn" firstAttribute="top" secondItem="Zyi-Oo-Hse" secondAttribute="bottom" id="zCW-RD-KWf"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="ingredientsTV" destination="yZV-OD-r1u" id="qfa-gS-xwY"/>
+                        <outlet property="instructionsTV" destination="SZI-4q-cln" id="FJX-1L-OTe"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6Ap-5i-nzJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -576,7 +578,6 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="150" id="0l0-vw-Qu8"/>
                                 </constraints>
-                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
@@ -632,6 +633,10 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="ingredientsTV" destination="Bta-xa-ox0" id="SGR-Yb-f5c"/>
+                        <outlet property="instructionsTV" destination="bGQ-sj-RTv" id="ws7-pG-7Ub"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YeR-Yw-5GD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -667,7 +672,6 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="150" id="0fI-kk-OYc"/>
                                 </constraints>
-                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
@@ -752,6 +756,8 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="favoriteButton" destination="coD-ip-PBe" id="Mig-A1-58w"/>
+                        <outlet property="ingredientsTV" destination="Y1p-Sp-l4E" id="xRq-Wm-eJr"/>
+                        <outlet property="instructionsTV" destination="IhE-0a-e9G" id="z7p-30-w7Q"/>
                         <outlet property="shareButton" destination="spo-NX-UiB" id="lJN-B0-Zmx"/>
                     </connections>
                 </viewController>
@@ -1036,6 +1042,6 @@
         <image name="timer-tab.png" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Rhg-DK-ehR"/>
+        <segue reference="YLU-RP-Sri"/>
     </inferredMetricsTieBreakers>
 </document>

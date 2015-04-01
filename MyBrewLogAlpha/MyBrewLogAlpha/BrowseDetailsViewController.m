@@ -19,9 +19,16 @@
 
 @implementation BrowseDetailsViewController
 
+//Synthesize for getters/setters
+@synthesize ingredientsTV, instructionsTV;
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    NSString *testString = @"ingredient 1 \ningredient 2 \ningredient 3 \ningredient 4 \ningredient 5 \ningredient 6 \ningredient 7 \ningredient 8 \ningredient 9 \ningredient 10";
+    
+    ingredientsTV.text = testString;
 }
 
 - (void)didReceiveMemoryWarning {

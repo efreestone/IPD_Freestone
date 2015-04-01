@@ -21,4 +21,7 @@
 -(IBAction)showTimerPicker:(id)sender;
 -(IBAction)showTempPicker:(id)sender;
 
+@property (strong, nonatomic) IBOutlet UITextView *ingredientsTV;
+@property (strong, nonatomic) IBOutlet UITextView *instructionsTV;
+
 @end

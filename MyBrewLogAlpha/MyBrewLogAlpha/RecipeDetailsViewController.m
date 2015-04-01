@@ -19,9 +19,16 @@
 
 @implementation RecipeDetailsViewController
 
+//Synthesize for getters/setters
+@synthesize ingredientsTV, instructionsTV;
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    NSString *testString = @"test line 1 \nline 2 \nline 3 \nline 4 \nend";
+    
+    instructionsTV.text = testString;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -43,6 +50,11 @@
     NSString *titleString = @"Share Recipe";
     NSString *alertMessage = @"Recipe would have been shared via social networks, however this feature is not functional yet";
     [self showAlert:alertMessage withTitle:titleString];
+    
+    NSString *testIngString = ingredientsTV.text;
+    NSLog(@"Ing test = %@", testIngString);
+    
+    instructionsTV.text = testIngString;
 }
 
 //Method to create and show alert view if there is no internet connectivity

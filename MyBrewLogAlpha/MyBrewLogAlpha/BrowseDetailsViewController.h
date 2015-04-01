@@ -19,4 +19,7 @@
 @property (strong, nonatomic) IBOutlet UIButton *shareButton;
 @property (strong, nonatomic) IBOutlet UIButton *favoriteButton;
 
+@property (strong, nonatomic) IBOutlet UITextView *ingredientsTV;
+@property (strong, nonatomic) IBOutlet UITextView *instructionsTV;
+
 @end

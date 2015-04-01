@@ -17,5 +17,7 @@
 
 @property (strong, nonatomic) IBOutlet UIButton *navbarButton;
 @property (strong, nonatomic) IBOutlet UIButton *shareButton;
+@property (strong, nonatomic) IBOutlet UITextView *ingredientsTV;
+@property (strong, nonatomic) IBOutlet UITextView *instructionsTV;
 
 @end

@@ -31,12 +31,18 @@
     NSInteger selectedBigUnit;
     NSInteger selectedSmallUnit;
     
+    NSString *ingredientTVString;
+    NSString *instructionsTVString;
+    
     id buttonSender;
 }
 
 @end
 
 @implementation NewRecipeViewController
+
+//Synthesize for getters/setters
+@synthesize ingredientsTV, instructionsTV;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -48,6 +54,9 @@
     //Create arrays for pickers
     recipeTypes = [NSArray arrayWithObjects:@"Beer", @"Wine", @"Other", nil];
     ingredientArray = [NSArray arrayWithObjects:@"Ingedient 1", @"Ingedient 2", @"Ingedient 3", @"Ingedient 4", @"Ingedient 5", @"Ingedient 6", nil];
+    
+    ingredientTVString = ingredientsTV.text;
+    //instructionsTVString = instructionsTV.text;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -153,21 +162,57 @@
                                       smallUnitMax:9
                                  selectedSmallUnit:selectedSmallUnit
                                             target:self
-                                            action:@selector(tempSelected)
+                                            action:@selector(tempSelected:smallUnit:)
                                             origin:sender];
 
 }
 
--(void)tempSelected {
-    NSLog(@"Temp selected");
+//- (void)measurementWasSelectedWithBigUnit:(NSNumber *)bigUnit smallUnit:(NSNumber *)smallUnit element:(id)element
+
+//Grab temp selection
+-(void)tempSelected:(NSNumber *)wholeNumber smallUnit:(NSNumber *)pointNumber {
+    NSString *currentInst = instructionsTV.text;
+//    NSString *lastChar = @"";
+//    //Get last 2 char
+//    if (currentInst.length >= 2) {
+//        NSLog(@"Last char");
+//        lastChar = [currentInst substringFromIndex: [currentInst length] - 2];
+//        //[state substringFromIndex: MAX([state length] - 2, 0)];
+//    }
+    
+    //Check if last line of string ends in new line, add before temp if it doesn't exist
+    NSString *addNewLine = @"";
+    if (![currentInst hasSuffix:@"\n"]) {
+        NSLog(@"new line");
+        addNewLine = @"\n";
+    }
+    
+    //Remove new line if textview was empty
+    if (currentInst.length == 0) {
+        addNewLine = @"";
+    }
+    
+    selectedBigUnit = [wholeNumber intValue];
+    selectedSmallUnit = [pointNumber intValue];
+    NSString *formattedTemp = [NSString stringWithFormat:@"%@Temp: %ld.%ld °F \n", addNewLine, (long)selectedBigUnit, (long)selectedSmallUnit];
+    NSLog(@"Formatted %@", formattedTemp);
+    
+    instructionsTVString = [NSString stringWithFormat:@"%@%@", currentInst, formattedTemp];
+    
+    NSLog(@"%@", instructionsTVString);
+    
+    instructionsTV.text = instructionsTVString;
 }
 
 #pragma mark - action sheet delegate
 
 //Grab action sheet actions via delegate method
 -(void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex{
+    //Tag 100 is Recipe Type
     if (actionSheet.tag == 100) {
-        NSLog(@"Recipe Type");
+        NSString *recipeSelected = [actionSheet buttonTitleAtIndex:buttonIndex];
+        NSLog(@"Recipe Type = %@", recipeSelected);
+    //Tag 200 is first timer (is 24 hours)
     } else if (actionSheet.tag == 200) {
         NSLog(@"Timer length");
         //Yes or No selected in first timer action sheet
