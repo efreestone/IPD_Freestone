@@ -1,0 +1,1041 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="13F1066" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="49e-Tb-3d3">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="Calibri Bold.ttf">
+            <string>Calibri-Bold</string>
+            <string>Calibri-Bold</string>
+        </mutableArray>
+        <mutableArray key="Calibri.ttf">
+            <string>Calibri</string>
+            <string>Calibri</string>
+            <string>Calibri</string>
+            <string>Calibri</string>
+            <string>Calibri</string>
+            <string>Calibri</string>
+            <string>Calibri</string>
+            <string>Calibri</string>
+            <string>Calibri</string>
+            <string>Calibri</string>
+            <string>Calibri</string>
+            <string>Calibri</string>
+            <string>Calibri</string>
+            <string>Calibri</string>
+            <string>Calibri</string>
+            <string>Calibri</string>
+            <string>Calibri</string>
+            <string>Calibri</string>
+            <string>Calibri</string>
+            <string>Calibri</string>
+            <string>Calibri</string>
+            <string>Calibri</string>
+            <string>Calibri</string>
+            <string>Calibri</string>
+            <string>Calibri</string>
+            <string>Calibri</string>
+            <string>Calibri</string>
+            <string>Calibri</string>
+            <string>Calibri</string>
+            <string>Calibri</string>
+            <string>Calibri</string>
+            <string>Calibri</string>
+            <string>Calibri</string>
+            <string>Calibri</string>
+            <string>Calibri</string>
+            <string>Calibri</string>
+            <string>Calibri</string>
+        </mutableArray>
+    </customFonts>
+    <scenes>
+        <!--Timers-->
+        <scene sceneID="mNF-or-5AF">
+            <objects>
+                <viewController title="Timers" id="fGG-OC-mvn" customClass="TimersViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="4jn-5n-qwZ"/>
+                        <viewControllerLayoutGuide type="bottom" id="KcV-Qt-Tm2"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="kBi-Xn-1r4">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Timer #1 for Step in Recipe Name" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ff8-JZ-hKf">
+                                <rect key="frame" x="200" y="151" width="200" height="54"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="Oec-Af-hrA"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Calibri" family="Calibri" pointSize="22"/>
+                                <color key="textColor" red="0.12549020349979401" green="0.12549020349979401" blue="0.12549020349979401" alpha="1" colorSpace="deviceRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OiA-gH-U6C">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="64"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="64" id="85V-nH-Hyx"/>
+                                </constraints>
+                                <items>
+                                    <navigationItem title="Timers" id="uF7-mC-UO3">
+                                        <barButtonItem key="leftBarButtonItem" title="Sort" id="QfE-wW-1jt"/>
+                                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="h7f-s2-fmY">
+                                            <connections>
+                                                <segue destination="8Wm-S4-3lb" kind="presentation" id="e6B-dv-0B3"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="29:35 left" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KmW-zG-c4p">
+                                <rect key="frame" x="204" y="210" width="193" height="62"/>
+                                <fontDescription key="fontDescription" name="Calibri" family="Calibri" pointSize="50"/>
+                                <color key="textColor" red="0.71764707565307617" green="0.11372549831867218" blue="0.16470588743686676" alpha="1" colorSpace="deviceRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yhc-Iy-aEx">
+                                <rect key="frame" x="189" y="277" width="72" height="49"/>
+                                <fontDescription key="fontDescription" name="Calibri" family="Calibri" pointSize="30"/>
+                                <state key="normal" title="Pause">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sb2-LE-Exk">
+                                <rect key="frame" x="335" y="277" width="81" height="49"/>
+                                <fontDescription key="fontDescription" name="Calibri" family="Calibri" pointSize="30"/>
+                                <state key="normal" title="Cancel">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M13-jt-K4o">
+                                <rect key="frame" x="197" y="75" width="207" height="61"/>
+                                <fontDescription key="fontDescription" name="Calibri" family="Calibri" pointSize="40"/>
+                                <state key="normal" title="+ New Timer">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Timer #2 for Step in Recipe Name" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aVx-gR-fmV">
+                                <rect key="frame" x="200" y="351" width="200" height="54"/>
+                                <fontDescription key="fontDescription" name="Calibri" family="Calibri" pointSize="22"/>
+                                <color key="textColor" red="0.12549020350000001" green="0.12549020350000001" blue="0.12549020350000001" alpha="1" colorSpace="deviceRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1:10:17 left" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a7I-DG-gM0">
+                                <rect key="frame" x="184" y="410" width="232" height="62"/>
+                                <fontDescription key="fontDescription" name="Calibri" family="Calibri" pointSize="50"/>
+                                <color key="textColor" red="0.71764707569999997" green="0.11372549830000001" blue="0.1647058874" alpha="1" colorSpace="deviceRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="axq-6C-h72">
+                                <rect key="frame" x="189" y="477" width="72" height="49"/>
+                                <fontDescription key="fontDescription" name="Calibri" family="Calibri" pointSize="30"/>
+                                <state key="normal" title="Pause">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ibb-UL-pe1">
+                                <rect key="frame" x="335" y="477" width="81" height="49"/>
+                                <fontDescription key="fontDescription" name="Calibri" family="Calibri" pointSize="30"/>
+                                <state key="normal" title="Cancel">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.9490196704864502" green="0.92156869173049927" blue="0.90196084976196289" alpha="1" colorSpace="deviceRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="centerX" secondItem="axq-6C-h72" secondAttribute="centerX" constant="75" id="64j-Yq-WMQ"/>
+                            <constraint firstItem="aVx-gR-fmV" firstAttribute="width" secondItem="ff8-JZ-hKf" secondAttribute="width" id="8e5-oi-qau"/>
+                            <constraint firstItem="KmW-zG-c4p" firstAttribute="top" secondItem="ff8-JZ-hKf" secondAttribute="bottom" constant="5" id="DqO-Si-fIu"/>
+                            <constraint firstAttribute="centerX" secondItem="OiA-gH-U6C" secondAttribute="centerX" id="F8g-DB-Zt1"/>
+                            <constraint firstItem="OiA-gH-U6C" firstAttribute="width" secondItem="kBi-Xn-1r4" secondAttribute="width" id="Fcj-kd-q6m"/>
+                            <constraint firstItem="a7I-DG-gM0" firstAttribute="top" secondItem="aVx-gR-fmV" secondAttribute="bottom" constant="5" id="IO3-8n-5Pa"/>
+                            <constraint firstAttribute="centerX" secondItem="ff8-JZ-hKf" secondAttribute="centerX" id="JPE-Qe-Mpg"/>
+                            <constraint firstItem="Yhc-Iy-aEx" firstAttribute="top" secondItem="KmW-zG-c4p" secondAttribute="bottom" constant="5" id="MRG-fg-FpB"/>
+                            <constraint firstItem="Yhc-Iy-aEx" firstAttribute="centerY" secondItem="sb2-LE-Exk" secondAttribute="centerY" id="b04-zT-3dQ"/>
+                            <constraint firstAttribute="centerX" secondItem="KmW-zG-c4p" secondAttribute="centerX" id="e6Z-iQ-7DM"/>
+                            <constraint firstAttribute="centerX" secondItem="sb2-LE-Exk" secondAttribute="centerX" constant="-75" id="hDY-jM-ABl"/>
+                            <constraint firstAttribute="centerX" secondItem="aVx-gR-fmV" secondAttribute="centerX" id="hcy-ob-ysr"/>
+                            <constraint firstItem="M13-jt-K4o" firstAttribute="top" secondItem="4jn-5n-qwZ" secondAttribute="bottom" constant="55" id="j18-Zi-rRo"/>
+                            <constraint firstItem="axq-6C-h72" firstAttribute="centerY" secondItem="ibb-UL-pe1" secondAttribute="centerY" id="jJS-Tn-i2y"/>
+                            <constraint firstAttribute="centerX" secondItem="M13-jt-K4o" secondAttribute="centerX" id="jfv-YN-xhA"/>
+                            <constraint firstItem="axq-6C-h72" firstAttribute="top" secondItem="a7I-DG-gM0" secondAttribute="bottom" constant="5" id="lUG-Fb-bdx"/>
+                            <constraint firstItem="ff8-JZ-hKf" firstAttribute="top" secondItem="M13-jt-K4o" secondAttribute="bottom" constant="15" id="oJN-r1-2N9"/>
+                            <constraint firstAttribute="centerX" secondItem="ibb-UL-pe1" secondAttribute="centerX" constant="-75" id="s2q-2R-2s5"/>
+                            <constraint firstItem="aVx-gR-fmV" firstAttribute="top" secondItem="Yhc-Iy-aEx" secondAttribute="bottom" constant="25" id="sh0-Nh-atf"/>
+                            <constraint firstAttribute="centerX" secondItem="a7I-DG-gM0" secondAttribute="centerX" id="vvS-6P-KyG"/>
+                            <constraint firstAttribute="centerX" secondItem="Yhc-Iy-aEx" secondAttribute="centerX" constant="75" id="wh4-lc-iUT"/>
+                            <constraint firstItem="OiA-gH-U6C" firstAttribute="top" secondItem="kBi-Xn-1r4" secondAttribute="top" id="ymR-Md-ae0"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Timer" image="timer-tab.png" id="vnW-FC-FXO"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="a2H-sX-dSF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="750" y="376"/>
+        </scene>
+        <!--Browse-->
+        <scene sceneID="O9d-5t-e8a">
+            <objects>
+                <tableViewController title="Browse" id="B1g-Qh-ijo" customClass="BrowseViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="60" sectionHeaderHeight="22" sectionFooterHeight="22" id="wUY-fu-lMd">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <searchBar key="tableHeaderView" contentMode="redraw" searchBarStyle="minimal" showsCancelButton="YES" id="H4L-Bc-PLp">
+                            <rect key="frame" x="0.0" y="64" width="600" height="44"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <color key="barTintColor" red="1" green="1" blue="1" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </searchBar>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="BrowseCell" rowHeight="60" id="2Wa-DO-55n" customClass="CustomTableViewCell">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="2Wa-DO-55n" id="uk5-7O-ogw">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bGk-Ej-U5b">
+                                            <rect key="frame" x="262" y="33" width="76" height="25"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="25" id="Qq8-1N-VBT"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" name="Calibri" family="Calibri" pointSize="18"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="highlightedColor" red="0.71764707565307617" green="0.11372549831867218" blue="0.16470588743686676" alpha="1" colorSpace="deviceRGB"/>
+                                        </label>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="MaR-Fh-sbs">
+                                            <rect key="frame" x="10" y="2" width="55" height="55"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="55" id="HR8-tk-dPb"/>
+                                                <constraint firstAttribute="height" constant="55" id="xzt-dK-KX0"/>
+                                            </constraints>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recipe Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YKN-UQ-hXC">
+                                            <rect key="frame" x="75" y="5" width="126" height="28"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="28" id="fJ9-jT-Ltd"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" name="Calibri-Bold" family="Calibri" pointSize="23"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="highlightedColor" red="0.12549020349979401" green="0.12549020349979401" blue="0.12549020349979401" alpha="1" colorSpace="deviceRGB"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="MaR-Fh-sbs" firstAttribute="leading" secondItem="uk5-7O-ogw" secondAttribute="leadingMargin" constant="2" id="5YU-qy-cn1"/>
+                                        <constraint firstItem="YKN-UQ-hXC" firstAttribute="leading" secondItem="MaR-Fh-sbs" secondAttribute="trailing" constant="10" id="5az-ku-Tz0"/>
+                                        <constraint firstAttribute="centerY" secondItem="MaR-Fh-sbs" secondAttribute="centerY" id="EL8-j8-g17"/>
+                                        <constraint firstItem="YKN-UQ-hXC" firstAttribute="top" secondItem="uk5-7O-ogw" secondAttribute="top" constant="5" id="mnr-Ti-0QQ"/>
+                                        <constraint firstAttribute="centerX" secondItem="bGk-Ej-U5b" secondAttribute="centerX" id="rnF-gt-h9W"/>
+                                        <constraint firstAttribute="bottom" secondItem="bGk-Ej-U5b" secondAttribute="bottom" constant="1" id="uIv-x6-Bld"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="cellImage" destination="MaR-Fh-sbs" id="7Z4-Gu-RlG"/>
+                                    <outlet property="detailsLabel" destination="bGk-Ej-U5b" id="sPg-Mn-Rix"/>
+                                    <outlet property="recipeNameLabel" destination="YKN-UQ-hXC" id="K7K-fz-dF8"/>
+                                    <segue destination="WBM-d3-r6Z" kind="show" id="egA-hy-KBP"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="B1g-Qh-ijo" id="FOO-sX-byq"/>
+                            <outlet property="delegate" destination="B1g-Qh-ijo" id="e5R-El-7aw"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Browse" id="552-s1-krd">
+                        <barButtonItem key="leftBarButtonItem" title="Sort" id="Mtt-9y-iKr">
+                            <connections>
+                                <action selector="showSortActionSheet:" destination="B1g-Qh-ijo" id="bhS-so-48p"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="R9I-J2-NgA">
+                            <connections>
+                                <segue destination="8Wm-S4-3lb" kind="presentation" id="Rhg-DK-ehR"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="browseTableView" destination="wUY-fu-lMd" id="z0s-xf-Nd8"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zfO-oC-WVF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1402" y="-286"/>
+        </scene>
+        <!--New Recipe-->
+        <scene sceneID="GGN-Qr-SaX">
+            <objects>
+                <viewController id="8Wm-S4-3lb" userLabel="New Recipe" customClass="NewRecipeViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="NIO-5A-ZyA"/>
+                        <viewControllerLayoutGuide type="bottom" id="Czb-sQ-rkl"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ibz-kt-3MR">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="90O-vS-DaU">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="64"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="64" id="YUh-kg-H8N"/>
+                                </constraints>
+                                <items>
+                                    <navigationItem title="New Recipe" id="6n0-ho-1QL">
+                                        <barButtonItem key="leftBarButtonItem" systemItem="save" id="pmV-r8-oUT">
+                                            <connections>
+                                                <action selector="onCancel:" destination="8Wm-S4-3lb" id="UHQ-KV-AVM"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="v7a-kv-2RF">
+                                            <connections>
+                                                <action selector="onCancel:" destination="8Wm-S4-3lb" id="8xQ-lZ-xt2"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aYc-Dw-eXV">
+                                <rect key="frame" x="150" y="114" width="150" height="37"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="150" id="V4v-Nh-wH3"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Calibri" family="Calibri" pointSize="20"/>
+                                <state key="normal" title="Recipe Type">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="showRecipeTypePicker:" destination="8Wm-S4-3lb" eventType="touchUpInside" id="HTp-gu-T9u"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B0M-gJ-6t8">
+                                <rect key="frame" x="150" y="151" width="150" height="37"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="150" id="muC-Xn-Oeu"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Calibri" family="Calibri" pointSize="20"/>
+                                <state key="normal" title="+ Timer">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="showTimerPicker:" destination="8Wm-S4-3lb" eventType="touchUpInside" id="t0a-pv-zUR"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zyi-Oo-Hse">
+                                <rect key="frame" x="300" y="114" width="150" height="37"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="150" id="7kL-7x-Lmm"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Calibri" family="Calibri" pointSize="20"/>
+                                <state key="normal" title="+ Ingredient">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="showIngredientPicker:" destination="8Wm-S4-3lb" eventType="touchUpInside" id="u4X-Ym-A5L"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Title of Recipe" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="IuN-DG-jVT">
+                                <rect key="frame" x="15" y="79" width="570" height="30"/>
+                                <fontDescription key="fontDescription" name="Calibri" family="Calibri" pointSize="16"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Notes" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="udZ-pc-DIP">
+                                <rect key="frame" x="15" y="193" width="570" height="30"/>
+                                <fontDescription key="fontDescription" name="Calibri" family="Calibri" pointSize="16"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="47T-Sj-dJn">
+                                <rect key="frame" x="300" y="151" width="150" height="37"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="150" id="jl1-28-WnU"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Calibri" family="Calibri" pointSize="20"/>
+                                <state key="normal" title="+ Temp">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="showTempPicker:" destination="8Wm-S4-3lb" eventType="touchUpInside" id="13k-JT-pfS"/>
+                                </connections>
+                            </button>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yZV-OD-r1u">
+                                <rect key="frame" x="15" y="251" width="570" height="125"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="125" id="OH2-2g-ms4"/>
+                                </constraints>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </string>
+                                <color key="textColor" red="0.12549020349979401" green="0.12549020349979401" blue="0.12549020349979401" alpha="1" colorSpace="deviceRGB"/>
+                                <fontDescription key="fontDescription" name="Calibri" family="Calibri" pointSize="16"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SZI-4q-cln">
+                                <rect key="frame" x="15" y="404" width="570" height="186"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <string key="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</string>
+                                <color key="textColor" red="0.12549020349979401" green="0.12549020349979401" blue="0.12549020349979401" alpha="1" colorSpace="deviceRGB"/>
+                                <fontDescription key="fontDescription" name="Calibri" family="Calibri" pointSize="16"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ingredients" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bfI-7g-5zF">
+                                <rect key="frame" x="261" y="228" width="78" height="21"/>
+                                <fontDescription key="fontDescription" name="Calibri" family="Calibri" pointSize="17"/>
+                                <color key="textColor" red="0.71764707565307617" green="0.11372549831867218" blue="0.16470588743686676" alpha="1" colorSpace="deviceRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Instructions" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HfL-dK-aeg">
+                                <rect key="frame" x="259" y="381" width="82" height="21"/>
+                                <fontDescription key="fontDescription" name="Calibri" family="Calibri" pointSize="17"/>
+                                <color key="textColor" red="0.71764707565307617" green="0.11372549831867218" blue="0.16470588743686676" alpha="1" colorSpace="deviceRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.9490196704864502" green="0.92156869173049927" blue="0.90196084976196289" alpha="1" colorSpace="deviceRGB"/>
+                        <constraints>
+                            <constraint firstItem="IuN-DG-jVT" firstAttribute="leading" secondItem="ibz-kt-3MR" secondAttribute="leading" constant="15" id="0C9-AU-mji"/>
+                            <constraint firstAttribute="centerX" secondItem="90O-vS-DaU" secondAttribute="centerX" id="3fz-FN-kDp"/>
+                            <constraint firstAttribute="centerX" secondItem="Zyi-Oo-Hse" secondAttribute="centerX" constant="-75" id="5hL-48-svm"/>
+                            <constraint firstAttribute="centerX" secondItem="udZ-pc-DIP" secondAttribute="centerX" id="5p4-z8-Oom"/>
+                            <constraint firstAttribute="centerX" secondItem="yZV-OD-r1u" secondAttribute="centerX" id="7zn-65-SDe"/>
+                            <constraint firstAttribute="trailing" secondItem="IuN-DG-jVT" secondAttribute="trailing" constant="15" id="9Tj-Pl-joU"/>
+                            <constraint firstItem="90O-vS-DaU" firstAttribute="top" secondItem="ibz-kt-3MR" secondAttribute="top" id="B6R-kf-NfL"/>
+                            <constraint firstAttribute="centerX" secondItem="SZI-4q-cln" secondAttribute="centerX" id="BRk-IY-4rW"/>
+                            <constraint firstAttribute="centerX" secondItem="B0M-gJ-6t8" secondAttribute="centerX" constant="75" id="Ble-Q3-PCl"/>
+                            <constraint firstItem="HfL-dK-aeg" firstAttribute="top" secondItem="yZV-OD-r1u" secondAttribute="bottom" constant="5" id="Gqe-U0-oz3"/>
+                            <constraint firstAttribute="centerX" secondItem="47T-Sj-dJn" secondAttribute="centerX" constant="-75" id="IOM-sl-cCc"/>
+                            <constraint firstAttribute="centerX" secondItem="IuN-DG-jVT" secondAttribute="centerX" id="LlO-fM-K8n"/>
+                            <constraint firstAttribute="centerX" secondItem="HfL-dK-aeg" secondAttribute="centerX" id="TcN-9q-CBd"/>
+                            <constraint firstItem="udZ-pc-DIP" firstAttribute="width" secondItem="yZV-OD-r1u" secondAttribute="width" id="XiF-zZ-6vB"/>
+                            <constraint firstItem="udZ-pc-DIP" firstAttribute="top" secondItem="B0M-gJ-6t8" secondAttribute="bottom" constant="5" id="dNk-pB-JH7"/>
+                            <constraint firstItem="SZI-4q-cln" firstAttribute="top" secondItem="HfL-dK-aeg" secondAttribute="bottom" constant="2" id="dga-IT-8Rf"/>
+                            <constraint firstItem="yZV-OD-r1u" firstAttribute="width" secondItem="SZI-4q-cln" secondAttribute="width" id="e86-xl-H0O"/>
+                            <constraint firstItem="IuN-DG-jVT" firstAttribute="width" secondItem="udZ-pc-DIP" secondAttribute="width" id="ejB-cY-iAz"/>
+                            <constraint firstItem="yZV-OD-r1u" firstAttribute="top" secondItem="bfI-7g-5zF" secondAttribute="bottom" constant="2" id="hwD-FW-YN3"/>
+                            <constraint firstItem="aYc-Dw-eXV" firstAttribute="centerY" secondItem="Zyi-Oo-Hse" secondAttribute="centerY" id="iCh-nY-Fcz"/>
+                            <constraint firstItem="B0M-gJ-6t8" firstAttribute="top" secondItem="aYc-Dw-eXV" secondAttribute="bottom" id="lb9-WU-97w"/>
+                            <constraint firstItem="bfI-7g-5zF" firstAttribute="top" secondItem="udZ-pc-DIP" secondAttribute="bottom" constant="5" id="mYc-xA-SVa"/>
+                            <constraint firstItem="aYc-Dw-eXV" firstAttribute="top" secondItem="IuN-DG-jVT" secondAttribute="bottom" constant="5" id="maq-ZD-yS1"/>
+                            <constraint firstItem="Czb-sQ-rkl" firstAttribute="top" secondItem="SZI-4q-cln" secondAttribute="bottom" constant="10" id="nJ9-Bo-WuV"/>
+                            <constraint firstItem="90O-vS-DaU" firstAttribute="width" secondItem="ibz-kt-3MR" secondAttribute="width" id="qPy-4I-Vh9"/>
+                            <constraint firstItem="IuN-DG-jVT" firstAttribute="top" secondItem="90O-vS-DaU" secondAttribute="bottom" constant="15" id="vSI-nI-by6"/>
+                            <constraint firstAttribute="centerX" secondItem="bfI-7g-5zF" secondAttribute="centerX" id="wHO-Nq-9ot"/>
+                            <constraint firstAttribute="centerX" secondItem="aYc-Dw-eXV" secondAttribute="centerX" constant="75" id="yng-4r-iV2"/>
+                            <constraint firstItem="47T-Sj-dJn" firstAttribute="top" secondItem="Zyi-Oo-Hse" secondAttribute="bottom" id="zCW-RD-KWf"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6Ap-5i-nzJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1759" y="376"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="yl2-sM-qoP">
+            <objects>
+                <tabBarController id="49e-Tb-3d3" sceneMemberID="viewController">
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="W28-zg-YXA">
+                        <rect key="frame" x="0.0" y="975" width="768" height="49"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="2xo-Vl-DZm" kind="relationship" relationship="viewControllers" id="WPc-Kv-194"/>
+                        <segue destination="rbv-aZ-EzX" kind="relationship" relationship="viewControllers" id="lzU-1b-eKA"/>
+                        <segue destination="fGG-OC-mvn" kind="relationship" relationship="viewControllers" id="XO6-ce-6c9"/>
+                        <segue destination="qGw-LO-XI8" kind="relationship" relationship="viewControllers" id="WQp-M9-PmU"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HuB-VB-40B" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="12" y="0.0"/>
+        </scene>
+        <!--My Recipes-->
+        <scene sceneID="W37-9l-rWf">
+            <objects>
+                <tableViewController storyboardIdentifier="MyRecipe" id="smT-7w-2oa" customClass="MyRecipeViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="60" sectionHeaderHeight="22" sectionFooterHeight="22" id="cs5-Ue-AE0">
+                        <rect key="frame" x="0.0" y="64" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <searchBar key="tableHeaderView" contentMode="redraw" searchBarStyle="minimal" showsCancelButton="YES" id="0bZ-Ny-wyH">
+                            <rect key="frame" x="0.0" y="64" width="600" height="44"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <color key="barTintColor" red="1" green="1" blue="1" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </searchBar>
+                        <prototypes>
+                            <tableViewCell opaque="NO" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MyRecipeCell" rowHeight="60" id="Gss-EB-OVZ" customClass="CustomTableViewCell">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Gss-EB-OVZ" id="IrY-Oz-c2p">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recipe Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qYC-ey-gls">
+                                            <rect key="frame" x="75" y="5" width="126" height="28"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="28" id="QbY-v0-94E"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" name="Calibri-Bold" family="Calibri" pointSize="23"/>
+                                            <color key="textColor" red="0.12549020349979401" green="0.12549020349979401" blue="0.12549020349979401" alpha="1" colorSpace="deviceRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s9H-0E-z4o">
+                                            <rect key="frame" x="283" y="33" width="35" height="25"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="25" id="O9Z-ye-XHy"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" name="Calibri" family="Calibri" pointSize="18"/>
+                                            <color key="textColor" red="0.71764707565307617" green="0.11372549831867218" blue="0.16470588743686676" alpha="1" colorSpace="deviceRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="LjS-pl-NkI">
+                                            <rect key="frame" x="10" y="2" width="55" height="55"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="55" id="0SP-Jt-FzZ"/>
+                                                <constraint firstAttribute="width" constant="55" id="7aA-JM-CRg"/>
+                                            </constraints>
+                                        </imageView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="qYC-ey-gls" firstAttribute="top" secondItem="IrY-Oz-c2p" secondAttribute="top" constant="5" id="0TK-nj-7qa"/>
+                                        <constraint firstItem="LjS-pl-NkI" firstAttribute="leading" secondItem="IrY-Oz-c2p" secondAttribute="leadingMargin" constant="2" id="41B-ub-EyF"/>
+                                        <constraint firstItem="qYC-ey-gls" firstAttribute="leading" secondItem="LjS-pl-NkI" secondAttribute="trailing" constant="10" id="Moe-Zy-Iic"/>
+                                        <constraint firstAttribute="bottom" secondItem="s9H-0E-z4o" secondAttribute="bottom" constant="1" id="jFX-ba-bmg"/>
+                                        <constraint firstAttribute="centerY" secondItem="LjS-pl-NkI" secondAttribute="centerY" id="pXa-im-7Z3"/>
+                                        <constraint firstAttribute="centerX" secondItem="s9H-0E-z4o" secondAttribute="centerX" id="ysu-xR-dbi"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="cellImage" destination="LjS-pl-NkI" id="HsK-qV-Bqo"/>
+                                    <outlet property="detailsLabel" destination="s9H-0E-z4o" id="yzd-Mh-N7p"/>
+                                    <outlet property="recipeNameLabel" destination="qYC-ey-gls" id="tdW-uv-a50"/>
+                                    <segue destination="Txs-R8-Y1A" kind="show" id="i0n-3n-lFJ"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="smT-7w-2oa" id="sBf-6X-YYG"/>
+                            <outlet property="delegate" destination="smT-7w-2oa" id="Fak-aL-dJg"/>
+                        </connections>
+                    </tableView>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="My Recipes" id="Jes-a0-yT6">
+                        <barButtonItem key="leftBarButtonItem" title="Sort" id="oRc-eF-Cii">
+                            <connections>
+                                <action selector="showSortActionSheet:" destination="smT-7w-2oa" id="bD6-6e-Rrg"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="nff-l0-opt">
+                            <connections>
+                                <segue destination="8Wm-S4-3lb" kind="presentation" id="nUX-dN-Hxy"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="myTableView" destination="cs5-Ue-AE0" id="Pnr-2f-Dxv"/>
+                        <outlet property="searchBar" destination="0bZ-Ny-wyH" id="Znz-0t-bm5"/>
+                        <outlet property="searchDisplayController" destination="b2D-fX-U5P" id="p4n-GK-JRT"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="997-Ga-gta" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <searchDisplayController id="b2D-fX-U5P">
+                    <connections>
+                        <outlet property="delegate" destination="smT-7w-2oa" id="qBL-je-Pae"/>
+                        <outlet property="searchContentsController" destination="smT-7w-2oa" id="elQ-nG-Mp9"/>
+                        <outlet property="searchResultsDataSource" destination="smT-7w-2oa" id="ks7-I9-kbi"/>
+                        <outlet property="searchResultsDelegate" destination="smT-7w-2oa" id="CdC-iG-u3M"/>
+                    </connections>
+                </searchDisplayController>
+            </objects>
+            <point key="canvasLocation" x="1402" y="-951"/>
+        </scene>
+        <!--Recipe Details-->
+        <scene sceneID="0fb-dY-lWO">
+            <objects>
+                <viewController id="Txs-R8-Y1A" userLabel="Recipe Details" customClass="RecipeDetailsViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ENt-Kz-aJt"/>
+                        <viewControllerLayoutGuide type="bottom" id="877-Le-ptP"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="qtt-gT-aeQ">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recipe Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iBz-OL-mqZ">
+                                <rect key="frame" x="206" y="64" width="188" height="43"/>
+                                <fontDescription key="fontDescription" name="Calibri" family="Calibri" pointSize="35"/>
+                                <color key="textColor" red="0.12549020349979401" green="0.12549020349979401" blue="0.12549020349979401" alpha="1" colorSpace="deviceRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ingredients" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z40-nB-vq1">
+                                <rect key="frame" x="261" y="107" width="78" height="21"/>
+                                <fontDescription key="fontDescription" name="Calibri" family="Calibri" pointSize="17"/>
+                                <color key="textColor" red="0.71764707565307617" green="0.11372549831867218" blue="0.16470588743686676" alpha="1" colorSpace="deviceRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bta-xa-ox0">
+                                <rect key="frame" x="10" y="133" width="580" height="150"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="150" id="0l0-vw-Qu8"/>
+                                </constraints>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Instructions" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pir-jH-SAc">
+                                <rect key="frame" x="259" y="288" width="82" height="21"/>
+                                <fontDescription key="fontDescription" name="Calibri" family="Calibri" pointSize="17"/>
+                                <color key="textColor" red="0.71764707569999997" green="0.11372549830000001" blue="0.1647058874" alpha="1" colorSpace="deviceRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bGQ-sj-RTv">
+                                <rect key="frame" x="10" y="314" width="580" height="193"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ezz-Wg-dFQ">
+                                <rect key="frame" x="266" y="507" width="69" height="49"/>
+                                <fontDescription key="fontDescription" name="Calibri" family="Calibri" pointSize="30"/>
+                                <state key="normal" title="Share">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="shareClicked:" destination="Txs-R8-Y1A" eventType="touchUpInside" id="zat-hD-OE5"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.9490196704864502" green="0.92156869173049927" blue="0.90196084976196289" alpha="1" colorSpace="deviceRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="bGQ-sj-RTv" secondAttribute="trailing" constant="10" id="1Uv-u4-ubV"/>
+                            <constraint firstItem="Bta-xa-ox0" firstAttribute="leading" secondItem="qtt-gT-aeQ" secondAttribute="leading" constant="10" id="2hv-FH-k3A"/>
+                            <constraint firstItem="iBz-OL-mqZ" firstAttribute="top" secondItem="ENt-Kz-aJt" secondAttribute="bottom" id="2rL-Bw-bA5"/>
+                            <constraint firstItem="ezz-Wg-dFQ" firstAttribute="top" secondItem="bGQ-sj-RTv" secondAttribute="bottom" id="6WH-a9-ctg"/>
+                            <constraint firstItem="Pir-jH-SAc" firstAttribute="top" secondItem="Bta-xa-ox0" secondAttribute="bottom" constant="5" id="EwK-lG-g4y"/>
+                            <constraint firstItem="bGQ-sj-RTv" firstAttribute="leading" secondItem="qtt-gT-aeQ" secondAttribute="leading" constant="10" id="H0S-RA-PAd"/>
+                            <constraint firstItem="877-Le-ptP" firstAttribute="top" secondItem="ezz-Wg-dFQ" secondAttribute="bottom" id="Xhc-TJ-WOu"/>
+                            <constraint firstAttribute="centerX" secondItem="iBz-OL-mqZ" secondAttribute="centerX" id="YV8-ZI-Cfb"/>
+                            <constraint firstAttribute="centerX" secondItem="bGQ-sj-RTv" secondAttribute="centerX" id="Yit-Oa-qCa"/>
+                            <constraint firstAttribute="centerX" secondItem="Pir-jH-SAc" secondAttribute="centerX" id="ZXb-cq-paa"/>
+                            <constraint firstAttribute="trailing" secondItem="Bta-xa-ox0" secondAttribute="trailing" constant="10" id="ad4-ls-dNB"/>
+                            <constraint firstItem="Bta-xa-ox0" firstAttribute="top" secondItem="z40-nB-vq1" secondAttribute="bottom" constant="5" id="cEm-xe-mbB"/>
+                            <constraint firstItem="bGQ-sj-RTv" firstAttribute="top" secondItem="Pir-jH-SAc" secondAttribute="bottom" constant="5" id="cxE-W1-Xcv"/>
+                            <constraint firstAttribute="centerX" secondItem="ezz-Wg-dFQ" secondAttribute="centerX" id="eCz-vl-gxK"/>
+                            <constraint firstItem="z40-nB-vq1" firstAttribute="top" secondItem="iBz-OL-mqZ" secondAttribute="bottom" id="pef-qP-SLk"/>
+                            <constraint firstAttribute="centerX" secondItem="z40-nB-vq1" secondAttribute="centerX" id="u6R-Op-XGO"/>
+                        </constraints>
+                    </view>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="Details" id="5Xn-sw-U8V">
+                        <barButtonItem key="rightBarButtonItem" systemItem="edit" id="n3u-tO-Im0">
+                            <connections>
+                                <segue destination="8Wm-S4-3lb" kind="presentation" id="YLU-RP-Sri"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YeR-Yw-5GD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2056" y="-951"/>
+        </scene>
+        <!--Browse Details-->
+        <scene sceneID="cWd-1m-pFm">
+            <objects>
+                <viewController id="WBM-d3-r6Z" userLabel="Browse Details" customClass="BrowseDetailsViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="FaO-c9-7od"/>
+                        <viewControllerLayoutGuide type="bottom" id="hh7-tM-QRq"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="LqL-zS-wsO">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recipe Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7ns-P9-Zti">
+                                <rect key="frame" x="206" y="64" width="188" height="43"/>
+                                <fontDescription key="fontDescription" name="Calibri" family="Calibri" pointSize="35"/>
+                                <color key="textColor" red="0.12549020350000001" green="0.12549020350000001" blue="0.12549020350000001" alpha="1" colorSpace="deviceRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ingredients" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M51-aG-fQ2">
+                                <rect key="frame" x="261" y="131" width="78" height="21"/>
+                                <fontDescription key="fontDescription" name="Calibri" family="Calibri" pointSize="17"/>
+                                <color key="textColor" red="0.71764707569999997" green="0.11372549830000001" blue="0.1647058874" alpha="1" colorSpace="deviceRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y1p-Sp-l4E">
+                                <rect key="frame" x="10" y="157" width="580" height="150"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="150" id="0fI-kk-OYc"/>
+                                </constraints>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Instructions" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bbi-19-fVH">
+                                <rect key="frame" x="259" y="312" width="82" height="21"/>
+                                <fontDescription key="fontDescription" name="Calibri" family="Calibri" pointSize="17"/>
+                                <color key="textColor" red="0.71764707569999997" green="0.11372549830000001" blue="0.1647058874" alpha="1" colorSpace="deviceRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IhE-0a-e9G">
+                                <rect key="frame" x="10" y="338" width="580" height="169"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="spo-NX-UiB">
+                                <rect key="frame" x="150" y="507" width="100" height="49"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="tx5-RO-07n"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Calibri" family="Calibri" pointSize="30"/>
+                                <state key="normal" title="Share">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="shareClicked:" destination="WBM-d3-r6Z" eventType="touchUpInside" id="gea-tc-yui"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="coD-ip-PBe">
+                                <rect key="frame" x="350" y="507" width="100" height="49"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="Msk-wf-NiO"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Calibri" family="Calibri" pointSize="30"/>
+                                <state key="normal" title="Favorite">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="favoriteClicked:" destination="WBM-d3-r6Z" eventType="touchUpInside" id="oT9-yK-5Ia"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="by Username" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e0U-56-K5Q">
+                                <rect key="frame" x="254" y="105" width="92" height="21"/>
+                                <fontDescription key="fontDescription" name="Calibri" family="Calibri" pointSize="17"/>
+                                <color key="textColor" red="0.12549020349979401" green="0.12549020349979401" blue="0.12549020349979401" alpha="1" colorSpace="deviceRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.94901967050000002" green="0.9215686917" blue="0.90196084980000002" alpha="1" colorSpace="deviceRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="centerX" secondItem="M51-aG-fQ2" secondAttribute="centerX" id="6XT-O1-2rZ"/>
+                            <constraint firstItem="spo-NX-UiB" firstAttribute="top" secondItem="IhE-0a-e9G" secondAttribute="bottom" id="B0D-5p-Z8C"/>
+                            <constraint firstAttribute="trailing" secondItem="Y1p-Sp-l4E" secondAttribute="trailing" constant="10" id="KyO-3q-9rJ"/>
+                            <constraint firstAttribute="centerX" secondItem="coD-ip-PBe" secondAttribute="centerX" constant="-100" id="MJn-xK-M7W"/>
+                            <constraint firstItem="7ns-P9-Zti" firstAttribute="top" secondItem="FaO-c9-7od" secondAttribute="bottom" id="PPH-9V-0b8"/>
+                            <constraint firstAttribute="trailing" secondItem="IhE-0a-e9G" secondAttribute="trailing" constant="10" id="QRn-T5-EbZ"/>
+                            <constraint firstAttribute="centerX" secondItem="Bbi-19-fVH" secondAttribute="centerX" id="U2O-KV-2KG"/>
+                            <constraint firstAttribute="centerX" secondItem="7ns-P9-Zti" secondAttribute="centerX" id="XIs-03-w75"/>
+                            <constraint firstAttribute="centerX" secondItem="e0U-56-K5Q" secondAttribute="centerX" id="XmM-A4-BL1"/>
+                            <constraint firstItem="e0U-56-K5Q" firstAttribute="top" secondItem="7ns-P9-Zti" secondAttribute="bottom" constant="-2" id="YvG-wg-oYS"/>
+                            <constraint firstItem="IhE-0a-e9G" firstAttribute="top" secondItem="Bbi-19-fVH" secondAttribute="bottom" constant="5" id="gRa-ko-AWk"/>
+                            <constraint firstAttribute="centerX" secondItem="IhE-0a-e9G" secondAttribute="centerX" id="hOT-ye-4Zb"/>
+                            <constraint firstItem="Y1p-Sp-l4E" firstAttribute="top" secondItem="M51-aG-fQ2" secondAttribute="bottom" constant="5" id="ieb-3x-onY"/>
+                            <constraint firstAttribute="centerX" secondItem="spo-NX-UiB" secondAttribute="centerX" constant="100" id="nKT-My-ngN"/>
+                            <constraint firstItem="Bbi-19-fVH" firstAttribute="top" secondItem="Y1p-Sp-l4E" secondAttribute="bottom" constant="5" id="ofj-SF-fMK"/>
+                            <constraint firstItem="hh7-tM-QRq" firstAttribute="top" secondItem="spo-NX-UiB" secondAttribute="bottom" id="ojt-0Z-GrF"/>
+                            <constraint firstItem="IhE-0a-e9G" firstAttribute="leading" secondItem="LqL-zS-wsO" secondAttribute="leading" constant="10" id="qNc-Vu-c7S"/>
+                            <constraint firstItem="M51-aG-fQ2" firstAttribute="top" secondItem="e0U-56-K5Q" secondAttribute="bottom" constant="5" id="rxc-Gt-x9e"/>
+                            <constraint firstItem="Y1p-Sp-l4E" firstAttribute="leading" secondItem="LqL-zS-wsO" secondAttribute="leading" constant="10" id="sF4-iO-fjf"/>
+                            <constraint firstItem="coD-ip-PBe" firstAttribute="top" secondItem="IhE-0a-e9G" secondAttribute="bottom" id="wih-Li-Y7d"/>
+                        </constraints>
+                    </view>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="Details" id="1IX-A4-0G6">
+                        <barButtonItem key="rightBarButtonItem" title="Copy" id="kpU-J7-O6o">
+                            <connections>
+                                <action selector="recipeCopied:" destination="WBM-d3-r6Z" id="YOY-Or-9Gv"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="favoriteButton" destination="coD-ip-PBe" id="Mig-A1-58w"/>
+                        <outlet property="shareButton" destination="spo-NX-UiB" id="lJN-B0-Zmx"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="b7D-Pn-I3z" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2056" y="-286"/>
+        </scene>
+        <!--My Recipes Nav-->
+        <scene sceneID="gAE-1Q-CgI">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="2xo-Vl-DZm" userLabel="My Recipes Nav" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="My Recipes" image="my-recipes-tab.png" id="UA5-Wl-bxr"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="hhT-GA-PSe">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="tYT-9P-HII">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
+                    <connections>
+                        <segue destination="smT-7w-2oa" kind="relationship" relationship="rootViewController" id="cRi-fT-qQa"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ntX-0F-0sc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="750" y="-951"/>
+        </scene>
+        <!--Browse Nav-->
+        <scene sceneID="D2f-QB-ERH">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="rbv-aZ-EzX" userLabel="Browse Nav" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Browse" image="browse-tab.png" id="cPa-gy-q4n"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="sqs-QJ-1Io">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="B1g-Qh-ijo" kind="relationship" relationship="rootViewController" id="wfp-wL-O2r"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="EIO-4Z-vVL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="750" y="-286"/>
+        </scene>
+        <!--Settings Nav-->
+        <scene sceneID="CdQ-Qi-DzV">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="qGw-LO-XI8" userLabel="Settings Nav" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Settings" image="settings-tab.png" id="1CR-hf-7Pb"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="8ip-hQ-AFM">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Woz-ZB-XNv" kind="relationship" relationship="rootViewController" id="arf-gs-ApL"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LVh-HV-ThD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="750" y="1043"/>
+        </scene>
+        <!--Settings-->
+        <scene sceneID="8zI-n9-qIs">
+            <objects>
+                <tableViewController id="Woz-ZB-XNv" customClass="SettingsViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" delaysContentTouches="NO" dataMode="static" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="ua8-ZJ-37R">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <sections>
+                            <tableViewSection id="bI8-vu-Uo0">
+                                <cells>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="jFb-2p-tR5" userLabel="Auto Sync Cell">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="jFb-2p-tR5" id="Ccy-4a-edz">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Nfp-4l-srd">
+                                                    <rect key="frame" x="501" y="6" width="51" height="31"/>
+                                                </switch>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Auto Sync" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X5T-Rv-DtF">
+                                                    <rect key="frame" x="20" y="9" width="81" height="25"/>
+                                                    <fontDescription key="fontDescription" name="Calibri" family="Calibri" pointSize="20"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="Nfp-4l-srd" secondAttribute="trailing" constant="50" id="IGQ-29-Jae"/>
+                                                <constraint firstAttribute="centerY" secondItem="X5T-Rv-DtF" secondAttribute="centerY" id="i6I-Xx-cEu"/>
+                                                <constraint firstItem="X5T-Rv-DtF" firstAttribute="leading" secondItem="Ccy-4a-edz" secondAttribute="leading" constant="20" id="kfw-CD-78m"/>
+                                                <constraint firstAttribute="centerY" secondItem="Nfp-4l-srd" secondAttribute="centerY" id="sHA-Q5-qBM"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="l1B-QY-Llq" userLabel="Edit Cell">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="l1B-QY-Llq" id="0mW-Rc-a0p">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eAW-Aj-YDI">
+                                                    <rect key="frame" x="501" y="6" width="51" height="31"/>
+                                                </switch>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Edit Recipes" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w0Q-K0-uAJ">
+                                                    <rect key="frame" x="20" y="9" width="98" height="25"/>
+                                                    <fontDescription key="fontDescription" name="Calibri" family="Calibri" pointSize="20"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="centerY" secondItem="w0Q-K0-uAJ" secondAttribute="centerY" id="6hF-s9-V4h"/>
+                                                <constraint firstAttribute="trailing" secondItem="eAW-Aj-YDI" secondAttribute="trailing" constant="50" id="9zT-TA-E24"/>
+                                                <constraint firstItem="w0Q-K0-uAJ" firstAttribute="leading" secondItem="0mW-Rc-a0p" secondAttribute="leading" constant="20" id="Biz-35-adQ"/>
+                                                <constraint firstAttribute="centerY" secondItem="eAW-Aj-YDI" secondAttribute="centerY" id="Wts-Gf-BHO"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="69s-co-3Vq" userLabel="Public Cell">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="69s-co-3Vq" id="Rd7-at-X2S">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YK7-vD-XXC">
+                                                    <rect key="frame" x="501" y="6" width="51" height="31"/>
+                                                </switch>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recipes Public" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bsq-0A-rhm">
+                                                    <rect key="frame" x="20" y="9" width="116" height="25"/>
+                                                    <fontDescription key="fontDescription" name="Calibri" family="Calibri" pointSize="20"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="bsq-0A-rhm" firstAttribute="leading" secondItem="Rd7-at-X2S" secondAttribute="leading" constant="20" id="4D6-dz-Tr4"/>
+                                                <constraint firstAttribute="centerY" secondItem="YK7-vD-XXC" secondAttribute="centerY" id="4cP-yD-WDz"/>
+                                                <constraint firstAttribute="trailing" secondItem="YK7-vD-XXC" secondAttribute="trailing" constant="50" id="4wV-Qv-WaH"/>
+                                                <constraint firstAttribute="centerY" secondItem="bsq-0A-rhm" secondAttribute="centerY" id="TCI-yB-GwK"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="110" id="DET-cz-eow" userLabel="Units Cell">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="DET-cz-eow" id="PWu-Jd-Quf">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Unit of Measurement" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E6w-kL-UWU">
+                                                    <rect key="frame" x="213" y="25" width="175" height="25"/>
+                                                    <fontDescription key="fontDescription" name="Calibri" family="Calibri" pointSize="20"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="7dS-U1-3qJ">
+                                                    <rect key="frame" x="213" y="62" width="175" height="29"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="175" id="FML-PH-sfm"/>
+                                                    </constraints>
+                                                    <segments>
+                                                        <segment title="Imperial"/>
+                                                        <segment title="Metric"/>
+                                                    </segments>
+                                                </segmentedControl>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="E6w-kL-UWU" firstAttribute="top" secondItem="PWu-Jd-Quf" secondAttribute="top" constant="25" id="P9R-9n-Whr"/>
+                                                <constraint firstAttribute="centerX" secondItem="E6w-kL-UWU" secondAttribute="centerX" id="Ryt-uZ-Klu"/>
+                                                <constraint firstAttribute="bottom" secondItem="7dS-U1-3qJ" secondAttribute="bottom" constant="20" id="jJL-aI-iJL"/>
+                                                <constraint firstAttribute="centerX" secondItem="7dS-U1-3qJ" secondAttribute="centerX" id="mah-3x-iWg"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="65" id="sA6-bF-anb" userLabel="Sign Out Cell">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="sA6-bF-anb" id="Rla-OZ-luX">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RKq-wi-F6H">
+                                                    <rect key="frame" x="238" y="9" width="125" height="47"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="125" id="UJj-5h-JG0"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="Calibri" family="Calibri" pointSize="28"/>
+                                                    <state key="normal" title="Sign Out">
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="onLogOutClick:" destination="Woz-ZB-XNv" eventType="touchUpInside" id="vND-q8-8TK"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="centerY" secondItem="RKq-wi-F6H" secondAttribute="centerY" id="Rnd-bh-g6v"/>
+                                                <constraint firstAttribute="centerX" secondItem="RKq-wi-F6H" secondAttribute="centerX" id="lqf-de-Om0"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="65" id="6i8-tl-9Tg" userLabel="Edit User Cell">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="6i8-tl-9Tg" id="mrE-ax-FRZ">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fr6-1N-Qug">
+                                                    <rect key="frame" x="238" y="9" width="125" height="47"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="125" id="4jt-a3-5u9"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="Calibri" family="Calibri" pointSize="28"/>
+                                                    <state key="normal" title="Edit User">
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="centerX" secondItem="Fr6-1N-Qug" secondAttribute="centerX" id="AfS-54-QyU"/>
+                                                <constraint firstAttribute="centerY" secondItem="Fr6-1N-Qug" secondAttribute="centerY" id="RzR-25-YVS"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="60" id="rFS-2l-IrD" userLabel="Info Cell">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rFS-2l-IrD" id="3db-40-Kxp">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoDark" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gj8-G0-3Qd" userLabel="Info">
+                                                    <rect key="frame" x="283" y="13" width="35" height="35"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="35" id="DMH-4e-XeR"/>
+                                                        <constraint firstAttribute="width" constant="35" id="sen-fr-ML9"/>
+                                                    </constraints>
+                                                    <state key="normal">
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="centerX" secondItem="Gj8-G0-3Qd" secondAttribute="centerX" id="pUj-vH-SsU"/>
+                                                <constraint firstAttribute="centerY" secondItem="Gj8-G0-3Qd" secondAttribute="centerY" id="qy1-vF-JJC"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="Woz-ZB-XNv" id="sBl-uu-xVd"/>
+                            <outlet property="delegate" destination="Woz-ZB-XNv" id="CXW-4e-EIT"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Settings" id="b7T-WD-Gdd">
+                        <barButtonItem key="leftBarButtonItem" systemItem="save" id="L51-Q8-Uau"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="2Hk-vj-OQh">
+                            <connections>
+                                <segue destination="8Wm-S4-3lb" kind="presentation" id="b29-uT-UxQ"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="editUserButton" destination="Fr6-1N-Qug" id="6nR-eL-9ks"/>
+                        <outlet property="infoButton" destination="Gj8-G0-3Qd" id="DuB-Yd-uqR"/>
+                        <outlet property="logOutButton" destination="RKq-wi-F6H" id="47N-pI-zxO"/>
+                        <outlet property="tableView" destination="ua8-ZJ-37R" id="58B-7h-0f8"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="q5e-Ot-bKj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1391" y="1043"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="browse-tab.png" width="30" height="30"/>
+        <image name="my-recipes-tab.png" width="30" height="30"/>
+        <image name="settings-tab.png" width="30" height="30"/>
+        <image name="timer-tab.png" width="30" height="30"/>
+    </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="Rhg-DK-ehR"/>
+    </inferredMetricsTieBreakers>
+</document>
