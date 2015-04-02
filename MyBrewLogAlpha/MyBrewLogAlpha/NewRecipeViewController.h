@@ -21,6 +21,8 @@
 -(IBAction)showTimerPicker:(id)sender;
 -(IBAction)showTempPicker:(id)sender;
 
+@property (strong, nonatomic) IBOutlet UITextField *recipeNameTF;
+@property (strong, nonatomic) IBOutlet UITextField *notesTF;
 @property (strong, nonatomic) IBOutlet UITextView *ingredientsTV;
 @property (strong, nonatomic) IBOutlet UITextView *instructionsTV;
 

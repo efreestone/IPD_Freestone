@@ -282,7 +282,7 @@
                                     <navigationItem title="New Recipe" id="6n0-ho-1QL">
                                         <barButtonItem key="leftBarButtonItem" systemItem="save" id="pmV-r8-oUT">
                                             <connections>
-                                                <action selector="onCancel:" destination="8Wm-S4-3lb" id="UHQ-KV-AVM"/>
+                                                <action selector="onSave:" destination="8Wm-S4-3lb" id="kRG-ic-JjO"/>
                                             </connections>
                                         </barButtonItem>
                                         <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="v7a-kv-2RF">
@@ -421,6 +421,8 @@
                     <connections>
                         <outlet property="ingredientsTV" destination="yZV-OD-r1u" id="qfa-gS-xwY"/>
                         <outlet property="instructionsTV" destination="SZI-4q-cln" id="FJX-1L-OTe"/>
+                        <outlet property="notesTF" destination="udZ-pc-DIP" id="LkF-bm-T12"/>
+                        <outlet property="recipeNameTF" destination="IuN-DG-jVT" id="ylY-qN-yv2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6Ap-5i-nzJ" userLabel="First Responder" sceneMemberID="firstResponder"/>

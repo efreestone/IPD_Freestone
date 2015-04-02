@@ -64,11 +64,11 @@
     [self showAlert:alertMessage withTitle:titleString];
 }
 
-//Method to create and show alert view if there is no internet connectivity
+//Method to create and show alert view
 -(void)showAlert:(NSString *)alertMessage withTitle:(NSString *)titleString {
     UIAlertView *copyAlert = [[UIAlertView alloc] initWithTitle:titleString message:alertMessage delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
     //Show alert
     [copyAlert show];
-} //noConnectionAlert close
+}
 
 @end
