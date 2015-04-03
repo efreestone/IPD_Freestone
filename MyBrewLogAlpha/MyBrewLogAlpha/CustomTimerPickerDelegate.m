@@ -21,8 +21,6 @@
         monthArray = [[NSMutableArray alloc] init];
         weekArray = [[NSMutableArray alloc] init];
         dayArray = [[NSMutableArray alloc] init];
-//        hourArray = [[NSMutableArray alloc] init];
-//        minuteArray = [[NSMutableArray alloc] init];
         
         for(int i = 0; i < 13; i++) {
             NSString *stringVal = [NSString stringWithFormat:@"%d", i];
@@ -39,15 +37,7 @@
             if (i < 8) {
                 [dayArray addObject:stringVal];
             }
-//            //Creat array with 24 hours
-//            if (i < 25) {
-//                [hourArray addObject:stringVal];
-//            }
-//            
-//            //create arrays with 60 minutes
-//            [minuteArray addObject:stringVal];
         }
-
     }
     return self;
 }

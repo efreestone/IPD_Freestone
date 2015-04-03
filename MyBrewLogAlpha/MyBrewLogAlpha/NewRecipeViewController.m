@@ -124,8 +124,7 @@
                                        doneBlock:^(ActionSheetStringPicker *picker, NSInteger selectedIndex, id selectedValue) {
                                            NSLog(@"Selected Value: %@", selectedValue);
                                            //Grab value selected
-                                           [self ingredientSelected:selectedValue];
-                                           [self showQuantityPicker:sender];
+                                           [self ingredientSelected:selectedValue fromSender:sender];
                                        }
                                      cancelBlock:^(ActionSheetStringPicker *picker) {
                                          NSLog(@"Block Picker Canceled");
@@ -134,12 +133,14 @@
 
 }
 
--(void)ingredientSelected:(NSString *)ing {
+//Ingredient selected. Will create alertview with textfield if Other selected
+-(void)ingredientSelected:(NSString *)ing fromSender:(id)sender {
     if ([ing isEqualToString:@"Other"]) {
         //Alert with TextView
         NSLog(@"Other Selected");
     } else {
         ingredientSelected = ing;
+        [self showQuantityPicker:sender];
     }
 }
 
@@ -162,6 +163,7 @@
     
 }
 
+//Quantity picked formats and adds ingredients to textview. Called from Quantity Delegate
 -(void)quantityPicked:(NSString *)formattedQuantity {
     NSLog(@"NewRec: %@", formattedQuantity);
     NSString *currentInst = ingredientsTV.text;
@@ -189,7 +191,6 @@
 -(IBAction)showTimerPicker:(id)sender {
     //Pass (id)sender to be used for launching ActionSheetPicker from reg action sheet
     buttonSender = sender;
-    
     UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Is timer over 24 hours?"
                                                              delegate:self
                                                     cancelButtonTitle:@"Cancel"
@@ -198,6 +199,60 @@
     //Set tag and show action sheet
     actionSheet.tag = 200;
     [actionSheet showInView:self.view];
+}
+
+//Show countdown picker. Triggered from selecting No to over 24 hour ActionSheet
+-(void)showCountdownPicker:(id)sender {
+    //Create picker and set to temer mode
+    actionSheetPicker = [[ActionSheetDatePicker alloc] initWithTitle:@"Under 24 hours"
+                                                      datePickerMode:UIDatePickerModeCountDownTimer
+                                                        selectedDate:nil
+                                                           doneBlock:^(ActionSheetDatePicker *picker, id dateSelected, id origin) {
+                                                               NSLog(@"dateSelected: %@", dateSelected);
+                                                               [self under24Hours:picker.countDownDuration element:origin];
+                                                           } cancelBlock:^(ActionSheetDatePicker *picker) {
+                                                               NSLog(@"Cancel clicked");
+                                                           } origin:sender];
+    [(ActionSheetDatePicker *) actionSheetPicker setCountDownDuration:120];
+    [actionSheetPicker showActionSheetPicker];
+}
+
+//Grab input countdown time
+- (void)under24Hours:(double)selectedCountdownDuration element:(id)element {
+    //NSString *countdownSelected = selectedCountdown.stringValue;
+    
+//    // Create a new date with the current time
+//    NSDate *date = [NSDate new];
+//    // Split up the date components
+//    NSDateComponents *time = [[NSCalendar currentCalendar]
+//                              components:NSCalendarUnitHour | NSCalendarUnitMinute
+//                              fromDate:date];
+//    NSInteger seconds = ([time hour] * 60 * 60) + ([time minute] * 60);
+    
+    NSInteger timerInt = (NSInteger)selectedCountdownDuration;
+    NSInteger minutes = (timerInt / 60) % 60;
+    NSInteger hours = (timerInt / 3600);
+    NSString *time = [NSString stringWithFormat:@"%02ld:%02ld", (long)hours, (long)minutes];
+    
+    NSLog(@"countdown %@", time);  
+}
+
+//Show custom picker. Triggered from selecting Yes to over 24 hour ActionSheet
+-(void)showCustomTimePicker:(id)sender {
+    //Init custom delegate
+    CustomTimerPickerDelegate *timerDelegate = [[CustomTimerPickerDelegate alloc] init];
+    NSNumber *comp0 = @0;
+    NSNumber *comp1 = @0;
+    NSNumber *comp2 = @0;
+    NSNumber *comp3 = @0;
+    NSNumber *comp4 = @0;
+    NSNumber *comp5 = @0;
+    //Set initial selections
+    NSArray *initialSelections = @[comp0, comp1, comp2, comp3, comp4, comp5];
+    
+    ActionSheetCustomPicker *customPicker = [[ActionSheetCustomPicker alloc] initWithTitle:@"Select Time" delegate:timerDelegate showCancelButton:YES origin:sender initialSelections:initialSelections];
+    
+    [customPicker showActionSheetPicker];
 }
 
 //Show Temp Picker
@@ -257,7 +312,7 @@
 #pragma mark - action sheet delegate
 
 //Grab action sheet actions via delegate method
--(void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex{
+-(void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex {
     //Tag 100 is Recipe Type
     if (actionSheet.tag == 100) {
         recipeType = [actionSheet buttonTitleAtIndex:buttonIndex];
@@ -283,40 +338,6 @@
     }
     
     NSLog(@"Index = %ld - Title = %@", (long)buttonIndex, [actionSheet buttonTitleAtIndex:buttonIndex]);
-}
-
-//Show countdown picker. Triggered from selecting No to over 24 hour ActionSheet
--(void)showCountdownPicker:(id)sender {
-    //Create picker and set to temer mode
-    actionSheetPicker = [[ActionSheetDatePicker alloc] initWithTitle:@"Under 24 hours"
-                                                      datePickerMode:UIDatePickerModeCountDownTimer
-                                                        selectedDate:nil
-                                                           doneBlock:^(ActionSheetDatePicker *picker, id dateSelected, id origin) {
-                                                               NSLog(@"dateSelected: %@", dateSelected);
-                                                               NSLog(@"picker.countDownDuration, %f", picker.countDownDuration);
-                                                           } cancelBlock:^(ActionSheetDatePicker *picker) {
-                                                               NSLog(@"Cancel clicked");
-                                                           } origin:sender];
-    [(ActionSheetDatePicker *) actionSheetPicker setCountDownDuration:120];
-    [actionSheetPicker showActionSheetPicker];
-}
-
-//Show custom picker. Triggered from selecting Yes to over 24 hour ActionSheet
--(void)showCustomTimePicker:(id)sender {
-    //Init custom delegate
-    CustomTimerPickerDelegate *timerDelegate = [[CustomTimerPickerDelegate alloc] init];
-    NSNumber *comp0 = @0;
-    NSNumber *comp1 = @0;
-    NSNumber *comp2 = @0;
-    NSNumber *comp3 = @0;
-    NSNumber *comp4 = @0;
-    NSNumber *comp5 = @0;
-    //Set initial selections
-    NSArray *initialSelections = @[comp0, comp1, comp2, comp3, comp4, comp5];
-
-    ActionSheetCustomPicker *customPicker = [[ActionSheetCustomPicker alloc] initWithTitle:@"Select Time" delegate:timerDelegate showCancelButton:YES origin:sender initialSelections:initialSelections];
-    
-    [customPicker showActionSheetPicker];
 }
 
 #pragma mark - Save

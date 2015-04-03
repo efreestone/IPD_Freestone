@@ -26,14 +26,12 @@
     NSString *formattedQuantity;
 }
 
-
-//@property (nonatomic, strong)
-
 //Init and build arrays
 - (id)init {
     if (self = [super init]) {
+        //Create default arrays
         measurementArray = [NSArray arrayWithObjects:@"qt", @"cup", @"gal", @"oz", @"lbs", nil];
-        ingredientArray = [NSArray arrayWithObjects:@"Ingedient 1", @"Ingedient 2", @"Ingedient 3", @"Ingedient 4", @"Ingedient 5", @"Ingedient 6", @"Other", nil];
+        
         amountHundreds = [[NSMutableArray alloc] init];
         amountTens = [[NSMutableArray alloc] init];
         amountOnes = [[NSMutableArray alloc] init];
@@ -52,7 +50,7 @@
         selectedTens = @"0";
         selectedOnes = @"0";
         selectedMeasurement = measurementArray[0];
-        
+        formattedQuantity = @"000 qt";
     }
     return self;
 }
@@ -116,31 +114,29 @@
     return nil;
 }
 
-- (void)actionSheetPickerDidSucceed:(AbstractActionSheetPicker *)actionSheetPicker origin:(id)origin
-{
-    NSString *resultMessage;
-    if (!selectedOnes && !selectedMeasurement)
-    {
-        resultMessage = [NSString stringWithFormat:@"Nothing is selected, inital selections: %@ %@", selectedOnes, selectedMeasurement];
-        
-        //selectedHundreds[(NSUInteger) [(UIPickerView *) actionSheetPicker.pickerView selectedRowInComponent:0]]
-        
+- (void)actionSheetPickerDidSucceed:(AbstractActionSheetPicker *)actionSheetPicker origin:(id)origin {
+    NSString *fullQuantity;
+    //Get numbers from string
+    NSString *numberString = [formattedQuantity substringToIndex:3];
+    //Check if picker was selected, set default to 1 qt if not.
+    if ([numberString isEqualToString:@"000"]) {
+        fullQuantity = [NSString stringWithFormat:@"1 %@", selectedMeasurement];
     } else {
-        resultMessage = formattedQuantity;
+        fullQuantity = formattedQuantity;
     }
     
-    [self.myRecipeVC quantityPicked:resultMessage];
-    
-    [[[UIAlertView alloc] initWithTitle:@"Success!" message:resultMessage delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil] show];
-    
-//    [NSTimer scheduledTimerWithTimeInterval:3.0 target:self.delegate
-//                                   selector:@selector(quantityPicked:) userInfo:nil repeats:NO];
+    //Strip leading zeros off
+    NSRange range = [fullQuantity rangeOfString:@"^0*" options:NSRegularExpressionSearch];
+    fullQuantity = [fullQuantity stringByReplacingCharactersInRange:range withString:@""];
+    //Call method on NewRecipe with formatted quantity passed
+    [self.myRecipeVC quantityPicked:fullQuantity];
 }
 
 //Grab selections
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
     NSLog(@"Row %li selected in component %li", (long)row, (long)component);
     
+    //Grab inputs for each component. Using if statements instead of case due to out of range crash selecting numbers. This is most efficient fix while that still allows any selectiong order for each component.
     if (component == 0) {
         selectedHundreds = amountHundreds[row];
     }
@@ -153,22 +149,6 @@
     if (component == 3) {
         selectedMeasurement = measurementArray[row];
     }
-    
-//    switch (component) {
-//        case 0:
-//            selectedHundreds = amountHundreds[row];
-//            return;
-//        case 1:
-//            selectedTens = amountTens[row];
-//            return;
-//        case 2:
-//            selectedOnes = amountOnes[row];
-//            return;
-//        case 3:
-//            selectedMeasurement = measurementArray[row];
-////            return;
-//        default:break;
-//    }
     
     formattedQuantity = [NSString stringWithFormat:@"%@%@%@ %@", selectedHundreds, selectedTens, selectedOnes, selectedMeasurement];
     NSLog(@"formatted # = %@", formattedQuantity);
