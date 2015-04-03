@@ -19,6 +19,7 @@
 #import "ActionSheetDistancePicker.h"
 #import "DistancePickerView.h"
 #import "CustomPickerDelegate.h"
+#import "CustomQuantityPickerDelegate.h"
 #import "CustomTimerPickerDelegate.h"
 #import <Parse/Parse.h>
 
@@ -31,6 +32,9 @@
     
     NSInteger selectedBigUnit;
     NSInteger selectedSmallUnit;
+    NSInteger selectedIndex;
+    NSString *ingredientSelected;
+    NSString *ingredientWithQuantity;
     
     NSString *ingredientTVString;
     NSString *instructionsTVString;
@@ -39,8 +43,8 @@
     NSString *recipeType;
     NSString *recipeName;
     NSString *recipeNotes;
-    NSString *parseClassName;
     
+    NSString *parseClassName;
     id buttonSender;
 }
 
@@ -61,7 +65,7 @@
     
     //Create arrays for pickers
     recipeTypes = [NSArray arrayWithObjects:@"Beer", @"Wine", @"Other", nil];
-    ingredientArray = [NSArray arrayWithObjects:@"Ingedient 1", @"Ingedient 2", @"Ingedient 3", @"Ingedient 4", @"Ingedient 5", @"Ingedient 6", nil];
+    ingredientArray = [NSArray arrayWithObjects:@"Ingedient 1", @"Ingedient 2", @"Ingedient 3", @"Ingedient 4", @"Ingedient 5", @"Ingedient 6", @"Other", nil];
     
     //Set default recipe type to Other
     recipeType = @"Other";
@@ -119,6 +123,8 @@
                                 initialSelection:0
                                        doneBlock:^(ActionSheetStringPicker *picker, NSInteger selectedIndex, id selectedValue) {
                                            NSLog(@"Selected Value: %@", selectedValue);
+                                           //Grab value selected
+                                           [self ingredientSelected:selectedValue];
                                            [self showQuantityPicker:sender];
                                        }
                                      cancelBlock:^(ActionSheetStringPicker *picker) {
@@ -128,20 +134,55 @@
 
 }
 
+-(void)ingredientSelected:(NSString *)ing {
+    if ([ing isEqualToString:@"Other"]) {
+        //Alert with TextView
+        NSLog(@"Other Selected");
+    } else {
+        ingredientSelected = ing;
+    }
+}
+
 //Show custom quantity picker. Triggered after selecting ingredient
 -(void)showQuantityPicker:(id)sender {
     //Init custom picker delegate
-    CustomPickerDelegate *delegate = [[CustomPickerDelegate alloc] init];
+    CustomQuantityPickerDelegate *delegate = [[CustomQuantityPickerDelegate alloc] init];
+    delegate.myRecipeVC = self;
     //Set initial selections
-    NSNumber *yass1 = @0;
-    NSNumber *yass2 = @0;
-    NSArray *initialSelections = @[yass1, yass2];
+    NSNumber *comp0 = @0;
+    NSNumber *comp1 = @0;
+    NSNumber *comp2 = @0;
+    NSNumber *comp3 = @0;
+    NSArray *initialSelections = @[comp0, comp1, comp2, comp3];
     [ActionSheetCustomPicker showPickerWithTitle:@"Select Quantity"
                                         delegate:delegate
                                 showCancelButton:YES
                                           origin:sender
                                initialSelections:initialSelections];
     
+}
+
+-(void)quantityPicked:(NSString *)formattedQuantity {
+    NSLog(@"NewRec: %@", formattedQuantity);
+    NSString *currentInst = ingredientsTV.text;
+    
+    //Check if last line of string ends in new line, add before temp if it doesn't exist
+    NSString *addNewLine = @"";
+    if (![currentInst hasSuffix:@"\n"]) {
+        NSLog(@"new line");
+        addNewLine = @"\n";
+    }
+    
+    //Remove new line if textview was empty. Behaviour isn't always as expected when including this check above
+    if (currentInst.length == 0) {
+        NSLog(@"Textview was empty");
+        addNewLine = @"";
+    }
+    
+    ingredientWithQuantity = [NSString stringWithFormat:@"%@%@ - %@\n", addNewLine, ingredientSelected, formattedQuantity];
+    
+    ingredientTVString = [NSString stringWithFormat:@"%@%@", currentInst, ingredientWithQuantity];
+    ingredientsTV.text = ingredientTVString;
 }
 
 //Show Timer Picker

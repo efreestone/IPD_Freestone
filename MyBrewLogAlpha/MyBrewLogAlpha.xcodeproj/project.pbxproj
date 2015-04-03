@@ -75,6 +75,7 @@
 		B8B1F8701ACB98500073B729 /* Calibri Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B8B1F86D1ACB98500073B729 /* Calibri Bold.ttf */; };
 		B8B1F8711ACB98500073B729 /* Calibri.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B8B1F86E1ACB98500073B729 /* Calibri.ttf */; };
 		B8B1F8721ACB98500073B729 /* CooperBlackStd.otf in Resources */ = {isa = PBXBuildFile; fileRef = B8B1F86F1ACB98500073B729 /* CooperBlackStd.otf */; };
+		B8C348EA1ACDE9DE00317424 /* CustomQuantityPickerDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B8C348E91ACDE9DE00317424 /* CustomQuantityPickerDelegate.m */; };
 		B8F237D51ACA37CD00C749D2 /* BrowseDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B8F237D41ACA37CD00C749D2 /* BrowseDetailsViewController.m */; };
 		B8F237D81ACA37FC00C749D2 /* RecipeDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B8F237D71ACA37FC00C749D2 /* RecipeDetailsViewController.m */; };
 		B8F237DB1ACA548200C749D2 /* CustomTimerPickerDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B8F237DA1ACA548200C749D2 /* CustomTimerPickerDelegate.m */; };
@@ -183,6 +184,8 @@
 		B8B1F86D1ACB98500073B729 /* Calibri Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Calibri Bold.ttf"; path = "MyBrewLogAlpha/Calibri Bold.ttf"; sourceTree = SOURCE_ROOT; };
 		B8B1F86E1ACB98500073B729 /* Calibri.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Calibri.ttf; path = MyBrewLogAlpha/Calibri.ttf; sourceTree = SOURCE_ROOT; };
 		B8B1F86F1ACB98500073B729 /* CooperBlackStd.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = CooperBlackStd.otf; path = MyBrewLogAlpha/CooperBlackStd.otf; sourceTree = SOURCE_ROOT; };
+		B8C348E81ACDE9DE00317424 /* CustomQuantityPickerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomQuantityPickerDelegate.h; sourceTree = "<group>"; };
+		B8C348E91ACDE9DE00317424 /* CustomQuantityPickerDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomQuantityPickerDelegate.m; sourceTree = "<group>"; };
 		B8F237D31ACA37CD00C749D2 /* BrowseDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrowseDetailsViewController.h; sourceTree = "<group>"; };
 		B8F237D41ACA37CD00C749D2 /* BrowseDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrowseDetailsViewController.m; sourceTree = "<group>"; };
 		B8F237D61ACA37FC00C749D2 /* RecipeDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecipeDetailsViewController.h; sourceTree = "<group>"; };
@@ -282,6 +285,8 @@
 				B89EB5BC1AC9E94400BDC399 /* CustomPFSignUpViewController.h */,
 				B89EB5BD1AC9E94400BDC399 /* CustomPFSignUpViewController.m */,
 				B89EB5121AC9E3FF00BDC399 /* Supporting Files */,
+				B8C348E81ACDE9DE00317424 /* CustomQuantityPickerDelegate.h */,
+				B8C348E91ACDE9DE00317424 /* CustomQuantityPickerDelegate.m */,
 			);
 			path = MyBrewLogAlpha;
 			sourceTree = "<group>";
@@ -548,6 +553,7 @@
 				B89EB5611AC9E54900BDC399 /* ActionSheetDatePicker.m in Sources */,
 				B89EB5B61AC9E7F300BDC399 /* CustomTableViewCell.m in Sources */,
 				B89EB5661AC9E54900BDC399 /* SWActionSheet.m in Sources */,
+				B8C348EA1ACDE9DE00317424 /* CustomQuantityPickerDelegate.m in Sources */,
 				B89EB5641AC9E54900BDC399 /* ActionSheetStringPicker.m in Sources */,
 				B89EB5B21AC9E78900BDC399 /* SettingsViewController.m in Sources */,
 				B8F237D81ACA37FC00C749D2 /* RecipeDetailsViewController.m in Sources */,

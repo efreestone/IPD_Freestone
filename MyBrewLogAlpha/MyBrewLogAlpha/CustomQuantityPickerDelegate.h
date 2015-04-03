@@ -1,3 +1,8 @@
+// Elijah Freestone
+// IPY 1504
+// Week 1 - Alpha
+// March 30th, 2015
+
 //
 //  CustomQuantityPickerDelegate.h
 //  MyBrewLogAlpha
@@ -6,8 +11,18 @@
 //  Copyright (c) 2015 Elijah Freestone. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+#import "ActionSheetCustomPickerDelegate.h"
+#import "NewRecipeViewController.h"
 
-@interface CustomQuantityPickerDelegate : NSObject
+@protocol CustomQuantityPickerDelegate <NSObject>
+
+-(void)quantityPicked:(NSString *)formattedQuantity;
+
+@end
+
+@interface CustomQuantityPickerDelegate : NSObject <ActionSheetCustomPickerDelegate>
+
+@property (nonatomic,strong) NewRecipeViewController *myRecipeVC;
 
 @end

@@ -26,4 +26,6 @@
 @property (strong, nonatomic) IBOutlet UITextView *ingredientsTV;
 @property (strong, nonatomic) IBOutlet UITextView *instructionsTV;
 
+-(void)quantityPicked:(NSString *)formattedQuantity;
+
 @end
