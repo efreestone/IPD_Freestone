@@ -12,6 +12,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MyRecipeViewController.h"
 
 @interface NewRecipeViewController : UIViewController
 
@@ -24,6 +25,7 @@
 @property (strong, nonatomic) IBOutlet UITextField *recipeNameTF;
 @property (strong, nonatomic) IBOutlet UITextView *ingredientsTV;
 @property (strong, nonatomic) IBOutlet UITextView *instructionsTV;
+@property (strong, nonatomic) MyRecipeViewController *myRecipeVC;
 
 -(void)quantityPicked:(NSString *)formattedQuantity;
 -(void)timerPicked: (NSString *)formattedTime;

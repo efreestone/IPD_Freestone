@@ -462,7 +462,7 @@
     recipeIngredients = ingredientsTV.text;
     recipeInstructions = instructionsTV.text;
     
-    if (recipeName.length > 0 && instructionsTVString.length > 0) {
+    if (recipeName.length > 0 && recipeInstructions.length > 0) {
         //Name was entered, continue saving
         PFObject *newRecipeObject = [PFObject objectWithClassName:parseClassName];
         newRecipeObject[@"Type"] = recipeType;
@@ -476,6 +476,7 @@
                 NSLog(@"New item saved.");
                 //Dismiss add item view
                 [self dismissViewControllerAnimated:YES completion:nil];
+                [self.myRecipeVC refreshTable];
             } else {
                 NSLog(@"%@", error);
                 //Error alert

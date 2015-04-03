@@ -14,6 +14,7 @@
 #import "MyRecipeViewController.h"
 #import "CustomTableViewCell.h"
 #import "AppDelegate.h"
+#import "NewRecipeViewController.h"
 #import <ParseUI/ParseUI.h>
 #import "CustomPFLoginViewController.h"
 #import "CustomPFSignUpViewController.h"
@@ -26,24 +27,22 @@
     NSArray *recipesArray;
     NSArray *imageArray;
     IBOutlet UISearchBar *searchBar;
-    CGRect originalSearchFrameRect;
-    CGRect searchFrameRect;
-    CGFloat zeroFloat;
-    BOOL scopeButtonsHidden;
+    NSString *parseClassName;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    //Set default ACL to be read/write of current user only
+    PFACL *defaultACL = [PFACL ACL];
+    [defaultACL setPublicReadAccess:YES];
+    [PFACL setDefaultACL:defaultACL withAccessForCurrentUser:YES];
+    
+    parseClassName = @"newRecipe";
+    
     recipesArray = [NSArray arrayWithObjects:@"Secret IPA", @"Dry Red Wine", @"Cali Style Sourdough", @"My Choco Stout", @"Peach Wine #1", @"Yogurt Base", @"Super Lager", @"Sweet Apple Pie Mead", @"Green Tea Kombucha", @"Strawberry Blonde", @"My White Zin", @"Plum Sake", @"Earl Grey Kombucha", @"Just good ol' Ale", @"Raspberry Suprise", @"Moms Sourdough Bread", nil];
     
     imageArray = [NSArray arrayWithObjects:@"beer-bottle.png", @"wine-glass.png", @"other-icon.png", @"beer-bottle.png", @"wine-glass.png", @"other-icon.png", @"beer-bottle.png", @"wine-glass.png", @"other-icon.png",@"beer-bottle.png", @"wine-glass.png", @"other-icon.png", @"beer-bottle.png", @"wine-glass.png", @"other-icon.png", @"beer-bottle.png", nil];
-    
-//    //Set offset and hide search bar
-//    self.tableView.contentOffset = CGPointMake(0, (searchBar.frame.size.height) - self.tableView.contentOffset.y);
-//    searchBar.hidden = YES;
-//    //searchBar.frame = searchFrameRect;
-//    scopeButtonsHidden = YES;
     
     //Grab user and username
     PFUser *user = [PFUser currentUser];
@@ -54,10 +53,20 @@
         NSLog(@"%@ is logged in", usernameString);
     }
     
+//    [self.myTableView setEditing:YES animated:YES];
+    
     //Test parse
     //    PFObject *testObject = [PFObject objectWithClassName:@"TestObject"];
     //    testObject[@"foo"] = @"bar";
     //    [testObject saveInBackground];
+}
+
+-(IBAction)showNewRecipeView:(id)sender {
+    UIStoryboard *storyBoard = [self storyboard];
+    NewRecipeViewController *newRecipeViewController = [storyBoard instantiateViewControllerWithIdentifier:@"NewRecipe"];
+    newRecipeViewController.myRecipeVC = self;
+    //[self.navigationController popoverPresentationController:newRecipeViewController animated:true];
+    [self presentViewController:newRecipeViewController animated:YES completion:nil];
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -70,29 +79,6 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-//Show search bar and scope buttons
--(IBAction)onSortClick:(id)sender {
-    if (searchBar.isHidden) {
-        self.tableView.contentOffset = CGPointMake(0, -searchBar.frame.size.height + self.tableView.contentOffset.y);
-        searchBar.hidden = NO;
-        //        searchBar.showsScopeBar = YES;
-        //        [searchBar sizeToFit];
-        scopeButtonsHidden = NO;
-        NSLog(@"show");
-        //searchBar.frame = originalSearchFrameRect;
-    } else if (!searchBar.isHidden) {
-        //        CGFloat zero = 0;
-        //        searchFrameRect.size.height = zero;
-        self.tableView.contentOffset = CGPointMake(0, searchBar.frame.size.height + self.tableView.contentOffset.y);
-        searchBar.hidden = YES;
-        //        searchBar.showsScopeBar = NO;
-        //        scopeButtonsHidden = YES;
-        NSLog(@"hidden");
-        //        searchBar.frame = searchFrameRect;
-    }
-    
 }
 
 //Check if user is logged in, present login if not
@@ -121,12 +107,27 @@
     }
 }
 
-#pragma mark - Table view data source
+#pragma mark - PFQueryTableViewController
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    return [recipesArray count];
+//Use initWithCoder instead of initWithStyle to use my own stroyboard.
+//This was not working in project 2 because parseClassName wasn't being set properly
+- (id)initWithCoder:(NSCoder *)aCoder {
+    self = [super initWithCoder:aCoder];
+    if (self) {
+        // Customize the table
+        // The className to query on
+        self.parseClassName = @"newRecipe";
+        // The key of the PFObject to display in the label of the default cell style
+        self.textKey = @"text";
+        // Whether the built-in pull-to-refresh is enabled
+        self.pullToRefreshEnabled = YES;
+        // The title for this table in the Navigation Controller.
+        //self.title = @"My Contacts";
+    }
+    return self;
 }
+
+#pragma mark - Table view data source
 
 -(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -146,26 +147,82 @@
     }
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+//Set up cells and apply objects from Parse
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath object:(PFObject *)object {
     static NSString *cellID = @"MyRecipeCell";
-    
     //UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
     CustomTableViewCell *cell = (CustomTableViewCell *) [tableView dequeueReusableCellWithIdentifier:cellID];
     
-    cell.recipeNameLabel.text = [recipesArray objectAtIndex:indexPath.row];
-    //cell.cellImage.image = [UIImage imageNamed:@"glasses.jpg"];
-    cell.cellImage.image = [UIImage imageNamed:[imageArray objectAtIndex:indexPath.row]];
+    NSString *recipeType = [object objectForKey:@"Type"];
+    NSString *imageName;
+    if ([recipeType isEqualToString:@"Beer"]) {
+        imageName = @"beer-bottle.png";
+    } else if ([recipeType isEqualToString:@"Wine"]) {
+        imageName = @"wine-glass.png";
+    } else {
+        imageName = @"other-icon.png";
+    }
     
-    //    CAGradientLayer *gradient = [CAGradientLayer layer];
-    //    gradient.frame = cell.bounds;
-    //    gradient.colors = [NSArray arrayWithObjects:(id)[[UIColor whiteColor]CGColor], (id)[[UIColor redColor]CGColor], nil];
-    //    [cell.layer addSublayer:gradient];
+    NSDate *updated = [object updatedAt];
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setDateFormat:@"MM-dd-yy"];
+    //cell.detailTextLabel.text = [NSString stringWithFormat:@"Lasted Updated: %@", [dateFormat stringFromDate:updated]];
+    NSString *createdAtString = [NSString stringWithFormat:@"Created %@",[dateFormat stringFromDate:updated]];
+    
+    cell.recipeNameLabel.text = [object objectForKey:@"Name"];
+    cell.detailsLabel.text = createdAtString;
+//    cell.recipeNameLabel.text = [recipesArray objectAtIndex:indexPath.row];
+    //cell.cellImage.image = [UIImage imageNamed:@"glasses.jpg"];
+    cell.cellImage.image = [UIImage imageNamed:imageName];
     
     //Override to remove extra seperator lines after the last cell
     [self.tableView setTableFooterView:[[UIView alloc] initWithFrame:CGRectMake(0,0,0,0)]];
     
     return cell;
+} //cellForRowAtIndexPath close
+
+-(void)refreshTable {
+    [self loadObjects];
+}
+
+////Override query to set cache policy an change sort
+//- (PFQuery *)queryForTable {
+//    //Make sure parseClassName is set
+//    if (!self.parseClassName) {
+//        self.parseClassName = @"newItem";
+//    }
+//    PFQuery *newItemQuery = [PFQuery queryWithClassName:self.parseClassName];
+//    
+//    //Set cache policy to network only
+////    if ([self.objects count] == 0) {
+////        newItemQuery.cachePolicy = kPFCachePolicyNetworkElseCache;
+////    }
+//    //Set sort
+//    [newItemQuery orderByAscending:@"createdAt"];
+//    return newItemQuery;
+//} //queryForTable close
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    // Return the number of rows in the section.
+    return self.objects.count;
+}
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    // Return NO if you do not want the specified item to be editable.
+    return YES;
+}
+
+// Override to support editing the table view.
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        // Delete the row from the data source
+        PFObject *object = [self.objects objectAtIndex:indexPath.row];
+        [object deleteInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+            [self loadObjects];
+        }];
+    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
+        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+    }
 }
 
 # pragma mark - ActionSheet (sort)
@@ -248,40 +305,6 @@
 - (void)signUpViewControllerDidCancelSignUp:(PFSignUpViewController *)signUpController {
     NSLog(@"User dismissed the signUpViewController");
 }
-
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
 
 /*
 #pragma mark - Navigation

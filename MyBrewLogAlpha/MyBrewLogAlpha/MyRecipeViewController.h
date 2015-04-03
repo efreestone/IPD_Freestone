@@ -13,10 +13,13 @@
 
 #import <UIKit/UIKit.h>
 #import <Parse/Parse.h>
+#import <ParseUI/ParseUI.h>
 
-@interface MyRecipeViewController : UITableViewController
+@interface MyRecipeViewController : PFQueryTableViewController
 
 //Declare table view
 @property (strong, nonatomic) IBOutlet UITableView *myTableView;
+
+-(void)refreshTable;
 
 @end
