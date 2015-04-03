@@ -35,6 +35,7 @@
     NSInteger selectedIndex;
     NSString *ingredientSelected;
     NSString *ingredientWithQuantity;
+    NSString *otherIngredient;
     
     NSString *ingredientTVString;
     NSString *instructionsTVString;
@@ -130,17 +131,41 @@
                                          NSLog(@"Block Picker Canceled");
                                      }
                                           origin:sender];
-
 }
 
 //Ingredient selected. Will create alertview with textfield if Other selected
 -(void)ingredientSelected:(NSString *)ing fromSender:(id)sender {
     if ([ing isEqualToString:@"Other"]) {
-        //Alert with TextView
+        //Alert with TextField
+        [self showOtherSelectedAlert:sender];
         NSLog(@"Other Selected");
     } else {
         ingredientSelected = ing;
         [self showQuantityPicker:sender];
+    }
+}
+
+//Create and show alert view if there is no internet connectivity
+-(void)showOtherSelectedAlert:(id)sender {
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Other Ingredient"
+                                                    message:@"Please enter your ingredient name"
+                                                   delegate:self
+                                          cancelButtonTitle:@"Cancel"
+                                          otherButtonTitles:@"Save", nil];
+    alert.alertViewStyle = UIAlertViewStylePlainTextInput;
+    [alert show];
+    buttonSender = sender;
+}
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    otherIngredient = [alertView textFieldAtIndex:0].text;
+    if (buttonIndex == 1) {
+        if (otherIngredient.length != 0) {
+            ingredientSelected = otherIngredient;
+            [self showQuantityPicker:buttonSender];
+        } else {
+            [self showOtherSelectedAlert:buttonSender];
+        }
     }
 }
 
@@ -234,7 +259,7 @@
     NSInteger hours = (timerInt / 3600);
     NSString *time = [NSString stringWithFormat:@"%02ld:%02ld", (long)hours, (long)minutes];
     
-    NSLog(@"countdown %@", time);  
+    NSLog(@"countdown %@", time); 
 }
 
 //Show custom picker. Triggered from selecting Yes to over 24 hour ActionSheet
