@@ -530,7 +530,7 @@
                                     <outlet property="cellImage" destination="LjS-pl-NkI" id="HsK-qV-Bqo"/>
                                     <outlet property="detailsLabel" destination="s9H-0E-z4o" id="yzd-Mh-N7p"/>
                                     <outlet property="recipeNameLabel" destination="qYC-ey-gls" id="tdW-uv-a50"/>
-                                    <segue destination="Txs-R8-Y1A" kind="show" id="i0n-3n-lFJ"/>
+                                    <segue destination="Txs-R8-Y1A" kind="show" identifier="DetailView" id="i0n-3n-lFJ"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -651,13 +651,14 @@
                     <navigationItem key="navigationItem" title="Details" id="5Xn-sw-U8V">
                         <barButtonItem key="rightBarButtonItem" systemItem="edit" id="n3u-tO-Im0">
                             <connections>
-                                <segue destination="8Wm-S4-3lb" kind="presentation" id="YLU-RP-Sri"/>
+                                <segue destination="8Wm-S4-3lb" kind="presentation" identifier="Edit" id="YLU-RP-Sri"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="ingredientsTV" destination="Bta-xa-ox0" id="SGR-Yb-f5c"/>
                         <outlet property="instructionsTV" destination="bGQ-sj-RTv" id="ws7-pG-7Ub"/>
+                        <outlet property="nameLabel" destination="iBz-OL-mqZ" id="MLB-ML-nDX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YeR-Yw-5GD" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1064,6 +1065,6 @@
         <image name="timer-tab.png" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Rhg-DK-ehR"/>
+        <segue reference="YLU-RP-Sri"/>
     </inferredMetricsTieBreakers>
 </document>

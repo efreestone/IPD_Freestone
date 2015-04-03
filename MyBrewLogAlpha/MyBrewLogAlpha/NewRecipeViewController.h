@@ -27,6 +27,12 @@
 @property (strong, nonatomic) IBOutlet UITextView *instructionsTV;
 @property (strong, nonatomic) MyRecipeViewController *myRecipeVC;
 
+@property (strong, nonatomic) NSString *passedName;
+@property (strong, nonatomic) NSString *passedType;
+@property (strong, nonatomic) NSString *passedIngredients;
+@property (strong, nonatomic) NSString *passedInstructions;
+@property (strong, nonatomic) PFObject *passedObject;
+
 -(void)quantityPicked:(NSString *)formattedQuantity;
 -(void)timerPicked: (NSString *)formattedTime;
 

@@ -55,6 +55,7 @@
 
 //Synthesize for getters/setters
 @synthesize recipeNameTF, ingredientsTV, instructionsTV;
+@synthesize passedName, passedType, passedIngredients, passedInstructions, passedObject;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -71,11 +72,26 @@
     //Set default recipe type to Other
     recipeType = @"Other";
     recipeNotes = @"";
+    
+    //Check if passedName exists. Only true when editing
+    if (passedName != nil) {
+        NSLog(@"Passed Name not nil");
+        recipeNameTF.text = passedName;
+        recipeType = passedType;
+        ingredientsTV.text = passedIngredients;
+        instructionsTV.text = passedInstructions;
+    } else {
+        NSLog(@"Passed Name IS nil");
+    }
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void)fillFieldsForEdit {
+    
 }
 
 //Dismiss new recipe view on cancel

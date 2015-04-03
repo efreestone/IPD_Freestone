@@ -15,6 +15,7 @@
 #import "CustomTableViewCell.h"
 #import "AppDelegate.h"
 #import "NewRecipeViewController.h"
+#import "RecipeDetailsViewController.h"
 #import <ParseUI/ParseUI.h>
 #import "CustomPFLoginViewController.h"
 #import "CustomPFSignUpViewController.h"
@@ -28,6 +29,12 @@
     NSArray *imageArray;
     IBOutlet UISearchBar *searchBar;
     NSString *parseClassName;
+    
+    NSString *selectedName;
+    NSString *selectedIngredients;
+    NSString *selectedInstructions;
+    NSString *selectedType;
+    PFObject *selectedPFObject;
 }
 
 - (void)viewDidLoad {
@@ -185,6 +192,14 @@
     [self loadObjects];
 }
 
+//-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+//    PFObject *object = [self objectAtIndexPath:indexPath];
+//    selectedName = [object objectForKey:@"Name"];
+//    selectedIngredients = [object objectForKey:@"Ingredients"];
+//    selectedInstructions = [object objectForKey:@"Instructions"];
+//    selectedPFObject = object;
+//}
+
 ////Override query to set cache policy an change sort
 //- (PFQuery *)queryForTable {
 //    //Make sure parseClassName is set
@@ -306,14 +321,31 @@
     NSLog(@"User dismissed the signUpViewController");
 }
 
-/*
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+    PFObject *object = [self objectAtIndexPath:indexPath];
+    selectedName = [object objectForKey:@"Name"];
+    selectedType = [object objectForKey:@"Type"];
+    selectedIngredients = [object objectForKey:@"Ingredients"];
+    selectedInstructions = [object objectForKey:@"Instructions"];
+    selectedPFObject = object;
+    
+    //Verify identifier of push segue to Details view
+    if ([segue.identifier isEqualToString:@"DetailView"]) {
+        //Grab destination view controller
+        RecipeDetailsViewController *detailsViewController = segue.destinationViewController;
+        //Pass details over to be displayed
+        if (detailsViewController != nil) {
+            detailsViewController.passedName = selectedName;
+            detailsViewController.passedType = selectedType;
+            detailsViewController.passedIngredients = selectedIngredients;
+            detailsViewController.passedInstructions = selectedInstructions;
+            detailsViewController.passedObject = selectedPFObject;
+        }
+    }
 }
-*/
 
 @end

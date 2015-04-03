@@ -12,6 +12,7 @@
 //
 
 #import "RecipeDetailsViewController.h"
+#import "NewRecipeViewController.h"
 
 @interface RecipeDetailsViewController () 
 
@@ -20,31 +21,33 @@
 @implementation RecipeDetailsViewController
 
 //Synthesize for getters/setters
-@synthesize ingredientsTV, instructionsTV;
+@synthesize nameLabel, ingredientsTV, instructionsTV;
+@synthesize passedObject, passedName, passedType, passedIngredients, passedInstructions;
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        // Custom initialization
+    }
+    return self;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    NSString *testString = @"test line 1 \nline 2 \nline 3 \nline 4 \nend";
+    //NSString *testString = @"test line 1 \nline 2 \nline 3 \nline 4 \nend";
     
-    instructionsTV.text = testString;
+    nameLabel.text = passedName;
+    ingredientsTV.text = passedIngredients;
+    instructionsTV.text = passedInstructions;
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 -(IBAction)shareClicked:(id)sender {
     NSString *titleString = @"Share Recipe";
@@ -63,5 +66,20 @@
     //Show alert
     [copyAlert show];
 } //noConnectionAlert close
+
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"Edit"]) {
+        NewRecipeViewController *newRecipeVC = segue.destinationViewController;
+        newRecipeVC.passedName = passedName;
+        newRecipeVC.passedType = passedType;
+        newRecipeVC.passedIngredients = passedIngredients;
+        newRecipeVC.passedInstructions = passedInstructions;
+        newRecipeVC.passedObject = passedObject;
+        
+    }
+}
 
 @end
