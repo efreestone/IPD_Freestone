@@ -70,6 +70,7 @@
     
     //Set default recipe type to Other
     recipeType = @"Other";
+    recipeNotes = @"";
 }
 
 - (void)didReceiveMemoryWarning {
@@ -145,7 +146,7 @@
     }
 }
 
-//Create and show alert view if there is no internet connectivity
+//Create and show alert view if Other is selected for ingredient
 -(void)showOtherSelectedAlert:(id)sender {
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Other Ingredient"
                                                     message:@"Please enter your ingredient name"
@@ -155,16 +156,28 @@
     alert.alertViewStyle = UIAlertViewStylePlainTextInput;
     [alert show];
     buttonSender = sender;
+    alert.tag = 5;
 }
 
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
-    otherIngredient = [alertView textFieldAtIndex:0].text;
-    if (buttonIndex == 1) {
-        if (otherIngredient.length != 0) {
-            ingredientSelected = otherIngredient;
-            [self showQuantityPicker:buttonSender];
-        } else {
-            [self showOtherSelectedAlert:buttonSender];
+    //Other ingredient is tag 5
+    if ([alertView tag] == 5) {
+        otherIngredient = [alertView textFieldAtIndex:0].text;
+        if (buttonIndex == 1) {
+            if (otherIngredient.length != 0) {
+                ingredientSelected = otherIngredient;
+                [self showQuantityPicker:buttonSender];
+            } else {
+                [self showOtherSelectedAlert:buttonSender];
+            }
+        }
+    }
+    //Notes is tag 6
+    if ([alertView tag] == 6) {
+        recipeNotes = [alertView textFieldAtIndex:0].text;
+        if (buttonIndex == 1) {
+            NSLog(@"Notes: %@", recipeNotes);
+            [self addNotesToInstructions];
         }
     }
 }
@@ -244,16 +257,7 @@
 
 //Grab input countdown time
 - (void)under24Hours:(double)selectedCountdownDuration element:(id)element {
-    //NSString *countdownSelected = selectedCountdown.stringValue;
-    
-//    // Create a new date with the current time
-//    NSDate *date = [NSDate new];
-//    // Split up the date components
-//    NSDateComponents *time = [[NSCalendar currentCalendar]
-//                              components:NSCalendarUnitHour | NSCalendarUnitMinute
-//                              fromDate:date];
-//    NSInteger seconds = ([time hour] * 60 * 60) + ([time minute] * 60);
-    
+    //Cast time interval to int to calculate hour and min
     NSInteger timerInt = (NSInteger)selectedCountdownDuration;
     NSInteger minutes = (timerInt / 60) % 60;
     NSInteger hours = (timerInt / 3600);
@@ -295,8 +299,6 @@
                                             origin:sender];
 }
 
-//- (void)measurementWasSelectedWithBigUnit:(NSNumber *)bigUnit smallUnit:(NSNumber *)smallUnit element:(id)element
-
 //Grab temp selection
 -(void)tempSelected:(NSNumber *)wholeNumber smallUnit:(NSNumber *)pointNumber {
     NSString *currentInst = instructionsTV.text;
@@ -330,6 +332,42 @@
     instructionsTVString = [NSString stringWithFormat:@"%@%@", currentInst, formattedTemp];
     
     //NSLog(@"%@", instructionsTVString);
+    
+    instructionsTV.text = instructionsTVString;
+}
+
+//Create and show alert view w/ textfield for notes
+-(IBAction)showNotesAlert:(id)sender {
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Notes"
+                                                    message:@"Please enter notes for your recipe"
+                                                   delegate:self
+                                          cancelButtonTitle:@"Cancel"
+                                          otherButtonTitles:@"Save", nil];
+    alert.alertViewStyle = UIAlertViewStylePlainTextInput;
+    [alert show];
+    
+    alert.tag = 6;
+}
+
+//Add notes to instructions
+-(void)addNotesToInstructions {
+    NSString *currentInst = instructionsTV.text;
+    
+    //Check if last line of string ends in new line, add before temp if it doesn't exist
+    NSString *addNewLine = @"";
+    if (![currentInst hasSuffix:@"\n"]) {
+        NSLog(@"new line");
+        addNewLine = @"\n";
+    }
+    
+    //Remove new line if textview was empty. Behaviour isn't always as expected when including this check above
+    if (currentInst.length == 0) {
+        NSLog(@"Textview was empty");
+        addNewLine = @"";
+    }
+    
+    NSString *formattedNotes = [NSString stringWithFormat:@"%@Notes: %@\n", addNewLine, recipeNotes];
+    instructionsTVString = [NSString stringWithFormat:@"%@%@", currentInst, formattedNotes];
     
     instructionsTV.text = instructionsTVString;
 }
@@ -371,7 +409,7 @@
 -(IBAction)onSave:(id)sender {
     //Grab text field for recipe name
     recipeName = recipeNameTF.text;
-    recipeNotes = notesTF.text;
+    //recipeNotes = notesTF.text;
     recipeIngredients = ingredientsTV.text;
     recipeInstructions = instructionsTV.text;
     
@@ -380,7 +418,7 @@
         PFObject *newRecipeObject = [PFObject objectWithClassName:parseClassName];
         newRecipeObject[@"Type"] = recipeType;
         newRecipeObject[@"Name"] = recipeName;
-        newRecipeObject[@"Notes"] = recipeNotes;
+//        newRecipeObject[@"Notes"] = recipeNotes;
         newRecipeObject[@"Ingredients"] = recipeIngredients;
         newRecipeObject[@"Instructions"] = recipeInstructions;
         

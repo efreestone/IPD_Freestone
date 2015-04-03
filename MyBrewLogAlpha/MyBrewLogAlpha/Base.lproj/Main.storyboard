@@ -300,7 +300,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aYc-Dw-eXV">
-                                <rect key="frame" x="150" y="104" width="150" height="35"/>
+                                <rect key="frame" x="150" y="99" width="150" height="35"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="150" id="V4v-Nh-wH3"/>
                                     <constraint firstAttribute="height" constant="35" id="X3p-cd-UTY"/>
@@ -314,7 +314,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B0M-gJ-6t8">
-                                <rect key="frame" x="150" y="139" width="150" height="35"/>
+                                <rect key="frame" x="150" y="134" width="150" height="35"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="OVK-Ji-gXH"/>
                                     <constraint firstAttribute="width" constant="150" id="muC-Xn-Oeu"/>
@@ -328,7 +328,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RNP-nT-AZV">
-                                <rect key="frame" x="150" y="174" width="150" height="35"/>
+                                <rect key="frame" x="150" y="169" width="150" height="35"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="150" id="65I-h9-gOB"/>
                                     <constraint firstAttribute="height" constant="35" id="xOO-fH-KeY"/>
@@ -342,7 +342,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9ee-AC-DkU">
-                                <rect key="frame" x="300" y="174" width="150" height="35"/>
+                                <rect key="frame" x="300" y="169" width="150" height="35"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="150" id="DlW-su-wfM"/>
                                     <constraint firstAttribute="height" constant="35" id="Fq5-KE-O5m"/>
@@ -351,9 +351,12 @@
                                 <state key="normal" title="+ Notes">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="showNotesAlert:" destination="8Wm-S4-3lb" eventType="touchUpInside" id="EW6-2R-feX"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zyi-Oo-Hse">
-                                <rect key="frame" x="300" y="104" width="150" height="35"/>
+                                <rect key="frame" x="300" y="99" width="150" height="35"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="150" id="7kL-7x-Lmm"/>
                                     <constraint firstAttribute="height" constant="35" id="uJy-KC-ygH"/>
@@ -364,7 +367,7 @@
                                 </state>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="47T-Sj-dJn">
-                                <rect key="frame" x="300" y="139" width="150" height="35"/>
+                                <rect key="frame" x="300" y="134" width="150" height="35"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="150" id="jl1-28-WnU"/>
                                     <constraint firstAttribute="height" constant="35" id="wUB-Dv-Ywr"/>
@@ -378,26 +381,26 @@
                                 </connections>
                             </button>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SZI-4q-cln">
-                                <rect key="frame" x="15" y="385" width="570" height="205"/>
+                                <rect key="frame" x="15" y="380" width="570" height="210"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="textColor" red="0.12549020349979401" green="0.12549020349979401" blue="0.12549020349979401" alpha="1" colorSpace="deviceRGB"/>
                                 <fontDescription key="fontDescription" name="Calibri" family="Calibri" pointSize="16"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ingredients" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bfI-7g-5zF">
-                                <rect key="frame" x="261" y="209" width="78" height="21"/>
+                                <rect key="frame" x="261" y="204" width="78" height="21"/>
                                 <fontDescription key="fontDescription" name="Calibri" family="Calibri" pointSize="17"/>
                                 <color key="textColor" red="0.71764707565307617" green="0.11372549831867218" blue="0.16470588743686676" alpha="1" colorSpace="deviceRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Instructions" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HfL-dK-aeg">
-                                <rect key="frame" x="259" y="362" width="82" height="21"/>
+                                <rect key="frame" x="259" y="357" width="82" height="21"/>
                                 <fontDescription key="fontDescription" name="Calibri" family="Calibri" pointSize="17"/>
                                 <color key="textColor" red="0.71764707565307617" green="0.11372549831867218" blue="0.16470588743686676" alpha="1" colorSpace="deviceRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yZV-OD-r1u">
-                                <rect key="frame" x="15" y="232" width="570" height="125"/>
+                                <rect key="frame" x="15" y="227" width="570" height="125"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="125" id="OH2-2g-ms4"/>
@@ -433,7 +436,7 @@
                             <constraint firstItem="yZV-OD-r1u" firstAttribute="top" secondItem="bfI-7g-5zF" secondAttribute="bottom" constant="2" id="hwD-FW-YN3"/>
                             <constraint firstItem="aYc-Dw-eXV" firstAttribute="centerY" secondItem="Zyi-Oo-Hse" secondAttribute="centerY" id="iCh-nY-Fcz"/>
                             <constraint firstItem="B0M-gJ-6t8" firstAttribute="top" secondItem="aYc-Dw-eXV" secondAttribute="bottom" id="lb9-WU-97w"/>
-                            <constraint firstItem="aYc-Dw-eXV" firstAttribute="top" secondItem="IuN-DG-jVT" secondAttribute="bottom" constant="5" id="maq-ZD-yS1"/>
+                            <constraint firstItem="aYc-Dw-eXV" firstAttribute="top" secondItem="IuN-DG-jVT" secondAttribute="bottom" id="maq-ZD-yS1"/>
                             <constraint firstItem="Czb-sQ-rkl" firstAttribute="top" secondItem="SZI-4q-cln" secondAttribute="bottom" constant="10" id="nJ9-Bo-WuV"/>
                             <constraint firstItem="90O-vS-DaU" firstAttribute="width" secondItem="ibz-kt-3MR" secondAttribute="width" id="qPy-4I-Vh9"/>
                             <constraint firstAttribute="trailing" secondItem="yZV-OD-r1u" secondAttribute="trailing" constant="15" id="rpf-Vn-Bhm"/>
