@@ -54,7 +54,7 @@
 @implementation NewRecipeViewController
 
 //Synthesize for getters/setters
-@synthesize recipeNameTF, notesTF, ingredientsTV, instructionsTV;
+@synthesize recipeNameTF, ingredientsTV, instructionsTV;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -263,6 +263,26 @@
     NSInteger hours = (timerInt / 3600);
     NSString *time = [NSString stringWithFormat:@"%02ld:%02ld", (long)hours, (long)minutes];
     
+    NSString *currentInst = instructionsTV.text;
+    
+    //Check if last line of string ends in new line, add before temp if it doesn't exist
+    NSString *addNewLine = @"";
+    if (![currentInst hasSuffix:@"\n"]) {
+        NSLog(@"new line");
+        addNewLine = @"\n";
+    }
+    
+    //Remove new line if textview was empty. Behaviour isn't always as expected when including this check above
+    if (currentInst.length == 0) {
+        NSLog(@"Textview was empty");
+        addNewLine = @"";
+    }
+    
+    NSString *formattedTime = [NSString stringWithFormat:@"%@Timer: %ld Hours %ld Minutes\n", addNewLine, (long)hours, (long)minutes];
+    instructionsTVString = [NSString stringWithFormat:@"%@%@", currentInst, formattedTime];
+    
+    instructionsTV.text = instructionsTVString;
+    
     NSLog(@"countdown %@", time); 
 }
 
@@ -281,7 +301,32 @@
     
     ActionSheetCustomPicker *customPicker = [[ActionSheetCustomPicker alloc] initWithTitle:@"Select Time" delegate:timerDelegate showCancelButton:YES origin:sender initialSelections:initialSelections];
     
+    timerDelegate.myRecipeVC = self;
     [customPicker showActionSheetPicker];
+}
+
+//Timer picked (over 24) formats and adds ingredients to textview. Called from Quantity Delegate
+-(void)timerPicked:(NSString *)formattedTime {
+    NSLog(@"NewRec: %@", formattedTime);
+    NSString *currentInst = instructionsTV.text;
+    
+    //Check if last line of string ends in new line, add before temp if it doesn't exist
+    NSString *addNewLine = @"";
+    if (![currentInst hasSuffix:@"\n"]) {
+        NSLog(@"new line");
+        addNewLine = @"\n";
+    }
+    
+    //Remove new line if textview was empty. Behaviour isn't always as expected when including this check above
+    if (currentInst.length == 0) {
+        NSLog(@"Textview was empty");
+        addNewLine = @"";
+    }
+    
+    NSString *timerWithNewLine = [NSString stringWithFormat:@"%@Timer: %@\n", addNewLine, formattedTime];
+    
+    instructionsTVString = [NSString stringWithFormat:@"%@%@", currentInst, timerWithNewLine];
+    instructionsTV.text = instructionsTVString;
 }
 
 //Show Temp Picker
@@ -371,6 +416,10 @@
     
     instructionsTV.text = instructionsTVString;
 }
+
+//-(void)addToInstructions {
+//
+//}
 
 #pragma mark - action sheet delegate
 

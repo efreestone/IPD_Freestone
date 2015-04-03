@@ -13,11 +13,16 @@
 
 #import "CustomTimerPickerDelegate.h"
 
-@implementation CustomTimerPickerDelegate
+@implementation CustomTimerPickerDelegate {
+    NSString *monthString;
+    NSString *weekString;
+    NSString *dayString;
+    NSString *formattedTime;
+}
 
-- (id)init
-{
+- (id)init {
     if (self = [super init]) {
+        //Init arrays and fill
         monthArray = [[NSMutableArray alloc] init];
         weekArray = [[NSMutableArray alloc] init];
         dayArray = [[NSMutableArray alloc] init];
@@ -38,17 +43,20 @@
                 [dayArray addObject:stringVal];
             }
         }
+        
+        //Set strings to defaults
+        monthString = @"0";
+        weekString = @"0";
+        dayString = @"0";
     }
     return self;
 }
 
-- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
-{
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
     return 6;
 }
 
-- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
-{
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
     // Returns
     switch (component) {
         case 0:
@@ -70,8 +78,7 @@
 }
 
 // returns width of column and height of row for each component.
-- (CGFloat)pickerView:(UIPickerView *)pickerView widthForComponent:(NSInteger)component
-{
+- (CGFloat)pickerView:(UIPickerView *)pickerView widthForComponent:(NSInteger)component {
     switch (component) {
         case 0:
             return 35.0f;
@@ -90,8 +97,8 @@
     return 0;
 }
 
-- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
-{
+//Set title for component
+- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
     [pickerView sizeToFit];
     switch (component) {
         case 0:
@@ -110,6 +117,42 @@
             break;
     }
     return nil;
+}
+
+//On done set default i needed and pass time back to New Recipe
+- (void)actionSheetPickerDidSucceed:(AbstractActionSheetPicker *)actionSheetPicker origin:(id)origin {
+    NSString *fullTimer;
+    //Get numbers from string
+    NSString *numberString = [NSString stringWithFormat:@"%@%@%@", monthString, weekString, dayString];
+    //Check if picker was selected, set default to 1 qt if not.
+    if ([numberString isEqualToString:@"000"]) {
+        fullTimer = @"1 Day";
+    } else {
+        fullTimer = formattedTime;
+    }
+
+    //Call method on NewRecipe with formatted quantity passed
+    [self.myRecipeVC timerPicked:fullTimer];
+}
+
+//Grab selections
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
+    NSLog(@"Row %li selected in component %li", (long)row, (long)component);
+    
+    //Grab inputs for each component. Using if statements instead of case due to out of range crash selecting numbers. This is most efficient fix while that still allows any selectiong order for each component.
+    if (component == 0) {
+        monthString = monthArray[row];
+    }
+    if (component == 2) {
+        weekString = weekArray[row];
+    }
+    if (component == 4) {
+        dayString = dayArray[row];
+    }
+    
+    formattedTime = [NSString stringWithFormat:@"%@ Months, %@ Weeks, %@ Days", monthString, weekString, dayString];
+    NSLog(@"formatted # = %@", formattedTime);
+    
 }
 
 @end
