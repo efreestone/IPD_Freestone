@@ -1000,6 +1000,9 @@
                                                     <state key="normal" title="Edit User">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="onEditUserClick:" destination="Woz-ZB-XNv" eventType="touchUpInside" id="0m8-6d-Des"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
@@ -1065,6 +1068,6 @@
         <image name="timer-tab.png" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="YLU-RP-Sri"/>
+        <segue reference="b29-uT-UxQ"/>
     </inferredMetricsTieBreakers>
 </document>

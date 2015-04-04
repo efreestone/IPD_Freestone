@@ -39,12 +39,43 @@
     // Dispose of any resources that can be recreated.
 }
 
+//Log user out
 -(IBAction)onLogOutClick:(id)sender {
     //Change tab to My Recipes and log out user. This also triggers presenting the login screen
     [self.tabBarController setSelectedIndex:0];
     [PFUser logOut];
     
     NSLog(@"user logged out from settings");
+}
+
+//Create alert with 2 text fields for changing email and/or username
+-(IBAction)onEditUserClick:(id)sender {
+    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Edit User"
+                                                   message:@"Reset username and/or email. Please use \"Forgot Password?\" on the login screen to reset password. Requires Email"
+                                                  delegate:self cancelButtonTitle:@"Cancel"
+                                         otherButtonTitles:@"Save", nil];
+    
+    alert.alertViewStyle = UIAlertViewStyleLoginAndPasswordInput;
+    [alert textFieldAtIndex:1].secureTextEntry = NO;
+    [alert textFieldAtIndex:0].placeholder = @"Enter New Email";
+    [alert textFieldAtIndex:1].placeholder = @"Enter New Username";
+    [alert show];
+}
+
+//Capture text input from alertview and reset username and/or email
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    NSString *newEmail = [alertView textFieldAtIndex:0].text;
+    NSString *newUsername = [alertView textFieldAtIndex:1].text;
+    if (buttonIndex == 1) {
+        if (newEmail.length != 0) {
+            [[PFUser currentUser] setEmail:newEmail];
+            [[PFUser currentUser] saveInBackground];
+        }
+        if (newUsername.length != 0) {
+            [[PFUser currentUser] setUsername:newUsername];
+            [[PFUser currentUser] saveInBackground];
+        }
+    }
 }
 
 /*
