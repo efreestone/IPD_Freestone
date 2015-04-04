@@ -34,6 +34,7 @@
     NSString *selectedIngredients;
     NSString *selectedInstructions;
     NSString *selectedType;
+    NSString *selectedObjectID;
     PFObject *selectedPFObject;
 }
 
@@ -66,6 +67,10 @@
     //    PFObject *testObject = [PFObject objectWithClassName:@"TestObject"];
     //    testObject[@"foo"] = @"bar";
     //    [testObject saveInBackground];
+}
+
+-(void)viewWillAppear:(BOOL)animated {
+    [self refreshTable];
 }
 
 -(IBAction)showNewRecipeView:(id)sender {
@@ -331,6 +336,7 @@
     selectedType = [object objectForKey:@"Type"];
     selectedIngredients = [object objectForKey:@"Ingredients"];
     selectedInstructions = [object objectForKey:@"Instructions"];
+    selectedObjectID = [NSString stringWithFormat:@"%@", object.objectId];
     selectedPFObject = object;
     
     //Verify identifier of push segue to Details view
@@ -343,6 +349,7 @@
             detailsViewController.passedType = selectedType;
             detailsViewController.passedIngredients = selectedIngredients;
             detailsViewController.passedInstructions = selectedInstructions;
+            detailsViewController.passedObjectID = selectedObjectID;
             detailsViewController.passedObject = selectedPFObject;
         }
     }

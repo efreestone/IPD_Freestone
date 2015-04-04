@@ -22,7 +22,7 @@
 
 //Synthesize for getters/setters
 @synthesize nameLabel, ingredientsTV, instructionsTV;
-@synthesize passedObject, passedName, passedType, passedIngredients, passedInstructions;
+@synthesize passedObject, passedName, passedType, passedIngredients, passedInstructions, passedObjectID;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -47,6 +47,11 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void)pressBackButton {
+    [self.navigationController popViewControllerAnimated:YES];
+    
 }
 
 -(IBAction)shareClicked:(id)sender {
@@ -77,7 +82,10 @@
         newRecipeVC.passedType = passedType;
         newRecipeVC.passedIngredients = passedIngredients;
         newRecipeVC.passedInstructions = passedInstructions;
+        newRecipeVC.passedObjectID = passedObjectID;
         newRecipeVC.passedObject = passedObject;
+        
+        newRecipeVC.recipeDetailsVC = self;
         
     }
 }

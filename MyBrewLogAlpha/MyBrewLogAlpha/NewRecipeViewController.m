@@ -55,7 +55,7 @@
 
 //Synthesize for getters/setters
 @synthesize recipeNameTF, ingredientsTV, instructionsTV;
-@synthesize passedName, passedType, passedIngredients, passedInstructions, passedObject;
+@synthesize passedName, passedType, passedIngredients, passedInstructions, passedObject, passedObjectID;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -479,26 +479,55 @@
     recipeInstructions = instructionsTV.text;
     
     if (recipeName.length > 0 && recipeInstructions.length > 0) {
-        //Name was entered, continue saving
-        PFObject *newRecipeObject = [PFObject objectWithClassName:parseClassName];
-        newRecipeObject[@"Type"] = recipeType;
-        newRecipeObject[@"Name"] = recipeName;
-//        newRecipeObject[@"Notes"] = recipeNotes;
-        newRecipeObject[@"Ingredients"] = recipeIngredients;
-        newRecipeObject[@"Instructions"] = recipeInstructions;
+        //If objectID is not nil, object is being edited so query and update
+        if (passedObjectID != nil) {
+            PFQuery *editQuery = [PFQuery queryWithClassName:parseClassName];
+            [editQuery getObjectInBackgroundWithId:passedObjectID block:^(PFObject *editObject, NSError *error) {
+                editObject[@"Type"] = recipeType;
+                editObject[@"Name"] = recipeName;
+                editObject[@"Ingredients"] = recipeIngredients;
+                editObject[@"Instructions"] = recipeInstructions;
+                [editObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                    if (succeeded) {
+                        NSLog(@"Edited item saved.");
+                        //Dismiss add item view
+                        [self dismissViewControllerAnimated:YES completion:nil];
+                        [self.myRecipeVC refreshTable];
+//                        [self.myRecipeVC.navigationController popToRootViewControllerAnimated:YES];
+                        [self.recipeDetailsVC pressBackButton];
+                    } else {
+                        NSLog(@"%@", error);
+                        //Error alert
+                        [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:NSLocalizedString(@"An error occured trying to save. Please try again.", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles:nil] show];
+                    }
+                }];
+            }];
+            //Not editing, create new object to save
+        } else {
+            //Name was entered, continue saving
+            PFObject *newRecipeObject = [PFObject objectWithClassName:parseClassName];
+            newRecipeObject[@"Type"] = recipeType;
+            newRecipeObject[@"Name"] = recipeName;
+            //        newRecipeObject[@"Notes"] = recipeNotes;
+            newRecipeObject[@"Ingredients"] = recipeIngredients;
+            newRecipeObject[@"Instructions"] = recipeInstructions;
+            
+            [newRecipeObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                if (succeeded) {
+                    NSLog(@"New item saved.");
+                    //Dismiss add item view
+                    [self dismissViewControllerAnimated:YES completion:nil];
+                    [self.myRecipeVC refreshTable];
+                } else {
+                    NSLog(@"%@", error);
+                    //Error alert
+                    [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:NSLocalizedString(@"An error occured trying to save. Please try again.", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles:nil] show];
+                }
+            }];
+            
+        }
         
-        [newRecipeObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-            if (succeeded) {
-                NSLog(@"New item saved.");
-                //Dismiss add item view
-                [self dismissViewControllerAnimated:YES completion:nil];
-                [self.myRecipeVC refreshTable];
-            } else {
-                NSLog(@"%@", error);
-                //Error alert
-                [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:NSLocalizedString(@"An error occured trying to save. Please try again.", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles:nil] show];
-            }
-        }];
+        
         
     } else {
         NSLog(@"Name required");

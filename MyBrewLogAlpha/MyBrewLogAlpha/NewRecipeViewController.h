@@ -13,6 +13,7 @@
 
 #import <UIKit/UIKit.h>
 #import "MyRecipeViewController.h"
+#import "RecipeDetailsViewController.h"
 
 @interface NewRecipeViewController : UIViewController
 
@@ -26,11 +27,13 @@
 @property (strong, nonatomic) IBOutlet UITextView *ingredientsTV;
 @property (strong, nonatomic) IBOutlet UITextView *instructionsTV;
 @property (strong, nonatomic) MyRecipeViewController *myRecipeVC;
+@property (strong, nonatomic) RecipeDetailsViewController *recipeDetailsVC;
 
 @property (strong, nonatomic) NSString *passedName;
 @property (strong, nonatomic) NSString *passedType;
 @property (strong, nonatomic) NSString *passedIngredients;
 @property (strong, nonatomic) NSString *passedInstructions;
+@property (strong, nonatomic) NSString *passedObjectID;
 @property (strong, nonatomic) PFObject *passedObject;
 
 -(void)quantityPicked:(NSString *)formattedQuantity;

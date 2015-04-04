@@ -26,6 +26,9 @@
 @property (strong, nonatomic) NSString *passedType;
 @property (strong, nonatomic) NSString *passedIngredients;
 @property (strong, nonatomic) NSString *passedInstructions;
+@property (strong, nonatomic) NSString *passedObjectID;
 @property (strong, nonatomic) PFObject *passedObject;
+
+-(void)pressBackButton;
 
 @end
