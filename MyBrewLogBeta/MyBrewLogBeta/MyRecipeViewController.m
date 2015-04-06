@@ -1,13 +1,13 @@
 // Elijah Freestone
 // IPY 1504
-// Week 1 - Alpha
-// March 30th, 2015
+// Week 2 - Beta
+// April 5th, 2015
 
 //
 //  MyRecipeViewController.m
-//  MyBrewLogAlpha
+//  MyBrewLogBeta
 //
-//  Created by Elijah Freestone on 3/30/15.
+//  Created by Elijah Freestone on 4/5/15.
 //  Copyright (c) 2015 Elijah Freestone. All rights reserved.
 //
 
@@ -61,7 +61,7 @@
         NSLog(@"%@ is logged in", usernameString);
     }
     
-//    [self.myTableView setEditing:YES animated:YES];
+    //    [self.myTableView setEditing:YES animated:YES];
     
     //Test parse
     //    PFObject *testObject = [PFObject objectWithClassName:@"TestObject"];
@@ -183,7 +183,7 @@
     
     cell.recipeNameLabel.text = [object objectForKey:@"Name"];
     cell.detailsLabel.text = createdAtString;
-//    cell.recipeNameLabel.text = [recipesArray objectAtIndex:indexPath.row];
+    //    cell.recipeNameLabel.text = [recipesArray objectAtIndex:indexPath.row];
     //cell.cellImage.image = [UIImage imageNamed:@"glasses.jpg"];
     cell.cellImage.image = [UIImage imageNamed:imageName];
     
@@ -212,7 +212,7 @@
 //        self.parseClassName = @"newItem";
 //    }
 //    PFQuery *newItemQuery = [PFQuery queryWithClassName:self.parseClassName];
-//    
+//
 //    //Set cache policy to network only
 ////    if ([self.objects count] == 0) {
 ////        newItemQuery.cachePolicy = kPFCachePolicyNetworkElseCache;

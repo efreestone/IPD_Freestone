@@ -1,13 +1,13 @@
 // Elijah Freestone
 // IPY 1504
-// Week 1 - Alpha
-// March 30th, 2015
+// Week 2 - Beta
+// April 5th, 2015
 
 //
 //  CustomQuantityPickerDelegate.h
-//  MyBrewLogAlpha
+//  MyBrewLogBeta
 //
-//  Created by Elijah Freestone on 4/2/15.
+//  Created by Elijah Freestone on 4/5/15.
 //  Copyright (c) 2015 Elijah Freestone. All rights reserved.
 //
 

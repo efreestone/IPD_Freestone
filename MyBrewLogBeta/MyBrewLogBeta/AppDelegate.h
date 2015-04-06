@@ -1,3 +1,8 @@
+// Elijah Freestone
+// IPY 1504
+// Week 2 - Beta
+// April 5th, 2015
+
 //
 //  AppDelegate.h
 //  MyBrewLogBeta
