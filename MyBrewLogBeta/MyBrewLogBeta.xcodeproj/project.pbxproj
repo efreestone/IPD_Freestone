@@ -1,0 +1,435 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		B80925EC1AD2102200F465D7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B80925EB1AD2102200F465D7 /* main.m */; };
+		B80925EF1AD2102200F465D7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B80925EE1AD2102200F465D7 /* AppDelegate.m */; };
+		B80925F21AD2102200F465D7 /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B80925F11AD2102200F465D7 /* FirstViewController.m */; };
+		B80925F51AD2102200F465D7 /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B80925F41AD2102200F465D7 /* SecondViewController.m */; };
+		B80925F81AD2102200F465D7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B80925F61AD2102200F465D7 /* Main.storyboard */; };
+		B80925FA1AD2102200F465D7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B80925F91AD2102200F465D7 /* Images.xcassets */; };
+		B80925FD1AD2102200F465D7 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = B80925FB1AD2102200F465D7 /* LaunchScreen.xib */; };
+		B80926091AD2102200F465D7 /* MyBrewLogBetaTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B80926081AD2102200F465D7 /* MyBrewLogBetaTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		B80926031AD2102200F465D7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B80925DE1AD2102200F465D7 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B80925E51AD2102200F465D7;
+			remoteInfo = MyBrewLogBeta;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		B80925E61AD2102200F465D7 /* MyBrewLogBeta.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyBrewLogBeta.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B80925EA1AD2102200F465D7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B80925EB1AD2102200F465D7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		B80925ED1AD2102200F465D7 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		B80925EE1AD2102200F465D7 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		B80925F01AD2102200F465D7 /* FirstViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FirstViewController.h; sourceTree = "<group>"; };
+		B80925F11AD2102200F465D7 /* FirstViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
+		B80925F31AD2102200F465D7 /* SecondViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SecondViewController.h; sourceTree = "<group>"; };
+		B80925F41AD2102200F465D7 /* SecondViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SecondViewController.m; sourceTree = "<group>"; };
+		B80925F71AD2102200F465D7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		B80925F91AD2102200F465D7 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		B80925FC1AD2102200F465D7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		B80926021AD2102200F465D7 /* MyBrewLogBetaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MyBrewLogBetaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B80926071AD2102200F465D7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B80926081AD2102200F465D7 /* MyBrewLogBetaTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyBrewLogBetaTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		B80925E31AD2102200F465D7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B80925FF1AD2102200F465D7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		B80925DD1AD2102200F465D7 = {
+			isa = PBXGroup;
+			children = (
+				B80925E81AD2102200F465D7 /* MyBrewLogBeta */,
+				B80926051AD2102200F465D7 /* MyBrewLogBetaTests */,
+				B80925E71AD2102200F465D7 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		B80925E71AD2102200F465D7 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B80925E61AD2102200F465D7 /* MyBrewLogBeta.app */,
+				B80926021AD2102200F465D7 /* MyBrewLogBetaTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		B80925E81AD2102200F465D7 /* MyBrewLogBeta */ = {
+			isa = PBXGroup;
+			children = (
+				B80925ED1AD2102200F465D7 /* AppDelegate.h */,
+				B80925EE1AD2102200F465D7 /* AppDelegate.m */,
+				B80925F01AD2102200F465D7 /* FirstViewController.h */,
+				B80925F11AD2102200F465D7 /* FirstViewController.m */,
+				B80925F31AD2102200F465D7 /* SecondViewController.h */,
+				B80925F41AD2102200F465D7 /* SecondViewController.m */,
+				B80925F61AD2102200F465D7 /* Main.storyboard */,
+				B80925F91AD2102200F465D7 /* Images.xcassets */,
+				B80925FB1AD2102200F465D7 /* LaunchScreen.xib */,
+				B80925E91AD2102200F465D7 /* Supporting Files */,
+			);
+			path = MyBrewLogBeta;
+			sourceTree = "<group>";
+		};
+		B80925E91AD2102200F465D7 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				B80925EA1AD2102200F465D7 /* Info.plist */,
+				B80925EB1AD2102200F465D7 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		B80926051AD2102200F465D7 /* MyBrewLogBetaTests */ = {
+			isa = PBXGroup;
+			children = (
+				B80926081AD2102200F465D7 /* MyBrewLogBetaTests.m */,
+				B80926061AD2102200F465D7 /* Supporting Files */,
+			);
+			path = MyBrewLogBetaTests;
+			sourceTree = "<group>";
+		};
+		B80926061AD2102200F465D7 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				B80926071AD2102200F465D7 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		B80925E51AD2102200F465D7 /* MyBrewLogBeta */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B809260C1AD2102200F465D7 /* Build configuration list for PBXNativeTarget "MyBrewLogBeta" */;
+			buildPhases = (
+				B80925E21AD2102200F465D7 /* Sources */,
+				B80925E31AD2102200F465D7 /* Frameworks */,
+				B80925E41AD2102200F465D7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MyBrewLogBeta;
+			productName = MyBrewLogBeta;
+			productReference = B80925E61AD2102200F465D7 /* MyBrewLogBeta.app */;
+			productType = "com.apple.product-type.application";
+		};
+		B80926011AD2102200F465D7 /* MyBrewLogBetaTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B809260F1AD2102200F465D7 /* Build configuration list for PBXNativeTarget "MyBrewLogBetaTests" */;
+			buildPhases = (
+				B80925FE1AD2102200F465D7 /* Sources */,
+				B80925FF1AD2102200F465D7 /* Frameworks */,
+				B80926001AD2102200F465D7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B80926041AD2102200F465D7 /* PBXTargetDependency */,
+			);
+			name = MyBrewLogBetaTests;
+			productName = MyBrewLogBetaTests;
+			productReference = B80926021AD2102200F465D7 /* MyBrewLogBetaTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		B80925DE1AD2102200F465D7 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0620;
+				ORGANIZATIONNAME = "Elijah Freestone";
+				TargetAttributes = {
+					B80925E51AD2102200F465D7 = {
+						CreatedOnToolsVersion = 6.2;
+					};
+					B80926011AD2102200F465D7 = {
+						CreatedOnToolsVersion = 6.2;
+						TestTargetID = B80925E51AD2102200F465D7;
+					};
+				};
+			};
+			buildConfigurationList = B80925E11AD2102200F465D7 /* Build configuration list for PBXProject "MyBrewLogBeta" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = B80925DD1AD2102200F465D7;
+			productRefGroup = B80925E71AD2102200F465D7 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				B80925E51AD2102200F465D7 /* MyBrewLogBeta */,
+				B80926011AD2102200F465D7 /* MyBrewLogBetaTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		B80925E41AD2102200F465D7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B80925F81AD2102200F465D7 /* Main.storyboard in Resources */,
+				B80925FD1AD2102200F465D7 /* LaunchScreen.xib in Resources */,
+				B80925FA1AD2102200F465D7 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B80926001AD2102200F465D7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		B80925E21AD2102200F465D7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B80925F51AD2102200F465D7 /* SecondViewController.m in Sources */,
+				B80925EF1AD2102200F465D7 /* AppDelegate.m in Sources */,
+				B80925F21AD2102200F465D7 /* FirstViewController.m in Sources */,
+				B80925EC1AD2102200F465D7 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B80925FE1AD2102200F465D7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B80926091AD2102200F465D7 /* MyBrewLogBetaTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		B80926041AD2102200F465D7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B80925E51AD2102200F465D7 /* MyBrewLogBeta */;
+			targetProxy = B80926031AD2102200F465D7 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		B80925F61AD2102200F465D7 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B80925F71AD2102200F465D7 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		B80925FB1AD2102200F465D7 /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B80925FC1AD2102200F465D7 /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		B809260A1AD2102200F465D7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		B809260B1AD2102200F465D7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		B809260D1AD2102200F465D7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = MyBrewLogBeta/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		B809260E1AD2102200F465D7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = MyBrewLogBeta/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		B80926101AD2102200F465D7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = MyBrewLogBetaTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MyBrewLogBeta.app/MyBrewLogBeta";
+			};
+			name = Debug;
+		};
+		B80926111AD2102200F465D7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = MyBrewLogBetaTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MyBrewLogBeta.app/MyBrewLogBeta";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		B80925E11AD2102200F465D7 /* Build configuration list for PBXProject "MyBrewLogBeta" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B809260A1AD2102200F465D7 /* Debug */,
+				B809260B1AD2102200F465D7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B809260C1AD2102200F465D7 /* Build configuration list for PBXNativeTarget "MyBrewLogBeta" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B809260D1AD2102200F465D7 /* Debug */,
+				B809260E1AD2102200F465D7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		B809260F1AD2102200F465D7 /* Build configuration list for PBXNativeTarget "MyBrewLogBetaTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B80926101AD2102200F465D7 /* Debug */,
+				B80926111AD2102200F465D7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = B80925DE1AD2102200F465D7 /* Project object */;
+}
