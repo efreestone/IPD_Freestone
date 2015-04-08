@@ -766,6 +766,7 @@
 				B809260E1AD2102200F465D7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		B809260F1AD2102200F465D7 /* Build configuration list for PBXNativeTarget "MyBrewLogBetaTests" */ = {
 			isa = XCConfigurationList;
@@ -774,6 +775,7 @@
 				B80926111AD2102200F465D7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

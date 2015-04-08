@@ -65,6 +65,18 @@
     
     parseClassName = @"newRecipe";
     
+    [[recipeNameTF layer] setBorderColor:[[UIColor lightGrayColor] CGColor]];
+    [[recipeNameTF layer] setBorderWidth:0.5];
+    [[recipeNameTF layer] setCornerRadius:7.5];
+    
+    [[ingredientsTV layer] setBorderColor:[[UIColor lightGrayColor] CGColor]];
+    [[ingredientsTV layer] setBorderWidth:0.5];
+    [[ingredientsTV layer] setCornerRadius:7.5];
+    
+    [[instructionsTV layer] setBorderColor:[[UIColor lightGrayColor] CGColor]];
+    [[instructionsTV layer] setBorderWidth:0.5];
+    [[instructionsTV layer] setCornerRadius:7.5];
+    
     //Create arrays for pickers
     recipeTypes = [NSArray arrayWithObjects:@"Beer", @"Wine", @"Other", nil];
     ingredientArray = [NSArray arrayWithObjects:@"Ingedient 1", @"Ingedient 2", @"Ingedient 3", @"Ingedient 4", @"Ingedient 5", @"Ingedient 6", @"Other", nil];

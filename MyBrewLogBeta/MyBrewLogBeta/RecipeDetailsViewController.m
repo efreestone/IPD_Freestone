@@ -42,12 +42,30 @@
     nameLabel.text = passedName;
     ingredientsTV.text = passedIngredients;
     instructionsTV.text = passedInstructions;
+    
+    [ingredientsTV flashScrollIndicators];
+    [instructionsTV flashScrollIndicators];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+//- (void)textViewDidChange:(UITextView *)textView {
+//    NSAttributedString *attrStr = textView.attributedText;
+//    NSString * string = [attrStr string];
+//    NSRegularExpression* myRegex = NameRegularExpression();
+//    NSArray * matches = [myRegex matchesInString:string options:0 range:NSMakeRange(0, [string length])];
+//    
+//    NSMutableAttributedString *attrMutableStr = [[NSMutableAttributedString alloc] initWithString:string];
+//    
+//    for (NSTextCheckingResult* match in matches ) {
+//        [attrMutableStr addAttribute:NSForegroundColorAttributeName value:[UIColor blueColor] range:match.range];
+//    }
+//    textView.attributedText = attrMutableStr;
+//    textView.contentSize = CGSizeMake(textView.frame.size.width, textView.contentSize.height);
+//}
 
 -(void)pressBackButton {
     [self.navigationController popViewControllerAnimated:YES];
