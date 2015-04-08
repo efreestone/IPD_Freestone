@@ -514,7 +514,7 @@
                     }
                 }];
             }];
-            //Not editing, create new object to save
+        //Not editing, create new object to save
         } else {
             //Name was entered, continue saving
             PFObject *newRecipeObject = [PFObject objectWithClassName:parseClassName];
@@ -523,6 +523,7 @@
             //        newRecipeObject[@"Notes"] = recipeNotes;
             newRecipeObject[@"Ingredients"] = recipeIngredients;
             newRecipeObject[@"Instructions"] = recipeInstructions;
+            newRecipeObject[@"createdBy"] = [PFUser currentUser].username;
             
             [newRecipeObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
                 if (succeeded) {

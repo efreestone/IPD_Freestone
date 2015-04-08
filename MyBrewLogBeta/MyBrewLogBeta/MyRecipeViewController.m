@@ -36,6 +36,7 @@
     NSString *selectedType;
     NSString *selectedObjectID;
     PFObject *selectedPFObject;
+    NSString *usernameString;
 }
 
 - (void)viewDidLoad {
@@ -54,7 +55,7 @@
     
     //Grab user and username
     PFUser *user = [PFUser currentUser];
-    NSString *usernameString = [user objectForKey:@"username"];
+    usernameString = [user objectForKey:@"username"];
     
     if ([PFUser currentUser]) {
         //Log username if user is logged in
@@ -141,8 +142,7 @@
 
 #pragma mark - Table view data source
 
--(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
-{
+-(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     // Remove seperator inset
     if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
         [cell setSeparatorInset:UIEdgeInsetsZero];
@@ -205,28 +205,30 @@
 //    selectedPFObject = object;
 //}
 
-////Override query to set cache policy an change sort
-//- (PFQuery *)queryForTable {
-//    //Make sure parseClassName is set
-//    if (!self.parseClassName) {
-//        self.parseClassName = @"newItem";
-//    }
-//    PFQuery *newItemQuery = [PFQuery queryWithClassName:self.parseClassName];
-//
-//    //Set cache policy to network only
-////    if ([self.objects count] == 0) {
-////        newItemQuery.cachePolicy = kPFCachePolicyNetworkElseCache;
-////    }
-//    //Set sort
-//    [newItemQuery orderByAscending:@"createdAt"];
-//    return newItemQuery;
-//} //queryForTable close
+//Override query to set cache policy an change sort
+- (PFQuery *)queryForTable {
+    //Make sure parseClassName is set
+    if (!self.parseClassName) {
+        self.parseClassName = @"newRecipe";
+    }
+    PFQuery *newItemQuery = [PFQuery queryWithClassName:self.parseClassName];
+    //[newItemQuery ]
+    [newItemQuery whereKey:@"createdBy" equalTo:[PFUser currentUser].username];
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
+    //Set cache policy
+    if ([self.objects count] == 0) {
+        newItemQuery.cachePolicy = kPFCachePolicyNetworkElseCache;
+    }
+    //Set sort
+    [newItemQuery orderByDescending:@"updatedAt"];
+    return newItemQuery;
+} //queryForTable close
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
     return self.objects.count;
 }
+
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
     // Return NO if you do not want the specified item to be editable.
     return YES;

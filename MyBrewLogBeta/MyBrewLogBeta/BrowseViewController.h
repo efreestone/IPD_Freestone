@@ -12,8 +12,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <ParseUI/ParseUI.h>
 
-@interface BrowseViewController : UITableViewController
+@interface BrowseViewController : PFQueryTableViewController
 
 //Declare table view
 @property (strong, nonatomic) IBOutlet UITableView *browseTableView;

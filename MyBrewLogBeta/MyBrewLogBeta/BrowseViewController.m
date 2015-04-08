@@ -13,6 +13,7 @@
 
 #import "BrowseViewController.h"
 #import "CustomTableViewCell.h"
+#import <Parse/Parse.h>
 
 @interface BrowseViewController () <UITableViewDelegate, UITableViewDataSource, UIActionSheetDelegate>
 
@@ -22,10 +23,14 @@
     NSArray *recipesArray;
     NSArray *imageArray;
     IBOutlet UISearchBar *searchBar;
+    NSString *parseClassName;
+    NSString *usernameString;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    parseClassName = @"newRecipe";
     
     recipesArray = [NSArray arrayWithObjects:@"Secret IPA", @"Dry Red Wine", @"Cali Style Sourdough", @"My Choco Stout", @"Peach Wine #1", @"Yogurt Base", @"Super Lager", @"Sweet Apple Pie Mead", @"Green Tea Kombucha", @"Strawberry Blonde", @"My White Zin", @"Plum Sake", @"Earl Grey Kombucha", @"Just good ol' Ale", @"Raspberry Suprise", @"Moms Sourdough Bread", nil];
     
@@ -34,6 +39,10 @@
 //    //Set offset and hide search bar
 //    self.tableView.contentOffset = CGPointMake(0, (searchBar.frame.size.height) - self.tableView.contentOffset.y);
 //    searchBar.hidden = YES;
+}
+
+-(void)viewWillAppear:(BOOL)animated {
+    [self loadObjects];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -54,15 +63,29 @@
     
 }
 
-#pragma mark - Table view data source
+#pragma mark - PFQueryTableViewController
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    return [recipesArray count];
+//Use initWithCoder instead of initWithStyle to use my own stroyboard.
+//This was not working in project 2 because parseClassName wasn't being set properly
+- (id)initWithCoder:(NSCoder *)aCoder {
+    self = [super initWithCoder:aCoder];
+    if (self) {
+        // Customize the table
+        // The className to query on
+        self.parseClassName = @"newRecipe";
+        // The key of the PFObject to display in the label of the default cell style
+        self.textKey = @"text";
+        // Whether the built-in pull-to-refresh is enabled
+        self.pullToRefreshEnabled = YES;
+        // The title for this table in the Navigation Controller.
+        //self.title = @"My Contacts";
+    }
+    return self;
 }
 
--(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
-{
+#pragma mark - Table view data source
+
+-(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     // Remove seperator inset
     if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
         [cell setSeparatorInset:UIEdgeInsetsZero];
@@ -79,20 +102,72 @@
     }
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+//Set up cells and apply objects from Parse
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath object:(PFObject *)object {
     static NSString *cellID = @"BrowseCell";
+    //UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
+    CustomTableViewCell *browseCell = (CustomTableViewCell *) [tableView dequeueReusableCellWithIdentifier:cellID];
     
-    CustomTableViewCell *cell = (CustomTableViewCell *) [tableView dequeueReusableCellWithIdentifier:cellID];
+//    if (!cell) {
+//        cell = [[CustomTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
+//    }
     
-    cell.recipeNameLabel.text = [recipesArray objectAtIndex:indexPath.row];
-    //cell.cellImage.image = [UIImage imageNamed:@"barrels.jpg"];
-    cell.cellImage.image = [UIImage imageNamed:[imageArray objectAtIndex:indexPath.row]];
+    NSString *recipeType = [object objectForKey:@"Type"];
+    NSString *imageName;
+    if ([recipeType isEqualToString:@"Beer"]) {
+        imageName = @"beer-bottle.png";
+    } else if ([recipeType isEqualToString:@"Wine"]) {
+        imageName = @"wine-glass.png";
+    } else {
+        imageName = @"other-icon.png";
+    }
+    
+    usernameString = [object objectForKey:@"createdBy"];
+    NSString *createdByString = [NSString stringWithFormat:@"By: %@", usernameString];
+    
+    browseCell.recipeNameLabel.text = [object objectForKey:@"Name"];
+    browseCell.detailsLabel.text = createdByString;
+    //    cell.recipeNameLabel.text = [recipesArray objectAtIndex:indexPath.row];
+    //cell.cellImage.image = [UIImage imageNamed:@"glasses.jpg"];
+    browseCell.cellImage.image = [UIImage imageNamed:imageName];
     
     //Override to remove extra seperator lines after the last cell
     [self.tableView setTableFooterView:[[UIView alloc] initWithFrame:CGRectMake(0,0,0,0)]];
     
-    return cell;
+    return browseCell;
+} //cellForRowAtIndexPath close
+
+//-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+//    PFObject *object = [self objectAtIndexPath:indexPath];
+//    selectedName = [object objectForKey:@"Name"];
+//    selectedIngredients = [object objectForKey:@"Ingredients"];
+//    selectedInstructions = [object objectForKey:@"Instructions"];
+//    selectedPFObject = object;
+//}
+
+//Override query to set cache policy an change sort
+- (PFQuery *)queryForTable {
+    //Make sure parseClassName is set
+    if (!self.parseClassName) {
+        self.parseClassName = @"newRecipe";
+    }
+    PFQuery *newItemQuery = [PFQuery queryWithClassName:self.parseClassName];
+    [newItemQuery whereKey:@"createdBy" notEqualTo:[PFUser currentUser].username];
+    
+    //[newItemQuery
+    
+    //Set cache policy
+    if ([self.objects count] == 0) {
+        newItemQuery.cachePolicy = kPFCachePolicyNetworkElseCache;
+    }
+    //Set sort
+    [newItemQuery orderByDescending:@"updatedAt"];
+    return newItemQuery;
+} //queryForTable close
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    // Return the number of rows in the section.
+    return self.objects.count;
 }
 
 # pragma mark - ActionSheet (sort)
