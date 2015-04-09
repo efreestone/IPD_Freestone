@@ -31,6 +31,9 @@
     [super viewDidLoad];
     
     parseClassName = @"newRecipe";
+    //self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+    self.browseTableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+    //self.tableView.separatorColor = [UIColor lightGrayColor];
     
     recipesArray = [NSArray arrayWithObjects:@"Secret IPA", @"Dry Red Wine", @"Cali Style Sourdough", @"My Choco Stout", @"Peach Wine #1", @"Yogurt Base", @"Super Lager", @"Sweet Apple Pie Mead", @"Green Tea Kombucha", @"Strawberry Blonde", @"My White Zin", @"Plum Sake", @"Earl Grey Kombucha", @"Just good ol' Ale", @"Raspberry Suprise", @"Moms Sourdough Bread", nil];
     
@@ -60,7 +63,6 @@
         searchBar.hidden = YES;
         NSLog(@"hidden");
     }
-    
 }
 
 #pragma mark - PFQueryTableViewController
@@ -108,10 +110,6 @@
     //UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
     CustomTableViewCell *browseCell = (CustomTableViewCell *) [tableView dequeueReusableCellWithIdentifier:cellID];
     
-//    if (!cell) {
-//        cell = [[CustomTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
-//    }
-    
     NSString *recipeType = [object objectForKey:@"Type"];
     NSString *imageName;
     if ([recipeType isEqualToString:@"Beer"]) {
@@ -151,15 +149,18 @@
     if (!self.parseClassName) {
         self.parseClassName = @"newRecipe";
     }
+    //Grab objects
     PFQuery *newItemQuery = [PFQuery queryWithClassName:self.parseClassName];
+    //Exclude the current users objects
     [newItemQuery whereKey:@"createdBy" notEqualTo:[PFUser currentUser].username];
-    
-    //[newItemQuery
     
     //Set cache policy
     if ([self.objects count] == 0) {
         newItemQuery.cachePolicy = kPFCachePolicyNetworkElseCache;
     }
+    
+//    self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+    
     //Set sort
     [newItemQuery orderByDescending:@"updatedAt"];
     return newItemQuery;

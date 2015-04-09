@@ -19,5 +19,4 @@
 //Declare table view
 @property (strong, nonatomic) IBOutlet UITableView *browseTableView;
 
-
 @end

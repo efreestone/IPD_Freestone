@@ -49,6 +49,10 @@
     
     parseClassName = @"newRecipe";
     
+    //Set seperators. Not sure why but they disappeared after hooking up Parse
+    self.myTableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+    //self.tableView.separatorColor = [UIColor lightGrayColor];
+    
     recipesArray = [NSArray arrayWithObjects:@"Secret IPA", @"Dry Red Wine", @"Cali Style Sourdough", @"My Choco Stout", @"Peach Wine #1", @"Yogurt Base", @"Super Lager", @"Sweet Apple Pie Mead", @"Green Tea Kombucha", @"Strawberry Blonde", @"My White Zin", @"Plum Sake", @"Earl Grey Kombucha", @"Just good ol' Ale", @"Raspberry Suprise", @"Moms Sourdough Bread", nil];
     
     imageArray = [NSArray arrayWithObjects:@"beer-bottle.png", @"wine-glass.png", @"other-icon.png", @"beer-bottle.png", @"wine-glass.png", @"other-icon.png", @"beer-bottle.png", @"wine-glass.png", @"other-icon.png",@"beer-bottle.png", @"wine-glass.png", @"other-icon.png", @"beer-bottle.png", @"wine-glass.png", @"other-icon.png", @"beer-bottle.png", nil];
@@ -211,8 +215,10 @@
     if (!self.parseClassName) {
         self.parseClassName = @"newRecipe";
     }
+    //Grab objects
     PFQuery *newItemQuery = [PFQuery queryWithClassName:self.parseClassName];
-    //[newItemQuery ]
+    //Include only recipes for current user.
+    //This does not work correctly if using usernameString fo requalTo. Not sure why
     [newItemQuery whereKey:@"createdBy" equalTo:[PFUser currentUser].username];
 
     //Set cache policy
