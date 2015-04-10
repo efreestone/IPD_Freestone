@@ -525,6 +525,8 @@
             newRecipeObject[@"Instructions"] = recipeInstructions;
             newRecipeObject[@"createdBy"] = [PFUser currentUser].username;
             
+            //newRecipeObject[@"array"] = ingredientArray;
+            
             [newRecipeObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
                 if (succeeded) {
                     NSLog(@"New item saved.");

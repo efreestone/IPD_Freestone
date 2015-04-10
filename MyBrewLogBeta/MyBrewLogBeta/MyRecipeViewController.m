@@ -218,7 +218,7 @@
     //Grab objects
     PFQuery *newItemQuery = [PFQuery queryWithClassName:self.parseClassName];
     //Include only recipes for current user.
-    //This does not work correctly if using usernameString fo requalTo. Not sure why
+    //This does not work correctly if using usernameString for requalTo. Not sure why
     [newItemQuery whereKey:@"createdBy" equalTo:[PFUser currentUser].username];
 
     //Set cache policy
@@ -339,6 +339,7 @@
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+    
     PFObject *object = [self objectAtIndexPath:indexPath];
     selectedName = [object objectForKey:@"Name"];
     selectedType = [object objectForKey:@"Type"];
