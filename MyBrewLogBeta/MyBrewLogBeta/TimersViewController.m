@@ -19,11 +19,20 @@
 
 @implementation TimersViewController
 
-@synthesize loadedLabel;
+//@synthesize loadedLabel;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    [[self.oneView layer] setBorderColor:[[UIColor lightGrayColor] CGColor]];
+    [[self.oneView layer] setBorderWidth:0.5];
+    [[self.oneView layer] setCornerRadius:7.5];
+    
+    [[self.twoView layer] setBorderColor:[[UIColor lightGrayColor] CGColor]];
+    [[self.twoView layer] setBorderWidth:0.5];
+    [[self.twoView layer] setCornerRadius:7.5];
+    
 }
 
 - (void)didReceiveMemoryWarning {
