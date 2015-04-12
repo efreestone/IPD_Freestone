@@ -37,49 +37,44 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    //Set textviews with passed data
     nameLabel.text = passedName;
     ingredientsTV.text = passedIngredients;
     instructionsTV.text = passedInstructions;
     
+    //Set rounded corners on ing and inst textviews
+    [[ingredientsTV layer] setBorderColor:[[UIColor lightGrayColor] CGColor]];
+    [[ingredientsTV layer] setBorderWidth:0.5];
+    [[ingredientsTV layer] setCornerRadius:7.5];
+    
+    [[instructionsTV layer] setBorderColor:[[UIColor lightGrayColor] CGColor]];
+    [[instructionsTV layer] setBorderWidth:0.5];
+    [[instructionsTV layer] setCornerRadius:7.5];
+    
+    //Grab string and change to NSAttributedString
     NSMutableAttributedString * string = [[NSMutableAttributedString alloc]initWithString:passedInstructions];
-    
     NSArray *words=[self.instructionsTV.text componentsSeparatedByString:@"\n"];
-    
+    //Add url attribute to lines that start with Timer:
     for (NSString *word in words) {
         if ([word hasPrefix:@"Timer:"]) {
             NSRange range=[self.instructionsTV.text rangeOfString:word];
-            [string addAttribute:NSForegroundColorAttributeName value:[UIColor redColor] range:range];
-            
+            //Add URL attribute. This is captured later to trigger Timer code
             [string addAttribute:NSLinkAttributeName value:@"Timer://timer" range:range];
         }
     }
     [self.instructionsTV setAttributedText:string];
     
-    //NSString *testString = @"test line 1 \nline 2 \nline 3 \nline 4 \nend";
-    
     [ingredientsTV flashScrollIndicators];
     [instructionsTV flashScrollIndicators];
+    
+    //Override link color
+    instructionsTV.linkTextAttributes = @{NSForegroundColorAttributeName:[UIColor redColor]};
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-//- (void)textViewDidChange:(UITextView *)textView {
-//    NSAttributedString *attrStr = textView.attributedText;
-//    NSString * string = [attrStr string];
-//    NSRegularExpression* myRegex = NameRegularExpression();
-//    NSArray * matches = [myRegex matchesInString:string options:0 range:NSMakeRange(0, [string length])];
-//    
-//    NSMutableAttributedString *attrMutableStr = [[NSMutableAttributedString alloc] initWithString:string];
-//    
-//    for (NSTextCheckingResult* match in matches ) {
-//        [attrMutableStr addAttribute:NSForegroundColorAttributeName value:[UIColor blueColor] range:match.range];
-//    }
-//    textView.attributedText = attrMutableStr;
-//    textView.contentSize = CGSizeMake(textView.frame.size.width, textView.contentSize.height);
-//}
 
 -(void)pressBackButton {
     [self.navigationController popViewControllerAnimated:YES];
@@ -110,7 +105,7 @@
 //    //Show alert
 //    [timerAlert show];
     
-    NSString *formattedString = [NSString stringWithFormat:@"%@ \nPlease enter a discription for the timer", alertMessage];
+    NSString *formattedString = [NSString stringWithFormat:@"%@ \nPlease enter a discription for timer", alertMessage];
     
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Start Timer"
                                                     message:formattedString
@@ -126,6 +121,7 @@
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"Edit"]) {
+        //Get VC and set items for passed object
         NewRecipeViewController *newRecipeVC = segue.destinationViewController;
         newRecipeVC.passedName = passedName;
         newRecipeVC.passedType = passedType;
@@ -135,28 +131,27 @@
         newRecipeVC.passedObject = passedObject;
         
         newRecipeVC.recipeDetailsVC = self;
-        
     }
 }
 
 -(BOOL)textView:(UITextView *)textView shouldInteractWithURL:(NSURL *)URL inRange:(NSRange)characterRange {
     NSString *rangeString = [textView.text substringWithRange:characterRange];
-    NSLog(@"==%@", rangeString);
+    NSLog(@"%@", rangeString);
     
     [self showTimerAlert:rangeString];
     
-    //NSString *username = [URL host];
-    
-    //NSLog(@"%@", username);
-    
-    if ([[URL scheme] isEqualToString:@"Timer:"]) {
-        //NSString *username = [URL host];
-        
-        //NSLog(@"==%@", username);
-        // do something with this username
-        // ...
-        return NO;
-    }
+//    //NSString *username = [URL host];
+//    
+//    //NSLog(@"%@", username);
+//    
+//    if ([[URL scheme] isEqualToString:@"Timer:"]) {
+//        //NSString *username = [URL host];
+//        
+//        //NSLog(@"==%@", username);
+//        // do something with this username
+//        // ...
+//        return NO;
+//    }
     
     return NO;
 }

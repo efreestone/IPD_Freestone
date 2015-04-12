@@ -16,6 +16,7 @@
 @interface BrowseDetailsViewController () {
     NSArray *recipesArray;
     NSArray *listItems;
+    NSString *usernameString;
 }
 
 @end
@@ -23,11 +24,29 @@
 @implementation BrowseDetailsViewController
 
 //Synthesize for getters/setters
-@synthesize ingredientsTV, instructionsTV;
+@synthesize nameLabel, usernameLabel, ingredientsTV, instructionsTV;
+@synthesize passedObject, passedName, passedType, passedIngredients, passedInstructions, passedObjectID;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    //Set textviews with passed data
+    nameLabel.text = passedName;
+    ingredientsTV.text = passedIngredients;
+    instructionsTV.text = passedInstructions;
+    
+    //Set rounded corners on ing and inst textviews
+    [[ingredientsTV layer] setBorderColor:[[UIColor lightGrayColor] CGColor]];
+    [[ingredientsTV layer] setBorderWidth:0.5];
+    [[ingredientsTV layer] setCornerRadius:7.5];
+    
+    [[instructionsTV layer] setBorderColor:[[UIColor lightGrayColor] CGColor]];
+    [[instructionsTV layer] setBorderWidth:0.5];
+    [[instructionsTV layer] setCornerRadius:7.5];
+    
+    usernameString = [passedObject objectForKey:@"createdBy"];
+    usernameLabel.text = [NSString stringWithFormat:@"By: %@", usernameString];
     
     NSString *testString = @"ingredient 1 \nTimer: ingredient 2 \ningredient 3 \ningredient 4 \ningredient 5 \ningredient 6 \ningredient 7 \ningredient 8 \ningredient 9 \ningredient 10";
     
@@ -37,7 +56,7 @@
     
     recipesArray = [NSArray arrayWithObjects:@"Secret IPA", @"Timer: Dry Red Wine", @"Cali Style Sourdough", @"My Choco Stout", @"Peach Wine #1", @"Yogurt Base", @"Super Lager", @"Sweet Apple Pie Mead", @"Green Tea Kombucha", @"Strawberry Blonde", @"My White Zin", @"Plum Sake", @"Timer: Earl Grey Kombucha", @"Just good ol' Ale", @"Raspberry Suprise", @"Moms Sourdough Bread this is a longer string with more text blah blah blah blah", nil];
     
-    ingredientsTV.text = testString;
+    //ingredientsTV.text = testString;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -127,6 +146,20 @@
 //    }
 //}
 
+-(IBAction)favoriteSelected:(id)sender {
+    PFQuery *editQuery = [PFQuery queryWithClassName:@"newRecipe"];
+    [editQuery getObjectInBackgroundWithId:passedObjectID block:^(PFObject *favObject, NSError *error) {
+        [favObject addUniqueObject:[PFUser currentUser].objectId forKey:@"favorites"];
+        [favObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+            if (!error) {
+                NSLog(@"Favorited Success");
+            } else {
+                NSLog(@"Favorited ERROR");
+            }
+        }];
+    
+    }];
+}
 
 
 @end

@@ -49,6 +49,8 @@
             <string>Calibri</string>
             <string>Calibri</string>
             <string>Calibri</string>
+            <string>Calibri</string>
+            <string>Calibri</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -234,7 +236,7 @@
                                     <outlet property="cellImage" destination="MaR-Fh-sbs" id="7Z4-Gu-RlG"/>
                                     <outlet property="detailsLabel" destination="bGk-Ej-U5b" id="sPg-Mn-Rix"/>
                                     <outlet property="recipeNameLabel" destination="YKN-UQ-hXC" id="K7K-fz-dF8"/>
-                                    <segue destination="WBM-d3-r6Z" kind="show" id="egA-hy-KBP"/>
+                                    <segue destination="WBM-d3-r6Z" kind="show" identifier="BrowseDetail" id="egA-hy-KBP"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -596,7 +598,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bta-xa-ox0">
-                                <rect key="frame" x="10" y="133" width="580" height="150"/>
+                                <rect key="frame" x="10" y="128" width="580" height="150"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="150" id="0l0-vw-Qu8"/>
@@ -605,13 +607,13 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Instructions" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pir-jH-SAc">
-                                <rect key="frame" x="259" y="288" width="82" height="21"/>
+                                <rect key="frame" x="259" y="283" width="82" height="21"/>
                                 <fontDescription key="fontDescription" name="Calibri" family="Calibri" pointSize="17"/>
                                 <color key="textColor" red="0.71764707569999997" green="0.11372549830000001" blue="0.1647058874" alpha="1" colorSpace="deviceRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bGQ-sj-RTv">
-                                <rect key="frame" x="10" y="314" width="580" height="193"/>
+                                <rect key="frame" x="10" y="304" width="580" height="212"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -621,7 +623,10 @@
                                 </connections>
                             </textView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ezz-Wg-dFQ">
-                                <rect key="frame" x="266" y="507" width="69" height="49"/>
+                                <rect key="frame" x="266" y="516" width="69" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="WF1-8r-1T9"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="Calibri" family="Calibri" pointSize="30"/>
                                 <state key="normal" title="Share">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -630,6 +635,19 @@
                                     <action selector="shareClicked:" destination="Txs-R8-Y1A" eventType="touchUpInside" id="zat-hD-OE5"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XHW-9w-G0E">
+                                <rect key="frame" x="9" y="98" width="49" height="35"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="35" id="bbh-Dk-4b9"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Calibri" family="Calibri" pointSize="24"/>
+                                <state key="normal" title="Log">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FY5-zg-KbE">
+                                <rect key="frame" x="10" y="520" width="51" height="31"/>
+                            </switch>
                         </subviews>
                         <color key="backgroundColor" red="0.9490196704864502" green="0.92156869173049927" blue="0.90196084976196289" alpha="1" colorSpace="deviceRGB"/>
                         <constraints>
@@ -639,14 +657,16 @@
                             <constraint firstItem="ezz-Wg-dFQ" firstAttribute="top" secondItem="bGQ-sj-RTv" secondAttribute="bottom" id="6WH-a9-ctg"/>
                             <constraint firstItem="Pir-jH-SAc" firstAttribute="top" secondItem="Bta-xa-ox0" secondAttribute="bottom" constant="5" id="EwK-lG-g4y"/>
                             <constraint firstItem="bGQ-sj-RTv" firstAttribute="leading" secondItem="qtt-gT-aeQ" secondAttribute="leading" constant="10" id="H0S-RA-PAd"/>
+                            <constraint firstItem="ezz-Wg-dFQ" firstAttribute="centerY" secondItem="FY5-zg-KbE" secondAttribute="centerY" constant="0.5" id="QUK-db-Exn"/>
                             <constraint firstItem="877-Le-ptP" firstAttribute="top" secondItem="ezz-Wg-dFQ" secondAttribute="bottom" id="Xhc-TJ-WOu"/>
                             <constraint firstAttribute="centerX" secondItem="iBz-OL-mqZ" secondAttribute="centerX" id="YV8-ZI-Cfb"/>
                             <constraint firstAttribute="centerX" secondItem="bGQ-sj-RTv" secondAttribute="centerX" id="Yit-Oa-qCa"/>
                             <constraint firstAttribute="centerX" secondItem="Pir-jH-SAc" secondAttribute="centerX" id="ZXb-cq-paa"/>
                             <constraint firstAttribute="trailing" secondItem="Bta-xa-ox0" secondAttribute="trailing" constant="10" id="ad4-ls-dNB"/>
-                            <constraint firstItem="Bta-xa-ox0" firstAttribute="top" secondItem="z40-nB-vq1" secondAttribute="bottom" constant="5" id="cEm-xe-mbB"/>
-                            <constraint firstItem="bGQ-sj-RTv" firstAttribute="top" secondItem="Pir-jH-SAc" secondAttribute="bottom" constant="5" id="cxE-W1-Xcv"/>
+                            <constraint firstItem="Bta-xa-ox0" firstAttribute="top" secondItem="z40-nB-vq1" secondAttribute="bottom" id="cEm-xe-mbB"/>
+                            <constraint firstItem="bGQ-sj-RTv" firstAttribute="top" secondItem="Pir-jH-SAc" secondAttribute="bottom" id="cxE-W1-Xcv"/>
                             <constraint firstAttribute="centerX" secondItem="ezz-Wg-dFQ" secondAttribute="centerX" id="eCz-vl-gxK"/>
+                            <constraint firstItem="FY5-zg-KbE" firstAttribute="leading" secondItem="qtt-gT-aeQ" secondAttribute="leading" constant="10" id="grE-hv-X0n"/>
                             <constraint firstItem="z40-nB-vq1" firstAttribute="top" secondItem="iBz-OL-mqZ" secondAttribute="bottom" id="pef-qP-SLk"/>
                             <constraint firstAttribute="centerX" secondItem="z40-nB-vq1" secondAttribute="centerX" id="u6R-Op-XGO"/>
                         </constraints>
@@ -709,15 +729,16 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IhE-0a-e9G">
-                                <rect key="frame" x="10" y="338" width="580" height="169"/>
+                                <rect key="frame" x="10" y="338" width="580" height="178"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <fontDescription key="fontDescription" name="Calibri" family="Calibri" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="spo-NX-UiB">
-                                <rect key="frame" x="150" y="507" width="100" height="49"/>
+                                <rect key="frame" x="150" y="516" width="100" height="40"/>
                                 <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="Wj5-Fk-t4X"/>
                                     <constraint firstAttribute="width" constant="100" id="tx5-RO-07n"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Calibri" family="Calibri" pointSize="30"/>
@@ -729,9 +750,10 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="coD-ip-PBe">
-                                <rect key="frame" x="350" y="507" width="100" height="49"/>
+                                <rect key="frame" x="350" y="516" width="100" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="Msk-wf-NiO"/>
+                                    <constraint firstAttribute="height" constant="40" id="rpq-b5-g34"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Calibri" family="Calibri" pointSize="30"/>
                                 <state key="normal" title="Favorite">
@@ -739,6 +761,7 @@
                                 </state>
                                 <connections>
                                     <action selector="favoriteClicked:" destination="WBM-d3-r6Z" eventType="touchUpInside" id="oT9-yK-5Ia"/>
+                                    <action selector="favoriteSelected:" destination="WBM-d3-r6Z" eventType="touchUpInside" id="nKJ-To-pM4"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="by Username" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e0U-56-K5Q">
@@ -773,7 +796,7 @@
                         </constraints>
                     </view>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="Details" id="1IX-A4-0G6">
+                    <navigationItem key="navigationItem" title="Browse Details" id="1IX-A4-0G6">
                         <barButtonItem key="rightBarButtonItem" title="Copy" id="kpU-J7-O6o">
                             <connections>
                                 <action selector="recipeCopied:" destination="WBM-d3-r6Z" id="YOY-Or-9Gv"/>
@@ -785,7 +808,9 @@
                         <outlet property="favoriteButton" destination="coD-ip-PBe" id="Mig-A1-58w"/>
                         <outlet property="ingredientsTV" destination="Y1p-Sp-l4E" id="xRq-Wm-eJr"/>
                         <outlet property="instructionsTV" destination="IhE-0a-e9G" id="z7p-30-w7Q"/>
+                        <outlet property="nameLabel" destination="7ns-P9-Zti" id="NTN-sP-rkf"/>
                         <outlet property="shareButton" destination="spo-NX-UiB" id="lJN-B0-Zmx"/>
+                        <outlet property="usernameLabel" destination="e0U-56-K5Q" id="oqP-th-lLV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="b7D-Pn-I3z" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -863,7 +888,7 @@
                         <sections>
                             <tableViewSection id="bI8-vu-Uo0">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="jFb-2p-tR5" userLabel="Auto Sync Cell">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="44" id="jFb-2p-tR5" userLabel="Auto Sync Cell">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="jFb-2p-tR5" id="Ccy-4a-edz">
                                             <autoresizingMask key="autoresizingMask"/>
@@ -887,7 +912,7 @@
                                         </tableViewCellContentView>
                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="l1B-QY-Llq" userLabel="Edit Cell">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="44" id="l1B-QY-Llq" userLabel="Edit Cell">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="l1B-QY-Llq" id="0mW-Rc-a0p">
                                             <autoresizingMask key="autoresizingMask"/>
@@ -911,7 +936,7 @@
                                         </tableViewCellContentView>
                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="69s-co-3Vq" userLabel="Public Cell">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="44" id="69s-co-3Vq" userLabel="Public Cell">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="69s-co-3Vq" id="Rd7-at-X2S">
                                             <autoresizingMask key="autoresizingMask"/>

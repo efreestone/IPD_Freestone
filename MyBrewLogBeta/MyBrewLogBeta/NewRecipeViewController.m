@@ -489,6 +489,8 @@
     //recipeNotes = notesTF.text;
     recipeIngredients = ingredientsTV.text;
     recipeInstructions = instructionsTV.text;
+    //Grab current date. Used for updatedByUser in either case (edit or new recipe)
+    NSDate *updated = [NSDate date];
     
     if (recipeName.length > 0 && recipeInstructions.length > 0) {
         //If objectID is not nil, object is being edited so query and update
@@ -499,6 +501,7 @@
                 editObject[@"Name"] = recipeName;
                 editObject[@"Ingredients"] = recipeIngredients;
                 editObject[@"Instructions"] = recipeInstructions;
+                editObject[@"updatedByUser"] = updated;
                 [editObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
                     if (succeeded) {
                         NSLog(@"Edited item saved.");
@@ -524,6 +527,7 @@
             newRecipeObject[@"Ingredients"] = recipeIngredients;
             newRecipeObject[@"Instructions"] = recipeInstructions;
             newRecipeObject[@"createdBy"] = [PFUser currentUser].username;
+            newRecipeObject[@"updatedByUser"] = updated;
             
             //newRecipeObject[@"array"] = ingredientArray;
             
@@ -541,9 +545,7 @@
             }];
             
         }
-        
-        
-        
+    //Name missing
     } else {
         NSLog(@"Name required");
         NSString *alertString = @"A Recipe Name and some Instructions are required to save. Please add them and try again.";

@@ -24,6 +24,15 @@
 
 @end
 
+//Create sort enum
+typedef enum {
+    SortActive,
+    SortName,
+    SortType,
+    SortNewest,
+    SortOldest
+}sortEnum;
+
 @implementation MyRecipeViewController {
     NSArray *recipesArray;
     NSArray *imageArray;
@@ -37,15 +46,18 @@
     NSString *selectedObjectID;
     PFObject *selectedPFObject;
     NSString *usernameString;
+    sortEnum toSort;
+    
+    PFQuery *newItemQuery;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     //Set default ACL to be read/write of current user only
-    PFACL *defaultACL = [PFACL ACL];
-    [defaultACL setPublicReadAccess:YES];
-    [PFACL setDefaultACL:defaultACL withAccessForCurrentUser:YES];
+//    PFACL *defaultACL = [PFACL ACL];
+//    [defaultACL setPublicReadAccess:YES];
+//    [PFACL setDefaultACL:defaultACL withAccessForCurrentUser:YES];
     
     parseClassName = @"newRecipe";
     
@@ -216,19 +228,48 @@
         self.parseClassName = @"newRecipe";
     }
     //Grab objects
-    PFQuery *newItemQuery = [PFQuery queryWithClassName:self.parseClassName];
+    newItemQuery = [PFQuery queryWithClassName:self.parseClassName];
     //Include only recipes for current user.
-    //This does not work correctly if using usernameString for requalTo. Not sure why
+    //This does not work correctly if using usernameString for equalTo. Not sure why
     [newItemQuery whereKey:@"createdBy" equalTo:[PFUser currentUser].username];
 
     //Set cache policy
     if ([self.objects count] == 0) {
         newItemQuery.cachePolicy = kPFCachePolicyNetworkElseCache;
     }
+
     //Set sort
-    [newItemQuery orderByDescending:@"updatedAt"];
+    switch (toSort) {
+        case 0: //Active
+            
+            break;
+        case 1: //Name
+            [newItemQuery orderByAscending:@"Name"];
+            break;
+        case 2: //Type
+            [newItemQuery orderByAscending:@"Type"];
+            break;
+        case 3: //Newest
+            [newItemQuery orderByDescending:@"updatedByUser"];
+            //[self refreshTable];
+            break;
+        case 4://Oldest
+            [newItemQuery orderByAscending:@"updatedByUser"];
+            //[self refreshTable];
+            break;
+        default:
+            //[newItemQuery orderByDescending:@"updatedByUser"];
+            break;
+    }
+    
+    //[newItemQuery orderByDescending:@"updatedByUser"];
     return newItemQuery;
 } //queryForTable close
+
+-(void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex {
+    toSort = (int) buttonIndex;
+    [self refreshTable];
+}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.

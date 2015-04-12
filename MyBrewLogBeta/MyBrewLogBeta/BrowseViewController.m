@@ -13,6 +13,7 @@
 
 #import "BrowseViewController.h"
 #import "CustomTableViewCell.h"
+#import "BrowseDetailsViewController.h"
 #import <Parse/Parse.h>
 
 @interface BrowseViewController () <UITableViewDelegate, UITableViewDataSource, UIActionSheetDelegate>
@@ -25,6 +26,14 @@
     IBOutlet UISearchBar *searchBar;
     NSString *parseClassName;
     NSString *usernameString;
+    
+    NSString *selectedName;
+    NSString *selectedIngredients;
+    NSString *selectedInstructions;
+    NSString *selectedType;
+    NSString *selectedObjectID;
+    PFObject *selectedPFObject;
+    //NSString *usernameString;
 }
 
 - (void)viewDidLoad {
@@ -162,7 +171,7 @@
 //    self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     
     //Set sort
-    [newItemQuery orderByDescending:@"updatedAt"];
+    [newItemQuery orderByDescending:@"updatedByUser"];
     return newItemQuery;
 } //queryForTable close
 
@@ -218,14 +227,36 @@
 }
 */
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+    
+    PFObject *object = [self objectAtIndexPath:indexPath];
+    selectedName = [object objectForKey:@"Name"];
+    selectedType = [object objectForKey:@"Type"];
+    selectedIngredients = [object objectForKey:@"Ingredients"];
+    selectedInstructions = [object objectForKey:@"Instructions"];
+    selectedObjectID = [NSString stringWithFormat:@"%@", object.objectId];
+    selectedPFObject = object;
+    
+    //Verify identifier of push segue to Details view
+    if ([segue.identifier isEqualToString:@"BrowseDetail"]) {
+        //Grab destination view controller
+        BrowseDetailsViewController *detailsViewController = segue.destinationViewController;
+        //Pass details over to be displayed
+        if (detailsViewController != nil) {
+            detailsViewController.passedName = selectedName;
+            detailsViewController.passedType = selectedType;
+            detailsViewController.passedIngredients = selectedIngredients;
+            detailsViewController.passedInstructions = selectedInstructions;
+            detailsViewController.passedObjectID = selectedObjectID;
+            detailsViewController.passedObject = selectedPFObject;
+        }
+    }
 }
-*/
+
 
 @end
