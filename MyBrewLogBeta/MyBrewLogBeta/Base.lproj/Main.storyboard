@@ -51,6 +51,7 @@
             <string>Calibri</string>
             <string>Calibri</string>
             <string>Calibri</string>
+            <string>Calibri</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -73,7 +74,6 @@
                                 </constraints>
                                 <items>
                                     <navigationItem title="Timers" id="uF7-mC-UO3">
-                                        <barButtonItem key="leftBarButtonItem" title="Sort" id="QfE-wW-1jt"/>
                                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="h7f-s2-fmY">
                                             <connections>
                                                 <segue destination="8Wm-S4-3lb" kind="presentation" id="e6B-dv-0B3"/>
@@ -83,20 +83,23 @@
                                 </items>
                             </navigationBar>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M13-jt-K4o">
-                                <rect key="frame" x="223" y="64" width="155" height="50"/>
+                                <rect key="frame" x="228" y="64" width="145" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="TlL-fA-LuK"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="Calibri" family="Calibri" pointSize="30"/>
+                                <fontDescription key="fontDescription" name="Calibri" family="Calibri" pointSize="28"/>
                                 <state key="normal" title="+ New Timer">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="startTimer:" destination="fGG-OC-mvn" eventType="touchUpInside" id="LOn-IU-Zwd"/>
+                                </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8lg-z9-8tw">
-                                <rect key="frame" x="163" y="109" width="275" height="175"/>
+                                <rect key="frame" x="163" y="109" width="275" height="170"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="29:35 left" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KmW-zG-c4p">
-                                        <rect key="frame" x="3" y="57" width="270" height="62"/>
+                                        <rect key="frame" x="3" y="54" width="270" height="62"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="270" id="Fhb-61-O98"/>
                                         </constraints>
@@ -105,31 +108,34 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yhc-Iy-aEx">
-                                        <rect key="frame" x="20" y="116" width="85" height="49"/>
+                                        <rect key="frame" x="20" y="113" width="85" height="47"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="85" id="IQc-zv-IwJ"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" name="Calibri" family="Calibri" pointSize="30"/>
+                                        <fontDescription key="fontDescription" name="Calibri" family="Calibri" pointSize="28"/>
                                         <state key="normal" title="Pause">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="pauseClicked:" destination="fGG-OC-mvn" eventType="touchUpInside" id="WAR-7J-wB9"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sb2-LE-Exk">
-                                        <rect key="frame" x="170" y="116" width="85" height="49"/>
+                                        <rect key="frame" x="170" y="113" width="85" height="47"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="85" id="DJF-IZ-1gO"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" name="Calibri" family="Calibri" pointSize="30"/>
+                                        <fontDescription key="fontDescription" name="Calibri" family="Calibri" pointSize="28"/>
                                         <state key="normal" title="Cancel">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Timer #1 for Step in Recipe Name" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ff8-JZ-hKf">
-                                        <rect key="frame" x="38" y="5" width="200" height="54"/>
+                                        <rect key="frame" x="38" y="5" width="200" height="49"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="200" id="Oec-Af-hrA"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" name="Calibri" family="Calibri" pointSize="22"/>
+                                        <fontDescription key="fontDescription" name="Calibri" family="Calibri" pointSize="20"/>
                                         <color key="textColor" red="0.12549020349979401" green="0.12549020349979401" blue="0.12549020349979401" alpha="1" colorSpace="deviceRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -139,50 +145,51 @@
                                     <constraint firstItem="Yhc-Iy-aEx" firstAttribute="leading" secondItem="8lg-z9-8tw" secondAttribute="leading" constant="20" id="HJK-3c-aNj"/>
                                     <constraint firstAttribute="centerY" secondItem="KmW-zG-c4p" secondAttribute="centerY" id="JMY-5R-zNX"/>
                                     <constraint firstAttribute="bottom" secondItem="sb2-LE-Exk" secondAttribute="bottom" constant="10" id="Klx-gN-mEF"/>
-                                    <constraint firstAttribute="height" constant="175" id="Meq-Cp-5xL"/>
+                                    <constraint firstAttribute="height" constant="170" id="Meq-Cp-5xL"/>
                                     <constraint firstAttribute="bottom" secondItem="Yhc-Iy-aEx" secondAttribute="bottom" constant="10" id="Pc7-Bd-Kf5"/>
                                     <constraint firstItem="ff8-JZ-hKf" firstAttribute="top" secondItem="8lg-z9-8tw" secondAttribute="top" constant="5" id="VfP-MF-eOn"/>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="175" id="cvd-sQ-Kpt"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="170" id="cvd-sQ-Kpt"/>
                                     <constraint firstAttribute="centerX" secondItem="ff8-JZ-hKf" secondAttribute="centerX" id="iMg-ST-IAv"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="275" id="lwZ-8K-8cW"/>
                                     <constraint firstAttribute="width" constant="275" id="qfh-jp-0Xc"/>
                                     <constraint firstAttribute="trailing" secondItem="sb2-LE-Exk" secondAttribute="trailing" constant="20" id="sKI-A9-kYe"/>
                                     <constraint firstAttribute="centerX" secondItem="KmW-zG-c4p" secondAttribute="centerX" id="voC-OV-WEZ"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fXS-Hg-RwE">
-                                <rect key="frame" x="163" y="294" width="275" height="175"/>
+                                <rect key="frame" x="163" y="289" width="275" height="170"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ibb-UL-pe1">
-                                        <rect key="frame" x="170" y="116" width="85" height="49"/>
+                                        <rect key="frame" x="170" y="113" width="85" height="47"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="85" id="Qeb-ot-LCZ"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" name="Calibri" family="Calibri" pointSize="30"/>
+                                        <fontDescription key="fontDescription" name="Calibri" family="Calibri" pointSize="28"/>
                                         <state key="normal" title="Cancel">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="axq-6C-h72">
-                                        <rect key="frame" x="20" y="116" width="85" height="49"/>
+                                        <rect key="frame" x="20" y="113" width="85" height="47"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="85" id="xGS-8I-mpj"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" name="Calibri" family="Calibri" pointSize="30"/>
+                                        <fontDescription key="fontDescription" name="Calibri" family="Calibri" pointSize="28"/>
                                         <state key="normal" title="Pause">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Timer #2 for Step in Recipe Name" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aVx-gR-fmV">
-                                        <rect key="frame" x="37" y="5" width="200" height="54"/>
+                                        <rect key="frame" x="37" y="5" width="200" height="49"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="200" id="x4t-o0-ekA"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" name="Calibri" family="Calibri" pointSize="22"/>
+                                        <fontDescription key="fontDescription" name="Calibri" family="Calibri" pointSize="20"/>
                                         <color key="textColor" red="0.12549020350000001" green="0.12549020350000001" blue="0.12549020350000001" alpha="1" colorSpace="deviceRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1:10:17 left" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a7I-DG-gM0">
-                                        <rect key="frame" x="0.0" y="57" width="275" height="62"/>
+                                        <rect key="frame" x="0.0" y="54" width="275" height="62"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="275" id="QGl-m9-QJk"/>
                                         </constraints>
@@ -196,7 +203,9 @@
                                     <constraint firstItem="axq-6C-h72" firstAttribute="leading" secondItem="fXS-Hg-RwE" secondAttribute="leading" constant="20" id="3gW-Dw-7HL"/>
                                     <constraint firstAttribute="width" constant="275" id="97B-8j-WF9"/>
                                     <constraint firstAttribute="bottom" secondItem="axq-6C-h72" secondAttribute="bottom" constant="10" id="DFw-aS-qSJ"/>
-                                    <constraint firstAttribute="height" constant="175" id="PLt-cC-FLQ"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="275" id="DKu-6T-XiU"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="170" id="HUU-yv-vQP"/>
+                                    <constraint firstAttribute="height" constant="170" id="PLt-cC-FLQ"/>
                                     <constraint firstAttribute="centerY" secondItem="a7I-DG-gM0" secondAttribute="centerY" id="Rfu-E4-hxz"/>
                                     <constraint firstAttribute="bottom" secondItem="ibb-UL-pe1" secondAttribute="bottom" constant="10" id="ZDF-vC-NLw"/>
                                     <constraint firstAttribute="centerX" secondItem="a7I-DG-gM0" secondAttribute="centerX" id="bRQ-Bd-ppE"/>
@@ -221,6 +230,7 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Timer" image="timer-tab.png" id="vnW-FC-FXO"/>
                     <connections>
+                        <outlet property="addNewTimerButton" destination="M13-jt-K4o" id="41r-UR-lSq"/>
                         <outlet property="oneCancelButton" destination="sb2-LE-Exk" id="yQi-OT-pZi"/>
                         <outlet property="oneDescriptionLabel" destination="ff8-JZ-hKf" id="KjF-xG-yso"/>
                         <outlet property="onePauseButton" destination="Yhc-Iy-aEx" id="HDH-dj-z5G"/>
@@ -646,19 +656,19 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recipe Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iBz-OL-mqZ">
-                                <rect key="frame" x="206" y="64" width="188" height="43"/>
-                                <fontDescription key="fontDescription" name="Calibri" family="Calibri" pointSize="35"/>
+                                <rect key="frame" x="220" y="64" width="161" height="37"/>
+                                <fontDescription key="fontDescription" name="Calibri" family="Calibri" pointSize="30"/>
                                 <color key="textColor" red="0.12549020349979401" green="0.12549020349979401" blue="0.12549020349979401" alpha="1" colorSpace="deviceRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ingredients" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z40-nB-vq1">
-                                <rect key="frame" x="261" y="107" width="78" height="21"/>
+                                <rect key="frame" x="261" y="101" width="78" height="21"/>
                                 <fontDescription key="fontDescription" name="Calibri" family="Calibri" pointSize="17"/>
                                 <color key="textColor" red="0.71764707565307617" green="0.11372549831867218" blue="0.16470588743686676" alpha="1" colorSpace="deviceRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bta-xa-ox0">
-                                <rect key="frame" x="10" y="128" width="580" height="150"/>
+                                <rect key="frame" x="10" y="122" width="580" height="150"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="150" id="0l0-vw-Qu8"/>
@@ -667,13 +677,13 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Instructions" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pir-jH-SAc">
-                                <rect key="frame" x="259" y="283" width="82" height="21"/>
+                                <rect key="frame" x="259" y="277" width="82" height="21"/>
                                 <fontDescription key="fontDescription" name="Calibri" family="Calibri" pointSize="17"/>
                                 <color key="textColor" red="0.71764707569999997" green="0.11372549830000001" blue="0.1647058874" alpha="1" colorSpace="deviceRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bGQ-sj-RTv">
-                                <rect key="frame" x="10" y="304" width="580" height="212"/>
+                                <rect key="frame" x="10" y="298" width="580" height="217"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -682,55 +692,66 @@
                                     <outlet property="delegate" destination="Txs-R8-Y1A" id="8sM-Lh-QZL"/>
                                 </connections>
                             </textView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ezz-Wg-dFQ">
-                                <rect key="frame" x="266" y="516" width="69" height="40"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="WF1-8r-1T9"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="Calibri" family="Calibri" pointSize="30"/>
-                                <state key="normal" title="Share">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="shareClicked:" destination="Txs-R8-Y1A" eventType="touchUpInside" id="zat-hD-OE5"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XHW-9w-G0E">
-                                <rect key="frame" x="10" y="98" width="35" height="35"/>
+                                <rect key="frame" x="10" y="77" width="40" height="35"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="bbh-Dk-4b9"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="Calibri" family="Calibri" pointSize="24"/>
+                                <fontDescription key="fontDescription" name="Calibri" family="Calibri" pointSize="28"/>
                                 <state key="normal" title="Log">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FY5-zg-KbE">
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5Nf-S1-fWJ">
                                 <rect key="frame" x="10" y="520" width="51" height="31"/>
+                                <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             </switch>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Public" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SR9-er-7XB">
+                                <rect key="frame" x="64" y="525" width="42" height="21"/>
+                                <fontDescription key="fontDescription" name="Calibri" family="Calibri" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sii-2v-0a7">
+                                <rect key="frame" x="541" y="520" width="51" height="31"/>
+                                <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            </switch>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Active" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lKx-7O-WzX">
+                                <rect key="frame" x="493" y="527" width="43" height="21"/>
+                                <fontDescription key="fontDescription" name="Calibri" family="Calibri" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.9490196704864502" green="0.92156869173049927" blue="0.90196084976196289" alpha="1" colorSpace="deviceRGB"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="bGQ-sj-RTv" secondAttribute="trailing" constant="10" id="1Uv-u4-ubV"/>
                             <constraint firstItem="Bta-xa-ox0" firstAttribute="leading" secondItem="qtt-gT-aeQ" secondAttribute="leading" constant="10" id="2hv-FH-k3A"/>
                             <constraint firstItem="iBz-OL-mqZ" firstAttribute="top" secondItem="ENt-Kz-aJt" secondAttribute="bottom" id="2rL-Bw-bA5"/>
-                            <constraint firstItem="ezz-Wg-dFQ" firstAttribute="top" secondItem="bGQ-sj-RTv" secondAttribute="bottom" id="6WH-a9-ctg"/>
-                            <constraint firstItem="Bta-xa-ox0" firstAttribute="top" secondItem="XHW-9w-G0E" secondAttribute="bottom" constant="-5" id="8ba-JR-yR7"/>
+                            <constraint firstItem="Bta-xa-ox0" firstAttribute="top" secondItem="XHW-9w-G0E" secondAttribute="bottom" constant="10" id="8ba-JR-yR7"/>
+                            <constraint firstItem="sii-2v-0a7" firstAttribute="leading" secondItem="lKx-7O-WzX" secondAttribute="trailing" constant="5" id="Dhq-Gu-LR5"/>
                             <constraint firstItem="Pir-jH-SAc" firstAttribute="top" secondItem="Bta-xa-ox0" secondAttribute="bottom" constant="5" id="EwK-lG-g4y"/>
                             <constraint firstItem="bGQ-sj-RTv" firstAttribute="leading" secondItem="qtt-gT-aeQ" secondAttribute="leading" constant="10" id="H0S-RA-PAd"/>
-                            <constraint firstItem="ezz-Wg-dFQ" firstAttribute="centerY" secondItem="FY5-zg-KbE" secondAttribute="centerY" constant="0.5" id="QUK-db-Exn"/>
-                            <constraint firstItem="877-Le-ptP" firstAttribute="top" secondItem="ezz-Wg-dFQ" secondAttribute="bottom" id="Xhc-TJ-WOu"/>
+                            <constraint firstItem="877-Le-ptP" firstAttribute="top" secondItem="sii-2v-0a7" secondAttribute="bottom" constant="5" id="OFv-Gk-2Tt"/>
+                            <constraint firstItem="877-Le-ptP" firstAttribute="top" secondItem="5Nf-S1-fWJ" secondAttribute="bottom" constant="5" id="PME-eR-VXp"/>
+                            <constraint firstItem="sii-2v-0a7" firstAttribute="centerY" secondItem="5Nf-S1-fWJ" secondAttribute="centerY" id="Xbx-wA-Zzi"/>
                             <constraint firstAttribute="centerX" secondItem="iBz-OL-mqZ" secondAttribute="centerX" id="YV8-ZI-Cfb"/>
                             <constraint firstAttribute="centerX" secondItem="bGQ-sj-RTv" secondAttribute="centerX" id="Yit-Oa-qCa"/>
                             <constraint firstAttribute="centerX" secondItem="Pir-jH-SAc" secondAttribute="centerX" id="ZXb-cq-paa"/>
+                            <constraint firstItem="sii-2v-0a7" firstAttribute="top" secondItem="bGQ-sj-RTv" secondAttribute="bottom" constant="5" id="aZQ-VI-sGq"/>
                             <constraint firstAttribute="trailing" secondItem="Bta-xa-ox0" secondAttribute="trailing" constant="10" id="ad4-ls-dNB"/>
                             <constraint firstItem="Bta-xa-ox0" firstAttribute="top" secondItem="z40-nB-vq1" secondAttribute="bottom" id="cEm-xe-mbB"/>
                             <constraint firstItem="XHW-9w-G0E" firstAttribute="leading" secondItem="qtt-gT-aeQ" secondAttribute="leading" constant="10" id="ce4-Pb-Gle"/>
                             <constraint firstItem="bGQ-sj-RTv" firstAttribute="top" secondItem="Pir-jH-SAc" secondAttribute="bottom" id="cxE-W1-Xcv"/>
-                            <constraint firstAttribute="centerX" secondItem="ezz-Wg-dFQ" secondAttribute="centerX" id="eCz-vl-gxK"/>
-                            <constraint firstItem="FY5-zg-KbE" firstAttribute="leading" secondItem="qtt-gT-aeQ" secondAttribute="leading" constant="10" id="grE-hv-X0n"/>
+                            <constraint firstItem="sii-2v-0a7" firstAttribute="centerY" secondItem="lKx-7O-WzX" secondAttribute="centerY" constant="-2" id="dfd-RV-2M9"/>
+                            <constraint firstAttribute="trailing" secondItem="sii-2v-0a7" secondAttribute="trailing" constant="10" id="gdg-L8-b6y"/>
+                            <constraint firstItem="lKx-7O-WzX" firstAttribute="centerY" secondItem="SR9-er-7XB" secondAttribute="centerY" constant="2" id="jg3-KI-pEv"/>
+                            <constraint firstItem="SR9-er-7XB" firstAttribute="leading" secondItem="5Nf-S1-fWJ" secondAttribute="trailing" constant="5" id="jjW-Jt-g8N"/>
                             <constraint firstItem="z40-nB-vq1" firstAttribute="top" secondItem="iBz-OL-mqZ" secondAttribute="bottom" id="pef-qP-SLk"/>
+                            <constraint firstItem="5Nf-S1-fWJ" firstAttribute="centerY" secondItem="SR9-er-7XB" secondAttribute="centerY" id="qLT-dx-WJz"/>
+                            <constraint firstItem="5Nf-S1-fWJ" firstAttribute="leading" secondItem="qtt-gT-aeQ" secondAttribute="leading" constant="10" id="sBM-sn-b4y"/>
                             <constraint firstAttribute="centerX" secondItem="z40-nB-vq1" secondAttribute="centerX" id="u6R-Op-XGO"/>
+                            <constraint firstItem="5Nf-S1-fWJ" firstAttribute="top" secondItem="bGQ-sj-RTv" secondAttribute="bottom" constant="5" id="uOP-rt-NtO"/>
                         </constraints>
                     </view>
                     <toolbarItems/>
@@ -749,7 +770,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YeR-Yw-5GD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2056" y="-951"/>
+            <point key="canvasLocation" x="2056" y="-954"/>
         </scene>
         <!--Browse Details-->
         <scene sceneID="cWd-1m-pFm">
@@ -956,19 +977,20 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Nfp-4l-srd">
-                                                    <rect key="frame" x="501" y="6" width="51" height="31"/>
+                                                    <rect key="frame" x="506" y="6" width="51" height="31"/>
+                                                    <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                 </switch>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Auto Sync" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X5T-Rv-DtF">
-                                                    <rect key="frame" x="20" y="9" width="81" height="25"/>
+                                                    <rect key="frame" x="45" y="9" width="81" height="25"/>
                                                     <fontDescription key="fontDescription" name="Calibri" family="Calibri" pointSize="20"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="Nfp-4l-srd" secondAttribute="trailing" constant="50" id="IGQ-29-Jae"/>
+                                                <constraint firstAttribute="trailing" secondItem="Nfp-4l-srd" secondAttribute="trailing" constant="45" id="IGQ-29-Jae"/>
                                                 <constraint firstAttribute="centerY" secondItem="X5T-Rv-DtF" secondAttribute="centerY" id="i6I-Xx-cEu"/>
-                                                <constraint firstItem="X5T-Rv-DtF" firstAttribute="leading" secondItem="Ccy-4a-edz" secondAttribute="leading" constant="20" id="kfw-CD-78m"/>
+                                                <constraint firstItem="X5T-Rv-DtF" firstAttribute="leading" secondItem="Ccy-4a-edz" secondAttribute="leading" constant="45" id="kfw-CD-78m"/>
                                                 <constraint firstAttribute="centerY" secondItem="Nfp-4l-srd" secondAttribute="centerY" id="sHA-Q5-qBM"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -981,10 +1003,11 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eAW-Aj-YDI">
-                                                    <rect key="frame" x="501" y="6" width="51" height="31"/>
+                                                    <rect key="frame" x="506" y="6" width="51" height="31"/>
+                                                    <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                 </switch>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Edit Recipes" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w0Q-K0-uAJ">
-                                                    <rect key="frame" x="20" y="9" width="98" height="25"/>
+                                                    <rect key="frame" x="45" y="9" width="98" height="25"/>
                                                     <fontDescription key="fontDescription" name="Calibri" family="Calibri" pointSize="20"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -992,8 +1015,8 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="centerY" secondItem="w0Q-K0-uAJ" secondAttribute="centerY" id="6hF-s9-V4h"/>
-                                                <constraint firstAttribute="trailing" secondItem="eAW-Aj-YDI" secondAttribute="trailing" constant="50" id="9zT-TA-E24"/>
-                                                <constraint firstItem="w0Q-K0-uAJ" firstAttribute="leading" secondItem="0mW-Rc-a0p" secondAttribute="leading" constant="20" id="Biz-35-adQ"/>
+                                                <constraint firstAttribute="trailing" secondItem="eAW-Aj-YDI" secondAttribute="trailing" constant="45" id="9zT-TA-E24"/>
+                                                <constraint firstItem="w0Q-K0-uAJ" firstAttribute="leading" secondItem="0mW-Rc-a0p" secondAttribute="leading" constant="45" id="Biz-35-adQ"/>
                                                 <constraint firstAttribute="centerY" secondItem="eAW-Aj-YDI" secondAttribute="centerY" id="Wts-Gf-BHO"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -1006,19 +1029,20 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YK7-vD-XXC">
-                                                    <rect key="frame" x="501" y="6" width="51" height="31"/>
+                                                    <rect key="frame" x="506" y="6" width="51" height="31"/>
+                                                    <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                 </switch>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recipes Public" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bsq-0A-rhm">
-                                                    <rect key="frame" x="20" y="9" width="116" height="25"/>
+                                                    <rect key="frame" x="45" y="9" width="116" height="25"/>
                                                     <fontDescription key="fontDescription" name="Calibri" family="Calibri" pointSize="20"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="bsq-0A-rhm" firstAttribute="leading" secondItem="Rd7-at-X2S" secondAttribute="leading" constant="20" id="4D6-dz-Tr4"/>
+                                                <constraint firstItem="bsq-0A-rhm" firstAttribute="leading" secondItem="Rd7-at-X2S" secondAttribute="leading" constant="45" id="4D6-dz-Tr4"/>
                                                 <constraint firstAttribute="centerY" secondItem="YK7-vD-XXC" secondAttribute="centerY" id="4cP-yD-WDz"/>
-                                                <constraint firstAttribute="trailing" secondItem="YK7-vD-XXC" secondAttribute="trailing" constant="50" id="4wV-Qv-WaH"/>
+                                                <constraint firstAttribute="trailing" secondItem="YK7-vD-XXC" secondAttribute="trailing" constant="45" id="4wV-Qv-WaH"/>
                                                 <constraint firstAttribute="centerY" secondItem="bsq-0A-rhm" secondAttribute="centerY" id="TCI-yB-GwK"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -1166,6 +1190,6 @@
         <image name="timer-tab.png" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="b29-uT-UxQ"/>
+        <segue reference="e6B-dv-0B3"/>
     </inferredMetricsTieBreakers>
 </document>

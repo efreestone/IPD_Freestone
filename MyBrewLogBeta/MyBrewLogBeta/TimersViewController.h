@@ -15,6 +15,9 @@
 
 @interface TimersViewController : UIViewController
 
+@property (strong, nonatomic) IBOutlet UIButton *addNewTimerButton;
+@property (strong, nonatomic) IBOutlet UIButton *addOverDayButton;
+
 @property (strong, nonatomic) IBOutlet UILabel *timerOneLabel;
 @property (strong, nonatomic) IBOutlet UILabel *oneDescriptionLabel;
 @property (strong, nonatomic) IBOutlet UILabel *timerTwoLabel;
@@ -31,5 +34,7 @@
 
 @property (strong, nonatomic) IBOutlet UIView *oneView;
 @property (strong, nonatomic) IBOutlet UIView *twoView;
+
+-(IBAction)startTimer:(id)sender;
 
 @end
