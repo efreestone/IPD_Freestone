@@ -44,6 +44,7 @@
     NSString *recipeType;
     NSString *recipeName;
     NSString *recipeNotes;
+    double selectedCountdownDouble;
     
     NSString *parseClassName;
     id buttonSender;
@@ -306,12 +307,13 @@
         addNewLine = @"";
     }
     
-    NSString *formattedTime = [NSString stringWithFormat:@"%@Timer: %ld Hours %ld Minutes\n", addNewLine, (long)hours, (long)minutes];
+    NSString *formattedTime = [NSString stringWithFormat:@"%@Timer: %@ \n", addNewLine, time];
     instructionsTVString = [NSString stringWithFormat:@"%@%@", currentInst, formattedTime];
     
     instructionsTV.text = instructionsTVString;
     
-    NSLog(@"countdown %@", time); 
+    selectedCountdownDouble = selectedCountdownDuration;
+    NSLog(@"countdown %ld", (long)timerInt);
 }
 
 //Show custom picker. Triggered from selecting Yes to over 24 hour ActionSheet
@@ -419,6 +421,10 @@
     alert.alertViewStyle = UIAlertViewStylePlainTextInput;
     [alert show];
     
+    UITextField *notesTF = [alert textFieldAtIndex:0];
+    [notesTF becomeFirstResponder];
+    [instructionsTV endEditing:YES];
+    
     alert.tag = 6;
 }
 
@@ -444,10 +450,6 @@
     
     instructionsTV.text = instructionsTVString;
 }
-
-//-(void)addToInstructions {
-//
-//}
 
 #pragma mark - action sheet delegate
 

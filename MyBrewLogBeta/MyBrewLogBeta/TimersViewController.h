@@ -36,5 +36,6 @@
 @property (strong, nonatomic) IBOutlet UIView *twoView;
 
 -(IBAction)startTimer:(id)sender;
+-(void)startTimerFromDetails:(NSInteger)time withDetails:(NSString *)details;
 
 @end

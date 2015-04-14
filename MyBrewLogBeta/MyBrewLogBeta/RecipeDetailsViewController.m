@@ -13,8 +13,12 @@
 
 #import "RecipeDetailsViewController.h"
 #import "NewRecipeViewController.h"
+#import "TimersViewController.h"
 
-@interface RecipeDetailsViewController () <UITextViewDelegate>
+@interface RecipeDetailsViewController () <UITextViewDelegate> {
+    NSInteger countdownSeconds;
+    TimersViewController *timersViewController;
+}
 
 @end
 
@@ -36,6 +40,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    timersViewController = (TimersViewController*)[[self.tabBarController viewControllers] objectAtIndex:2];
     
     //Set textviews with passed data
     nameLabel.text = passedName;
@@ -116,6 +122,18 @@
     [alert show];
 } //showAlert close
 
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    NSString *description = [alertView textFieldAtIndex:0].text;
+    if (buttonIndex == 1) {
+        NSLog(@"index 1");
+        if (description.length == 0) {
+            description = @"No Description";
+        }
+        [timersViewController startTimerFromDetails:countdownSeconds withDetails:description];
+        //timersViewController.oneView.hidden = NO;
+    }
+}
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -140,18 +158,34 @@
     
     [self showTimerAlert:rangeString];
     
-//    //NSString *username = [URL host];
-//    
-//    //NSLog(@"%@", username);
-//    
-//    if ([[URL scheme] isEqualToString:@"Timer:"]) {
-//        //NSString *username = [URL host];
-//        
-//        //NSLog(@"==%@", username);
-//        // do something with this username
-//        // ...
-//        return NO;
-//    }
+    NSString *timeString = [rangeString substringFromIndex:7];
+    //NSLog(@"timeString %@", timeString);
+    //Get third char and check if :
+    NSRange range = {2,1};
+    NSString *charAtThree = [timeString substringWithRange:range];
+    //Is countdown timer if contains char is :
+    if ([charAtThree isEqualToString:@":"]) {
+//        NSLog(@"equals :");
+        NSArray *numbersArray = [timeString componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@":"]];
+        
+        NSInteger hoursFromString = [numbersArray[0] intValue];
+        NSInteger minuteFromString = [numbersArray[1] intValue];
+        NSInteger hoursInt = 0;
+        NSInteger minutesInt = 0;
+        
+        //Make sure times aren't 00 and get seconds
+        if (hoursFromString != 00) {
+            hoursInt = hoursFromString * 3600;
+        }
+        if (minuteFromString != 00) {
+            minutesInt = minuteFromString * 60;
+        }
+        countdownSeconds = hoursInt + minutesInt;
+        NSLog(@"Countdown = %ld", (long)countdownSeconds);
+        
+    } else {
+        NSLog(@"Not :, over 24 hours");
+    }
     
     return NO;
 }

@@ -15,13 +15,17 @@
 
 @interface TimersViewController () {
     NSTimer *firstTimer;
+    NSTimer *secondTimer;
     int hoursInt;
     int minutesInt;
     int secondsInt;
-    int countdownSeconds;
+    NSInteger countdownSeconds;
+    NSString *timerString;
     
     NSDate *pauseStart, *previousFireDate;
     BOOL timerPaused;
+    
+    NSString *oneDescription;
 }
 
 @end
@@ -29,7 +33,7 @@
 @implementation TimersViewController
 
 //Synthesize for getters/setters
-@synthesize oneDescriptionLabel, timerOneLabel, onePauseButton, oneCancelButton;
+@synthesize oneDescriptionLabel, timerOneLabel, onePauseButton, oneCancelButton, oneView;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -43,6 +47,14 @@
     [[self.twoView layer] setBorderColor:[[UIColor lightGrayColor] CGColor]];
     [[self.twoView layer] setBorderWidth:0.5];
     [[self.twoView layer] setCornerRadius:7.5];
+    
+    if (oneDescription.length != 0) {
+//        oneDescription = @"Description for timer";
+        oneDescriptionLabel.text = oneDescription;
+    }
+    
+    //oneView.hidden = YES;
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -55,13 +67,45 @@
     firstTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(runTimer) userInfo:nil repeats:YES];
 }
 
+-(void)startTimerFromDetails:(NSInteger)time withDetails:(NSString *)description {
+    NSLog(@"Timer seconds = %ld", (long)time);
+    countdownSeconds = time;
+    oneDescription = description;
+    if (countdownSeconds <= 86340) {
+        if (firstTimer == nil) {
+//            oneView.hidden = NO;
+            //oneDescriptionLabel.text = oneDescription;
+            firstTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(runTimer) userInfo:nil repeats:YES];
+        } else if (secondTimer == nil) {
+            //Second timer
+            NSLog(@"Second timer");
+        }
+
+    } else {
+        NSLog(@"Over 23:59");
+    }
+}
+
 -(void)runTimer {
     countdownSeconds = countdownSeconds - 1;
     
-    minutesInt = countdownSeconds / 60;
-    secondsInt = countdownSeconds - (minutesInt * 60);
+    //Calculate hours/minutes/seconds from countdownSeconds
+    secondsInt = countdownSeconds % 60;
+    minutesInt = (countdownSeconds / 60) % 60;
+    hoursInt = (countdownSeconds / 3600) % 24;
+    //Display timer
+//    NSString *timerString = [NSString stringWithFormat:@"%.2d:%.2d:%.2d left", hoursInt, minutesInt, secondsInt];
     
-    NSString *timerString = [NSString stringWithFormat:@"%.2d:%.2d left", minutesInt, secondsInt];
+    if (hoursInt < 1) {
+        timerString = [NSString stringWithFormat:@"%.2d:%.2d left", minutesInt, secondsInt];
+    } else {
+        if (hoursInt < 10) {
+            timerString = [NSString stringWithFormat:@"%.1d:%.2d:%.2d left", hoursInt, minutesInt, secondsInt];
+        } else {
+            timerString = [NSString stringWithFormat:@"%.2d:%.2d:%.2d left", hoursInt, minutesInt, secondsInt];
+        }
+    }
+    
     timerOneLabel.text = timerString;
     
     if (countdownSeconds == 0) {
@@ -79,7 +123,7 @@
 }
 
 -(void)resumeTimer:(NSTimer *)timer {
-    float pauseTime = -1*[pauseStart timeIntervalSinceNow];
+    float pauseTime = -1 * [pauseStart timeIntervalSinceNow];
     [timer setFireDate:[previousFireDate initWithTimeInterval:pauseTime sinceDate:previousFireDate]];
     timerPaused = NO;
 }
@@ -87,9 +131,17 @@
 -(IBAction)pauseClicked:(id)sender {
     if (!timerPaused) {
         [self pauseTimer:firstTimer];
+        [onePauseButton setTitle:@"Start" forState:UIControlStateNormal];
     } else {
         [self resumeTimer:firstTimer];
+        [onePauseButton setTitle:@"Pause" forState:UIControlStateNormal];
     }
+}
+
+-(IBAction)cancelClicked:(id)sender {
+    [firstTimer invalidate];
+    firstTimer = nil;
+    timerOneLabel.text = @"00:00";
 }
 
 /*

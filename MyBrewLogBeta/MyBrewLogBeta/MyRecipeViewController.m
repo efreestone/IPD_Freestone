@@ -20,6 +20,8 @@
 #import "CustomPFLoginViewController.h"
 #import "CustomPFSignUpViewController.h"
 
+#import "TimersViewController.h"
+
 @interface MyRecipeViewController () <UITableViewDelegate, UITableViewDataSource, PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate, UIActionSheetDelegate>
 
 @end
