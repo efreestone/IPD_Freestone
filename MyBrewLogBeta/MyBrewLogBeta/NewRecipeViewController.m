@@ -55,6 +55,7 @@
 @implementation NewRecipeViewController
 
 //Synthesize for getters/setters
+@synthesize typeButton, batchButton, ingredientButton, tempButton, timerButton, notesButton;
 @synthesize recipeNameTF, ingredientsTV, instructionsTV;
 @synthesize passedName, passedType, passedIngredients, passedInstructions, passedObject, passedObjectID;
 
@@ -77,6 +78,21 @@
     [[instructionsTV layer] setBorderColor:[[UIColor lightGrayColor] CGColor]];
     [[instructionsTV layer] setBorderWidth:0.5];
     [[instructionsTV layer] setCornerRadius:7.5];
+    
+//    [[typeButton layer] setBorderColor:[[UIColor blueColor] CGColor]];
+//    [[typeButton layer] setBorderWidth:1];
+//    [[typeButton layer] setCornerRadius:8];
+//    [[typeButton layer] masksToBounds];
+//    
+//    [[batchButton layer] setBorderColor:[[UIColor blueColor] CGColor]];
+//    [[batchButton layer] setBorderWidth:1];
+//    [[batchButton layer] setCornerRadius:8];
+//    [[batchButton layer] masksToBounds];
+//    
+//    [[ingredientButton layer] setBorderColor:[[UIColor blueColor] CGColor]];
+//    [[ingredientButton layer] setBorderWidth:1];
+//    [[ingredientButton layer] setCornerRadius:8];
+//    [[ingredientButton layer] masksToBounds];
     
     //Create arrays for pickers
     recipeTypes = [NSArray arrayWithObjects:@"Beer", @"Wine", @"Other", nil];
@@ -545,7 +561,6 @@
                     [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:NSLocalizedString(@"An error occured trying to save. Please try again.", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles:nil] show];
                 }
             }];
-            
         }
     //Name missing
     } else {

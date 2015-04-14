@@ -15,7 +15,7 @@
 #import "NewRecipeViewController.h"
 #import "TimersViewController.h"
 
-@interface RecipeDetailsViewController () <UITextViewDelegate> {
+@interface RecipeDetailsViewController () <UITextViewDelegate, UIActionSheetDelegate> {
     NSInteger countdownSeconds;
     TimersViewController *timersViewController;
 }
@@ -98,6 +98,8 @@
     instructionsTV.text = testIngString;
 }
 
+# pragma mark - AlertViews
+
 //Method to create and show alert view if there is no internet connectivity
 -(void)showAlert:(NSString *)alertMessage withTitle:(NSString *)titleString {
     UIAlertView *copyAlert = [[UIAlertView alloc] initWithTitle:titleString message:alertMessage delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
@@ -134,6 +136,38 @@
     }
 }
 
+# pragma mark - ActionSheet (menu)
+
+-(IBAction)showMenuActionSheet:(id)sender {
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"What would you like to do with this recipe?"
+                                                             delegate:self
+                                                    cancelButtonTitle:@"Cancel"
+                                               destructiveButtonTitle:nil
+                                                    otherButtonTitles:@"Edit", @"Copy", @"Share", @"Delete", nil];
+    
+    [actionSheet showInView:self.view];
+}
+
+-(void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex {
+    switch (buttonIndex) {
+        case 0: //Edit
+            NSLog(@"0");
+            break;
+        case 1: //Copy
+            NSLog(@"1");
+            break;
+        case 2: //Share
+            NSLog(@"2");
+            break;
+        case 3: //Delete
+            NSLog(@"3");
+            break;
+        default:
+            NSLog(@"Other clicked");
+            break;
+    }
+}
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -152,6 +186,7 @@
     }
 }
 
+//Grab URL click in TextView and start timer, return NO to stop browser from opening
 -(BOOL)textView:(UITextView *)textView shouldInteractWithURL:(NSURL *)URL inRange:(NSRange)characterRange {
     NSString *rangeString = [textView.text substringWithRange:characterRange];
     NSLog(@"%@", rangeString);
