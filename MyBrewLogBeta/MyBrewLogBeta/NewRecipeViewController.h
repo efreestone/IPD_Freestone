@@ -41,7 +41,9 @@
 @property (strong, nonatomic) NSString *passedIngredients;
 @property (strong, nonatomic) NSString *passedInstructions;
 @property (strong, nonatomic) NSString *passedObjectID;
+@property (strong, nonatomic) NSString *passedUsername;
 @property (strong, nonatomic) PFObject *passedObject;
+@property (nonatomic) BOOL isCopy;
 
 -(void)quantityPicked:(NSString *)formattedQuantity;
 -(void)timerPicked: (NSString *)formattedTime;

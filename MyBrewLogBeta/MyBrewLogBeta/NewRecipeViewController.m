@@ -57,7 +57,7 @@
 //Synthesize for getters/setters
 @synthesize typeButton, batchButton, ingredientButton, tempButton, timerButton, notesButton;
 @synthesize recipeNameTF, ingredientsTV, instructionsTV;
-@synthesize passedName, passedType, passedIngredients, passedInstructions, passedObject, passedObjectID;
+@synthesize passedName, passedType, passedIngredients, passedInstructions, passedUsername, passedObject, passedObjectID, isCopy;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -102,10 +102,19 @@
     recipeType = @"Other";
     recipeNotes = @"";
     
+    //Grab user and username
+    PFUser *user = [PFUser currentUser];
+    NSString *usernameString = [user objectForKey:@"username"];
+    
     //Check if passedName exists. Only true when editing
     if (passedName != nil) {
         NSLog(@"Passed Name not nil");
-        recipeNameTF.text = passedName;
+        if ([passedUsername isEqualToString: usernameString]) {
+            NSLog(@"Username equals current");
+            recipeNameTF.text = passedName;
+        } else {
+            recipeNameTF.text = [NSString stringWithFormat:@"%@ by %@", passedName, passedUsername];
+        }
         recipeType = passedType;
         ingredientsTV.text = passedIngredients;
         instructionsTV.text = passedInstructions;
@@ -512,7 +521,7 @@
     
     if (recipeName.length > 0 && recipeInstructions.length > 0) {
         //If objectID is not nil, object is being edited so query and update
-        if (passedObjectID != nil) {
+        if (passedObjectID != nil && !isCopy) {
             PFQuery *editQuery = [PFQuery queryWithClassName:parseClassName];
             [editQuery getObjectInBackgroundWithId:passedObjectID block:^(PFObject *editObject, NSError *error) {
                 editObject[@"Type"] = recipeType;
@@ -540,7 +549,11 @@
             //Name was entered, continue saving
             PFObject *newRecipeObject = [PFObject objectWithClassName:parseClassName];
             newRecipeObject[@"Type"] = recipeType;
-            newRecipeObject[@"Name"] = recipeName;
+            if (isCopy) {
+                newRecipeObject[@"Name"] = [NSString stringWithFormat:@"%@ Copy", recipeName];
+            } else {
+                newRecipeObject[@"Name"] = recipeName;
+            }
             //        newRecipeObject[@"Notes"] = recipeNotes;
             newRecipeObject[@"Ingredients"] = recipeIngredients;
             newRecipeObject[@"Instructions"] = recipeInstructions;

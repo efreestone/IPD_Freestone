@@ -18,6 +18,7 @@
 @interface RecipeDetailsViewController () <UITextViewDelegate, UIActionSheetDelegate> {
     NSInteger countdownSeconds;
     TimersViewController *timersViewController;
+    BOOL isCopy;
 }
 
 @end
@@ -26,7 +27,7 @@
 
 //Synthesize for getters/setters
 @synthesize nameLabel, ingredientsTV, instructionsTV;
-@synthesize passedObject, passedName, passedType, passedIngredients, passedInstructions, passedObjectID;
+@synthesize passedObject, passedName, passedType, passedIngredients, passedUsername, passedInstructions, passedObjectID;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -152,9 +153,13 @@
     switch (buttonIndex) {
         case 0: //Edit
             NSLog(@"0");
+            [self performSegueWithIdentifier:@"Edit" sender:self];
+//            [self segueToNewRecipe:NO];
             break;
         case 1: //Copy
             NSLog(@"1");
+            isCopy = YES;
+            [self performSegueWithIdentifier:@"Edit" sender:self];
             break;
         case 2: //Share
             NSLog(@"2");
@@ -168,6 +173,11 @@
     }
 }
 
+-(void)segueToNewRecipe:(BOOL)isCopy {
+    NewRecipeViewController *newRecipeVC = [self.storyboard instantiateViewControllerWithIdentifier:@"NewRecipe"];
+    [self.navigationController pushViewController: newRecipeVC animated:YES];
+}
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -179,8 +189,10 @@
         newRecipeVC.passedType = passedType;
         newRecipeVC.passedIngredients = passedIngredients;
         newRecipeVC.passedInstructions = passedInstructions;
+        newRecipeVC.passedUsername = passedUsername;
         newRecipeVC.passedObjectID = passedObjectID;
         newRecipeVC.passedObject = passedObject;
+        newRecipeVC.isCopy = isCopy;
         
         newRecipeVC.recipeDetailsVC = self;
     }

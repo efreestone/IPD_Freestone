@@ -12,6 +12,7 @@
 //
 
 #import "BrowseDetailsViewController.h"
+#import "NewRecipeViewController.h"
 
 @interface BrowseDetailsViewController () {
     NSArray *recipesArray;
@@ -25,7 +26,7 @@
 
 //Synthesize for getters/setters
 @synthesize nameLabel, usernameLabel, ingredientsTV, instructionsTV;
-@synthesize passedObject, passedName, passedType, passedIngredients, passedInstructions, passedObjectID;
+@synthesize passedObject, passedName, passedType, passedIngredients, passedUsername, passedInstructions, passedObjectID;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -159,6 +160,27 @@
         }];
     
     }];
+}
+
+#pragma mark - Navigation
+
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"DetailsCopy"]) {
+        //Get VC and set items for passed object
+        NewRecipeViewController *newRecipeVC = segue.destinationViewController;
+        newRecipeVC.passedName = passedName;
+        newRecipeVC.passedType = passedType;
+        newRecipeVC.passedIngredients = passedIngredients;
+        newRecipeVC.passedInstructions = passedInstructions;
+        newRecipeVC.passedUsername = passedUsername;
+        newRecipeVC.passedObjectID = passedObjectID;
+        newRecipeVC.passedObject = passedObject;
+        newRecipeVC.isCopy = YES;
+        
+        //newRecipeVC.recipeDetailsVC = self;
+    }
 }
 
 

@@ -20,6 +20,15 @@
 
 @end
 
+//Create sort enum
+typedef enum {
+    SortFavorite,
+    SortUsername,
+    SortType,
+    SortNewest,
+    SortOldest
+}sortEnum;
+
 @implementation BrowseViewController {
     NSArray *recipesArray;
     NSArray *imageArray;
@@ -34,10 +43,14 @@
     NSString *selectedObjectID;
     PFObject *selectedPFObject;
     //NSString *usernameString;
+    sortEnum toSort;
+    PFQuery *newItemQuery;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    toSort = 10;
     
     parseClassName = @"newRecipe";
     //self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
@@ -159,7 +172,7 @@
         self.parseClassName = @"newRecipe";
     }
     //Grab objects
-    PFQuery *newItemQuery = [PFQuery queryWithClassName:self.parseClassName];
+    newItemQuery = [PFQuery queryWithClassName:self.parseClassName];
     //Exclude the current users objects
     [newItemQuery whereKey:@"createdBy" notEqualTo:[PFUser currentUser].username];
     
@@ -168,10 +181,33 @@
         newItemQuery.cachePolicy = kPFCachePolicyNetworkElseCache;
     }
     
-//    self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+    //Set sort
+    switch (toSort) {
+        case 0: //Favorites
+            [newItemQuery whereKey:@"favorites" equalTo:[PFUser currentUser].objectId];
+            [newItemQuery orderByDescending:@"updatedByUser"];
+            break;
+        case 1: //Username
+            [newItemQuery orderByAscending:@"createdBy"];
+            break;
+        case 2: //Type
+            [newItemQuery orderByAscending:@"Type"];
+            break;
+        case 3: //Newest
+            [newItemQuery orderByDescending:@"updatedByUser"];
+            //[self refreshTable];
+            break;
+        case 4://Oldest
+            [newItemQuery orderByAscending:@"updatedByUser"];
+            //[self refreshTable];
+            break;
+        default:
+            //[newItemQuery orderByDescending:@"updatedByUser"];
+            break;
+    }
     
     //Set sort
-    [newItemQuery orderByDescending:@"updatedByUser"];
+//    [newItemQuery orderByDescending:@"updatedByUser"];
     return newItemQuery;
 } //queryForTable close
 
@@ -190,7 +226,15 @@
                                                     otherButtonTitles:@"Favorites", @"Username", @"Type", @"Newest", @"Oldest", nil];
     
     [actionSheet showInView:self.view];
+}
+
+-(void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex {
+    toSort = (int) buttonIndex;
+//    if (toSort == 0) {
+//        [newItemQuery whereKey:@"favorites" equalTo:[PFUser currentUser].objectId];
+//    }
     
+    [self loadObjects];
 }
 
 /*
@@ -252,6 +296,7 @@
             detailsViewController.passedType = selectedType;
             detailsViewController.passedIngredients = selectedIngredients;
             detailsViewController.passedInstructions = selectedInstructions;
+            detailsViewController.passedUsername = usernameString;
             detailsViewController.passedObjectID = selectedObjectID;
             detailsViewController.passedObject = selectedPFObject;
         }

@@ -775,6 +775,7 @@
                         <outlet property="ingredientsTV" destination="Bta-xa-ox0" id="SGR-Yb-f5c"/>
                         <outlet property="instructionsTV" destination="bGQ-sj-RTv" id="ws7-pG-7Ub"/>
                         <outlet property="nameLabel" destination="iBz-OL-mqZ" id="MLB-ML-nDX"/>
+                        <segue destination="8Wm-S4-3lb" kind="presentation" identifier="Edit" id="fSe-cm-Zxg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YeR-Yw-5GD" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -892,6 +893,7 @@
                         <barButtonItem key="rightBarButtonItem" title="Copy" id="kpU-J7-O6o">
                             <connections>
                                 <action selector="recipeCopied:" destination="WBM-d3-r6Z" id="YOY-Or-9Gv"/>
+                                <segue destination="8Wm-S4-3lb" kind="presentation" identifier="DetailsCopy" id="YZW-Of-gs0"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -1199,6 +1201,6 @@
         <image name="timer-tab.png" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="e6B-dv-0B3"/>
+        <segue reference="YZW-Of-gs0"/>
     </inferredMetricsTieBreakers>
 </document>

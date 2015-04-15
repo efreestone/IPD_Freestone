@@ -56,6 +56,8 @@ typedef enum {
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    toSort = 10;
+    
     //Set default ACL to be read/write of current user only
 //    PFACL *defaultACL = [PFACL ACL];
 //    [defaultACL setPublicReadAccess:YES];
@@ -240,7 +242,7 @@ typedef enum {
         newItemQuery.cachePolicy = kPFCachePolicyNetworkElseCache;
     }
 
-    //Set sort
+    //Set sort, toSort is set out of range of enum to start
     switch (toSort) {
         case 0: //Active
             
@@ -401,6 +403,7 @@ typedef enum {
             detailsViewController.passedType = selectedType;
             detailsViewController.passedIngredients = selectedIngredients;
             detailsViewController.passedInstructions = selectedInstructions;
+            detailsViewController.passedUsername = usernameString;
             detailsViewController.passedObjectID = selectedObjectID;
             detailsViewController.passedObject = selectedPFObject;
         }
