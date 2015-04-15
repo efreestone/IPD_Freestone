@@ -181,7 +181,7 @@ typedef enum {
         newItemQuery.cachePolicy = kPFCachePolicyNetworkElseCache;
     }
     
-    //Set sort
+    //Set sort. toSort is an enum set by selecting a button in the sort action sheet
     switch (toSort) {
         case 0: //Favorites
             [newItemQuery whereKey:@"favorites" equalTo:[PFUser currentUser].objectId];
@@ -205,12 +205,10 @@ typedef enum {
             //[newItemQuery orderByDescending:@"updatedByUser"];
             break;
     }
-    
-    //Set sort
-//    [newItemQuery orderByDescending:@"updatedByUser"];
     return newItemQuery;
 } //queryForTable close
 
+//Set number of rows
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
     return self.objects.count;
@@ -218,6 +216,7 @@ typedef enum {
 
 # pragma mark - ActionSheet (sort)
 
+//Creat and show action sheet for sort
 -(IBAction)showSortActionSheet:(id)sender {
     UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Sort Recipes by:"
                                                              delegate:self
@@ -228,12 +227,10 @@ typedef enum {
     [actionSheet showInView:self.view];
 }
 
+//Grab tag of button pressed in sort action sheet and set enum to it
 -(void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex {
     toSort = (int) buttonIndex;
-//    if (toSort == 0) {
-//        [newItemQuery whereKey:@"favorites" equalTo:[PFUser currentUser].objectId];
-//    }
-    
+    //Reload table with new sort params
     [self loadObjects];
 }
 
@@ -278,6 +275,7 @@ typedef enum {
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
     
+    //Grab object and items to pass
     PFObject *object = [self objectAtIndexPath:indexPath];
     selectedName = [object objectForKey:@"Name"];
     selectedType = [object objectForKey:@"Type"];

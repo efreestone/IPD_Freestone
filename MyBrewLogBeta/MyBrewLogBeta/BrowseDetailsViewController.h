@@ -16,7 +16,6 @@
 
 @interface BrowseDetailsViewController : UIViewController
 
-@property (strong, nonatomic) IBOutlet UIButton *navbarCopyButton;
 @property (strong, nonatomic) IBOutlet UIButton *shareButton;
 @property (strong, nonatomic) IBOutlet UIButton *favoriteButton;
 

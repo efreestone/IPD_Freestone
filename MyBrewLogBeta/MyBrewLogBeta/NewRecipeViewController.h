@@ -15,7 +15,7 @@
 #import "MyRecipeViewController.h"
 #import "RecipeDetailsViewController.h"
 
-@interface NewRecipeViewController : UIViewController
+@interface NewRecipeViewController : UIViewController 
 
 -(IBAction)onCancel:(id)sender;
 -(IBAction)showRecipeTypePicker:(id)sender;

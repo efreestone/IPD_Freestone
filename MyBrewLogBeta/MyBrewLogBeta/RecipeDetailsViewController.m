@@ -40,8 +40,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    
+    //Grab timers view controller to start timers from textview
     timersViewController = (TimersViewController*)[[self.tabBarController viewControllers] objectAtIndex:2];
     
     //Set textviews with passed data
@@ -83,12 +82,13 @@
     // Dispose of any resources that can be recreated.
 }
 
+//Dismiss view. Used to dismiss from new recipe edit upon saving
 -(void)pressBackButton {
     [self.navigationController popViewControllerAnimated:YES];
-    
 }
 
--(IBAction)shareClicked:(id)sender {
+//Share object
+-(void)shareClicked {
     NSString *titleString = @"Share Recipe";
     NSString *alertMessage = @"Recipe would have been shared via social networks, however this feature is not functional yet";
     [self showAlert:alertMessage withTitle:titleString];
@@ -110,10 +110,6 @@
 
 //Method to create and show alert view if there is no internet connectivity
 -(void)showTimerAlert:(NSString *)alertMessage {
-//    UIAlertView *timerAlert = [[UIAlertView alloc] initWithTitle:titleString message:alertMessage delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
-//    //Show alert
-//    [timerAlert show];
-    
     NSString *formattedString = [NSString stringWithFormat:@"%@ \nPlease enter a discription for timer", alertMessage];
     
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Start Timer"
@@ -125,6 +121,7 @@
     [alert show];
 } //showAlert close
 
+//Grab text entered into alertview
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     NSString *description = [alertView textFieldAtIndex:0].text;
     if (buttonIndex == 1) {
@@ -139,6 +136,7 @@
 
 # pragma mark - ActionSheet (menu)
 
+//Create and show action sheet
 -(IBAction)showMenuActionSheet:(id)sender {
     UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"What would you like to do with this recipe?"
                                                              delegate:self
@@ -149,12 +147,12 @@
     [actionSheet showInView:self.view];
 }
 
+//Get tag for action sheet but selected and process accordingly
 -(void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex {
     switch (buttonIndex) {
         case 0: //Edit
             NSLog(@"0");
             [self performSegueWithIdentifier:@"Edit" sender:self];
-//            [self segueToNewRecipe:NO];
             break;
         case 1: //Copy
             NSLog(@"1");
@@ -163,9 +161,11 @@
             break;
         case 2: //Share
             NSLog(@"2");
+            [self shareClicked];
             break;
         case 3: //Delete
             NSLog(@"3");
+            [self deleteObject];
             break;
         default:
             NSLog(@"Other clicked");
@@ -173,9 +173,13 @@
     }
 }
 
--(void)segueToNewRecipe:(BOOL)isCopy {
-    NewRecipeViewController *newRecipeVC = [self.storyboard instantiateViewControllerWithIdentifier:@"NewRecipe"];
-    [self.navigationController pushViewController: newRecipeVC animated:YES];
+//Delete object
+-(void)deleteObject {
+    // Delete the object from the data source
+    [passedObject deleteInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        //[self loadObjects];
+        [self pressBackButton];
+    }];
 }
 
 #pragma mark - Navigation

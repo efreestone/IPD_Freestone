@@ -48,6 +48,8 @@
     
     NSString *parseClassName;
     id buttonSender;
+    
+    BOOL browseCopy;
 }
 
 @end
@@ -111,9 +113,16 @@
         NSLog(@"Passed Name not nil");
         if ([passedUsername isEqualToString: usernameString]) {
             NSLog(@"Username equals current");
-            recipeNameTF.text = passedName;
+            //Check if recipe is a copy (not from browse)
+            if (isCopy) {
+                //Add copy to name of recipe
+                recipeNameTF.text = [NSString stringWithFormat:@"%@ Copy", passedName];
+            } else {
+                recipeNameTF.text = passedName;
+            }
         } else {
             recipeNameTF.text = [NSString stringWithFormat:@"%@ by %@", passedName, passedUsername];
+            browseCopy = YES;
         }
         recipeType = passedType;
         ingredientsTV.text = passedIngredients;
@@ -549,11 +558,7 @@
             //Name was entered, continue saving
             PFObject *newRecipeObject = [PFObject objectWithClassName:parseClassName];
             newRecipeObject[@"Type"] = recipeType;
-            if (isCopy) {
-                newRecipeObject[@"Name"] = [NSString stringWithFormat:@"%@ Copy", recipeName];
-            } else {
-                newRecipeObject[@"Name"] = recipeName;
-            }
+            newRecipeObject[@"Name"] = recipeName;
             //        newRecipeObject[@"Notes"] = recipeNotes;
             newRecipeObject[@"Ingredients"] = recipeIngredients;
             newRecipeObject[@"Instructions"] = recipeInstructions;

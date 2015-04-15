@@ -36,6 +36,9 @@
     nameLabel.text = passedName;
     ingredientsTV.text = passedIngredients;
     instructionsTV.text = passedInstructions;
+    //Grab username and display
+    usernameString = [passedObject objectForKey:@"createdBy"];
+    usernameLabel.text = [NSString stringWithFormat:@"By: %@", usernameString];
     
     //Set rounded corners on ing and inst textviews
     [[ingredientsTV layer] setBorderColor:[[UIColor lightGrayColor] CGColor]];
@@ -45,19 +48,6 @@
     [[instructionsTV layer] setBorderColor:[[UIColor lightGrayColor] CGColor]];
     [[instructionsTV layer] setBorderWidth:0.5];
     [[instructionsTV layer] setCornerRadius:7.5];
-    
-    usernameString = [passedObject objectForKey:@"createdBy"];
-    usernameLabel.text = [NSString stringWithFormat:@"By: %@", usernameString];
-    
-    NSString *testString = @"ingredient 1 \nTimer: ingredient 2 \ningredient 3 \ningredient 4 \ningredient 5 \ningredient 6 \ningredient 7 \ningredient 8 \ningredient 9 \ningredient 10";
-    
-    listItems = [testString componentsSeparatedByString:@"\n"];
-    NSLog(@"%@", listItems);
-    NSLog(@"%lu", (unsigned long)listItems.count);
-    
-    recipesArray = [NSArray arrayWithObjects:@"Secret IPA", @"Timer: Dry Red Wine", @"Cali Style Sourdough", @"My Choco Stout", @"Peach Wine #1", @"Yogurt Base", @"Super Lager", @"Sweet Apple Pie Mead", @"Green Tea Kombucha", @"Strawberry Blonde", @"My White Zin", @"Plum Sake", @"Timer: Earl Grey Kombucha", @"Just good ol' Ale", @"Raspberry Suprise", @"Moms Sourdough Bread this is a longer string with more text blah blah blah blah", nil];
-    
-    //ingredientsTV.text = testString;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -65,31 +55,10 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
--(IBAction)recipeCopied:(id)sender {
-    NSString *titleString = @"Copy Recipe";
-    NSString *alertMessage = @"Recipe would have copied to My Recipes, however this feature is not functional yet";
-    [self showAlert:alertMessage withTitle:titleString];
-}
-
+//Share button clicked
 -(IBAction)shareClicked:(id)sender {
     NSString *titleString = @"Share Recipe";
     NSString *alertMessage = @"Recipe would have been shared via social networks, however this feature is not functional yet";
-    [self showAlert:alertMessage withTitle:titleString];
-}
-
--(IBAction)favoriteClicked:(id)sender {
-    NSString *titleString = @"Favorite Recipe";
-    NSString *alertMessage = @"Recipe would have been added to Favorite Recipes, however this feature is not functional yet";
     [self showAlert:alertMessage withTitle:titleString];
 }
 
@@ -100,53 +69,7 @@
     [copyAlert show];
 }
 
-//- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-//    // Return the number of sections.
-//    return [recipesArray count];
-//}
-
-//- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-//    // Return the number of rows in the section.
-//    // If you're serving data from an array, return the length of the array:
-//    return [listItems count];
-//}
-//
-//// Customize the appearance of table view cells.
-//- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-//    static NSString *CellIdentifier = @"Cell";
-//    
-//    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-//    if (cell == nil) {
-//        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-//    }
-//    
-//    // Set the data for this cell:
-//    cell.textLabel.text = [listItems objectAtIndex:indexPath.row];
-//    
-//    return cell;
-//}
-//
-//
-//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-//    CGSize size = [[listItems objectAtIndex:indexPath.row]
-//                   sizeWithFont:[UIFont systemFontOfSize:14]
-//                   constrainedToSize:CGSizeMake(400, CGFLOAT_MAX)];
-//    return size.height + 1;
-//}
-//
-//-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-//    NSString *selectedCell = [listItems objectAtIndex:indexPath.row];
-//    NSString *firstSix;
-//    if (selectedCell.length >= 3) {
-//        firstSix = [selectedCell substringToIndex:6];
-//        NSLog(@"first six %@", firstSix);
-//    }
-//    
-//    if ([selectedCell isEqualToString:@"Timer:"]) {
-//        NSLog(@"Timer selected");
-//    }
-//}
-
+//Set object to favorites when fav selected
 -(IBAction)favoriteSelected:(id)sender {
     PFQuery *editQuery = [PFQuery queryWithClassName:@"newRecipe"];
     [editQuery getObjectInBackgroundWithId:passedObjectID block:^(PFObject *favObject, NSError *error) {
@@ -154,16 +77,18 @@
         [favObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
             if (!error) {
                 NSLog(@"Favorited Success");
+                //Create and show an alert
+                NSString *titleString = @"Favorite Recipe";
+                NSString *alertMessage = @"Recipe added to favorites. Select Favorite in the Browse Sort to see your Favorite Recipes";
+                [self showAlert:alertMessage withTitle:titleString];
             } else {
                 NSLog(@"Favorited ERROR");
             }
         }];
-    
     }];
 }
 
 #pragma mark - Navigation
-
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -178,8 +103,6 @@
         newRecipeVC.passedObjectID = passedObjectID;
         newRecipeVC.passedObject = passedObject;
         newRecipeVC.isCopy = YES;
-        
-        //newRecipeVC.recipeDetailsVC = self;
     }
 }
 
