@@ -12,9 +12,12 @@
 //
 
 #import "AppDelegate.h"
+#import "TimersViewController.h"
 #import <Parse/Parse.h>
 
-@interface AppDelegate ()
+@interface AppDelegate () {
+    TimersViewController *timerVC;
+}
 
 @end
 
@@ -45,6 +48,13 @@
 - (void)applicationDidEnterBackground:(UIApplication *)application {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    
+    if (timerVC.firstTimer != nil) {
+        //Start local notification for timer
+        [timerVC startLocalNotification:timerVC.timerDate];
+        //Invalidate timer
+        [timerVC.firstTimer invalidate];
+    }
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
@@ -54,6 +64,9 @@
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     self.eventManager = [[EventManager alloc] init];
+    
+    UITabBarController *tbc = (UITabBarController *)self.window.rootViewController;
+    timerVC = (TimersViewController*)[[tbc viewControllers] objectAtIndex:2];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {

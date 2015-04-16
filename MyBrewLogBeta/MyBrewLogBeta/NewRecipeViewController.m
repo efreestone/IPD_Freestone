@@ -81,21 +81,6 @@
     [[instructionsTV layer] setBorderWidth:0.5];
     [[instructionsTV layer] setCornerRadius:7.5];
     
-//    [[typeButton layer] setBorderColor:[[UIColor blueColor] CGColor]];
-//    [[typeButton layer] setBorderWidth:1];
-//    [[typeButton layer] setCornerRadius:8];
-//    [[typeButton layer] masksToBounds];
-//    
-//    [[batchButton layer] setBorderColor:[[UIColor blueColor] CGColor]];
-//    [[batchButton layer] setBorderWidth:1];
-//    [[batchButton layer] setCornerRadius:8];
-//    [[batchButton layer] masksToBounds];
-//    
-//    [[ingredientButton layer] setBorderColor:[[UIColor blueColor] CGColor]];
-//    [[ingredientButton layer] setBorderWidth:1];
-//    [[ingredientButton layer] setCornerRadius:8];
-//    [[ingredientButton layer] masksToBounds];
-    
     //Create arrays for pickers
     recipeTypes = [NSArray arrayWithObjects:@"Beer", @"Wine", @"Other", nil];
     ingredientArray = [NSArray arrayWithObjects:@"Ingedient 1", @"Ingedient 2", @"Ingedient 3", @"Ingedient 4", @"Ingedient 5", @"Ingedient 6", @"Other", nil];
@@ -121,6 +106,7 @@
                 recipeNameTF.text = passedName;
             }
         } else {
+            NSLog(@"user = %@", passedUsername);
             recipeNameTF.text = [NSString stringWithFormat:@"%@ by %@", passedName, passedUsername];
             browseCopy = YES;
         }
@@ -456,8 +442,10 @@
     [alert show];
     
     UITextField *notesTF = [alert textFieldAtIndex:0];
-    [notesTF becomeFirstResponder];
+    //Set alert textfield as first responder after ending edit on both teextviews. This is to fix the occasional issue of trying to add notes but have the text appear in the instructions or ingredients textview instead
+    [ingredientsTV endEditing:YES];
     [instructionsTV endEditing:YES];
+    [notesTF becomeFirstResponder];
     
     alert.tag = 6;
 }

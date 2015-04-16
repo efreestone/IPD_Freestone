@@ -51,7 +51,6 @@
             <string>Calibri</string>
             <string>Calibri</string>
             <string>Calibri</string>
-            <string>Calibri</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -701,16 +700,6 @@
                                     <outlet property="delegate" destination="Txs-R8-Y1A" id="8sM-Lh-QZL"/>
                                 </connections>
                             </textView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XHW-9w-G0E">
-                                <rect key="frame" x="10" y="77" width="40" height="35"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="35" id="bbh-Dk-4b9"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="Calibri" family="Calibri" pointSize="28"/>
-                                <state key="normal" title="Log">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5Nf-S1-fWJ">
                                 <rect key="frame" x="10" y="520" width="51" height="31"/>
                                 <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -737,7 +726,6 @@
                             <constraint firstAttribute="trailing" secondItem="bGQ-sj-RTv" secondAttribute="trailing" constant="10" id="1Uv-u4-ubV"/>
                             <constraint firstItem="Bta-xa-ox0" firstAttribute="leading" secondItem="qtt-gT-aeQ" secondAttribute="leading" constant="10" id="2hv-FH-k3A"/>
                             <constraint firstItem="iBz-OL-mqZ" firstAttribute="top" secondItem="ENt-Kz-aJt" secondAttribute="bottom" id="2rL-Bw-bA5"/>
-                            <constraint firstItem="Bta-xa-ox0" firstAttribute="top" secondItem="XHW-9w-G0E" secondAttribute="bottom" constant="10" id="8ba-JR-yR7"/>
                             <constraint firstItem="sii-2v-0a7" firstAttribute="leading" secondItem="lKx-7O-WzX" secondAttribute="trailing" constant="5" id="Dhq-Gu-LR5"/>
                             <constraint firstItem="Pir-jH-SAc" firstAttribute="top" secondItem="Bta-xa-ox0" secondAttribute="bottom" constant="5" id="EwK-lG-g4y"/>
                             <constraint firstItem="bGQ-sj-RTv" firstAttribute="leading" secondItem="qtt-gT-aeQ" secondAttribute="leading" constant="10" id="H0S-RA-PAd"/>
@@ -750,7 +738,6 @@
                             <constraint firstItem="sii-2v-0a7" firstAttribute="top" secondItem="bGQ-sj-RTv" secondAttribute="bottom" constant="5" id="aZQ-VI-sGq"/>
                             <constraint firstAttribute="trailing" secondItem="Bta-xa-ox0" secondAttribute="trailing" constant="10" id="ad4-ls-dNB"/>
                             <constraint firstItem="Bta-xa-ox0" firstAttribute="top" secondItem="z40-nB-vq1" secondAttribute="bottom" id="cEm-xe-mbB"/>
-                            <constraint firstItem="XHW-9w-G0E" firstAttribute="leading" secondItem="qtt-gT-aeQ" secondAttribute="leading" constant="10" id="ce4-Pb-Gle"/>
                             <constraint firstItem="bGQ-sj-RTv" firstAttribute="top" secondItem="Pir-jH-SAc" secondAttribute="bottom" id="cxE-W1-Xcv"/>
                             <constraint firstItem="sii-2v-0a7" firstAttribute="centerY" secondItem="lKx-7O-WzX" secondAttribute="centerY" constant="-2" id="dfd-RV-2M9"/>
                             <constraint firstAttribute="trailing" secondItem="sii-2v-0a7" secondAttribute="trailing" constant="10" id="gdg-L8-b6y"/>
@@ -853,7 +840,6 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="favoriteClicked:" destination="WBM-d3-r6Z" eventType="touchUpInside" id="oT9-yK-5Ia"/>
                                     <action selector="favoriteSelected:" destination="WBM-d3-r6Z" eventType="touchUpInside" id="nKJ-To-pM4"/>
                                 </connections>
                             </button>

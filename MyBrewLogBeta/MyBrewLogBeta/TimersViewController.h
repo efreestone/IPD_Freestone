@@ -36,10 +36,15 @@
 @property (strong, nonatomic) IBOutlet UIView *oneView;
 @property (strong, nonatomic) IBOutlet UIView *twoView;
 
-@property (strong, nonatomic) AppDelegate *appDelegate;
+@property (strong, nonatomic) NSTimer *firstTimer;
+@property (strong, nonatomic) NSTimer *secondTimer;
+@property (strong, nonatomic) NSDate *timerDate;
+@property (nonatomic) NSInteger countdownSeconds;
+
+@property (nonatomic) AppDelegate *appDelegate;
 
 -(IBAction)startTimer:(id)sender;
 -(void)startTimerFromDetails:(NSInteger)time withDetails:(NSString *)details;
-//-(void)createCalendar:(NSString *)title;
+-(void)startLocalNotification:(NSDate *)fire;
 
 @end

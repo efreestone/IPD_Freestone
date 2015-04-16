@@ -99,7 +99,7 @@
         newRecipeVC.passedType = passedType;
         newRecipeVC.passedIngredients = passedIngredients;
         newRecipeVC.passedInstructions = passedInstructions;
-        newRecipeVC.passedUsername = passedUsername;
+        newRecipeVC.passedUsername = usernameString;
         newRecipeVC.passedObjectID = passedObjectID;
         newRecipeVC.passedObject = passedObject;
         newRecipeVC.isCopy = YES;

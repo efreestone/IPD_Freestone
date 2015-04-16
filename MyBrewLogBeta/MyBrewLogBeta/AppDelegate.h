@@ -13,12 +13,16 @@
 
 #import <UIKit/UIKit.h>
 #import "EventManager.h"
+//#import "TimersViewController.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 
 @property (strong, nonatomic) EventManager *eventManager;
+
+@property (strong, nonatomic) NSTimer *firstTimer;
+@property (strong, nonatomic) NSTimer *secondTimer;
 
 @end
 

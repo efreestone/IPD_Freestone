@@ -66,9 +66,9 @@ typedef enum {
 //    searchBar.hidden = YES;
 }
 
--(void)viewWillAppear:(BOOL)animated {
-    [self loadObjects];
-}
+//-(void)viewWillAppear:(BOOL)animated {
+//    [self loadObjects];
+//}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -171,6 +171,9 @@ typedef enum {
     if (!self.parseClassName) {
         self.parseClassName = @"newRecipe";
     }
+    
+    NSLog(@"toSort = %u", toSort);
+    
     //Grab objects
     newItemQuery = [PFQuery queryWithClassName:self.parseClassName];
     //Exclude the current users objects
@@ -186,6 +189,7 @@ typedef enum {
         case 0: //Favorites
             [newItemQuery whereKey:@"favorites" equalTo:[PFUser currentUser].objectId];
             [newItemQuery orderByDescending:@"updatedByUser"];
+            NSLog(@"Sort favorites");
             break;
         case 1: //Username
             [newItemQuery orderByAscending:@"createdBy"];
@@ -202,7 +206,8 @@ typedef enum {
             //[self refreshTable];
             break;
         default:
-            //[newItemQuery orderByDescending:@"updatedByUser"];
+            [newItemQuery orderByDescending:@"updatedByUser"];
+            NSLog(@"Sort default");
             break;
     }
     return newItemQuery;
