@@ -19,10 +19,13 @@
 #import <ParseUI/ParseUI.h>
 #import "CustomPFLoginViewController.h"
 #import "CustomPFSignUpViewController.h"
+#import "AppDelegate.h"
 
 #import "TimersViewController.h"
 
 @interface MyRecipeViewController () <UITableViewDelegate, UITableViewDataSource, PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate, UIActionSheetDelegate>
+
+-(void)requestEventsAccess;
 
 @end
 
@@ -51,12 +54,16 @@ typedef enum {
     sortEnum toSort;
     
     PFQuery *newItemQuery;
+    AppDelegate *appDelegate;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     toSort = 10;
+    
+    //Grab app delegate
+    appDelegate = [[UIApplication sharedApplication] delegate];
     
     //Set default ACL to be read/write of current user only
 //    PFACL *defaultACL = [PFACL ACL];
@@ -80,9 +87,10 @@ typedef enum {
     if ([PFUser currentUser]) {
         //Log username if user is logged in
         NSLog(@"%@ is logged in", usernameString);
+        
+        //Request access to device events. A delay is required in order for events kit to initialize
+        [self performSelector:@selector(requestEventsAccess) withObject:nil afterDelay:0.5];
     }
-    
-    //    [self.myTableView setEditing:YES animated:YES];
     
     //Test parse
     //    PFObject *testObject = [PFObject objectWithClassName:@"TestObject"];
@@ -92,14 +100,6 @@ typedef enum {
 
 -(void)viewWillAppear:(BOOL)animated {
     [self refreshTable];
-}
-
--(IBAction)showNewRecipeView:(id)sender {
-    UIStoryboard *storyBoard = [self storyboard];
-    NewRecipeViewController *newRecipeViewController = [storyBoard instantiateViewControllerWithIdentifier:@"NewRecipe"];
-    newRecipeViewController.myRecipeVC = self;
-    //[self.navigationController popoverPresentationController:newRecipeViewController animated:true];
-    [self presentViewController:newRecipeViewController animated:YES completion:nil];
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -112,6 +112,29 @@ typedef enum {
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+//Request access to eventkit for use with calendars
+-(void)requestEventsAccess {
+    //Request access
+    [appDelegate.eventManager.eventStore requestAccessToEntityType:EKEntityTypeEvent completion:^(BOOL access, NSError *error) {
+        if (!error) {
+            //Store access BOOL
+            appDelegate.eventManager.accessGranted = access;
+        } else {
+            //Error, log description
+            NSLog(@"%@", [error localizedDescription]);
+        }
+    }];
+}
+
+//Alloc new recipe and ptresent
+-(IBAction)showNewRecipeView:(id)sender {
+    UIStoryboard *storyBoard = [self storyboard];
+    NewRecipeViewController *newRecipeViewController = [storyBoard instantiateViewControllerWithIdentifier:@"NewRecipe"];
+    newRecipeViewController.myRecipeVC = self;
+    //[self.navigationController popoverPresentationController:newRecipeViewController animated:true];
+    [self presentViewController:newRecipeViewController animated:YES completion:nil];
 }
 
 //Check if user is logged in, present login if not
@@ -235,7 +258,10 @@ typedef enum {
     newItemQuery = [PFQuery queryWithClassName:self.parseClassName];
     //Include only recipes for current user.
     //This does not work correctly if using usernameString for equalTo. Not sure why
-    [newItemQuery whereKey:@"createdBy" equalTo:[PFUser currentUser].username];
+    
+    if ([PFUser currentUser]) {
+        [newItemQuery whereKey:@"createdBy" equalTo:[PFUser currentUser].username];
+    }
 
     //Set cache policy
     if ([self.objects count] == 0) {

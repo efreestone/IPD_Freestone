@@ -12,6 +12,8 @@
 //
 
 #import "TimersViewController.h"
+#import "AppDelegate.h"
+#import <EventKitUI/EventKitUI.h>
 
 @interface TimersViewController () {
     NSTimer *firstTimer;
@@ -26,6 +28,7 @@
     BOOL timerPaused;
     
     NSString *oneDescription;
+    EKCalendar *recipeCalendar;
 }
 
 @end
@@ -34,10 +37,15 @@
 
 //Synthesize for getters/setters
 @synthesize oneDescriptionLabel, timerOneLabel, onePauseButton, oneCancelButton, oneView;
+//@synthesize appDelegate;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    //Grab app delegate and set calendar
+    self.appDelegate = [[UIApplication sharedApplication] delegate];
+    recipeCalendar = self.appDelegate.eventManager.recipeCalendar;
     
     //Set boarders for timer views to match textviews and textfields elsewhere
     [[self.oneView layer] setBorderColor:[[UIColor lightGrayColor] CGColor]];
@@ -54,7 +62,25 @@
     }
     
     //oneView.hidden = YES;
-
+    
+//    if ([UIApplication instancesRespondToSelector:@selector(registerUserNotificationSettings:)]) {
+//        [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert|UIUserNotificationTypeSound categories:nil]];
+//    }
+    
+    NSString *recipeTitle = @"My Brew Log Test";
+    NSInteger testInt = 120;
+    NSDate *testDate = [NSDate date];
+    testDate = [testDate dateByAddingTimeInterval:testInt];
+    
+    [self createCalendarEvent:testDate withTitle:recipeTitle];
+    
+//    //Check if calendar exists, create if it doesn't
+//    if (![self checkForCalendar:recipeTitle]) {
+//        NSLog(@"Calendar does NOT exist");
+//        [self createCalendar:recipeTitle];
+//    } else {
+//        NSLog(@"Calendar exists");
+//    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -76,6 +102,10 @@
 //            oneView.hidden = NO;
             //oneDescriptionLabel.text = oneDescription;
             firstTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(runTimer) userInfo:nil repeats:YES];
+            
+            NSDate *timerDate = [NSDate date];
+            timerDate = [timerDate dateByAddingTimeInterval:countdownSeconds];
+            [self startLocalNotification:timerDate];
         } else if (secondTimer == nil) {
             //Second timer
             NSLog(@"Second timer");
@@ -83,8 +113,91 @@
 
     } else {
         NSLog(@"Over 23:59");
+        NSDate *calDate = [NSDate date];
+        calDate = [calDate dateByAddingTimeInterval:countdownSeconds];
+        [self createCalendarEvent:calDate withTitle:description];
+        
     }
 }
+
+-(void)createCalendarEvent:(NSDate *)eventDate withTitle:(NSString *)title {
+    if (title.length == 0) {
+        title = @"My Brew Log Event. No Title";
+    }
+    
+    recipeCalendar = self.appDelegate.eventManager.recipeCalendar;
+    
+    //Create the event, set title and calendar
+    EKEvent *recipeEvent = [EKEvent eventWithEventStore:self.appDelegate.eventManager.eventStore];
+    recipeEvent.title = title;
+    recipeEvent.calendar = self.appDelegate.eventManager.recipeCalendar;
+    
+    //Set start/end date, which is set to 1 hour
+    NSDate *endDate = [eventDate dateByAddingTimeInterval:3600];
+    recipeEvent.startDate = eventDate;
+    recipeEvent.endDate = endDate;
+    [recipeEvent addAlarm:[EKAlarm alarmWithAbsoluteDate:eventDate]];
+    
+    //Make sure calendar exists and save event if it does
+    if (recipeCalendar != nil) {
+        // Save and commit the event.
+        NSError *error;
+        if ([self.appDelegate.eventManager.eventStore saveEvent:recipeEvent span:EKSpanFutureEvents commit:YES error:&error]) {
+            NSLog(@"Event saved successfully");
+        } else {
+            // An error occurred, so log the error description.
+            NSLog(@"%@", [error localizedDescription]);
+        }
+    } else {
+        NSLog(@"Calendar doesn't exist");
+    }
+}
+
+//-(BOOL)checkForCalendar:(NSString *)calendarName {
+//    //get an array of the user's calendar using your instance of the eventStore
+//    NSArray *calendarArray = [appDelegate.eventManager.eventStore calendarsForEntityType:EKEntityTypeEvent];
+//    
+//    EKCalendar *calendar;
+//    
+//    for (int i = 0; i < [calendarArray count]; i++) {
+//        calendar = [calendarArray objectAtIndex:i];
+//        NSString *calTitle = [calendar title];
+//        
+//        // if the calendar is found, return YES
+//        if ([calTitle isEqualToString:calendarName]) {
+//            return YES;
+//        }
+//    }
+//    // Calendar name was not found, return NO;
+//    return NO;
+//}
+//
+//-(void)createCalendar:(NSString *)title {
+//    EKCalendar *recipeCalendar = [EKCalendar calendarForEntityType:EKEntityTypeEvent eventStore:appDelegate.eventManager.eventStore];
+//    recipeCalendar.title = title;
+//    
+//    // Find the proper source type value.
+//    for (int i = 0; i < appDelegate.eventManager.eventStore.sources.count; i++) {
+//        EKSource *source = (EKSource *)[appDelegate.eventManager.eventStore.sources objectAtIndex:i];
+//        EKSourceType currentSourceType = source.sourceType;
+//        
+//        if (currentSourceType == EKSourceTypeLocal) {
+//            recipeCalendar.source = source;
+//            break;
+//        }
+//    }
+//    
+//    NSError *error;
+//    [appDelegate.eventManager.eventStore saveCalendar:recipeCalendar commit:YES error:&error];
+//    
+//    // If no error occurs then turn the editing mode off, store the new calendar identifier and reload the calendars.
+//    if (!error) {
+//        NSLog(@"Event saved successfully");
+//    } else {
+//        //Error, log description
+//        NSLog(@"%@", [error localizedDescription]);
+//    }
+//}
 
 -(void)runTimer {
     countdownSeconds = countdownSeconds - 1;
@@ -142,6 +255,14 @@
     [firstTimer invalidate];
     firstTimer = nil;
     timerOneLabel.text = @"00:00";
+}
+
+-(void)startLocalNotification:(NSDate *)fire {
+    UILocalNotification *localNotification = [[UILocalNotification alloc] init];
+    localNotification.fireDate = fire;
+    localNotification.alertBody = [NSString stringWithFormat:@"Alert Fired at %@", fire];
+    localNotification.soundName = UILocalNotificationDefaultSoundName;
+    [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
 }
 
 /*

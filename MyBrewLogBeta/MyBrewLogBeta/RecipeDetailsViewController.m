@@ -14,11 +14,13 @@
 #import "RecipeDetailsViewController.h"
 #import "NewRecipeViewController.h"
 #import "TimersViewController.h"
+#import "AppDelegate.h"
 
 @interface RecipeDetailsViewController () <UITextViewDelegate, UIActionSheetDelegate> {
     NSInteger countdownSeconds;
     TimersViewController *timersViewController;
     BOOL isCopy;
+    AppDelegate *appDelegate;
 }
 
 @end
@@ -40,8 +42,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    appDelegate = [[UIApplication sharedApplication] delegate];
     //Grab timers view controller to start timers from textview
     timersViewController = (TimersViewController*)[[self.tabBarController viewControllers] objectAtIndex:2];
+    //set timers app delegate
+    timersViewController.appDelegate = appDelegate;
     
     //Set textviews with passed data
     nameLabel.text = passedName;
@@ -236,6 +241,29 @@
         
     } else {
         NSLog(@"Not :, over 24 hours");
+        NSArray *numbersArray = [timeString componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@","]];
+        
+        NSInteger monthsFromString = [numbersArray[0] intValue];
+        NSInteger monthsInt = 0;
+        NSInteger weeksFromString = [numbersArray[1] intValue];
+        NSInteger weeksInt = 0;
+        NSInteger daysFromString = [numbersArray[2] intValue];
+        NSInteger daysInt = 0;
+        
+        //NSLog(@"M - %ld, W - %ld, D - %ld", (long)monthsFromString, (long)weeksFromString, (long)daysFromString);
+        
+        if (monthsFromString != 00) {
+            monthsInt = monthsFromString * 2592000;
+            NSLog(@"Months in seconds = %ld", (long)monthsInt);
+        }
+        if (weeksFromString != 00) {
+            weeksInt = weeksFromString * 604800;
+        }
+        if (daysFromString != 00) {
+            daysInt = daysFromString * 86400;
+        }
+        
+        countdownSeconds = monthsInt + weeksInt + daysInt;
     }
     
     return NO;

@@ -79,6 +79,7 @@
 		B80926AD1AD2140C00F465D7 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B80926AC1AD2140C00F465D7 /* libsqlite3.dylib */; };
 		B80926AF1AD2141500F465D7 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B80926AE1AD2141500F465D7 /* Social.framework */; };
 		B80926B11AD2141D00F465D7 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B80926B01AD2141D00F465D7 /* Accounts.framework */; };
+		B8EF85C01ADF1942006B5AB2 /* EventManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B8EF85BF1ADF1942006B5AB2 /* EventManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -192,6 +193,8 @@
 		B80926AC1AD2140C00F465D7 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		B80926AE1AD2141500F465D7 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		B80926B01AD2141D00F465D7 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
+		B8EF85BE1ADF1942006B5AB2 /* EventManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventManager.h; sourceTree = "<group>"; };
+		B8EF85BF1ADF1942006B5AB2 /* EventManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -287,6 +290,8 @@
 				B80925E91AD2102200F465D7 /* Supporting Files */,
 				B80926421AD2116800F465D7 /* CustomPickerDelegate.h */,
 				B80926431AD2116800F465D7 /* CustomPickerDelegate.m */,
+				B8EF85BE1ADF1942006B5AB2 /* EventManager.h */,
+				B8EF85BF1ADF1942006B5AB2 /* EventManager.m */,
 			);
 			path = MyBrewLogBeta;
 			sourceTree = "<group>";
@@ -557,6 +562,7 @@
 				B809264E1AD2116800F465D7 /* CustomPickerDelegate.m in Sources */,
 				B809268E1AD2118800F465D7 /* RecipeDetailsViewController.m in Sources */,
 				B80925EC1AD2102200F465D7 /* main.m in Sources */,
+				B8EF85C01ADF1942006B5AB2 /* EventManager.m in Sources */,
 				B80926351AD2115A00F465D7 /* ActionSheetLocalePicker.m in Sources */,
 				B809264F1AD2116800F465D7 /* CustomQuantityPickerDelegate.m in Sources */,
 				B809264D1AD2116800F465D7 /* CustomPFSignUpViewController.m in Sources */,

@@ -12,6 +12,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AppDelegate.h"
 
 @interface TimersViewController : UIViewController
 
@@ -35,7 +36,10 @@
 @property (strong, nonatomic) IBOutlet UIView *oneView;
 @property (strong, nonatomic) IBOutlet UIView *twoView;
 
+@property (strong, nonatomic) AppDelegate *appDelegate;
+
 -(IBAction)startTimer:(id)sender;
 -(void)startTimerFromDetails:(NSInteger)time withDetails:(NSString *)details;
+//-(void)createCalendar:(NSString *)title;
 
 @end
