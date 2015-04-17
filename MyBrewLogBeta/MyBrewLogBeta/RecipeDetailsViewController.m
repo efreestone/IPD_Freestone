@@ -15,6 +15,7 @@
 #import "NewRecipeViewController.h"
 #import "TimersViewController.h"
 #import "AppDelegate.h"
+#import <Social/Social.h>
 
 @interface RecipeDetailsViewController () <UITextViewDelegate, UIActionSheetDelegate> {
     NSInteger countdownSeconds;
@@ -166,7 +167,8 @@
             break;
         case 2: //Share
             NSLog(@"2");
-            [self shareClicked];
+            //[self shareClicked];
+            [self postToTwitter];
             break;
         case 3: //Delete
             NSLog(@"3");
@@ -267,6 +269,22 @@
     }
     
     return NO;
+}
+
+//Post to twitter. This is still lacking a link but there is no website interface to handle it anyways.
+-(void)postToTwitter {
+    //Create string with username and score
+    NSString *tweetString = [NSString stringWithFormat:@"Check out my %@ recipe on My Brew Log (insert link) called %@", passedType, passedName];
+    
+    if ([SLComposeViewController isAvailableForServiceType:SLServiceTypeTwitter]) {
+        SLComposeViewController *tweetSheet = [SLComposeViewController
+                                               composeViewControllerForServiceType:SLServiceTypeTwitter];
+        [tweetSheet setInitialText:tweetString];
+        NSLog(@"Post to Twitter");
+        [self presentViewController:tweetSheet animated:YES completion:nil];
+    } else {
+        [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:NSLocalizedString(@"There is no twitter account available on your device. Please check your account settings and try again", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles:nil] show];
+    }
 }
 
 @end

@@ -13,6 +13,7 @@
 
 #import "BrowseDetailsViewController.h"
 #import "NewRecipeViewController.h"
+#import <Social/Social.h>
 
 @interface BrowseDetailsViewController () {
     NSArray *recipesArray;
@@ -57,9 +58,10 @@
 
 //Share button clicked
 -(IBAction)shareClicked:(id)sender {
-    NSString *titleString = @"Share Recipe";
-    NSString *alertMessage = @"Recipe would have been shared via social networks, however this feature is not functional yet";
-    [self showAlert:alertMessage withTitle:titleString];
+//    NSString *titleString = @"Share Recipe";
+//    NSString *alertMessage = @"Recipe would have been shared via social networks, however this feature is not functional yet";
+//    [self showAlert:alertMessage withTitle:titleString];
+    [self postToTwitter];
 }
 
 //Method to create and show alert view
@@ -103,6 +105,23 @@
         newRecipeVC.passedObjectID = passedObjectID;
         newRecipeVC.passedObject = passedObject;
         newRecipeVC.isCopy = YES;
+    }
+}
+
+
+//Post to twitter. This is still lacking a link but there is no website interface to handle it anyways.
+-(void)postToTwitter {
+    //Create string with username and score
+    NSString *tweetString = [NSString stringWithFormat:@"Check out this %@ recipe on My Brew Log (insert link) called %@ by %@", passedType, passedName, usernameString];
+    
+    if ([SLComposeViewController isAvailableForServiceType:SLServiceTypeTwitter]) {
+        SLComposeViewController *tweetSheet = [SLComposeViewController
+                                               composeViewControllerForServiceType:SLServiceTypeTwitter];
+        [tweetSheet setInitialText:tweetString];
+        NSLog(@"Post to Twitter");
+        [self presentViewController:tweetSheet animated:YES completion:nil];
+    } else {
+        [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:NSLocalizedString(@"There is no twitter account available on your device. Please check your account settings and try again", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles:nil] show];
     }
 }
 
