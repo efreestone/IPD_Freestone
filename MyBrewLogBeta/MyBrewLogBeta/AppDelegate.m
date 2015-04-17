@@ -1,0 +1,82 @@
+// Elijah Freestone
+// IPY 1504
+// Week 2 - Beta
+// April 5th, 2015
+
+//
+//  AppDelegate.m
+//  MyBrewLogBeta
+//
+//  Created by Elijah Freestone on 4/5/15.
+//  Copyright (c) 2015 Elijah Freestone. All rights reserved.
+//
+
+#import "AppDelegate.h"
+#import "TimersViewController.h"
+#import "BrowseViewController.h"
+#import <Parse/Parse.h>
+
+@interface AppDelegate () {
+    TimersViewController *timerVC;
+}
+
+@end
+
+@implementation AppDelegate
+
+
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    // [Optional] Power your app with Local Datastore. For more info, go to
+    // https://parse.com/docs/ios_guide#localdatastore/iOS
+//        [Parse enableLocalDatastore];
+    
+    // Initialize Parse.
+    [Parse setApplicationId:@"HFCzzZqkKhg4PrVoCRQSJmRlCGCUFi1DckNMbx4D"
+                  clientKey:@"VJOEAlb0WMoPpvzdcwqxzAOTTBxr8eEAf9OyTAmw"];
+    
+    // [Optional] Track statistics around application opens.
+    [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
+    
+    // Override point for customization after application launch.
+    return YES;
+}
+
+- (void)applicationWillResignActive:(UIApplication *)application {
+    // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
+    // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
+}
+
+- (void)applicationDidEnterBackground:(UIApplication *)application {
+    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
+    // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    
+    if (timerVC.firstTimer != nil) {
+        //Start local notification for timer
+        [timerVC startLocalNotification:timerVC.timerDate];
+        //Invalidate timer
+        [timerVC.firstTimer invalidate];
+    }
+}
+
+- (void)applicationWillEnterForeground:(UIApplication *)application {
+    // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+}
+
+- (void)applicationDidBecomeActive:(UIApplication *)application {
+    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    self.eventManager = [[EventManager alloc] init];
+    
+    UITabBarController *tabController = (UITabBarController *)self.window.rootViewController;
+    
+    timerVC = (TimersViewController *)[[tabController viewControllers] objectAtIndex:2];
+    
+//    //Grab browse view controller and set sort enum. This is a workaround to fix default sort going
+//    BrowseViewController *browseVC = (BrowseViewController *)[[tabController viewControllers] objectAtIndex:1];
+//    browseVC.toSort = 10;
+}
+
+- (void)applicationWillTerminate:(UIApplication *)application {
+    // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+@end
