@@ -31,6 +31,7 @@
 
 //Create sort enum
 typedef enum {
+    SortDefault,
     SortActive,
     SortName,
     SortType,
@@ -60,7 +61,7 @@ typedef enum {
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    toSort = 10;
+    //toSort = 10;
     
     //Grab app delegate
     appDelegate = [[UIApplication sharedApplication] delegate];
@@ -240,14 +241,6 @@ typedef enum {
     [self loadObjects];
 }
 
-//-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-//    PFObject *object = [self objectAtIndexPath:indexPath];
-//    selectedName = [object objectForKey:@"Name"];
-//    selectedIngredients = [object objectForKey:@"Ingredients"];
-//    selectedInstructions = [object objectForKey:@"Instructions"];
-//    selectedPFObject = object;
-//}
-
 //Override query to set cache policy an change sort
 - (PFQuery *)queryForTable {
     //Make sure parseClassName is set
@@ -270,20 +263,20 @@ typedef enum {
 
     //Set sort, toSort is set out of range of enum to start
     switch (toSort) {
-        case 0: //Active
+        case 1: //Active
             
             break;
-        case 1: //Name
+        case 2: //Name
             [newItemQuery orderByAscending:@"Name"];
             break;
-        case 2: //Type
+        case 3: //Type
             [newItemQuery orderByAscending:@"Type"];
             break;
-        case 3: //Newest
+        case 4: //Newest
             [newItemQuery orderByDescending:@"updatedByUser"];
             //[self refreshTable];
             break;
-        case 4://Oldest
+        case 5://Oldest
             [newItemQuery orderByAscending:@"updatedByUser"];
             //[self refreshTable];
             break;

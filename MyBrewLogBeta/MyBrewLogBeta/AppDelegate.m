@@ -13,6 +13,7 @@
 
 #import "AppDelegate.h"
 #import "TimersViewController.h"
+#import "BrowseViewController.h"
 #import <Parse/Parse.h>
 
 @interface AppDelegate () {
@@ -65,8 +66,13 @@
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     self.eventManager = [[EventManager alloc] init];
     
-    UITabBarController *tbc = (UITabBarController *)self.window.rootViewController;
-    timerVC = (TimersViewController*)[[tbc viewControllers] objectAtIndex:2];
+    UITabBarController *tabController = (UITabBarController *)self.window.rootViewController;
+    
+    timerVC = (TimersViewController *)[[tabController viewControllers] objectAtIndex:2];
+    
+//    //Grab browse view controller and set sort enum. This is a workaround to fix default sort going
+//    BrowseViewController *browseVC = (BrowseViewController *)[[tabController viewControllers] objectAtIndex:1];
+//    browseVC.toSort = 10;
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {

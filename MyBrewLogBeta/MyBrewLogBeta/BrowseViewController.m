@@ -22,6 +22,7 @@
 
 //Create sort enum
 typedef enum {
+    SortDefault,
     SortFavorite,
     SortUsername,
     SortType,
@@ -50,7 +51,7 @@ typedef enum {
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    toSort = 10;
+    //toSort = 10;
     
     parseClassName = @"newRecipe";
     //self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
@@ -157,14 +158,6 @@ typedef enum {
     return browseCell;
 } //cellForRowAtIndexPath close
 
-//-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-//    PFObject *object = [self objectAtIndexPath:indexPath];
-//    selectedName = [object objectForKey:@"Name"];
-//    selectedIngredients = [object objectForKey:@"Ingredients"];
-//    selectedInstructions = [object objectForKey:@"Instructions"];
-//    selectedPFObject = object;
-//}
-
 //Override query to set cache policy an change sort
 - (PFQuery *)queryForTable {
     //Make sure parseClassName is set
@@ -186,30 +179,46 @@ typedef enum {
     
     //Set sort. toSort is an enum set by selecting a button in the sort action sheet
     switch (toSort) {
-        case 0: //Favorites
+        case 1: //Favorites
             [newItemQuery whereKey:@"favorites" equalTo:[PFUser currentUser].objectId];
             [newItemQuery orderByDescending:@"updatedByUser"];
             NSLog(@"Sort favorites");
             break;
-        case 1: //Username
+        case 2: //Username
             [newItemQuery orderByAscending:@"createdBy"];
             break;
-        case 2: //Type
+        case 3: //Type
             [newItemQuery orderByAscending:@"Type"];
             break;
-        case 3: //Newest
+        case 4: //Newest
             [newItemQuery orderByDescending:@"updatedByUser"];
             //[self refreshTable];
             break;
-        case 4://Oldest
+        case 5://Oldest
             [newItemQuery orderByAscending:@"updatedByUser"];
             //[self refreshTable];
             break;
         default:
-            [newItemQuery orderByDescending:@"updatedByUser"];
+//            [newItemQuery orderByDescending:@"updatedByUser"];
             NSLog(@"Sort default");
             break;
     }
+    
+//    if (toSort == 0) {
+//        [newItemQuery whereKey:@"favorites" equalTo:[PFUser currentUser].objectId];
+//        [newItemQuery orderByDescending:@"updatedByUser"];
+//    } else if (toSort == 1) {
+//        [newItemQuery orderByAscending:@"createdBy"];
+//    } else if (toSort == 2) {
+//        [newItemQuery orderByAscending:@"Type"];
+//    } else if (toSort == 3) {
+//        [newItemQuery orderByDescending:@"updatedByUser"];
+//    } else if (toSort == 4) {
+//        [newItemQuery orderByAscending:@"updatedByUser"];
+//    } else {
+//        [newItemQuery orderByDescending:@"updatedByUser"];
+//    }
+    
     return newItemQuery;
 } //queryForTable close
 
@@ -234,7 +243,7 @@ typedef enum {
 
 //Grab tag of button pressed in sort action sheet and set enum to it
 -(void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex {
-    toSort = (int) buttonIndex;
+    toSort = (int) buttonIndex + 1;
     //Reload table with new sort params
     [self loadObjects];
 }
