@@ -13,20 +13,23 @@
 
 #import "TimersViewController.h"
 #import "AppDelegate.h"
+#import "CustomTimerPickerDelegate.h"
+#import "ActionSheetCustomPicker.h"
+#import "ActionSheetDatePicker.h"
 #import <EventKitUI/EventKitUI.h>
 
-@interface TimersViewController () {
+@interface TimersViewController () <UIActionSheetDelegate> {
     int hoursInt;
     int minutesInt;
     int secondsInt;
     
     NSString *timerString;
-    
     NSDate *pauseStart, *previousFireDate;
     BOOL timerPaused;
     
     NSString *oneDescription;
     EKCalendar *recipeCalendar;
+    id buttonSender;
 }
 
 @end
@@ -59,6 +62,9 @@
         oneDescriptionLabel.text = oneDescription;
     }
     
+   
+    
+    
     //oneView.hidden = YES;
     
 //    if ([UIApplication instancesRespondToSelector:@selector(registerUserNotificationSettings:)]) {
@@ -81,6 +87,31 @@
 -(IBAction)startTimer:(id)sender {
     countdownSeconds = 180;
     firstTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(runTimer) userInfo:nil repeats:YES];
+}
+
+-(void)addNewTimer:(NSInteger)time withDetails:(NSString *)description {
+    oneDescription = description;
+    
+    //Calculate hours/minutes/seconds from countdownSeconds
+    secondsInt = time % 60;
+    minutesInt = (time / 60) % 60;
+    hoursInt = (time / 3600) % 24;
+    //Display timer
+    //    NSString *timerString = [NSString stringWithFormat:@"%.2d:%.2d:%.2d left", hoursInt, minutesInt, secondsInt];
+    
+    if (hoursInt < 1) {
+        timerString = [NSString stringWithFormat:@"%.2d:%.2d left", minutesInt, secondsInt];
+    } else {
+        if (hoursInt < 10) {
+            timerString = [NSString stringWithFormat:@"%.1d:%.2d:%.2d left", hoursInt, minutesInt, secondsInt];
+        } else {
+            timerString = [NSString stringWithFormat:@"%.2d:%.2d:%.2d left", hoursInt, minutesInt, secondsInt];
+        }
+    }
+    
+    timerOneLabel.text = timerString;
+    [onePauseButton setTitle:@"Start" forState:UIControlStateNormal];
+    timerPaused = YES;
 }
 
 -(void)startTimerFromDetails:(NSInteger)time withDetails:(NSString *)description {
@@ -113,39 +144,6 @@
     }
 }
 
--(void)createCalendarEvent:(NSDate *)eventDate withTitle:(NSString *)title {
-    if (title.length == 0) {
-        title = @"My Brew Log Event. No Title";
-    }
-    
-    recipeCalendar = self.appDelegate.eventManager.recipeCalendar;
-    
-    //Create the event, set title and calendar
-    EKEvent *recipeEvent = [EKEvent eventWithEventStore:self.appDelegate.eventManager.eventStore];
-    recipeEvent.title = title;
-    recipeEvent.calendar = self.appDelegate.eventManager.recipeCalendar;
-    
-    //Set start/end date, which is set to 1 hour
-    NSDate *endDate = [eventDate dateByAddingTimeInterval:3600];
-    recipeEvent.startDate = eventDate;
-    recipeEvent.endDate = endDate;
-    [recipeEvent addAlarm:[EKAlarm alarmWithAbsoluteDate:eventDate]];
-    
-    //Make sure calendar exists and save event if it does
-    if (recipeCalendar != nil) {
-        // Save and commit the event.
-        NSError *error;
-        if ([self.appDelegate.eventManager.eventStore saveEvent:recipeEvent span:EKSpanFutureEvents commit:YES error:&error]) {
-            NSLog(@"Event saved successfully");
-        } else {
-            // An error occurred, so log the error description.
-            NSLog(@"%@", [error localizedDescription]);
-        }
-    } else {
-        NSLog(@"Calendar doesn't exist");
-    }
-}
-
 -(void)runTimer {
     countdownSeconds = countdownSeconds - 1;
     
@@ -165,12 +163,15 @@
             timerString = [NSString stringWithFormat:@"%.2d:%.2d:%.2d left", hoursInt, minutesInt, secondsInt];
         }
     }
-    
+    //Display currnet countdown time
     timerOneLabel.text = timerString;
     
+    //Play sound and invalidate once time down to zero
     if (countdownSeconds == 0) {
         [firstTimer invalidate];
         firstTimer = nil;
+        [self.alarmPlayer play];
+        NSLog(@"Timer over");
     }
 }
 
@@ -211,6 +212,155 @@
     localNotification.soundName = UILocalNotificationDefaultSoundName;
     [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
     NSLog(@"Local notifiaction started");
+}
+
+//Create calendar
+-(void)createCalendarEvent:(NSDate *)eventDate withTitle:(NSString *)title {
+    if (title.length == 0) {
+        title = @"My Brew Log Event. No Title";
+    }
+    
+    recipeCalendar = self.appDelegate.eventManager.recipeCalendar;
+    
+    //Create the event, set title and calendar
+    EKEvent *recipeEvent = [EKEvent eventWithEventStore:self.appDelegate.eventManager.eventStore];
+    recipeEvent.title = title;
+    recipeEvent.calendar = self.appDelegate.eventManager.recipeCalendar;
+    
+    //Set start/end date, which is set to 1 hour
+    NSDate *endDate = [eventDate dateByAddingTimeInterval:3600];
+    recipeEvent.startDate = eventDate;
+    recipeEvent.endDate = endDate;
+    [recipeEvent addAlarm:[EKAlarm alarmWithAbsoluteDate:eventDate]];
+    
+    //Make sure calendar exists and save event if it does
+    if (recipeCalendar != nil) {
+        // Save and commit the event.
+        NSError *error;
+        if ([self.appDelegate.eventManager.eventStore saveEvent:recipeEvent span:EKSpanFutureEvents commit:YES error:&error]) {
+            NSLog(@"Event saved successfully");
+        } else {
+            // An error occurred, so log the error description.
+            NSLog(@"%@", [error localizedDescription]);
+        }
+    } else {
+        NSLog(@"Calendar doesn't exist");
+    }
+}
+
+#pragma new timer
+
+//Show Timer Picker
+-(IBAction)showTimerPicker:(id)sender {
+    //Pass (id)sender to be used for launching ActionSheetPicker from reg action sheet
+    buttonSender = sender;
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Is timer over 24 hours?"
+                                                             delegate:self
+                                                    cancelButtonTitle:@"Cancel"
+                                               destructiveButtonTitle:nil
+                                                    otherButtonTitles:@"Yes", @"No", nil];
+    //Set tag and show action sheet
+    actionSheet.tag = 200;
+    [actionSheet showInView:self.view];
+}
+
+//Show countdown picker. Triggered from selecting No to over 24 hour ActionSheet
+-(void)showCountdownPicker:(id)sender {
+    //Create picker and set to timer mode
+    ActionSheetDatePicker *actionSheetPicker = [[ActionSheetDatePicker alloc] initWithTitle:@"Under 24 hours"
+                                                      datePickerMode:UIDatePickerModeCountDownTimer
+                                                        selectedDate:nil
+                                                           doneBlock:^(ActionSheetDatePicker *picker, id dateSelected, id origin) {
+                                                               NSLog(@"dateSelected: %@", dateSelected);
+                                                               [self under24Hours:picker.countDownDuration element:origin];
+                                                           } cancelBlock:^(ActionSheetDatePicker *picker) {
+                                                               NSLog(@"Cancel clicked");
+                                                           } origin:sender];
+    [(ActionSheetDatePicker *) actionSheetPicker setCountDownDuration:120];
+    [actionSheetPicker showActionSheetPicker];
+}
+
+//Grab input countdown time
+- (void)under24Hours:(double)selectedCountdownDuration element:(id)element {
+    [self showTimerAlert];
+    countdownSeconds = selectedCountdownDuration;
+    NSLog(@"countdown %f", selectedCountdownDuration);
+}
+
+//Show custom picker. Triggered from selecting Yes to over 24 hour ActionSheet
+-(void)showCustomTimePicker:(id)sender {
+    //Init custom delegate
+    CustomTimerPickerDelegate *timerDelegate = [[CustomTimerPickerDelegate alloc] init];
+    NSNumber *comp0 = @0;
+    NSNumber *comp1 = @0;
+    NSNumber *comp2 = @0;
+    NSNumber *comp3 = @0;
+    NSNumber *comp4 = @0;
+    NSNumber *comp5 = @0;
+    //Set initial selections
+    NSArray *initialSelections = @[comp0, comp1, comp2, comp3, comp4, comp5];
+    
+    ActionSheetCustomPicker *customPicker = [[ActionSheetCustomPicker alloc] initWithTitle:@"Select Time" delegate:timerDelegate showCancelButton:YES origin:sender initialSelections:initialSelections];
+    
+//    timerDelegate.myRecipeVC = self;
+    [customPicker showActionSheetPicker];
+}
+
+//Timer picked (over 24) formats and adds ingredients to textview. Called from Quantity Delegate
+-(void)timerPicked:(NSString *)formattedTime {
+    NSLog(@"NewRec: %@", formattedTime);
+
+}
+
+//Grab action sheet actions via delegate method
+-(void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex {
+    //Over 24 hours (Yes clicked)
+    if (buttonIndex == 0) {
+        NSLog(@"index 0");
+        [self showCustomTimePicker:buttonSender];
+    //Under 24 hours (No clicked)
+    } else if (buttonIndex == 1) {
+        NSLog(@"index 1");
+        [self showCountdownPicker:buttonSender];
+    //Cancel clicked
+    } else {
+        NSLog(@"Other index");
+    }
+}
+
+//Method to create and show alert view with text input
+-(void)showTimerAlert {
+    NSString *formattedString = @"Please enter a discription for the new timer";
+    
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Start Timer"
+                                                    message:formattedString
+                                                   delegate:self
+                                          cancelButtonTitle:@"Cancel"
+                                          otherButtonTitles:@"Start", nil];
+    alert.alertViewStyle = UIAlertViewStylePlainTextInput;
+    [alert show];
+} //showAlert close
+
+//Grab text entered into alertview
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    NSString *description = [alertView textFieldAtIndex:0].text;
+    if (buttonIndex == 1) {
+        NSLog(@"index 1");
+        if (description.length == 0) {
+            description = @"No Description";
+        }
+        //[self addNewTimer:countdownSeconds withDetails:description];
+        //Add one to countdown to utilize runTimer to set up nstimer
+        countdownSeconds = countdownSeconds + 1;
+        [self runTimer];
+        
+//        timerOneLabel.text = timerString;
+        [onePauseButton setTitle:@"Start" forState:UIControlStateNormal];
+        timerPaused = YES;
+        [self startTimerFromDetails:countdownSeconds withDetails:description];
+        [self pauseTimer:firstTimer];
+        //timersViewController.oneView.hidden = NO;
+    }
 }
 
 /*

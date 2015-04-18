@@ -69,6 +69,11 @@
     UITabBarController *tabController = (UITabBarController *)self.window.rootViewController;
     
     timerVC = (TimersViewController *)[[tabController viewControllers] objectAtIndex:2];
+    
+    // Construct URL to sound file
+    NSString *path = [NSString stringWithFormat:@"%@/bell.mp3", [[NSBundle mainBundle] resourcePath]];
+    NSURL *soundUrl = [NSURL fileURLWithPath:path];
+    timerVC.alarmPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:soundUrl error:nil];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {

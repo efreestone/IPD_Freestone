@@ -13,6 +13,7 @@
 
 #import <UIKit/UIKit.h>
 #import "AppDelegate.h"
+#import <AVFoundation/AVFoundation.h>
 
 @interface TimersViewController : UIViewController
 
@@ -40,6 +41,7 @@
 @property (strong, nonatomic) NSTimer *secondTimer;
 @property (strong, nonatomic) NSDate *timerDate;
 @property (nonatomic) NSInteger countdownSeconds;
+@property (strong, nonatomic) AVAudioPlayer *alarmPlayer;
 
 @property (nonatomic) AppDelegate *appDelegate;
 

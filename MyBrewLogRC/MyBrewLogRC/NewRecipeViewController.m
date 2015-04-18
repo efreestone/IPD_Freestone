@@ -144,17 +144,6 @@
                                                destructiveButtonTitle:nil
                                                     otherButtonTitles:nil];
     
-//    [[[actionSheet valueForKey:@"_buttons"] objectAtIndex:0] setImage:[UIImage imageNamed:@"beer-bottle.png"] forState:UIControlStateNormal];
-//    [[[actionSheet valueForKey:@"_buttons"] objectAtIndex:1] setImage:[UIImage imageNamed:@"wine-glass.png"] forState:UIControlStateNormal];
-//    [[[actionSheet valueForKey:@"_buttons"] objectAtIndex:2] setImage:[UIImage imageNamed:@"other-icon.png"] forState:UIControlStateNormal];
-//    
-//    for (UIView *subview in actionSheet.subviews) {
-//        if ([subview isKindOfClass:[UIButton class]]) {
-//            UIButton *button = (UIButton *)subview;
-//            [button setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
-//        }
-//    }
-    
     //Fast enum recipe types and apply to "other" button
     for (NSString *title in recipeTypes) {
         [actionSheet addButtonWithTitle:title];

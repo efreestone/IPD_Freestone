@@ -79,6 +79,7 @@
 		B810FA9F1AE1BDE200991074 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B810FA9E1AE1BDE200991074 /* CoreGraphics.framework */; };
 		B810FAA11AE1BDEE00991074 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B810FAA01AE1BDEE00991074 /* CFNetwork.framework */; };
 		B810FAA31AE1BDF500991074 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B810FAA21AE1BDF500991074 /* AudioToolbox.framework */; };
+		B8E599A61AE1F95400AE3060 /* bell.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B8E599A51AE1F95400AE3060 /* bell.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -192,6 +193,7 @@
 		B810FA9E1AE1BDE200991074 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		B810FAA01AE1BDEE00991074 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		B810FAA21AE1BDF500991074 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		B8E599A51AE1F95400AE3060 /* bell.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bell.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -409,6 +411,7 @@
 		B810FA7A1AE1BCFB00991074 /* resources */ = {
 			isa = PBXGroup;
 			children = (
+				B8E599A51AE1F95400AE3060 /* bell.mp3 */,
 				B810FA7B1AE1BCFB00991074 /* Calibri Bold.ttf */,
 				B810FA7C1AE1BCFB00991074 /* Calibri.ttf */,
 				B810FA7D1AE1BCFB00991074 /* CooperBlackStd.otf */,
@@ -508,6 +511,7 @@
 				B810FA6C1AE1BCE800991074 /* my-recipes-tab@2x.png in Resources */,
 				B810FA621AE1BCE800991074 /* barrels.jpg in Resources */,
 				B810FA721AE1BCE800991074 /* timer-tab@2x.png in Resources */,
+				B8E599A61AE1F95400AE3060 /* bell.mp3 in Resources */,
 				B810F9E71AE1BABC00991074 /* Main.storyboard in Resources */,
 				B810FA671AE1BCE800991074 /* Icon-76@2x.png in Resources */,
 				B810FA731AE1BCE800991074 /* wine-glass.png in Resources */,
@@ -766,6 +770,7 @@
 				B810F9FD1AE1BABD00991074 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		B810F9FE1AE1BABD00991074 /* Build configuration list for PBXNativeTarget "MyBrewLogRCTests" */ = {
 			isa = XCConfigurationList;
@@ -774,6 +779,7 @@
 				B810FA001AE1BABD00991074 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

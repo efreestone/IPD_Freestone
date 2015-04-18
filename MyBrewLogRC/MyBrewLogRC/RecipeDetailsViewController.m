@@ -114,7 +114,7 @@
     [copyAlert show];
 } //showAlert close
 
-//Method to create and show alert view if there is no internet connectivity
+//Method to create and show alert view with text input
 -(void)showTimerAlert:(NSString *)alertMessage {
     NSString *formattedString = [NSString stringWithFormat:@"%@ \nPlease enter a discription for timer", alertMessage];
     
@@ -158,10 +158,13 @@
     switch (buttonIndex) {
         case 0: //Edit
             NSLog(@"0");
+            //Set copy BOOL
+            isCopy = NO;
             [self performSegueWithIdentifier:@"Edit" sender:self];
             break;
         case 1: //Copy
             NSLog(@"1");
+            //Set copy BOOL
             isCopy = YES;
             [self performSegueWithIdentifier:@"Edit" sender:self];
             break;
