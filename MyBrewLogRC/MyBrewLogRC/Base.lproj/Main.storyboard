@@ -302,7 +302,6 @@
                                     <outlet property="cellImage" destination="MaR-Fh-sbs" id="7Z4-Gu-RlG"/>
                                     <outlet property="detailsLabel" destination="bGk-Ej-U5b" id="sPg-Mn-Rix"/>
                                     <outlet property="recipeNameLabel" destination="YKN-UQ-hXC" id="K7K-fz-dF8"/>
-                                    <segue destination="WBM-d3-r6Z" kind="show" identifier="BrowseDetail" id="egA-hy-KBP"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -788,7 +787,7 @@
         <!--Browse Details-->
         <scene sceneID="cWd-1m-pFm">
             <objects>
-                <viewController id="WBM-d3-r6Z" userLabel="Browse Details" customClass="BrowseDetailsViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="BrowseDetails" id="WBM-d3-r6Z" userLabel="Browse Details" customClass="BrowseDetailsViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="FaO-c9-7od"/>
                         <viewControllerLayoutGuide type="bottom" id="hh7-tM-QRq"/>
@@ -1203,6 +1202,6 @@
         <image name="timer-tab.png" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Rhg-DK-ehR"/>
+        <segue reference="YZW-Of-gs0"/>
     </inferredMetricsTieBreakers>
 </document>

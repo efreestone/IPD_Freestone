@@ -46,6 +46,7 @@ typedef enum {
     //NSString *usernameString;
     sortEnum toSort;
     PFQuery *newItemQuery;
+    NSIndexPath *selectedIndexPath;
 }
 
 - (void)viewDidLoad {
@@ -88,8 +89,11 @@ typedef enum {
     self.browseSearchController.searchResultsUpdater = self;
     
     self.browseSearchController.searchBar.frame = CGRectMake(self.browseSearchController.searchBar.frame.origin.x, self.browseSearchController.searchBar.frame.origin.y, self.browseSearchController.searchBar.frame.size.width, 44.0);
+    self.browseSearchController.searchBar.searchBarStyle = UISearchBarStyleMinimal;
     
     self.tableView.tableHeaderView = self.browseSearchController.searchBar;
+    self.tableView.dataSource = self;
+    self.tableView.delegate = self;
     
     self.definesPresentationContext = YES;
 }
@@ -124,7 +128,7 @@ typedef enum {
 //        [self.tableView reloadData];
 //    }];
     
-    NSLog(@"Result: %@", results);
+    //NSLog(@"Result: %@", results);
     NSLog(@"filterResults %lu", (unsigned long)results.count);
     
     [self.browseSearchResults addObjectsFromArray:results];
@@ -210,8 +214,9 @@ typedef enum {
 //        browseCell.cellImage.image = [UIImage imageNamed:imageName];
 //    }
     
+    //If browseSearchResults exists, populate table with search results
     if (self.browseSearchResults.count >= 1) {
-        NSLog(@"Search results controller");
+        //NSLog(@"Search results controller");
         PFObject *searchedObject = [self.browseSearchResults objectAtIndex:indexPath.row];
 //        PFQuery *query = [PFQuery queryWithClassName:parseClassName];
 //        PFObject *searchedUser = [query getObjectWithId:searchedObject.objectId];
@@ -232,7 +237,8 @@ typedef enum {
         browseCell.detailsLabel.text = createdByString;
         browseCell.cellImage.image = [UIImage imageNamed:imageName];
     } else {
-        NSLog(@"ELSE Search results controller");
+    //Not search, regulare populate
+        //NSLog(@"ELSE Search results controller");
         NSString *recipeType = [object objectForKey:@"Type"];
         NSString *imageName;
         if ([recipeType isEqualToString:@"Beer"]) {
@@ -393,37 +399,92 @@ typedef enum {
 }
 */
 
+//Fired whenever a tableview cell is selected, including when search active
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    PFObject *object;
+    //If browseSearchResults exists, process as search table
+    if (self.browseSearchResults.count >= 1) {
+        //NSLog(@"indexpath at search tableview is: %ld", (long)indexPath.row);
+        object = [self.browseSearchResults objectAtIndex:indexPath.row];
+        selectedName = [object objectForKey:@"Name"];
+        selectedType = [object objectForKey:@"Type"];
+        selectedIngredients = [object objectForKey:@"Ingredients"];
+        selectedInstructions = [object objectForKey:@"Instructions"];
+        selectedObjectID = [NSString stringWithFormat:@"%@", object.objectId];
+        selectedPFObject = object;
+    } else {
+    //Not search, process as standard selection
+        //NSLog(@"indexpath at orignal tableview is: %@", [indexPath description]);
+        object = [self objectAtIndexPath:indexPath];
+        selectedName = [object objectForKey:@"Name"];
+        selectedType = [object objectForKey:@"Type"];
+        selectedIngredients = [object objectForKey:@"Ingredients"];
+        selectedInstructions = [object objectForKey:@"Instructions"];
+        selectedObjectID = [NSString stringWithFormat:@"%@", object.objectId];
+        selectedPFObject = object;
+    }
+    
+    //Grab destination view controller
+    UIStoryboard *storyBoard = [self storyboard];
+    BrowseDetailsViewController *detailsViewController = [storyBoard instantiateViewControllerWithIdentifier:@"BrowseDetails"];
+
+    //Pass details over to be displayed
+    if (detailsViewController != nil) {
+        detailsViewController.passedName = selectedName;
+        detailsViewController.passedType = selectedType;
+        detailsViewController.passedIngredients = selectedIngredients;
+        detailsViewController.passedInstructions = selectedInstructions;
+        detailsViewController.passedUsername = usernameString;
+        detailsViewController.passedObjectID = selectedObjectID;
+        detailsViewController.passedObject = selectedPFObject;
+    }
+    //Manually push details view
+    [self.navigationController pushViewController:detailsViewController animated:YES];
+}
+
 
 #pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-    
-    //Grab object and items to pass
-    PFObject *object = [self objectAtIndexPath:indexPath];
-    selectedName = [object objectForKey:@"Name"];
-    selectedType = [object objectForKey:@"Type"];
-    selectedIngredients = [object objectForKey:@"Ingredients"];
-    selectedInstructions = [object objectForKey:@"Instructions"];
-    selectedObjectID = [NSString stringWithFormat:@"%@", object.objectId];
-    selectedPFObject = object;
-    
-    //Verify identifier of push segue to Details view
-    if ([segue.identifier isEqualToString:@"BrowseDetail"]) {
-        //Grab destination view controller
-        BrowseDetailsViewController *detailsViewController = segue.destinationViewController;
-        //Pass details over to be displayed
-        if (detailsViewController != nil) {
-            detailsViewController.passedName = selectedName;
-            detailsViewController.passedType = selectedType;
-            detailsViewController.passedIngredients = selectedIngredients;
-            detailsViewController.passedInstructions = selectedInstructions;
-            detailsViewController.passedUsername = usernameString;
-            detailsViewController.passedObjectID = selectedObjectID;
-            detailsViewController.passedObject = selectedPFObject;
-        }
-    }
+//// In a storyboard-based application, you will often want to do a little preparation before navigation
+//- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+//    NSIndexPath *indexPath;
+//    if (self.browseSearchResults.count <= 1) {
+//        indexPath = [self.browseTableView indexPathForSelectedRow];
+//    } else {
+//        indexPath = [self.tableView indexPathForSelectedRow];
+//    }
+//    
+//    
+//    
+//    //Grab object and items to pass
+//    
+////    selectedName = [object objectForKey:@"Name"];
+////    selectedType = [object objectForKey:@"Type"];
+////    selectedIngredients = [object objectForKey:@"Ingredients"];
+////    selectedInstructions = [object objectForKey:@"Instructions"];
+////    selectedObjectID = [NSString stringWithFormat:@"%@", object.objectId];
+////    selectedPFObject = object;
+//    
+//    //Verify identifier of push segue to Details view
+//    if ([segue.identifier isEqualToString:@"BrowseDetail"]) {
+//        //Grab destination view controller
+//        BrowseDetailsViewController *detailsViewController = segue.destinationViewController;
+//        //Pass details over to be displayed
+//        if (detailsViewController != nil) {
+//            detailsViewController.passedName = selectedName;
+//            detailsViewController.passedType = selectedType;
+//            detailsViewController.passedIngredients = selectedIngredients;
+//            detailsViewController.passedInstructions = selectedInstructions;
+//            detailsViewController.passedUsername = usernameString;
+//            detailsViewController.passedObjectID = selectedObjectID;
+//            detailsViewController.passedObject = selectedPFObject;
+//        }
+//    }
+//}
+
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
+    NSLog(@"Cancel button clicked");
+    self.browseSearchResults = nil;
 }
 
 
