@@ -19,4 +19,8 @@
 //Declare table view
 @property (strong, nonatomic) IBOutlet UITableView *browseTableView;
 
+@property (nonatomic, strong) IBOutlet UISearchBar *browseSearchBar;
+@property (nonatomic, strong) UISearchController *browseSearchController;
+@property (nonatomic, strong) NSMutableArray *browseSearchResults;
+
 @end

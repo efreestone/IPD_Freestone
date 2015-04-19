@@ -99,9 +99,11 @@
             NSLog(@"Username equals current");
             //Check if recipe is a copy (not from browse)
             if (isCopy) {
+                NSLog(@"is copy");
                 //Add copy to name of recipe
                 recipeNameTF.text = [NSString stringWithFormat:@"%@ Copy", passedName];
             } else {
+                NSLog(@"not copy");
                 recipeNameTF.text = passedName;
             }
         } else {
@@ -120,10 +122,6 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
--(void)fillFieldsForEdit {
-    
 }
 
 //Dismiss new recipe view on cancel
@@ -507,6 +505,7 @@
     if (recipeName.length > 0 && recipeInstructions.length > 0) {
         //If objectID is not nil, object is being edited so query and update
         if (passedObjectID != nil && !isCopy) {
+            NSLog(@"not copy");
             PFQuery *editQuery = [PFQuery queryWithClassName:parseClassName];
             [editQuery getObjectInBackgroundWithId:passedObjectID block:^(PFObject *editObject, NSError *error) {
                 editObject[@"Type"] = recipeType;
@@ -531,6 +530,7 @@
             }];
         //Not editing, create new object to save
         } else {
+            NSLog(@"is copy or new");
             //Name was entered, continue saving
             PFObject *newRecipeObject = [PFObject objectWithClassName:parseClassName];
             newRecipeObject[@"Type"] = recipeType;

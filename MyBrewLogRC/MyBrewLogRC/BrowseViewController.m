@@ -16,7 +16,7 @@
 #import "BrowseDetailsViewController.h"
 #import <Parse/Parse.h>
 
-@interface BrowseViewController () <UITableViewDelegate, UITableViewDataSource, UIActionSheetDelegate>
+@interface BrowseViewController () <UITableViewDelegate, UITableViewDataSource, UIActionSheetDelegate, UISearchBarDelegate, UISearchResultsUpdating>
 
 @end
 
@@ -65,15 +65,71 @@ typedef enum {
 //    //Set offset and hide search bar
 //    self.tableView.contentOffset = CGPointMake(0, (searchBar.frame.size.height) - self.tableView.contentOffset.y);
 //    searchBar.hidden = YES;
+    
+    self.browseSearchResults = [[NSMutableArray alloc] init];
+    
+//    self.browseSearchController = [[UISearchController alloc] initWithSearchResultsController:nil];
+//    self.browseSearchController.searchResultsUpdater = self;
+//    self.browseSearchController.dimsBackgroundDuringPresentation = NO;
+//    
+////    self.browseSearchController.searchBar.scopeButtonTitles = @[NSLocalizedString(@"ScopeButtonCountry",@"Country"),
+////                                                          NSLocalizedString(@"ScopeButtonCapital",@"Capital")];
+//    self.browseSearchController.searchBar.delegate = self;
+//    
+//    //[self.browseSearchController.searchBar se];
+//    
+//    self.tableView.tableHeaderView = self.browseSearchController.searchBar;
+//    self.definesPresentationContext = YES;
+    
+    self.browseSearchController = [[UISearchController alloc] initWithSearchResultsController:nil];
+    
+    self.browseSearchController.searchBar.delegate = self;
+    self.browseSearchController.dimsBackgroundDuringPresentation = NO;
+    self.browseSearchController.searchResultsUpdater = self;
+    
+    self.browseSearchController.searchBar.frame = CGRectMake(self.browseSearchController.searchBar.frame.origin.x, self.browseSearchController.searchBar.frame.origin.y, self.browseSearchController.searchBar.frame.size.width, 44.0);
+    
+    self.tableView.tableHeaderView = self.browseSearchController.searchBar;
+    
+    self.definesPresentationContext = YES;
 }
-
-//-(void)viewWillAppear:(BOOL)animated {
-//    [self loadObjects];
-//}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)updateSearchResultsForSearchController:(UISearchController *)searchController {
+    NSString *searchString = searchController.searchBar.text;
+    //[self searchForText:searchString scope:searchController.searchBar.selectedScopeButtonIndex];
+    [self filterResults:searchString];
+    //[self.tableView reloadData];
+}
+
+-(void)filterResults:(NSString *)searchTerm {
+    
+    [self.browseSearchResults removeAllObjects];
+    
+    PFQuery *query = [PFQuery queryWithClassName: parseClassName];
+    [query whereKey:@"createdBy" notEqualTo:[PFUser currentUser].username];
+    [query whereKeyExists:@"Name"];  //this is based on whatever query you are trying to accomplish
+    [query whereKeyExists:@"createdBy"]; //this is based on whatever query you are trying to accomplish
+    [query whereKey:@"Name" containsString:searchTerm];
+    
+    NSArray *results  = [query findObjects];
+//    NSMutableArray *results;
+//    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error){
+//        [self.browseSearchResults addObjectsFromArray:objects];
+//        
+//        [self.tableView reloadData];
+//    }];
+    
+    NSLog(@"Result: %@", results);
+    NSLog(@"filterResults %lu", (unsigned long)results.count);
+    
+    [self.browseSearchResults addObjectsFromArray:results];
+    [self.tableView reloadData];
+    //[self loadObjects];
 }
 
 -(IBAction)onSortClick:(id)sender {
@@ -133,27 +189,91 @@ typedef enum {
     //UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
     CustomTableViewCell *browseCell = (CustomTableViewCell *) [tableView dequeueReusableCellWithIdentifier:cellID];
     
-    NSString *recipeType = [object objectForKey:@"Type"];
-    NSString *imageName;
-    if ([recipeType isEqualToString:@"Beer"]) {
-        imageName = @"beer-bottle.png";
-    } else if ([recipeType isEqualToString:@"Wine"]) {
-        imageName = @"wine-glass.png";
+//    if (tableView != self.browseSearchController.searchResultsUpdater) {
+//        NSString *recipeType = [object objectForKey:@"Type"];
+//        NSString *imageName;
+//        if ([recipeType isEqualToString:@"Beer"]) {
+//            imageName = @"beer-bottle.png";
+//        } else if ([recipeType isEqualToString:@"Wine"]) {
+//            imageName = @"wine-glass.png";
+//        } else {
+//            imageName = @"other-icon.png";
+//        }
+//        
+//        usernameString = [object objectForKey:@"createdBy"];
+//        NSString *createdByString = [NSString stringWithFormat:@"By: %@", usernameString];
+//        
+//        browseCell.recipeNameLabel.text = [object objectForKey:@"Name"];
+//        browseCell.detailsLabel.text = createdByString;
+//        //    cell.recipeNameLabel.text = [recipesArray objectAtIndex:indexPath.row];
+//        //cell.cellImage.image = [UIImage imageNamed:@"glasses.jpg"];
+//        browseCell.cellImage.image = [UIImage imageNamed:imageName];
+//    }
+    
+    if (self.browseSearchResults.count >= 1) {
+        NSLog(@"Search results controller");
+        PFObject *searchedObject = [self.browseSearchResults objectAtIndex:indexPath.row];
+//        PFQuery *query = [PFQuery queryWithClassName:parseClassName];
+//        PFObject *searchedUser = [query getObjectWithId:searchedObject.objectId];
+        NSString *recipeType = [searchedObject objectForKey:@"Type"];
+        NSString *imageName;
+        if ([recipeType isEqualToString:@"Beer"]) {
+            imageName = @"beer-bottle.png";
+        } else if ([recipeType isEqualToString:@"Wine"]) {
+            imageName = @"wine-glass.png";
+        } else {
+            imageName = @"other-icon.png";
+        }
+        
+        usernameString = [searchedObject objectForKey:@"createdBy"];
+        NSString *createdByString = [NSString stringWithFormat:@"By: %@", usernameString];
+        
+        browseCell.recipeNameLabel.text = [searchedObject objectForKey:@"Name"];
+        browseCell.detailsLabel.text = createdByString;
+        browseCell.cellImage.image = [UIImage imageNamed:imageName];
     } else {
-        imageName = @"other-icon.png";
+        NSLog(@"ELSE Search results controller");
+        NSString *recipeType = [object objectForKey:@"Type"];
+        NSString *imageName;
+        if ([recipeType isEqualToString:@"Beer"]) {
+            imageName = @"beer-bottle.png";
+        } else if ([recipeType isEqualToString:@"Wine"]) {
+            imageName = @"wine-glass.png";
+        } else {
+            imageName = @"other-icon.png";
+        }
+        
+        usernameString = [object objectForKey:@"createdBy"];
+        NSString *createdByString = [NSString stringWithFormat:@"By: %@", usernameString];
+        
+        browseCell.recipeNameLabel.text = [object objectForKey:@"Name"];
+        browseCell.detailsLabel.text = createdByString;
+        browseCell.cellImage.image = [UIImage imageNamed:imageName];
     }
     
-    usernameString = [object objectForKey:@"createdBy"];
-    NSString *createdByString = [NSString stringWithFormat:@"By: %@", usernameString];
-    
-    browseCell.recipeNameLabel.text = [object objectForKey:@"Name"];
-    browseCell.detailsLabel.text = createdByString;
-    //    cell.recipeNameLabel.text = [recipesArray objectAtIndex:indexPath.row];
-    //cell.cellImage.image = [UIImage imageNamed:@"glasses.jpg"];
-    browseCell.cellImage.image = [UIImage imageNamed:imageName];
+//    NSString *recipeType = [object objectForKey:@"Type"];
+//    NSString *imageName;
+//    if ([recipeType isEqualToString:@"Beer"]) {
+//        imageName = @"beer-bottle.png";
+//    } else if ([recipeType isEqualToString:@"Wine"]) {
+//        imageName = @"wine-glass.png";
+//    } else {
+//        imageName = @"other-icon.png";
+//    }
+//    
+//    usernameString = [object objectForKey:@"createdBy"];
+//    NSString *createdByString = [NSString stringWithFormat:@"By: %@", usernameString];
+//    
+//    browseCell.recipeNameLabel.text = [object objectForKey:@"Name"];
+//    browseCell.detailsLabel.text = createdByString;
+//    //    cell.recipeNameLabel.text = [recipesArray objectAtIndex:indexPath.row];
+//    //cell.cellImage.image = [UIImage imageNamed:@"glasses.jpg"];
+//    browseCell.cellImage.image = [UIImage imageNamed:imageName];
     
     //Override to remove extra seperator lines after the last cell
     [self.tableView setTableFooterView:[[UIView alloc] initWithFrame:CGRectMake(0,0,0,0)]];
+    
+    //NSLog(@"Cell for row end");
     
     return browseCell;
 } //cellForRowAtIndexPath close
@@ -173,9 +293,9 @@ typedef enum {
     [newItemQuery whereKey:@"createdBy" notEqualTo:[PFUser currentUser].username];
     
     //Set cache policy
-    if ([self.objects count] == 0) {
-        newItemQuery.cachePolicy = kPFCachePolicyNetworkElseCache;
-    }
+//    if ([self.objects count] == 0) {
+//        newItemQuery.cachePolicy = kPFCachePolicyNetworkElseCache;
+//    }
     
     //Set sort. toSort is an enum set by selecting a button in the sort action sheet
     switch (toSort) {
@@ -203,29 +323,20 @@ typedef enum {
             NSLog(@"Sort default");
             break;
     }
-    
-//    if (toSort == 0) {
-//        [newItemQuery whereKey:@"favorites" equalTo:[PFUser currentUser].objectId];
-//        [newItemQuery orderByDescending:@"updatedByUser"];
-//    } else if (toSort == 1) {
-//        [newItemQuery orderByAscending:@"createdBy"];
-//    } else if (toSort == 2) {
-//        [newItemQuery orderByAscending:@"Type"];
-//    } else if (toSort == 3) {
-//        [newItemQuery orderByDescending:@"updatedByUser"];
-//    } else if (toSort == 4) {
-//        [newItemQuery orderByAscending:@"updatedByUser"];
-//    } else {
-//        [newItemQuery orderByDescending:@"updatedByUser"];
-//    }
-    
+    NSArray *queryResults = [newItemQuery findObjects];
+    [PFObject pinAllInBackground:queryResults];
     return newItemQuery;
 } //queryForTable close
 
 //Set number of rows
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    return self.objects.count;
+    if (self.browseSearchResults.count == 0) {
+        return self.objects.count;
+    } else {
+        return self.browseSearchResults.count;
+    }
+
 }
 
 # pragma mark - ActionSheet (sort)

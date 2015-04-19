@@ -257,11 +257,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.94901967050000002" green="0.9215686917" blue="0.90196084980000002" alpha="1" colorSpace="deviceRGB"/>
-                        <searchBar key="tableHeaderView" contentMode="redraw" searchBarStyle="minimal" showsCancelButton="YES" id="H4L-Bc-PLp">
-                            <rect key="frame" x="0.0" y="64" width="600" height="44"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                            <textInputTraits key="textInputTraits"/>
-                        </searchBar>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="BrowseCell" rowHeight="60" id="2Wa-DO-55n" customClass="CustomTableViewCell">
                                 <autoresizingMask key="autoresizingMask"/>
@@ -330,9 +325,26 @@
                     </navigationItem>
                     <connections>
                         <outlet property="browseTableView" destination="wUY-fu-lMd" id="z0s-xf-Nd8"/>
+                        <outlet property="searchDisplayController" destination="KBe-eY-Ram" id="PXt-yQ-NKt"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zfO-oC-WVF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <searchDisplayController id="2gt-nn-xrB">
+                    <connections>
+                        <outlet property="delegate" destination="B1g-Qh-ijo" id="13b-1T-3f6"/>
+                        <outlet property="searchContentsController" destination="B1g-Qh-ijo" id="JrE-mE-XY2"/>
+                        <outlet property="searchResultsDataSource" destination="B1g-Qh-ijo" id="O2X-fG-DYX"/>
+                        <outlet property="searchResultsDelegate" destination="B1g-Qh-ijo" id="LdN-Lt-fa3"/>
+                    </connections>
+                </searchDisplayController>
+                <searchDisplayController id="KBe-eY-Ram">
+                    <connections>
+                        <outlet property="delegate" destination="B1g-Qh-ijo" id="NBp-Mh-14J"/>
+                        <outlet property="searchContentsController" destination="B1g-Qh-ijo" id="xbB-al-nHw"/>
+                        <outlet property="searchResultsDataSource" destination="B1g-Qh-ijo" id="jx3-9l-LwS"/>
+                        <outlet property="searchResultsDelegate" destination="B1g-Qh-ijo" id="6Xf-xy-SA8"/>
+                    </connections>
+                </searchDisplayController>
             </objects>
             <point key="canvasLocation" x="1402" y="-286"/>
         </scene>
@@ -1191,6 +1203,6 @@
         <image name="timer-tab.png" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="e6B-dv-0B3"/>
+        <segue reference="Rhg-DK-ehR"/>
     </inferredMetricsTieBreakers>
 </document>

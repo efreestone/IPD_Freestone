@@ -256,10 +256,10 @@ typedef enum {
         [newItemQuery whereKey:@"createdBy" equalTo:[PFUser currentUser].username];
     }
 
-    //Set cache policy
-    if ([self.objects count] == 0) {
-        newItemQuery.cachePolicy = kPFCachePolicyNetworkElseCache;
-    }
+//    //Set cache policy
+//    if ([self.objects count] == 0) {
+//        newItemQuery.cachePolicy = kPFCachePolicyNetworkElseCache;
+//    }
 
     //Set sort, toSort is set out of range of enum to start
     switch (toSort) {
