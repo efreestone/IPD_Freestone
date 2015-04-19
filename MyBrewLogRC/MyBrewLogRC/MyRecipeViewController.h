@@ -20,6 +20,9 @@
 //Declare table view
 @property (strong, nonatomic) IBOutlet UITableView *myTableView;
 
+@property (nonatomic, strong) UISearchController *recipeSearchController;
+@property (nonatomic, strong) NSMutableArray *recipeSearchResults;
+
 -(void)refreshTable;
 
 @end

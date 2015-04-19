@@ -23,7 +23,7 @@
 
 #import "TimersViewController.h"
 
-@interface MyRecipeViewController () <UITableViewDelegate, UITableViewDataSource, PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate, UIActionSheetDelegate>
+@interface MyRecipeViewController () <UITableViewDelegate, UITableViewDataSource, PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate, UIActionSheetDelegate, UISearchBarDelegate, UISearchResultsUpdating>
 
 -(void)requestEventsAccess;
 
@@ -77,10 +77,6 @@ typedef enum {
     self.myTableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     //self.tableView.separatorColor = [UIColor lightGrayColor];
     
-    recipesArray = [NSArray arrayWithObjects:@"Secret IPA", @"Dry Red Wine", @"Cali Style Sourdough", @"My Choco Stout", @"Peach Wine #1", @"Yogurt Base", @"Super Lager", @"Sweet Apple Pie Mead", @"Green Tea Kombucha", @"Strawberry Blonde", @"My White Zin", @"Plum Sake", @"Earl Grey Kombucha", @"Just good ol' Ale", @"Raspberry Suprise", @"Moms Sourdough Bread", nil];
-    
-    imageArray = [NSArray arrayWithObjects:@"beer-bottle.png", @"wine-glass.png", @"other-icon.png", @"beer-bottle.png", @"wine-glass.png", @"other-icon.png", @"beer-bottle.png", @"wine-glass.png", @"other-icon.png",@"beer-bottle.png", @"wine-glass.png", @"other-icon.png", @"beer-bottle.png", @"wine-glass.png", @"other-icon.png", @"beer-bottle.png", nil];
-    
     //Grab user and username
     PFUser *user = [PFUser currentUser];
     usernameString = [user objectForKey:@"username"];
@@ -97,6 +93,23 @@ typedef enum {
     //    PFObject *testObject = [PFObject objectWithClassName:@"TestObject"];
     //    testObject[@"foo"] = @"bar";
     //    [testObject saveInBackground];
+    
+    self.recipeSearchResults = [[NSMutableArray alloc] init];
+    
+    self.recipeSearchController = [[UISearchController alloc] initWithSearchResultsController:nil];
+    
+    self.recipeSearchController.searchBar.delegate = self;
+    self.recipeSearchController.dimsBackgroundDuringPresentation = NO;
+    self.recipeSearchController.searchResultsUpdater = self;
+    
+    self.recipeSearchController.searchBar.frame = CGRectMake(self.recipeSearchController.searchBar.frame.origin.x, self.recipeSearchController.searchBar.frame.origin.y, self.recipeSearchController.searchBar.frame.size.width, 44.0);
+    self.recipeSearchController.searchBar.searchBarStyle = UISearchBarStyleMinimal;
+    
+    self.tableView.tableHeaderView = self.recipeSearchController.searchBar;
+    self.tableView.dataSource = self;
+    self.tableView.delegate = self;
+    
+    self.definesPresentationContext = YES;
 }
 
 -(void)viewWillAppear:(BOOL)animated {
@@ -209,27 +222,77 @@ typedef enum {
     //UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
     CustomTableViewCell *cell = (CustomTableViewCell *) [tableView dequeueReusableCellWithIdentifier:cellID];
     
-    NSString *recipeType = [object objectForKey:@"Type"];
-    NSString *imageName;
-    if ([recipeType isEqualToString:@"Beer"]) {
-        imageName = @"beer-bottle.png";
-    } else if ([recipeType isEqualToString:@"Wine"]) {
-        imageName = @"wine-glass.png";
+    //If browseSearchResults exists, populate table with search results
+    if (self.recipeSearchResults.count >= 1) {
+        //NSLog(@"Search results controller");
+        //Get object from recipeSearchResults array instead of regular query
+        PFObject *searchedObject = [self.recipeSearchResults objectAtIndex:indexPath.row];
+        NSString *recipeType = [searchedObject objectForKey:@"Type"];
+        NSString *imageName;
+        if ([recipeType isEqualToString:@"Beer"]) {
+            imageName = @"beer-bottle.png";
+        } else if ([recipeType isEqualToString:@"Wine"]) {
+            imageName = @"wine-glass.png";
+        } else {
+            imageName = @"other-icon.png";
+        }
+        
+        NSDate *updated = [object updatedAt];
+        NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+        [dateFormat setDateFormat:@"MM-dd-yy"];
+        //cell.detailTextLabel.text = [NSString stringWithFormat:@"Lasted Updated: %@", [dateFormat stringFromDate:updated]];
+        NSString *createdAtString = [NSString stringWithFormat:@"Created %@",[dateFormat stringFromDate:updated]];
+        
+        cell.recipeNameLabel.text = [searchedObject objectForKey:@"Name"];
+        cell.detailsLabel.text = createdAtString;
+        cell.cellImage.image = [UIImage imageNamed:imageName];
     } else {
-        imageName = @"other-icon.png";
+    //Not search, populate in regular manner
+        //NSLog(@"ELSE Search results controller");
+        NSString *recipeType = [object objectForKey:@"Type"];
+        NSString *imageName;
+        if ([recipeType isEqualToString:@"Beer"]) {
+            imageName = @"beer-bottle.png";
+        } else if ([recipeType isEqualToString:@"Wine"]) {
+            imageName = @"wine-glass.png";
+        } else {
+            imageName = @"other-icon.png";
+        }
+        
+        NSDate *updated = [object updatedAt];
+        NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+        [dateFormat setDateFormat:@"MM-dd-yy"];
+        //cell.detailTextLabel.text = [NSString stringWithFormat:@"Lasted Updated: %@", [dateFormat stringFromDate:updated]];
+        NSString *createdAtString = [NSString stringWithFormat:@"Created %@",[dateFormat stringFromDate:updated]];
+        
+        cell.recipeNameLabel.text = [object objectForKey:@"Name"];
+        cell.detailsLabel.text = createdAtString;
+        //    cell.recipeNameLabel.text = [recipesArray objectAtIndex:indexPath.row];
+        //cell.cellImage.image = [UIImage imageNamed:@"glasses.jpg"];
+        cell.cellImage.image = [UIImage imageNamed:imageName];
     }
     
-    NSDate *updated = [object updatedAt];
-    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-    [dateFormat setDateFormat:@"MM-dd-yy"];
-    //cell.detailTextLabel.text = [NSString stringWithFormat:@"Lasted Updated: %@", [dateFormat stringFromDate:updated]];
-    NSString *createdAtString = [NSString stringWithFormat:@"Created %@",[dateFormat stringFromDate:updated]];
-    
-    cell.recipeNameLabel.text = [object objectForKey:@"Name"];
-    cell.detailsLabel.text = createdAtString;
-    //    cell.recipeNameLabel.text = [recipesArray objectAtIndex:indexPath.row];
-    //cell.cellImage.image = [UIImage imageNamed:@"glasses.jpg"];
-    cell.cellImage.image = [UIImage imageNamed:imageName];
+//    NSString *recipeType = [object objectForKey:@"Type"];
+//    NSString *imageName;
+//    if ([recipeType isEqualToString:@"Beer"]) {
+//        imageName = @"beer-bottle.png";
+//    } else if ([recipeType isEqualToString:@"Wine"]) {
+//        imageName = @"wine-glass.png";
+//    } else {
+//        imageName = @"other-icon.png";
+//    }
+//    
+//    NSDate *updated = [object updatedAt];
+//    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+//    [dateFormat setDateFormat:@"MM-dd-yy"];
+//    //cell.detailTextLabel.text = [NSString stringWithFormat:@"Lasted Updated: %@", [dateFormat stringFromDate:updated]];
+//    NSString *createdAtString = [NSString stringWithFormat:@"Created %@",[dateFormat stringFromDate:updated]];
+//    
+//    cell.recipeNameLabel.text = [object objectForKey:@"Name"];
+//    cell.detailsLabel.text = createdAtString;
+//    //    cell.recipeNameLabel.text = [recipesArray objectAtIndex:indexPath.row];
+//    //cell.cellImage.image = [UIImage imageNamed:@"glasses.jpg"];
+//    cell.cellImage.image = [UIImage imageNamed:imageName];
     
     //Override to remove extra seperator lines after the last cell
     [self.tableView setTableFooterView:[[UIView alloc] initWithFrame:CGRectMake(0,0,0,0)]];
@@ -296,7 +359,11 @@ typedef enum {
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    return self.objects.count;
+    if (self.recipeSearchResults.count == 0) {
+        return self.objects.count;
+    } else {
+        return self.recipeSearchResults.count;
+    }
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -310,11 +377,58 @@ typedef enum {
         // Delete the row from the data source
         PFObject *object = [self.objects objectAtIndex:indexPath.row];
         [object deleteInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+            [self.recipeSearchController setActive:NO];
             [self loadObjects];
+            self.recipeSearchResults = nil;
+//            [self searchBarCancelButtonClicked:self.recipeSearchController.searchBar];
+//            [self.recipeSearchController.searchBar resignFirstResponder];
         }];
     } else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
     }
+}
+
+//Fired whenever a tableview cell is selected, including when search active
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    PFObject *selectedObject;
+    //If recipeSearchResults exists, process as search table
+    if (self.recipeSearchResults.count >= 1) {
+        //NSLog(@"indexpath at search tableview is: %ld", (long)indexPath.row);
+        selectedObject = [self.recipeSearchResults objectAtIndex:indexPath.row];
+        selectedName = [selectedObject objectForKey:@"Name"];
+        selectedType = [selectedObject objectForKey:@"Type"];
+        selectedIngredients = [selectedObject objectForKey:@"Ingredients"];
+        selectedInstructions = [selectedObject objectForKey:@"Instructions"];
+        selectedObjectID = [NSString stringWithFormat:@"%@", selectedObject.objectId];
+        selectedPFObject = selectedObject;
+    } else {
+        //Not search, process as standard selection
+        //NSLog(@"indexpath at orignal tableview is: %@", [indexPath description]);
+        selectedObject = [self objectAtIndexPath:indexPath];
+        selectedName = [selectedObject objectForKey:@"Name"];
+        selectedType = [selectedObject objectForKey:@"Type"];
+        selectedIngredients = [selectedObject objectForKey:@"Ingredients"];
+        selectedInstructions = [selectedObject objectForKey:@"Instructions"];
+        selectedObjectID = [NSString stringWithFormat:@"%@", selectedObject.objectId];
+        selectedPFObject = selectedObject;
+    }
+    
+    //Grab destination view controller
+    UIStoryboard *storyBoard = [self storyboard];
+    RecipeDetailsViewController *detailsViewController = [storyBoard instantiateViewControllerWithIdentifier:@"RecipeDetails"];
+    
+    //Pass details over to be displayed
+    if (detailsViewController != nil) {
+        detailsViewController.passedName = selectedName;
+        detailsViewController.passedType = selectedType;
+        detailsViewController.passedIngredients = selectedIngredients;
+        detailsViewController.passedInstructions = selectedInstructions;
+        detailsViewController.passedUsername = usernameString;
+        detailsViewController.passedObjectID = selectedObjectID;
+        detailsViewController.passedObject = selectedPFObject;
+    }
+    //Manually push details view
+    [self.navigationController pushViewController:detailsViewController animated:YES];
 }
 
 # pragma mark - ActionSheet (sort)
@@ -400,33 +514,76 @@ typedef enum {
 
 #pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-    
-    PFObject *object = [self objectAtIndexPath:indexPath];
-    selectedName = [object objectForKey:@"Name"];
-    selectedType = [object objectForKey:@"Type"];
-    selectedIngredients = [object objectForKey:@"Ingredients"];
-    selectedInstructions = [object objectForKey:@"Instructions"];
-    selectedObjectID = [NSString stringWithFormat:@"%@", object.objectId];
-    selectedPFObject = object;
-    
-    //Verify identifier of push segue to Details view
-    if ([segue.identifier isEqualToString:@"DetailView"]) {
-        //Grab destination view controller
-        RecipeDetailsViewController *detailsViewController = segue.destinationViewController;
-        //Pass details over to be displayed
-        if (detailsViewController != nil) {
-            detailsViewController.passedName = selectedName;
-            detailsViewController.passedType = selectedType;
-            detailsViewController.passedIngredients = selectedIngredients;
-            detailsViewController.passedInstructions = selectedInstructions;
-            detailsViewController.passedUsername = usernameString;
-            detailsViewController.passedObjectID = selectedObjectID;
-            detailsViewController.passedObject = selectedPFObject;
-        }
-    }
+//// In a storyboard-based application, you will often want to do a little preparation before navigation
+//- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+//    NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+//    
+//    PFObject *object = [self objectAtIndexPath:indexPath];
+//    selectedName = [object objectForKey:@"Name"];
+//    selectedType = [object objectForKey:@"Type"];
+//    selectedIngredients = [object objectForKey:@"Ingredients"];
+//    selectedInstructions = [object objectForKey:@"Instructions"];
+//    selectedObjectID = [NSString stringWithFormat:@"%@", object.objectId];
+//    selectedPFObject = object;
+//    
+//    //Verify identifier of push segue to Details view
+//    if ([segue.identifier isEqualToString:@"DetailView"]) {
+//        //Grab destination view controller
+//        RecipeDetailsViewController *detailsViewController = segue.destinationViewController;
+//        //Pass details over to be displayed
+//        if (detailsViewController != nil) {
+//            detailsViewController.passedName = selectedName;
+//            detailsViewController.passedType = selectedType;
+//            detailsViewController.passedIngredients = selectedIngredients;
+//            detailsViewController.passedInstructions = selectedInstructions;
+//            detailsViewController.passedUsername = usernameString;
+//            detailsViewController.passedObjectID = selectedObjectID;
+//            detailsViewController.passedObject = selectedPFObject;
+//        }
+//    }
+//}
+
+#pragma mark - Search
+
+//Delegate method triggered when search text is entered
+- (void)updateSearchResultsForSearchController:(UISearchController *)searchController {
+    NSString *searchString = searchController.searchBar.text;
+    //[self searchForText:searchString scope:searchController.searchBar.selectedScopeButtonIndex];
+    [self filterResults:searchString];
+    //[self.tableView reloadData];
 }
+
+//Filter query with search terms
+-(void)filterResults:(NSString *)searchTerm {
+    //Clear out search results array
+    [self.recipeSearchResults removeAllObjects];
+    
+    //Query with search term
+    PFQuery *query = [PFQuery queryWithClassName: parseClassName];
+    [query whereKey:@"createdBy" equalTo:[PFUser currentUser].username];
+//    [query whereKeyExists:@"Name"];  //this is based on whatever query you are trying to accomplish
+//    [query whereKeyExists:@"createdBy"]; //this is based on whatever query you are trying to accomplish
+    [query whereKey:@"Name" containsString:searchTerm];
+    
+    //Pass query objects as Array
+    NSArray *results  = [query findObjects];
+    
+    //NSLog(@"Result: %@", results);
+    NSLog(@"filterResults %lu", (unsigned long)results.count);
+    
+    [self.recipeSearchResults addObjectsFromArray:results];
+    [self.tableView reloadData];
+    //[self loadObjects];
+}
+
+//Cancel button on search bar clicked
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
+    NSLog(@"Cancel button clicked");
+    //Clear out search results array
+    [self.recipeSearchResults removeAllObjects];
+}
+
+#pragma mark - Navigation
+//didSelectRowAtIndexPath is used instead of prepare for segue
 
 @end

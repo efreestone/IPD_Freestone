@@ -51,36 +51,17 @@ typedef enum {
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    //toSort = 10;
-    
+    //Set parse class name
     parseClassName = @"newRecipe";
     //self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     self.browseTableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     //self.tableView.separatorColor = [UIColor lightGrayColor];
-    
-    recipesArray = [NSArray arrayWithObjects:@"Secret IPA", @"Dry Red Wine", @"Cali Style Sourdough", @"My Choco Stout", @"Peach Wine #1", @"Yogurt Base", @"Super Lager", @"Sweet Apple Pie Mead", @"Green Tea Kombucha", @"Strawberry Blonde", @"My White Zin", @"Plum Sake", @"Earl Grey Kombucha", @"Just good ol' Ale", @"Raspberry Suprise", @"Moms Sourdough Bread", nil];
-    
-    imageArray = [NSArray arrayWithObjects:@"beer-bottle.png", @"wine-glass.png", @"other-icon.png", @"beer-bottle.png", @"wine-glass.png", @"other-icon.png", @"beer-bottle.png", @"wine-glass.png", @"other-icon.png",@"beer-bottle.png", @"wine-glass.png", @"other-icon.png", @"beer-bottle.png", @"wine-glass.png", @"other-icon.png", @"beer-bottle.png", nil];
     
 //    //Set offset and hide search bar
 //    self.tableView.contentOffset = CGPointMake(0, (searchBar.frame.size.height) - self.tableView.contentOffset.y);
 //    searchBar.hidden = YES;
     
     self.browseSearchResults = [[NSMutableArray alloc] init];
-    
-//    self.browseSearchController = [[UISearchController alloc] initWithSearchResultsController:nil];
-//    self.browseSearchController.searchResultsUpdater = self;
-//    self.browseSearchController.dimsBackgroundDuringPresentation = NO;
-//    
-////    self.browseSearchController.searchBar.scopeButtonTitles = @[NSLocalizedString(@"ScopeButtonCountry",@"Country"),
-////                                                          NSLocalizedString(@"ScopeButtonCapital",@"Capital")];
-//    self.browseSearchController.searchBar.delegate = self;
-//    
-//    //[self.browseSearchController.searchBar se];
-//    
-//    self.tableView.tableHeaderView = self.browseSearchController.searchBar;
-//    self.definesPresentationContext = YES;
     
     self.browseSearchController = [[UISearchController alloc] initWithSearchResultsController:nil];
     
@@ -103,50 +84,17 @@ typedef enum {
     // Dispose of any resources that can be recreated.
 }
 
-- (void)updateSearchResultsForSearchController:(UISearchController *)searchController {
-    NSString *searchString = searchController.searchBar.text;
-    //[self searchForText:searchString scope:searchController.searchBar.selectedScopeButtonIndex];
-    [self filterResults:searchString];
-    //[self.tableView reloadData];
-}
-
--(void)filterResults:(NSString *)searchTerm {
-    
-    [self.browseSearchResults removeAllObjects];
-    
-    PFQuery *query = [PFQuery queryWithClassName: parseClassName];
-    [query whereKey:@"createdBy" notEqualTo:[PFUser currentUser].username];
-    [query whereKeyExists:@"Name"];  //this is based on whatever query you are trying to accomplish
-    [query whereKeyExists:@"createdBy"]; //this is based on whatever query you are trying to accomplish
-    [query whereKey:@"Name" containsString:searchTerm];
-    
-    NSArray *results  = [query findObjects];
-//    NSMutableArray *results;
-//    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error){
-//        [self.browseSearchResults addObjectsFromArray:objects];
-//        
-//        [self.tableView reloadData];
-//    }];
-    
-    //NSLog(@"Result: %@", results);
-    NSLog(@"filterResults %lu", (unsigned long)results.count);
-    
-    [self.browseSearchResults addObjectsFromArray:results];
-    [self.tableView reloadData];
-    //[self loadObjects];
-}
-
--(IBAction)onSortClick:(id)sender {
-    if (searchBar.isHidden) {
-        self.tableView.contentOffset = CGPointMake(0, -searchBar.frame.size.height + self.tableView.contentOffset.y);
-        searchBar.hidden = NO;
-        NSLog(@"show");
-    } else if (!searchBar.isHidden) {
-        self.tableView.contentOffset = CGPointMake(0, searchBar.frame.size.height + self.tableView.contentOffset.y);
-        searchBar.hidden = YES;
-        NSLog(@"hidden");
-    }
-}
+//-(IBAction)onSortClick:(id)sender {
+//    if (searchBar.isHidden) {
+//        self.tableView.contentOffset = CGPointMake(0, -searchBar.frame.size.height + self.tableView.contentOffset.y);
+//        searchBar.hidden = NO;
+//        NSLog(@"show");
+//    } else if (!searchBar.isHidden) {
+//        self.tableView.contentOffset = CGPointMake(0, searchBar.frame.size.height + self.tableView.contentOffset.y);
+//        searchBar.hidden = YES;
+//        NSLog(@"hidden");
+//    }
+//}
 
 #pragma mark - PFQueryTableViewController
 
@@ -189,37 +137,15 @@ typedef enum {
 
 //Set up cells and apply objects from Parse
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath object:(PFObject *)object {
+    //Set ID for deque of cells
     static NSString *cellID = @"BrowseCell";
-    //UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
     CustomTableViewCell *browseCell = (CustomTableViewCell *) [tableView dequeueReusableCellWithIdentifier:cellID];
-    
-//    if (tableView != self.browseSearchController.searchResultsUpdater) {
-//        NSString *recipeType = [object objectForKey:@"Type"];
-//        NSString *imageName;
-//        if ([recipeType isEqualToString:@"Beer"]) {
-//            imageName = @"beer-bottle.png";
-//        } else if ([recipeType isEqualToString:@"Wine"]) {
-//            imageName = @"wine-glass.png";
-//        } else {
-//            imageName = @"other-icon.png";
-//        }
-//        
-//        usernameString = [object objectForKey:@"createdBy"];
-//        NSString *createdByString = [NSString stringWithFormat:@"By: %@", usernameString];
-//        
-//        browseCell.recipeNameLabel.text = [object objectForKey:@"Name"];
-//        browseCell.detailsLabel.text = createdByString;
-//        //    cell.recipeNameLabel.text = [recipesArray objectAtIndex:indexPath.row];
-//        //cell.cellImage.image = [UIImage imageNamed:@"glasses.jpg"];
-//        browseCell.cellImage.image = [UIImage imageNamed:imageName];
-//    }
     
     //If browseSearchResults exists, populate table with search results
     if (self.browseSearchResults.count >= 1) {
         //NSLog(@"Search results controller");
+        //Get object from browseSearchResults array instead of regular query
         PFObject *searchedObject = [self.browseSearchResults objectAtIndex:indexPath.row];
-//        PFQuery *query = [PFQuery queryWithClassName:parseClassName];
-//        PFObject *searchedUser = [query getObjectWithId:searchedObject.objectId];
         NSString *recipeType = [searchedObject objectForKey:@"Type"];
         NSString *imageName;
         if ([recipeType isEqualToString:@"Beer"]) {
@@ -237,7 +163,7 @@ typedef enum {
         browseCell.detailsLabel.text = createdByString;
         browseCell.cellImage.image = [UIImage imageNamed:imageName];
     } else {
-    //Not search, regulare populate
+    //Not search, populate in regular manner
         //NSLog(@"ELSE Search results controller");
         NSString *recipeType = [object objectForKey:@"Type"];
         NSString *imageName;
@@ -257,25 +183,6 @@ typedef enum {
         browseCell.cellImage.image = [UIImage imageNamed:imageName];
     }
     
-//    NSString *recipeType = [object objectForKey:@"Type"];
-//    NSString *imageName;
-//    if ([recipeType isEqualToString:@"Beer"]) {
-//        imageName = @"beer-bottle.png";
-//    } else if ([recipeType isEqualToString:@"Wine"]) {
-//        imageName = @"wine-glass.png";
-//    } else {
-//        imageName = @"other-icon.png";
-//    }
-//    
-//    usernameString = [object objectForKey:@"createdBy"];
-//    NSString *createdByString = [NSString stringWithFormat:@"By: %@", usernameString];
-//    
-//    browseCell.recipeNameLabel.text = [object objectForKey:@"Name"];
-//    browseCell.detailsLabel.text = createdByString;
-//    //    cell.recipeNameLabel.text = [recipesArray objectAtIndex:indexPath.row];
-//    //cell.cellImage.image = [UIImage imageNamed:@"glasses.jpg"];
-//    browseCell.cellImage.image = [UIImage imageNamed:imageName];
-    
     //Override to remove extra seperator lines after the last cell
     [self.tableView setTableFooterView:[[UIView alloc] initWithFrame:CGRectMake(0,0,0,0)]];
     
@@ -290,8 +197,6 @@ typedef enum {
     if (!self.parseClassName) {
         self.parseClassName = @"newRecipe";
     }
-    
-    NSLog(@"toSort = %u", toSort);
     
     //Grab objects
     newItemQuery = [PFQuery queryWithClassName:self.parseClassName];
@@ -329,8 +234,8 @@ typedef enum {
             NSLog(@"Sort default");
             break;
     }
-    NSArray *queryResults = [newItemQuery findObjects];
-    [PFObject pinAllInBackground:queryResults];
+//    NSArray *queryResults = [newItemQuery findObjects];
+//    [PFObject pinAllInBackground:queryResults];
     return newItemQuery;
 } //queryForTable close
 
@@ -343,6 +248,49 @@ typedef enum {
         return self.browseSearchResults.count;
     }
 
+}
+
+//Fired whenever a tableview cell is selected, including when search active
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    PFObject *object;
+    //If browseSearchResults exists, process as search table
+    if (self.browseSearchResults.count >= 1) {
+        //NSLog(@"indexpath at search tableview is: %ld", (long)indexPath.row);
+        object = [self.browseSearchResults objectAtIndex:indexPath.row];
+        selectedName = [object objectForKey:@"Name"];
+        selectedType = [object objectForKey:@"Type"];
+        selectedIngredients = [object objectForKey:@"Ingredients"];
+        selectedInstructions = [object objectForKey:@"Instructions"];
+        selectedObjectID = [NSString stringWithFormat:@"%@", object.objectId];
+        selectedPFObject = object;
+    } else {
+        //Not search, process as standard selection
+        //NSLog(@"indexpath at orignal tableview is: %@", [indexPath description]);
+        object = [self objectAtIndexPath:indexPath];
+        selectedName = [object objectForKey:@"Name"];
+        selectedType = [object objectForKey:@"Type"];
+        selectedIngredients = [object objectForKey:@"Ingredients"];
+        selectedInstructions = [object objectForKey:@"Instructions"];
+        selectedObjectID = [NSString stringWithFormat:@"%@", object.objectId];
+        selectedPFObject = object;
+    }
+    
+    //Grab destination view controller
+    UIStoryboard *storyBoard = [self storyboard];
+    BrowseDetailsViewController *detailsViewController = [storyBoard instantiateViewControllerWithIdentifier:@"BrowseDetails"];
+    
+    //Pass details over to be displayed
+    if (detailsViewController != nil) {
+        detailsViewController.passedName = selectedName;
+        detailsViewController.passedType = selectedType;
+        detailsViewController.passedIngredients = selectedIngredients;
+        detailsViewController.passedInstructions = selectedInstructions;
+        detailsViewController.passedUsername = usernameString;
+        detailsViewController.passedObjectID = selectedObjectID;
+        detailsViewController.passedObject = selectedPFObject;
+    }
+    //Manually push details view
+    [self.navigationController pushViewController:detailsViewController animated:YES];
 }
 
 # pragma mark - ActionSheet (sort)
@@ -365,127 +313,53 @@ typedef enum {
     [self loadObjects];
 }
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
+#pragma mark - Search
+
+//Delegate method triggered when search text is entered
+- (void)updateSearchResultsForSearchController:(UISearchController *)searchController {
+    NSString *searchString = searchController.searchBar.text;
+    //[self searchForText:searchString scope:searchController.searchBar.selectedScopeButtonIndex];
+    [self filterResults:searchString];
+    //[self.tableView reloadData];
 }
-*/
 
-
-//// Override to support editing the table view.
-//- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-//    if (editingStyle == UITableViewCellEditingStyleDelete) {
-//        // Delete the row from the data source
-//        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-//    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-//        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-//    }   
-//}
-
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-//Fired whenever a tableview cell is selected, including when search active
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    PFObject *object;
-    //If browseSearchResults exists, process as search table
-    if (self.browseSearchResults.count >= 1) {
-        //NSLog(@"indexpath at search tableview is: %ld", (long)indexPath.row);
-        object = [self.browseSearchResults objectAtIndex:indexPath.row];
-        selectedName = [object objectForKey:@"Name"];
-        selectedType = [object objectForKey:@"Type"];
-        selectedIngredients = [object objectForKey:@"Ingredients"];
-        selectedInstructions = [object objectForKey:@"Instructions"];
-        selectedObjectID = [NSString stringWithFormat:@"%@", object.objectId];
-        selectedPFObject = object;
-    } else {
-    //Not search, process as standard selection
-        //NSLog(@"indexpath at orignal tableview is: %@", [indexPath description]);
-        object = [self objectAtIndexPath:indexPath];
-        selectedName = [object objectForKey:@"Name"];
-        selectedType = [object objectForKey:@"Type"];
-        selectedIngredients = [object objectForKey:@"Ingredients"];
-        selectedInstructions = [object objectForKey:@"Instructions"];
-        selectedObjectID = [NSString stringWithFormat:@"%@", object.objectId];
-        selectedPFObject = object;
-    }
+//Filter query with search terms
+-(void)filterResults:(NSString *)searchTerm {
+    //Clear out search results array
+    [self.browseSearchResults removeAllObjects];
     
-    //Grab destination view controller
-    UIStoryboard *storyBoard = [self storyboard];
-    BrowseDetailsViewController *detailsViewController = [storyBoard instantiateViewControllerWithIdentifier:@"BrowseDetails"];
-
-    //Pass details over to be displayed
-    if (detailsViewController != nil) {
-        detailsViewController.passedName = selectedName;
-        detailsViewController.passedType = selectedType;
-        detailsViewController.passedIngredients = selectedIngredients;
-        detailsViewController.passedInstructions = selectedInstructions;
-        detailsViewController.passedUsername = usernameString;
-        detailsViewController.passedObjectID = selectedObjectID;
-        detailsViewController.passedObject = selectedPFObject;
-    }
-    //Manually push details view
-    [self.navigationController pushViewController:detailsViewController animated:YES];
+    //Query with search term
+    PFQuery *query = [PFQuery queryWithClassName: parseClassName];
+    [query whereKey:@"createdBy" notEqualTo:[PFUser currentUser].username];
+    [query whereKeyExists:@"Name"];  //this is based on whatever query you are trying to accomplish
+    [query whereKeyExists:@"createdBy"]; //this is based on whatever query you are trying to accomplish
+    [query whereKey:@"Name" containsString:searchTerm];
+    
+    NSArray *results  = [query findObjects];
+    //    NSMutableArray *results;
+    //    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error){
+    //        [self.browseSearchResults addObjectsFromArray:objects];
+    //
+    //        [self.tableView reloadData];
+    //    }];
+    
+    //NSLog(@"Result: %@", results);
+    NSLog(@"filterResults %lu", (unsigned long)results.count);
+    
+    [self.browseSearchResults addObjectsFromArray:results];
+    [self.tableView reloadData];
+    //[self loadObjects];
 }
 
-
-#pragma mark - Navigation
-
-//// In a storyboard-based application, you will often want to do a little preparation before navigation
-//- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-//    NSIndexPath *indexPath;
-//    if (self.browseSearchResults.count <= 1) {
-//        indexPath = [self.browseTableView indexPathForSelectedRow];
-//    } else {
-//        indexPath = [self.tableView indexPathForSelectedRow];
-//    }
-//    
-//    
-//    
-//    //Grab object and items to pass
-//    
-////    selectedName = [object objectForKey:@"Name"];
-////    selectedType = [object objectForKey:@"Type"];
-////    selectedIngredients = [object objectForKey:@"Ingredients"];
-////    selectedInstructions = [object objectForKey:@"Instructions"];
-////    selectedObjectID = [NSString stringWithFormat:@"%@", object.objectId];
-////    selectedPFObject = object;
-//    
-//    //Verify identifier of push segue to Details view
-//    if ([segue.identifier isEqualToString:@"BrowseDetail"]) {
-//        //Grab destination view controller
-//        BrowseDetailsViewController *detailsViewController = segue.destinationViewController;
-//        //Pass details over to be displayed
-//        if (detailsViewController != nil) {
-//            detailsViewController.passedName = selectedName;
-//            detailsViewController.passedType = selectedType;
-//            detailsViewController.passedIngredients = selectedIngredients;
-//            detailsViewController.passedInstructions = selectedInstructions;
-//            detailsViewController.passedUsername = usernameString;
-//            detailsViewController.passedObjectID = selectedObjectID;
-//            detailsViewController.passedObject = selectedPFObject;
-//        }
-//    }
-//}
-
+//Cancel button on search bar clicked
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
     NSLog(@"Cancel button clicked");
-    self.browseSearchResults = nil;
+    //Clear out search results array
+    [self.browseSearchResults removeAllObjects];
 }
+
+#pragma mark - Navigation
+//didSelectRowAtIndexPath is used instead of prepare for segue
 
 
 @end
