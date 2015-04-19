@@ -571,6 +571,21 @@ typedef enum {
     //NSLog(@"Result: %@", results);
     NSLog(@"filterResults %lu", (unsigned long)results.count);
     
+    //UITextField *searchBarTextField = (UITextField *)secondLevelSubview;
+    
+    UITextField *searchField = [self.recipeSearchController.searchBar valueForKey:@"_searchField"];
+    
+    
+    if (results.count == 0) {
+        self.recipeSearchController.searchBar.backgroundColor = [UIColor grayColor];
+        searchField.textColor = [UIColor redColor];
+//        self.recipeSearchController.dimsBackgroundDuringPresentation = YES;
+    } else {
+        self.recipeSearchController.searchBar.backgroundColor = [UIColor clearColor];
+        searchField.textColor = [UIColor blackColor];
+//        self.recipeSearchController.dimsBackgroundDuringPresentation = NO;
+    }
+    
     [self.recipeSearchResults addObjectsFromArray:results];
     [self.tableView reloadData];
     //[self loadObjects];

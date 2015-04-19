@@ -346,6 +346,16 @@ typedef enum {
     //NSLog(@"Result: %@", results);
     NSLog(@"filterResults %lu", (unsigned long)results.count);
     
+    UITextField *searchField = [self.browseSearchController.searchBar valueForKey:@"_searchField"];
+    
+    if (results.count == 0) {
+        self.browseSearchController.searchBar.backgroundColor = [UIColor grayColor];
+        searchField.textColor = [UIColor redColor];
+    } else {
+        self.browseSearchController.searchBar.backgroundColor = [UIColor clearColor];
+        searchField.textColor = [UIColor blackColor];
+    }
+    
     [self.browseSearchResults addObjectsFromArray:results];
     [self.tableView reloadData];
     //[self loadObjects];
