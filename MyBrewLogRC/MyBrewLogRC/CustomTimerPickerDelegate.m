@@ -49,6 +49,10 @@
         weekString = @"0";
         dayString = @"0";
     }
+//    if (self.myRecipeVC == nil) {
+//        
+//    }
+//    self.timersVC = [[self.myRecipeVC.tabBarController viewControllers] objectAtIndex:2];
     return self;
 }
 
@@ -124,15 +128,27 @@
     NSString *fullTimer;
     //Get numbers from string
     NSString *numberString = [NSString stringWithFormat:@"%@%@%@", monthString, weekString, dayString];
+    NSLog(@"number string = %@", numberString);
     //Check if picker was selected, set default to 1 qt if not.
     if ([numberString isEqualToString:@"000"]) {
         fullTimer = @"1 Day";
     } else {
         fullTimer = formattedTime;
     }
-
-    //Call method on NewRecipe with formatted quantity passed
-    [self.myRecipeVC timerPicked:fullTimer];
+    
+    if (self.myRecipeVC != nil) {
+        NSLog(@"Timer delegate MyRecipe");
+        //Call method on NewRecipe with formatted quantity passed
+        [self.myRecipeVC timerPicked:fullTimer];
+    }
+    
+    if (self.timersVC != nil) {
+        NSLog(@"Timer delegate Timer");
+        //Call method on Timer with formatted quantity passed
+        [self.timersVC timerPicked:fullTimer];
+    }
+    
+    //self.timersVC.countdownSeconds
 }
 
 //Grab selections

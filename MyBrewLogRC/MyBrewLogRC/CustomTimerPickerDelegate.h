@@ -14,6 +14,7 @@
 #import <UIKit/UIKit.h>
 #import "ActionSheetCustomPickerDelegate.h"
 #import "NewRecipeViewController.h"
+#import "TimersViewController.h"
 
 @interface CustomTimerPickerDelegate : NSObject <ActionSheetCustomPickerDelegate> {
     NSMutableArray *monthArray;
@@ -27,6 +28,7 @@
 @property (nonatomic, assign) NSInteger monthDigits;
 @property (nonatomic, assign) NSInteger weekDigits;
 @property (nonatomic, assign) NSInteger dayDigits;
-@property (nonatomic,strong) NewRecipeViewController *myRecipeVC;
+@property (nonatomic, strong) NewRecipeViewController *myRecipeVC;
+@property (nonatomic, strong) TimersViewController *timersVC;
 
 @end

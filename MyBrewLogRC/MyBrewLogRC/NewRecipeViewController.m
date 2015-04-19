@@ -341,7 +341,7 @@
     [customPicker showActionSheetPicker];
 }
 
-//Timer picked (over 24) formats and adds ingredients to textview. Called from Quantity Delegate
+//Timer picked (over 24) formats and adds ingredients to textview. Called from Timer Delegate
 -(void)timerPicked:(NSString *)formattedTime {
     NSLog(@"NewRec: %@", formattedTime);
     NSString *currentInst = instructionsTV.text;

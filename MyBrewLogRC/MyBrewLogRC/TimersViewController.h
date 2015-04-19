@@ -48,5 +48,6 @@
 -(IBAction)startTimer:(id)sender;
 -(void)startTimerFromDetails:(NSInteger)time withDetails:(NSString *)details;
 -(void)startLocalNotification:(NSDate *)fire;
+-(void)timerPicked:(NSString *)formattedTime;
 
 @end

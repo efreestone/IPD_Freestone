@@ -116,7 +116,7 @@
 
 //Method to create and show alert view with text input
 -(void)showTimerAlert:(NSString *)alertMessage {
-    NSString *formattedString = [NSString stringWithFormat:@"%@ \nPlease enter a discription for timer", alertMessage];
+    NSString *formattedString = [NSString stringWithFormat:@"%@ \nPlease enter a discription for the new timer. Over 24 hours will be calendar entries.", alertMessage];
     
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Start Timer"
                                                     message:formattedString

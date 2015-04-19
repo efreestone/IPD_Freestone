@@ -302,14 +302,38 @@
     
     ActionSheetCustomPicker *customPicker = [[ActionSheetCustomPicker alloc] initWithTitle:@"Select Time" delegate:timerDelegate showCancelButton:YES origin:sender initialSelections:initialSelections];
     
-//    timerDelegate.myRecipeVC = self;
+    timerDelegate.timersVC = self;
     [customPicker showActionSheetPicker];
 }
 
-//Timer picked (over 24) formats and adds ingredients to textview. Called from Quantity Delegate
+//Timer picked (over 24) formats and adds ingredients to textview. Called from Timer Delegate
 -(void)timerPicked:(NSString *)formattedTime {
     NSLog(@"NewRec: %@", formattedTime);
-
+    
+    NSArray *numbersArray = [formattedTime componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@","]];
+    
+    NSInteger monthsFromString = [numbersArray[0] intValue];
+    NSInteger monthsInt = 0;
+    NSInteger weeksFromString = [numbersArray[1] intValue];
+    NSInteger weeksInt = 0;
+    NSInteger daysFromString = [numbersArray[2] intValue];
+    NSInteger daysInt = 0;
+    
+    //NSLog(@"M - %ld, W - %ld, D - %ld", (long)monthsFromString, (long)weeksFromString, (long)daysFromString);
+    
+    if (monthsFromString != 00) {
+        monthsInt = monthsFromString * 2592000;
+        NSLog(@"Months in seconds = %ld", (long)monthsInt);
+    }
+    if (weeksFromString != 00) {
+        weeksInt = weeksFromString * 604800;
+    }
+    if (daysFromString != 00) {
+        daysInt = daysFromString * 86400;
+    }
+    
+    countdownSeconds = monthsInt + weeksInt + daysInt;
+    [self showTimerAlert];
 }
 
 //Grab action sheet actions via delegate method
@@ -317,6 +341,7 @@
     //Over 24 hours (Yes clicked)
     if (buttonIndex == 0) {
         NSLog(@"index 0");
+        
         [self showCustomTimePicker:buttonSender];
     //Under 24 hours (No clicked)
     } else if (buttonIndex == 1) {
@@ -330,10 +355,10 @@
 
 //Method to create and show alert view with text input
 -(void)showTimerAlert {
-    NSString *formattedString = @"Please enter a discription for the new timer";
+    NSString *alertString = @"Please enter a discription for the new timer. Over 24 hours will be calendar entries.";
     
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Start Timer"
-                                                    message:formattedString
+                                                    message:alertString
                                                    delegate:self
                                           cancelButtonTitle:@"Cancel"
                                           otherButtonTitles:@"Start", nil];
@@ -349,16 +374,21 @@
         if (description.length == 0) {
             description = @"No Description";
         }
+        
+        if (countdownSeconds <= 86340) {
+            //Add one to countdown to utilize runTimer to set up nstimer
+            countdownSeconds = countdownSeconds + 1;
+            [self runTimer];
+            [onePauseButton setTitle:@"Start" forState:UIControlStateNormal];
+            timerPaused = YES;
+            [self pauseTimer:firstTimer];
+        }
         //[self addNewTimer:countdownSeconds withDetails:description];
-        //Add one to countdown to utilize runTimer to set up nstimer
-        countdownSeconds = countdownSeconds + 1;
-        [self runTimer];
         
 //        timerOneLabel.text = timerString;
-        [onePauseButton setTitle:@"Start" forState:UIControlStateNormal];
-        timerPaused = YES;
+        
         [self startTimerFromDetails:countdownSeconds withDetails:description];
-        [self pauseTimer:firstTimer];
+        
         //timersViewController.oneView.hidden = NO;
     }
 }
