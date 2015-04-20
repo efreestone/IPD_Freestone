@@ -18,17 +18,11 @@
 @interface NewRecipeViewController : UIViewController 
 
 -(IBAction)onCancel:(id)sender;
--(IBAction)showRecipeTypePicker:(id)sender;
 -(IBAction)showIngredientPicker:(id)sender;
--(IBAction)showTimerPicker:(id)sender;
--(IBAction)showTempPicker:(id)sender;
 
-@property (strong, nonatomic) IBOutlet UIButton *typeButton;
-@property (strong, nonatomic) IBOutlet UIButton *batchButton;
+@property (strong, nonatomic) IBOutlet UISegmentedControl *recipeTypeSegment;
+@property (strong, nonatomic) IBOutlet UISegmentedControl *addItemsSegment;
 @property (strong, nonatomic) IBOutlet UIButton *ingredientButton;
-@property (strong, nonatomic) IBOutlet UIButton *tempButton;
-@property (strong, nonatomic) IBOutlet UIButton *timerButton;
-@property (strong, nonatomic) IBOutlet UIButton *notesButton;
 
 @property (strong, nonatomic) IBOutlet UITextField *recipeNameTF;
 @property (strong, nonatomic) IBOutlet UITextView *ingredientsTV;

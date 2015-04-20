@@ -21,6 +21,7 @@
 
 @implementation SettingsViewController {
     MyRecipeViewController *myRecipes;
+    PFUser *currenUser;
 }
 
 - (void)viewDidLoad {
@@ -30,6 +31,7 @@
 //                                                         bundle: nil];
 //    myRecipes = [storyboard instantiateViewControllerWithIdentifier:@"MyRecipe"];
     
+    currenUser = [PFUser currentUser];
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 }
@@ -50,6 +52,11 @@
 
 //Create alert with 2 text fields for changing email and/or username
 -(IBAction)onEditUserClick:(id)sender {
+    NSString *emailString = [currenUser email];
+    NSLog(@"email %@", emailString);
+    NSString *usernameString = [currenUser username];
+    NSLog(@"username %@", usernameString);
+    
     UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Edit User"
                                                    message:@"Reset username and/or email. Please use \"Forgot Password?\" on the login screen to reset password. Requires Email"
                                                   delegate:self cancelButtonTitle:@"Cancel"
@@ -57,8 +64,17 @@
     
     alert.alertViewStyle = UIAlertViewStyleLoginAndPasswordInput;
     [alert textFieldAtIndex:1].secureTextEntry = NO;
-    [alert textFieldAtIndex:0].placeholder = @"Enter New Email";
-    [alert textFieldAtIndex:1].placeholder = @"Enter New Username";
+    if (emailString.length == 0) {
+        [alert textFieldAtIndex:0].placeholder = @"Enter New Email";
+    } else {
+        [alert textFieldAtIndex:0].text = emailString;
+    }
+    if (usernameString.length == 0) {
+        [alert textFieldAtIndex:1].placeholder = @"Enter New Username";
+    } else {
+        [alert textFieldAtIndex:1].text = usernameString;
+    }
+    
     [alert show];
 }
 

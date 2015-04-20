@@ -56,6 +56,7 @@ typedef enum {
     
     PFQuery *newItemQuery;
     AppDelegate *appDelegate;
+    UIView *noRecipesView;
 }
 
 - (void)viewDidLoad {
@@ -88,6 +89,22 @@ typedef enum {
         //Request access to device events. A delay is required in order for events kit to initialize
         [self performSelector:@selector(requestEventsAccess) withObject:nil afterDelay:0.5];
     }
+    
+    noRecipesView = [[UIView alloc] initWithFrame:self.view.frame];
+    noRecipesView.backgroundColor = [UIColor clearColor];
+    //Create and set no recpices label
+    UILabel *noRecipesLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, noRecipesView.frame.size.width, 200)];
+    noRecipesLabel.font = [UIFont boldSystemFontOfSize:18];
+    noRecipesLabel.numberOfLines = 1;
+    noRecipesLabel.textColor = [UIColor darkGrayColor];
+    noRecipesLabel.shadowOffset = CGSizeMake(0, 1);
+    //noRecipesLabel.backgroundColor = [UIColor clearColor];
+    noRecipesLabel.textAlignment = NSTextAlignmentCenter;
+    noRecipesLabel.text = @"No Recipes to Show";
+    //Hide no recipe view by default. Is shown if no recipes are available to show
+    noRecipesView.hidden = YES;
+    [noRecipesView addSubview:noRecipesLabel];
+    [self.tableView insertSubview:noRecipesView belowSubview:self.tableView];
     
     //Test parse
     //    PFObject *testObject = [PFObject objectWithClassName:@"TestObject"];
@@ -272,28 +289,6 @@ typedef enum {
         cell.cellImage.image = [UIImage imageNamed:imageName];
     }
     
-//    NSString *recipeType = [object objectForKey:@"Type"];
-//    NSString *imageName;
-//    if ([recipeType isEqualToString:@"Beer"]) {
-//        imageName = @"beer-bottle.png";
-//    } else if ([recipeType isEqualToString:@"Wine"]) {
-//        imageName = @"wine-glass.png";
-//    } else {
-//        imageName = @"other-icon.png";
-//    }
-//    
-//    NSDate *updated = [object updatedAt];
-//    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-//    [dateFormat setDateFormat:@"MM-dd-yy"];
-//    //cell.detailTextLabel.text = [NSString stringWithFormat:@"Lasted Updated: %@", [dateFormat stringFromDate:updated]];
-//    NSString *createdAtString = [NSString stringWithFormat:@"Created %@",[dateFormat stringFromDate:updated]];
-//    
-//    cell.recipeNameLabel.text = [object objectForKey:@"Name"];
-//    cell.detailsLabel.text = createdAtString;
-//    //    cell.recipeNameLabel.text = [recipesArray objectAtIndex:indexPath.row];
-//    //cell.cellImage.image = [UIImage imageNamed:@"glasses.jpg"];
-//    cell.cellImage.image = [UIImage imageNamed:imageName];
-    
     //Override to remove extra seperator lines after the last cell
     [self.tableView setTableFooterView:[[UIView alloc] initWithFrame:CGRectMake(0,0,0,0)]];
     
@@ -327,7 +322,7 @@ typedef enum {
     //Set sort, toSort is set out of range of enum to start
     switch (toSort) {
         case 1: //Active
-            
+            [newItemQuery whereKey:@"Active" equalTo:[NSNumber numberWithBool:YES]];
             break;
         case 2: //Name
             [newItemQuery orderByAscending:@"Name"];
@@ -352,16 +347,31 @@ typedef enum {
     return newItemQuery;
 } //queryForTable close
 
+//Sort action sheet
 -(void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex {
-    toSort = (int) buttonIndex;
+    //Add 1 to button index. toSort case 0 is default, first real case is 1
+    toSort = (int) buttonIndex + 1;
     [self refreshTable];
 }
 
+//Set number of rows in the tableview
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
     if (self.recipeSearchResults.count == 0) {
+        //Show/hide no recipes view based on count
+        if (self.objects.count == 0) {
+            noRecipesView.hidden = NO;
+        } else {
+            noRecipesView.hidden = YES;
+        }
         return self.objects.count;
     } else {
+        //Show/hide no recipes view based on count
+        if (self.recipeSearchResults.count == 0) {
+            noRecipesView.hidden = NO;
+        } else {
+            noRecipesView.hidden = YES;
+        }
         return self.recipeSearchResults.count;
     }
 }
@@ -571,19 +581,25 @@ typedef enum {
     //NSLog(@"Result: %@", results);
     NSLog(@"filterResults %lu", (unsigned long)results.count);
     
-    //UITextField *searchBarTextField = (UITextField *)secondLevelSubview;
-    
-    UITextField *searchField = [self.recipeSearchController.searchBar valueForKey:@"_searchField"];
-    
+    //Grab searchbar textfield to apply color and border when no results found
+    UITextField *searchTextField;
+    for (id object in [[[self.recipeSearchController.searchBar subviews] objectAtIndex:0] subviews]) {
+        if ([object isKindOfClass:[UITextField class]]) {
+            searchTextField = (UITextField *)object;
+            break;
+        }
+    }
     
     if (results.count == 0) {
-        self.recipeSearchController.searchBar.backgroundColor = [UIColor grayColor];
-        searchField.textColor = [UIColor redColor];
-//        self.recipeSearchController.dimsBackgroundDuringPresentation = YES;
+        //self.browseSearchController.searchBar.backgroundColor = [UIColor grayColor];
+        searchTextField.textColor = [UIColor redColor];
+        searchTextField.layer.borderColor = [[UIColor redColor] CGColor];
+        searchTextField.layer.borderWidth = 1.0;
     } else {
-        self.recipeSearchController.searchBar.backgroundColor = [UIColor clearColor];
-        searchField.textColor = [UIColor blackColor];
-//        self.recipeSearchController.dimsBackgroundDuringPresentation = NO;
+        //self.browseSearchController.searchBar.backgroundColor = [UIColor clearColor];
+        searchTextField.textColor = [UIColor blackColor];
+        searchTextField.layer.borderColor = [[UIColor whiteColor] CGColor];
+        searchTextField.layer.borderWidth = 0.0;
     }
     
     [self.recipeSearchResults addObjectsFromArray:results];

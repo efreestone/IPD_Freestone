@@ -47,6 +47,7 @@ typedef enum {
     sortEnum toSort;
     PFQuery *newItemQuery;
     NSIndexPath *selectedIndexPath;
+    UIView *noRecipesView;
 }
 
 - (void)viewDidLoad {
@@ -61,10 +62,25 @@ typedef enum {
 //    self.tableView.contentOffset = CGPointMake(0, (searchBar.frame.size.height) - self.tableView.contentOffset.y);
 //    searchBar.hidden = YES;
     
+    noRecipesView = [[UIView alloc] initWithFrame:self.view.frame];
+    noRecipesView.backgroundColor = [UIColor clearColor];
+    //Create and set no recpices label
+    UILabel *noRecipesLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, noRecipesView.frame.size.width, 200)];
+    noRecipesLabel.font = [UIFont boldSystemFontOfSize:18];
+    noRecipesLabel.numberOfLines = 1;
+    noRecipesLabel.textColor = [UIColor darkGrayColor];
+    noRecipesLabel.shadowOffset = CGSizeMake(0, 1);
+    //noRecipesLabel.backgroundColor = [UIColor clearColor];
+    noRecipesLabel.textAlignment = NSTextAlignmentCenter;
+    noRecipesLabel.text = @"No Recipes to Show";
+    //Hide no recipe view by default. Is shown if no recipes are available to show
+    noRecipesView.hidden = YES;
+    [noRecipesView addSubview:noRecipesLabel];
+    [self.tableView insertSubview:noRecipesView belowSubview:self.tableView];
+    
+    //Set up and add searchbar
     self.browseSearchResults = [[NSMutableArray alloc] init];
-    
     self.browseSearchController = [[UISearchController alloc] initWithSearchResultsController:nil];
-    
     self.browseSearchController.searchBar.delegate = self;
     self.browseSearchController.dimsBackgroundDuringPresentation = NO;
     self.browseSearchController.searchResultsUpdater = self;
@@ -243,11 +259,22 @@ typedef enum {
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
     if (self.browseSearchResults.count == 0) {
+        //Show/hide no recipes view based on count
+        if (self.objects.count == 0) {
+            noRecipesView.hidden = NO;
+        } else {
+            noRecipesView.hidden = YES;
+        }
         return self.objects.count;
     } else {
+        //Show/hide no recipes view based on count
+        if (self.browseSearchResults.count == 0) {
+            noRecipesView.hidden = NO;
+        } else {
+            noRecipesView.hidden = YES;
+        }
         return self.browseSearchResults.count;
     }
-
 }
 
 //Fired whenever a tableview cell is selected, including when search active
@@ -346,14 +373,25 @@ typedef enum {
     //NSLog(@"Result: %@", results);
     NSLog(@"filterResults %lu", (unsigned long)results.count);
     
-    UITextField *searchField = [self.browseSearchController.searchBar valueForKey:@"_searchField"];
+    //Grab searchbar textfield to apply color and border when no results found
+    UITextField *searchTextField;
+    for (id object in [[[self.browseSearchController.searchBar subviews] objectAtIndex:0] subviews]) {
+        if ([object isKindOfClass:[UITextField class]]) {
+            searchTextField = (UITextField *)object;
+            break;
+        }
+    }
     
     if (results.count == 0) {
-        self.browseSearchController.searchBar.backgroundColor = [UIColor grayColor];
-        searchField.textColor = [UIColor redColor];
+        //self.browseSearchController.searchBar.backgroundColor = [UIColor grayColor];
+        searchTextField.textColor = [UIColor redColor];
+        searchTextField.layer.borderColor = [[UIColor redColor] CGColor];
+        searchTextField.layer.borderWidth = 1.0;
     } else {
-        self.browseSearchController.searchBar.backgroundColor = [UIColor clearColor];
-        searchField.textColor = [UIColor blackColor];
+        //self.browseSearchController.searchBar.backgroundColor = [UIColor clearColor];
+        searchTextField.textColor = [UIColor blackColor];
+        searchTextField.layer.borderColor = [[UIColor whiteColor] CGColor];
+        searchTextField.layer.borderWidth = 0.0;
     }
     
     [self.browseSearchResults addObjectsFromArray:results];

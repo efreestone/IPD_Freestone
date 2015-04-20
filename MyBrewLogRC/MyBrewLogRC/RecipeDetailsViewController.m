@@ -31,6 +31,7 @@
 //Synthesize for getters/setters
 @synthesize nameLabel, ingredientsTV, instructionsTV;
 @synthesize passedObject, passedName, passedType, passedIngredients, passedUsername, passedInstructions, passedObjectID;
+@synthesize activeSwitch, publicSwitch;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -189,6 +190,27 @@
     [passedObject deleteInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         //[self loadObjects];
         [self pressBackButton];
+    }];
+}
+
+#pragma mark - UISwitch
+
+//Active switch changed
+-(IBAction)activeSwitchChanged:(id)sender {
+    //Check switch status
+    if ([activeSwitch isOn]) {
+        NSLog(@"Switch is on");
+        passedObject[@"Active"] = [NSNumber numberWithBool:YES];
+    } else {
+        NSLog(@"Switch is off");
+        passedObject[@"Active"] = [NSNumber numberWithBool:NO];
+    }
+    [passedObject saveInBackgroundWithBlock:^(BOOL success, NSError *error){
+        if (!error) {
+            NSLog(@"Save successful");
+        } else {
+            NSLog(@"Error saving object");
+        }
     }];
 }
 

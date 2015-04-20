@@ -56,7 +56,7 @@
 @implementation NewRecipeViewController
 
 //Synthesize for getters/setters
-@synthesize typeButton, batchButton, ingredientButton, tempButton, timerButton, notesButton;
+@synthesize recipeTypeSegment, addItemsSegment, ingredientButton;
 @synthesize recipeNameTF, ingredientsTV, instructionsTV;
 @synthesize passedName, passedType, passedIngredients, passedInstructions, passedUsername, passedObject, passedObjectID, isCopy;
 
@@ -130,27 +130,73 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+#pragma mark - Segment Controllers
+
+//Recipe type segment. Default is "Other" or segment 3 (index 2)
+-(IBAction)recipeTypeIndexChanged:(UISegmentedControl *)sender {
+    //Grab selected segment and set recipe type
+    switch (recipeTypeSegment.selectedSegmentIndex) {
+            //Beer selected
+        case 0:
+            recipeType = @"Beer";
+            break;
+            //Wine selected
+        case 1:
+            recipeType = @"Wine";
+            break;
+            //Other selected
+        case 2:
+            recipeType = @"Other";
+            break;
+        default:
+            recipeType = @"Other";
+            break;
+    }
+}
+
+-(IBAction)addItemIndexChanged:(id)sender {
+    switch (addItemsSegment.selectedSegmentIndex) {
+        //Timer selected
+        case 0:
+            NSLog(@"index 0");
+            [self showTimerPicker:sender];
+            break;
+        //Temp selected
+        case 1:
+            NSLog(@"index 1");
+            [self showTempPicker:sender];
+            break;
+        //Notes selected
+        case 2:
+            NSLog(@"index 2");
+            [self showNotesAlert:sender];
+            break;
+        default:
+            break;
+    }
+}
+
 #pragma mark - Pickers and Action Sheets
 //Using ActionSheetPicker, an open source lib. Found at https://github.com/skywinder/ActionSheetPicker-3.0
 
-//Show Recipe Type Picker
--(IBAction)showRecipeTypePicker:(id)sender {
-    //Create ActionSheet for recipe types
-    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Select a Recipe Type"
-                                                             delegate:self
-                                                    cancelButtonTitle:@"Cancel"
-                                               destructiveButtonTitle:nil
-                                                    otherButtonTitles:nil];
-    
-    //Fast enum recipe types and apply to "other" button
-    for (NSString *title in recipeTypes) {
-        [actionSheet addButtonWithTitle:title];
-    }
-    
-    actionSheet.tag = 100;
-    
-    [actionSheet showInView:self.view];
-}
+////Show Recipe Type Picker
+//-(IBAction)showRecipeTypePicker:(id)sender {
+//    //Create ActionSheet for recipe types
+//    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Select a Recipe Type"
+//                                                             delegate:self
+//                                                    cancelButtonTitle:@"Cancel"
+//                                               destructiveButtonTitle:nil
+//                                                    otherButtonTitles:nil];
+//    
+//    //Fast enum recipe types and apply to "other" button
+//    for (NSString *title in recipeTypes) {
+//        [actionSheet addButtonWithTitle:title];
+//    }
+//    
+//    actionSheet.tag = 100;
+//    
+//    [actionSheet showInView:self.view];
+//}
 
 //Show Ingredients Picker
 -(IBAction)showIngredientPicker:(id)sender {
@@ -261,7 +307,7 @@
 }
 
 //Show Timer Picker
--(IBAction)showTimerPicker:(id)sender {
+-(void)showTimerPicker:(id)sender {
     //Pass (id)sender to be used for launching ActionSheetPicker from reg action sheet
     buttonSender = sender;
     UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Is timer over 24 hours?"
@@ -366,7 +412,7 @@
 }
 
 //Show Temp Picker
--(IBAction)showTempPicker:(id)sender {
+-(void)showTempPicker:(id)sender {
     //Create picker using Distance. Will likely need custom for real picker or use a stepper instead.
     [ActionSheetDistancePicker showPickerWithTitle:@"Select Temperature"
                                      bigUnitString:@"."
@@ -418,7 +464,7 @@
 }
 
 //Create and show alert view w/ textfield for notes
--(IBAction)showNotesAlert:(id)sender {
+-(void)showNotesAlert:(id)sender {
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Notes"
                                                     message:@"Please enter notes for your recipe"
                                                    delegate:self

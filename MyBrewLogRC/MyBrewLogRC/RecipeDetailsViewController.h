@@ -19,6 +19,8 @@
 @property (strong, nonatomic) IBOutlet UILabel *nameLabel;
 @property (strong, nonatomic) IBOutlet UITextView *ingredientsTV;
 @property (strong, nonatomic) IBOutlet UITextView *instructionsTV;
+@property (strong, nonatomic) IBOutlet UISwitch *activeSwitch;
+@property (strong, nonatomic) IBOutlet UISwitch *publicSwitch;
 
 @property (strong, nonatomic) NSString *passedName;
 @property (strong, nonatomic) NSString *passedType;
