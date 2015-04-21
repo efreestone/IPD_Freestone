@@ -129,9 +129,9 @@
     //Get numbers from string
     NSString *numberString = [NSString stringWithFormat:@"%@%@%@", monthString, weekString, dayString];
     NSLog(@"number string = %@", numberString);
-    //Check if picker was selected, set default to 1 qt if not.
+    //Check if picker was selected, set default to 1 if not.
     if ([numberString isEqualToString:@"000"]) {
-        fullTimer = @"1 Day";
+        fullTimer = @"0 Months, 0 Weeks, 1 Days";
     } else {
         fullTimer = formattedTime;
     }

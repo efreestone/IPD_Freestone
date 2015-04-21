@@ -53,9 +53,9 @@
 //Create alert with 2 text fields for changing email and/or username
 -(IBAction)onEditUserClick:(id)sender {
     NSString *emailString = [currenUser email];
-    NSLog(@"email %@", emailString);
+    //NSLog(@"email %@", emailString);
     NSString *usernameString = [currenUser username];
-    NSLog(@"username %@", usernameString);
+    //NSLog(@"username %@", usernameString);
     
     UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Edit User"
                                                    message:@"Reset username and/or email. Please use \"Forgot Password?\" on the login screen to reset password. Requires Email"

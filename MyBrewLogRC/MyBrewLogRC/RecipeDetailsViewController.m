@@ -242,18 +242,28 @@
     [self showTimerAlert:rangeString];
     
     NSString *timeString = [rangeString substringFromIndex:7];
-    //NSLog(@"timeString %@", timeString);
-    //Get third char and check if :
-    NSRange range = {2,1};
-    NSString *charAtThree = [timeString substringWithRange:range];
-    //Is countdown timer if contains char is :
-    if ([charAtThree isEqualToString:@":"]) {
-//        NSLog(@"equals :");
+    NSLog(@"timeString%@time", timeString);
+    //Check format with regex. Under searches for 0:00 or 00:00 format
+    NSString *under24Pattern = @"^([0-9]|0[0-9]|1?[0-9]|2[0-3]):([0-5][0-9] )$";
+    NSPredicate *predicateOne = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", under24Pattern];
+    //Check for 0 Months, 0 Weeks, 0 Days format. double digit for any of the numbers is accepted too
+    NSString *over24Pattern = @"^[0-9]{1,2} Months, [0-9]{1,2} Weeks, [0-9]{1,2} Days$";
+    NSPredicate *predicateTwo = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", over24Pattern];
+    
+    //If matches 0:00 or 00:00 formats
+    if ([predicateOne evaluateWithObject:timeString]) {
+        NSLog(@"00:00 matches");
+        //Add extra zero at beginning if hours is only one digit
+        if (timeString.length == 5) {
+            timeString = [NSString stringWithFormat:@"0%@", timeString];
+            NSLog(@"timerString = %@ %lu", timeString, (unsigned long)timeString.length);
+        }
+        //Is countdown timer if contains char is :
         NSArray *numbersArray = [timeString componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@":"]];
         
         NSInteger hoursFromString = [numbersArray[0] intValue];
-        NSInteger minuteFromString = [numbersArray[1] intValue];
         NSInteger hoursInt = 0;
+        NSInteger minuteFromString = [numbersArray[1] intValue];
         NSInteger minutesInt = 0;
         
         //Make sure times aren't 00 and get seconds
@@ -265,33 +275,83 @@
         }
         countdownSeconds = hoursInt + minutesInt;
         NSLog(@"Countdown = %ld", (long)countdownSeconds);
+    } else if ([predicateTwo evaluateWithObject:timeString]) {
+        NSLog(@"Months, Weeks, Days matches");
         
     } else {
-        NSLog(@"Not :, over 24 hours");
-        NSArray *numbersArray = [timeString componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@","]];
-        
-        NSInteger monthsFromString = [numbersArray[0] intValue];
-        NSInteger monthsInt = 0;
-        NSInteger weeksFromString = [numbersArray[1] intValue];
-        NSInteger weeksInt = 0;
-        NSInteger daysFromString = [numbersArray[2] intValue];
-        NSInteger daysInt = 0;
-        
-        //NSLog(@"M - %ld, W - %ld, D - %ld", (long)monthsFromString, (long)weeksFromString, (long)daysFromString);
-        
-        if (monthsFromString != 00) {
-            monthsInt = monthsFromString * 2592000;
-            NSLog(@"Months in seconds = %ld", (long)monthsInt);
-        }
-        if (weeksFromString != 00) {
-            weeksInt = weeksFromString * 604800;
-        }
-        if (daysFromString != 00) {
-            daysInt = daysFromString * 86400;
-        }
-        
-        countdownSeconds = monthsInt + weeksInt + daysInt;
+        NSLog(@"NO matches");
     }
+    
+//    //Is countdown timer if contains char is :
+//    if ([charAtThree isEqualToString:@":"]) {
+//        NSLog(@"equals :");
+//        NSArray *numbersArray = [timeString componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@":"]];
+//        
+//        NSInteger hoursFromString = [numbersArray[0] intValue];
+//        NSInteger hoursInt = 0;
+//        NSInteger minuteFromString = 0;
+//        if (numbersArray.count >= 2) {
+//            minuteFromString = [numbersArray[1] intValue];
+//        }
+//        NSInteger minutesInt = 0;
+//        
+//        //Make sure times aren't 00 and get seconds
+//        if (hoursFromString != 00) {
+//            hoursInt = hoursFromString * 3600;
+//        }
+//        if (minuteFromString != 00) {
+//            minutesInt = minuteFromString * 60;
+//        }
+//        countdownSeconds = hoursInt + minutesInt;
+//        NSLog(@"Countdown = %ld", (long)countdownSeconds);
+//    } else {
+//        NSLog(@"Not :, over 24 hours");
+//        if (timeString.length < 25) {
+//            NSLog(@"Wrong format for timer");
+//            NSArray *numbersArray = [timeString componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@" "]];
+//            NSInteger hoursFromString = [numbersArray[0] intValue];
+//            NSInteger hoursInt = 0;
+//            NSInteger minuteFromString = 0;
+//            if (numbersArray.count >= 2) {
+//                minuteFromString = [numbersArray[2] intValue];
+//            }
+//            NSInteger minutesInt = 0;
+//            
+//            //Make sure times aren't 00 and get seconds
+//            if (hoursFromString != 00) {
+//                hoursInt = hoursFromString * 3600;
+//            }
+//            if (minuteFromString != 00) {
+//                minutesInt = minuteFromString * 60;
+//            }
+//            countdownSeconds = hoursInt + minutesInt;
+//            NSLog(@"Countdown = %ld", (long)countdownSeconds);
+//        } else {
+//            NSArray *numbersArray = [timeString componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@","]];
+//            
+//            NSInteger monthsFromString = [numbersArray[0] intValue];
+//            NSInteger monthsInt = 0;
+//            NSInteger weeksFromString = [numbersArray[1] intValue];
+//            NSInteger weeksInt = 0;
+//            NSInteger daysFromString = [numbersArray[2] intValue];
+//            NSInteger daysInt = 0;
+//            
+//            //NSLog(@"M - %ld, W - %ld, D - %ld", (long)monthsFromString, (long)weeksFromString, (long)daysFromString);
+//            
+//            if (monthsFromString != 00) {
+//                monthsInt = monthsFromString * 2592000;
+//                NSLog(@"Months in seconds = %ld", (long)monthsInt);
+//            }
+//            if (weeksFromString != 00) {
+//                weeksInt = weeksFromString * 604800;
+//            }
+//            if (daysFromString != 00) {
+//                daysInt = daysFromString * 86400;
+//            }
+//            
+//            countdownSeconds = monthsInt + weeksInt + daysInt;
+//        }
+//    }
     
     return NO;
 }

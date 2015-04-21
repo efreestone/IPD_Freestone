@@ -80,6 +80,12 @@
     [[instructionsTV layer] setBorderWidth:0.5];
     [[instructionsTV layer] setCornerRadius:7.5];
     
+//    [[addItemsSegment layer] setCornerRadius:15];
+//    addItemsSegment.clipsToBounds = YES;
+    
+//    UIImage *myNewImage = [[UIImage imageNamed:@"beer-segment.png"] resizableImageWithCapInsets:UIEdgeInsetsZero];
+//    [recipeTypeSegment setImage:myNewImage forSegmentAtIndex:0];
+    
     //Create arrays for pickers
     recipeTypes = [NSArray arrayWithObjects:@"Beer", @"Wine", @"Other", nil];
     ingredientArray = [NSArray arrayWithObjects:@"Ingedient 1", @"Ingedient 2", @"Ingedient 3", @"Ingedient 4", @"Ingedient 5", @"Ingedient 6", @"Other", nil];
@@ -136,16 +142,19 @@
 -(IBAction)recipeTypeIndexChanged:(UISegmentedControl *)sender {
     //Grab selected segment and set recipe type
     switch (recipeTypeSegment.selectedSegmentIndex) {
-            //Beer selected
+        //Beer selected
         case 0:
+            //NSLog(@"Beer");
             recipeType = @"Beer";
             break;
-            //Wine selected
+        //Wine selected
         case 1:
+            //NSLog(@"Wine");
             recipeType = @"Wine";
             break;
-            //Other selected
+        //Other selected
         case 2:
+            //NSLog(@"Other");
             recipeType = @"Other";
             break;
         default:
@@ -405,7 +414,7 @@
         addNewLine = @"";
     }
     
-    NSString *timerWithNewLine = [NSString stringWithFormat:@"%@Timer: %@\n", addNewLine, formattedTime];
+    NSString *timerWithNewLine = [NSString stringWithFormat:@"%@Timer:~ %@\n", addNewLine, formattedTime];
     
     instructionsTVString = [NSString stringWithFormat:@"%@%@", currentInst, timerWithNewLine];
     instructionsTV.text = instructionsTVString;

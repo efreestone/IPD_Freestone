@@ -39,6 +39,8 @@
 @property (strong, nonatomic) PFObject *passedObject;
 @property (nonatomic) BOOL isCopy;
 
+@property (strong, nonatomic) IBOutlet UIView *recipeTypeView;
+
 -(void)quantityPicked:(NSString *)formattedQuantity;
 -(void)timerPicked: (NSString *)formattedTime;
 
