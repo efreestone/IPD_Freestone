@@ -242,16 +242,16 @@
     //Remove "Timer:" from string for easier processing
     NSString *timeString = [rangeString substringFromIndex:7];
     //Check format with regex. Under searches for 0:00 or 00:00 format
-    NSString *under24Pattern = @"^([0-9]|0[0-9]|1?[0-9]|2[0-3]):([0-5][0-9] )$";
+    NSString *under24Pattern = @"^([0-9]|0[0-9]|1?[0-9]|2[0-3]):([0-5][0-9]\\s?)$";
     NSPredicate *predicateOne = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", under24Pattern];
     //Check for 0 Months, 0 Weeks, 0 Days format. double digit for any of the numbers is accepted too
-    NSString *over24Pattern = @"^[0-9]{1,2} Months, [0-9]{1,2} Weeks, [0-9]{1,2} Days$";
+    NSString *over24Pattern = @"^[0-9]{1,2} [mM](onths)?(,)? [0-9]{1,2} [wW](eeks)?(,)? [0-9]{1,2} [dD](ays)?$";
     NSPredicate *predicateTwo = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", over24Pattern];
     //Check for 0 Hours 0 Minutes (double digits ok). This is to account for the old format of under 24 timers
-    NSString *altUnder24Pattern = @"^[0-9]{1,2} Hours [0-9]{1,2} Minutes$";
+    NSString *altUnder24Pattern = @"^[0-9]{1,2} [hH](ours)?(,)? [0-9]{1,2} [mM](inutes)?$";
     NSPredicate *predicateThree = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", altUnder24Pattern];
     
-    NSLog(@"timerString =%@-", timeString);
+    //NSLog(@"timerString =%@-", timeString);
     
     //If matches 0:00 or 00:00 formats
     if ([predicateOne evaluateWithObject:timeString]) {
@@ -277,18 +277,18 @@
             minutesInt = minuteFromString * 60;
         }
         countdownSeconds = hoursInt + minutesInt;
-        NSLog(@"Countdown = %ld", (long)countdownSeconds);
+        NSLog(@"Countdown = %ld in under 24", (long)countdownSeconds);
     //Matches 0 Months, 0 Weeks, 0 Days (double digit ok too)
     } else if ([predicateTwo evaluateWithObject:timeString]) {
         NSLog(@"Months, Weeks, Days matches");
         //Seperate string into array at comma
-        NSArray *numbersArray = [timeString componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@","]];
+        NSArray *numbersArray = [timeString componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@" "]];
         //Grab int values from array
         NSInteger monthsFromString = [numbersArray[0] intValue];
         NSInteger monthsInt = 0;
-        NSInteger weeksFromString = [numbersArray[1] intValue];
+        NSInteger weeksFromString = [numbersArray[2] intValue];
         NSInteger weeksInt = 0;
-        NSInteger daysFromString = [numbersArray[2] intValue];
+        NSInteger daysFromString = [numbersArray[4] intValue];
         NSInteger daysInt = 0;
         
         //Make sure times aren't 00 and get seconds
@@ -303,32 +303,27 @@
             daysInt = daysFromString * 86400;
         }
         countdownSeconds = monthsInt + weeksInt + daysInt;
-    //Alt under 24 matches 0 Hours 0 Minutes (double digits ok)
+    //Alternative under 24 matches 0 Hours 0 Minutes (double digits ok). This was the original format
     } else if ([predicateThree evaluateWithObject:timeString]) {
         NSLog(@"0 Hours 0 Minutes matches");
-        if (timeString.length < 25) {
-            NSLog(@"Wrong format for timer");
-            NSArray *numbersArray = [timeString componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@" "]];
-            NSInteger hoursFromString = [numbersArray[0] intValue];
-            NSInteger hoursInt = 0;
-            NSInteger minuteFromString = 0;
-            if (numbersArray.count >= 2) {
-                minuteFromString = [numbersArray[2] intValue];
-            }
-            NSInteger minutesInt = 0;
-            
-            //Make sure times aren't 00 and get seconds
-            if (hoursFromString != 00) {
-                hoursInt = hoursFromString * 3600;
-            }
-            if (minuteFromString != 00) {
-                minutesInt = minuteFromString * 60;
-            }
-            countdownSeconds = hoursInt + minutesInt;
-            NSLog(@"Countdown = %ld", (long)countdownSeconds);
-        } else {
-            NSLog(@"timeString is over 25 characters");
+        NSArray *numbersArray = [timeString componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@" "]];
+        NSInteger hoursFromString = [numbersArray[0] intValue];
+        NSInteger hoursInt = 0;
+        NSInteger minuteFromString = 0;
+        if (numbersArray.count >= 2) {
+            minuteFromString = [numbersArray[2] intValue];
         }
+        NSInteger minutesInt = 0;
+        
+        //Make sure times aren't 00 and get seconds
+        if (hoursFromString != 00) {
+            hoursInt = hoursFromString * 3600;
+        }
+        if (minuteFromString != 00) {
+            minutesInt = minuteFromString * 60;
+        }
+        countdownSeconds = hoursInt + minutesInt;
+        NSLog(@"Countdown = %ld in Alt under 24", (long)countdownSeconds);
     //No format matches
     } else {
         NSLog(@"NO matches");
