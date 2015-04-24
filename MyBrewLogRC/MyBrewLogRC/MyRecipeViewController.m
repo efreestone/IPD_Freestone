@@ -68,9 +68,9 @@ typedef enum {
     appDelegate = [[UIApplication sharedApplication] delegate];
     
     //Set default ACL to be read/write of current user only
-//    PFACL *defaultACL = [PFACL ACL];
-//    [defaultACL setPublicReadAccess:YES];
-//    [PFACL setDefaultACL:defaultACL withAccessForCurrentUser:YES];
+    PFACL *defaultACL = [PFACL ACL];
+    [defaultACL setPublicReadAccess:YES];
+    [PFACL setDefaultACL:defaultACL withAccessForCurrentUser:YES];
     
     parseClassName = @"newRecipe";
     
@@ -178,6 +178,12 @@ typedef enum {
         //        logInViewController.logInView.logo = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"splash-logo.png"]];
         //        logInViewController.logInView.logo.frame = CGRectMake(0, 0, 370, 170.6);
         
+        logInViewController.fields = PFLogInFieldsUsernameAndPassword
+        | PFLogInFieldsLogInButton
+        | PFLogInFieldsSignUpButton
+        | PFLogInFieldsPasswordForgotten
+        | PFLogInFieldsDismissButton;
+        
         [logInViewController setDelegate:self]; // Set ourselves as the delegate
         
         // Create the sign up view controller
@@ -246,6 +252,7 @@ typedef enum {
         PFObject *searchedObject = [self.recipeSearchResults objectAtIndex:indexPath.row];
         NSString *recipeType = [searchedObject objectForKey:@"Type"];
         NSString *imageName;
+        //Set the icon based on recipe type. "Other" is the default
         if ([recipeType isEqualToString:@"Beer"]) {
             imageName = @"beer-bottle.png";
         } else if ([recipeType isEqualToString:@"Wine"]) {
@@ -254,7 +261,8 @@ typedef enum {
             imageName = @"other-icon.png";
         }
         
-        NSDate *updated = [object updatedAt];
+        //NSDate *updated = [object updatedAt];
+        NSDate *updated = [object valueForKey:@"updatedByUser"];
         NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
         [dateFormat setDateFormat:@"MM-dd-yy"];
         //cell.detailTextLabel.text = [NSString stringWithFormat:@"Lasted Updated: %@", [dateFormat stringFromDate:updated]];
@@ -268,6 +276,7 @@ typedef enum {
         //NSLog(@"ELSE Search results controller");
         NSString *recipeType = [object objectForKey:@"Type"];
         NSString *imageName;
+        //Set the icon based on recipe type. "Other" is the default
         if ([recipeType isEqualToString:@"Beer"]) {
             imageName = @"beer-bottle.png";
         } else if ([recipeType isEqualToString:@"Wine"]) {
@@ -276,7 +285,8 @@ typedef enum {
             imageName = @"other-icon.png";
         }
         
-        NSDate *updated = [object updatedAt];
+        //NSDate *updated = [object updatedAt];
+        NSDate *updated = [object valueForKey:@"updatedByUser"];
         NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
         [dateFormat setDateFormat:@"MM-dd-yy"];
         //cell.detailTextLabel.text = [NSString stringWithFormat:@"Lasted Updated: %@", [dateFormat stringFromDate:updated]];
@@ -309,7 +319,6 @@ typedef enum {
     newItemQuery = [PFQuery queryWithClassName:self.parseClassName];
     //Include only recipes for current user.
     //This does not work correctly if using usernameString for equalTo. Not sure why
-    
     if ([PFUser currentUser]) {
         [newItemQuery whereKey:@"createdBy" equalTo:[PFUser currentUser].username];
     }

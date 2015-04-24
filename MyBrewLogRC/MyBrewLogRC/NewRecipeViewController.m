@@ -22,7 +22,7 @@
 #import "CustomTimerPickerDelegate.h"
 #import <Parse/Parse.h>
 
-@interface NewRecipeViewController () <UIActionSheetDelegate> {
+@interface NewRecipeViewController () <UIActionSheetDelegate, UITextViewDelegate> {
     NSArray *recipeTypes;
     NSArray *ingredientArray;
     NSDate *selectedDate;
@@ -130,10 +130,23 @@
     // Dispose of any resources that can be recreated.
 }
 
-//Dismiss new recipe view on cancel
--(IBAction)onCancel:(id)sender {
-    //Dismiss view controller
-    [self dismissViewControllerAnimated:YES completion:nil];
+#pragma mark - TextView delegate
+
+//-(void)textViewDidEndEditing:(UITextView *)textView {
+//    NSLog(@"textViewDidEndEditing");
+//    [ingredientsTV resignFirstResponder];
+//    [self resignFirstResponder];
+//    [textView endEditing:YES];
+//}
+
+- (IBAction)dismissKeyboard:(id)sender {
+    [ingredientsTV resignFirstResponder];
+    [instructionsTV resignFirstResponder];
+}
+
+-(void)dismissKeyboard {
+    [ingredientsTV resignFirstResponder];
+    [instructionsTV resignFirstResponder];
 }
 
 #pragma mark - Segment Controllers
@@ -161,6 +174,8 @@
             recipeType = @"Other";
             break;
     }
+    //Dissmiss any keyboards currently showing on button click
+    [self dismissKeyboard];
 }
 
 -(IBAction)addItemIndexChanged:(id)sender {
@@ -183,29 +198,12 @@
         default:
             break;
     }
+    //Dissmiss any keyboards currently showing on button click
+    [self dismissKeyboard];
 }
 
 #pragma mark - Pickers and Action Sheets
 //Using ActionSheetPicker, an open source lib. Found at https://github.com/skywinder/ActionSheetPicker-3.0
-
-////Show Recipe Type Picker
-//-(IBAction)showRecipeTypePicker:(id)sender {
-//    //Create ActionSheet for recipe types
-//    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Select a Recipe Type"
-//                                                             delegate:self
-//                                                    cancelButtonTitle:@"Cancel"
-//                                               destructiveButtonTitle:nil
-//                                                    otherButtonTitles:nil];
-//    
-//    //Fast enum recipe types and apply to "other" button
-//    for (NSString *title in recipeTypes) {
-//        [actionSheet addButtonWithTitle:title];
-//    }
-//    
-//    actionSheet.tag = 100;
-//    
-//    [actionSheet showInView:self.view];
-//}
 
 //Show Ingredients Picker
 -(IBAction)showIngredientPicker:(id)sender {
@@ -617,6 +615,12 @@
         NSString *alertString = @"A Recipe Name and some Instructions are required to save. Please add them and try again.";
         [self showRequiredAlert:alertString];
     }
+}
+
+//Dismiss new recipe view on cancel
+-(IBAction)onCancel:(id)sender {
+    //Dismiss view controller
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - Alerts

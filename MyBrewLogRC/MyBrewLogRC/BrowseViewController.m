@@ -164,6 +164,7 @@ typedef enum {
         PFObject *searchedObject = [self.browseSearchResults objectAtIndex:indexPath.row];
         NSString *recipeType = [searchedObject objectForKey:@"Type"];
         NSString *imageName;
+        //Set the icon based on recipe type. "Other" is the default
         if ([recipeType isEqualToString:@"Beer"]) {
             imageName = @"beer-bottle.png";
         } else if ([recipeType isEqualToString:@"Wine"]) {
@@ -183,6 +184,7 @@ typedef enum {
         //NSLog(@"ELSE Search results controller");
         NSString *recipeType = [object objectForKey:@"Type"];
         NSString *imageName;
+        //Set the icon based on recipe type. "Other" is the default
         if ([recipeType isEqualToString:@"Beer"]) {
             imageName = @"beer-bottle.png";
         } else if ([recipeType isEqualToString:@"Wine"]) {
@@ -190,7 +192,7 @@ typedef enum {
         } else {
             imageName = @"other-icon.png";
         }
-        
+        //Grab username to be displayed beow the recipe
         usernameString = [object objectForKey:@"createdBy"];
         NSString *createdByString = [NSString stringWithFormat:@"By: %@", usernameString];
         

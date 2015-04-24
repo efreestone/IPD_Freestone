@@ -21,7 +21,10 @@
     NSInteger countdownSeconds;
     TimersViewController *timersViewController;
     BOOL isCopy;
+    BOOL isActive;
+    BOOL isPrivate;
     AppDelegate *appDelegate;
+    PFACL *objectACL;
 }
 
 @end
@@ -49,6 +52,29 @@
     timersViewController = (TimersViewController*)[[self.tabBarController viewControllers] objectAtIndex:2];
     //set timers app delegate
     timersViewController.appDelegate = appDelegate;
+    
+    //Grab ACL of the current recipe. Used for Public switch
+    objectACL = [PFACL ACL];
+    
+    //Get active bool and set switch accordingly
+    isActive = [passedObject valueForKey:@"Active"];
+    if (isActive) {
+        NSLog(@"is active");
+        [activeSwitch setOn:YES];
+    } else {
+        NSLog(@"not active");
+        [activeSwitch setOn:NO];
+    }
+    
+    //Get private bool and set switch accordingly
+    isPrivate = [passedObject valueForKey:@"Private"];
+    if (isPrivate) {
+        NSLog(@"not public");
+        [publicSwitch setOn:NO];
+    } else {
+        NSLog(@"is public");
+        [publicSwitch setOn:YES];
+    }
     
     //Set textviews with passed data
     nameLabel.text = passedName;
@@ -94,28 +120,17 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-//Share object
--(void)shareClicked {
-    NSString *titleString = @"Share Recipe";
-    NSString *alertMessage = @"Recipe would have been shared via social networks, however this feature is not functional yet";
-    [self showAlert:alertMessage withTitle:titleString];
-    
-    NSString *testIngString = ingredientsTV.text;
-    NSLog(@"Ing test = %@", testIngString);
-    
-    instructionsTV.text = testIngString;
-}
-
 # pragma mark - AlertViews
 
-//Method to create and show alert view if there is no internet connectivity
--(void)showAlert:(NSString *)alertMessage withTitle:(NSString *)titleString {
-    UIAlertView *copyAlert = [[UIAlertView alloc] initWithTitle:titleString message:alertMessage delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+//Method to create and show alert view if timer format does not match
+-(void)showNoMatchAlert {
+    NSString *noMatchString = @"Sorry, the timer does not match the format and can't be started. The accepted formats are \"HH:MM\" for under 24 hours and \"0 Months, 0 Weeks, 0 Days\" for over 24 hours. Please check the format and try again";
+    UIAlertView *noMatchAlert = [[UIAlertView alloc] initWithTitle:@"Error" message:noMatchString delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
     //Show alert
-    [copyAlert show];
+    [noMatchAlert show];
 } //showAlert close
 
-//Method to create and show alert view with text input
+//Method to create and show alert view with text input for timers
 -(void)showTimerAlert:(NSString *)alertMessage {
     NSString *formattedString = [NSString stringWithFormat:@"%@ \nPlease enter a discription for the new timer. Over 24 hours will be calendar entries.", alertMessage];
     
@@ -125,19 +140,38 @@
                                           cancelButtonTitle:@"Cancel"
                                           otherButtonTitles:@"Start", nil];
     alert.alertViewStyle = UIAlertViewStylePlainTextInput;
+    alert.tag = 100;
     [alert show];
 } //showAlert close
 
-//Grab text entered into alertview
+//Method to create and show alert view if timer format does not match
+-(void)showDeleteConfrimAlert {
+    NSString *deleteConfirmString = @"Are you sure you want to delete this recipe? It can not be undone.";
+    UIAlertView *deleteConfrimAlert = [[UIAlertView alloc] initWithTitle:@"Delete Recipe?" message:deleteConfirmString delegate:self cancelButtonTitle:@"No, Cancel" otherButtonTitles:@"Yes, Delete", nil];
+    deleteConfrimAlert.tag = 200;
+    //Show alert
+    [deleteConfrimAlert show];
+} //showAlert close
+
+//Grab text entered into alertview and start timer
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     NSString *description = [alertView textFieldAtIndex:0].text;
-    if (buttonIndex == 1) {
-        NSLog(@"index 1");
+
+    if (alertView.tag == 100) {
+        NSLog(@"tag 100, timer alert");
         if (description.length == 0) {
             description = @"No Description";
         }
         [timersViewController startTimerFromDetails:countdownSeconds withDetails:description];
         //timersViewController.oneView.hidden = NO;
+    }
+    if (alertView.tag == 200) {
+        if (buttonIndex == 1) {
+            NSLog(@"tag 200 index 1, yes delete");
+            [self deleteObject];
+        } else {
+            NSLog(@"tag 200 other index, cancel");
+        }
     }
 }
 
@@ -171,17 +205,40 @@
             break;
         case 2: //Share
             NSLog(@"2");
-            //[self shareClicked];
-            [self postToTwitter];
+            [self createActivityViewForShare];
             break;
         case 3: //Delete
             NSLog(@"3");
-            [self deleteObject];
+            //[self deleteObject];
+            [self showDeleteConfrimAlert];
             break;
         default:
             NSLog(@"Other clicked");
             break;
     }
+}
+
+//Create activity view controller to Facebook or Twitter
+-(void)createActivityViewForShare {
+    NSString *text = [NSString stringWithFormat:@"Check out my %@ recipe on @My_Brew_Log (insert link) called %@", passedType, passedName];
+    
+    UIActivityViewController *activityController = [[UIActivityViewController alloc] initWithActivityItems:@[text] applicationActivities:nil];
+    
+    //Ignore all share options but facebook and twitter
+    activityController.excludedActivityTypes = @[UIActivityTypePostToWeibo,
+                                         UIActivityTypeMessage,
+                                         UIActivityTypeMail,
+                                         UIActivityTypePrint,
+                                         UIActivityTypeCopyToPasteboard,
+                                         UIActivityTypeAssignToContact,
+                                         UIActivityTypeSaveToCameraRoll,
+                                         UIActivityTypeAddToReadingList,
+                                         UIActivityTypePostToFlickr,
+                                         UIActivityTypePostToVimeo,
+                                         UIActivityTypePostToTencentWeibo,
+                                         UIActivityTypeAirDrop];
+    
+    [self presentViewController:activityController animated:YES completion:nil];
 }
 
 //Delete object
@@ -195,21 +252,57 @@
 
 #pragma mark - UISwitch
 
+//Public switch changed
+-(IBAction)publicSwitchChanged:(id)sender {
+    if ([publicSwitch isOn]) {
+        NSLog(@"Switch is on");
+        [objectACL setPublicReadAccess:true];
+        [objectACL setPublicWriteAccess:true];
+        //Set bool to represent if it is public or not. Much easier than trying to read ACL settings
+        passedObject[@"Private"] = [NSNumber numberWithBool:NO];
+    } else {
+        NSLog(@"Switch is off");
+        //[objectACL setPublicReadAccess:false];
+        //[objectACL setPublicWriteAccess:false];
+        //passedObject.ACL = [PFACL ACLWithUser:[PFUser currentUser]];
+        //[objectACL setWriteAccess:true forUser:[PFUser currentUser]];
+        [objectACL setReadAccess:YES forUser:[PFUser currentUser]];
+        [objectACL setWriteAccess:YES forUser:[PFUser currentUser]];
+        [objectACL setPublicReadAccess:false];
+        //Set bool to not public
+        passedObject[@"Private"] = [NSNumber numberWithBool:YES];
+        
+        //    PFACL *defaultACL = [PFACL ACL];
+        //    [defaultACL setPublicReadAccess:YES];
+        //    [PFACL setDefaultACL:defaultACL withAccessForCurrentUser:YES];
+    }
+    //Change ACL of the recipe
+    [passedObject setACL:objectACL];
+    [passedObject saveInBackgroundWithBlock:^(BOOL success, NSError *error){
+        if (!error) {
+            NSLog(@"Save successful - public");
+        } else {
+            NSLog(@"Error saving object - public");
+        }
+    }];
+}
+
 //Active switch changed
 -(IBAction)activeSwitchChanged:(id)sender {
     //Check switch status
     if ([activeSwitch isOn]) {
         NSLog(@"Switch is on");
         passedObject[@"Active"] = [NSNumber numberWithBool:YES];
+        
     } else {
         NSLog(@"Switch is off");
         passedObject[@"Active"] = [NSNumber numberWithBool:NO];
     }
     [passedObject saveInBackgroundWithBlock:^(BOOL success, NSError *error){
         if (!error) {
-            NSLog(@"Save successful");
+            NSLog(@"Save successful - active");
         } else {
-            NSLog(@"Error saving object");
+            NSLog(@"Error saving object - active");
         }
     }];
 }
@@ -261,7 +354,7 @@
             timeString = [NSString stringWithFormat:@"0%@", timeString];
             NSLog(@"timerString = %@ %lu", timeString, (unsigned long)timeString.length);
         }
-       //Seperate string into array at comma
+        //Seperate string into array at comma
         NSArray *numbersArray = [timeString componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@":"]];
         //Grab int values form array
         NSInteger hoursFromString = [numbersArray[0] intValue];
@@ -327,6 +420,7 @@
     //No format matches
     } else {
         NSLog(@"NO matches");
+        [self showNoMatchAlert];
         return NO;
     }
     
@@ -334,20 +428,20 @@
     return NO;
 }
 
-//Post to twitter. This is still lacking a link but there is no website interface to handle it anyways.
--(void)postToTwitter {
-    //Create string with username and score
-    NSString *tweetString = [NSString stringWithFormat:@"Check out my %@ recipe on My Brew Log (insert link) called %@", passedType, passedName];
-    
-    if ([SLComposeViewController isAvailableForServiceType:SLServiceTypeTwitter]) {
-        SLComposeViewController *tweetSheet = [SLComposeViewController
-                                               composeViewControllerForServiceType:SLServiceTypeTwitter];
-        [tweetSheet setInitialText:tweetString];
-        NSLog(@"Post to Twitter");
-        [self presentViewController:tweetSheet animated:YES completion:nil];
-    } else {
-        [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:NSLocalizedString(@"There is no twitter account available on your device. Please check your account settings and try again", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles:nil] show];
-    }
-}
+////Post to twitter. This is still lacking a link but there is no website interface to handle it anyways.
+//-(void)postToTwitter {
+//    //Create string with username and score
+//    NSString *tweetString = [NSString stringWithFormat:@"Check out my %@ recipe on My Brew Log (insert link) called %@", passedType, passedName];
+//    
+//    if ([SLComposeViewController isAvailableForServiceType:SLServiceTypeTwitter]) {
+//        SLComposeViewController *tweetSheet = [SLComposeViewController
+//                                               composeViewControllerForServiceType:SLServiceTypeTwitter];
+//        [tweetSheet setInitialText:tweetString];
+//        NSLog(@"Post to Twitter");
+//        [self presentViewController:tweetSheet animated:YES completion:nil];
+//    } else {
+//        [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:NSLocalizedString(@"There is no twitter account available on your device. Please check your account settings and try again", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles:nil] show];
+//    }
+//}
 
 @end
