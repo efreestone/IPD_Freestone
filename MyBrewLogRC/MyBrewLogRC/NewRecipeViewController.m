@@ -220,6 +220,7 @@
                                          NSLog(@"Block Picker Canceled");
                                      }
                                           origin:sender];
+    [self dismissKeyboard];
 }
 
 //Ingredient selected. Will create alertview with textfield if Other selected
