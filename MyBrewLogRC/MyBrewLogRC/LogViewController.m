@@ -36,7 +36,7 @@
     
     //Set placeholder text
     placeholderString = @"This is a place for you to jot down and keep track of progess related stuff for your recipe. An example could be\n \"1-1-15 gravity at 1.040. Moving to carboy\"\n but feel free to use this as you see fit. This is NOT shared with your recipe so other users will not see it.";
-    
+    //If noteString is empty, replace with placeholder
     if (notesString == nil || [notesString isEqualToString:@""]) {
         //Set placeholder text if no notes exist for the recipe
         notesString = placeholderString;
@@ -60,11 +60,11 @@
 //Save notes if any were entered and dismiss log view
 -(IBAction)doneClicked:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
-    passedObject[@"Notes"] = notesTextView.text;
     
     //Make sure notes were entered and save if they were
     if (![notesTextView.text isEqualToString:@""] && ![notesTextView.text isEqualToString:placeholderString]) {
         NSLog(@"Notes were entered");
+        passedObject[@"Notes"] = notesTextView.text;
         [passedObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
             if (succeeded) {
                 NSLog(@"Note saved.");
@@ -114,6 +114,7 @@
     shouldMoveCursor = YES;
 }
 
+
 - (void)textViewDidChangeSelection:(UITextView *)textView {
     if(shouldMoveCursor) {
         NSRange endRange = NSMakeRange(notesTextView.text.length, 0);
@@ -140,29 +141,27 @@
                                                  name:UIKeyboardWillHideNotification object:nil];
 }
 
+//Called when keyboard notifies appearing
 - (void)keyboardAppeared:(NSNotification*)notification {
+    //Grab keyboard height and create CGSize and inset
     NSDictionary* info = [notification userInfo];
     CGSize keyboardSize = [[info objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
-    
-    //notesTextView.contentInset = UIEdgeInsetsMake(0, 0, keyboardSize.height, 0);
-    //notesTextView.scrollIndicatorInsets = notesTextView.contentInset;
     
     UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, keyboardSize.height, 0.0);
     notesTextView.contentInset = contentInsets;
     notesTextView.scrollIndicatorInsets = contentInsets;
     
+    //Grab rect of frame and check it against keyboard, only scrolling when keyboard covers text position
     CGRect myRect = self.view.frame;
-    
     myRect.size.height -= keyboardSize.height;
     
     if (!CGRectContainsPoint(myRect, notesTextView.frame.origin) ) {
-        
         [notesTextView scrollRectToVisible:notesTextView.frame animated:YES];
-        
     }
     //[notesTextView setContentOffset:CGPointMake(0.0, notesTextView.frame.origin.y - keyboardSize.height + 150) animated:YES];
 }
 
+//Called when keyboard notifies disappearing
 - (void)keyboardHidden:(NSNotification*)notification {
     notesTextView.contentInset = UIEdgeInsetsZero;
     notesTextView.scrollIndicatorInsets = UIEdgeInsetsZero;
