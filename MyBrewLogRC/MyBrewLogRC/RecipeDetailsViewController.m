@@ -14,6 +14,7 @@
 #import "RecipeDetailsViewController.h"
 #import "NewRecipeViewController.h"
 #import "TimersViewController.h"
+#import "LogViewController.h"
 #import "AppDelegate.h"
 #import <Social/Social.h>
 
@@ -33,7 +34,7 @@
 
 //Synthesize for getters/setters
 @synthesize nameLabel, ingredientsTV, instructionsTV;
-@synthesize passedObject, passedName, passedType, passedIngredients, passedUsername, passedInstructions, passedObjectID;
+@synthesize passedObject, passedName, passedType, passedIngredients, passedUsername, passedInstructions, passedNotes, passedObjectID;
 @synthesize activeSwitch, publicSwitch;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -118,6 +119,10 @@
 //Dismiss view. Used to dismiss from new recipe edit upon saving
 -(void)pressBackButton {
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+-(IBAction)logButtonClicked:(id)sender {
+    
 }
 
 # pragma mark - AlertViews
@@ -325,6 +330,14 @@
         
         newRecipeVC.recipeDetailsVC = self;
     }
+    
+    if ([segue.identifier isEqualToString:@"Log"]) {
+        LogViewController *logViewController = segue.destinationViewController;
+        logViewController.titleString = passedName;
+        logViewController.notesString = passedNotes;
+        logViewController.passedObject = passedObject;
+        logViewController.detailsVC = self;
+    }
 }
 
 //Grab URL click in TextView and start timer, return NO to stop browser from opening
@@ -427,21 +440,5 @@
     [self showTimerAlert:rangeString];
     return NO;
 }
-
-////Post to twitter. This is still lacking a link but there is no website interface to handle it anyways.
-//-(void)postToTwitter {
-//    //Create string with username and score
-//    NSString *tweetString = [NSString stringWithFormat:@"Check out my %@ recipe on My Brew Log (insert link) called %@", passedType, passedName];
-//    
-//    if ([SLComposeViewController isAvailableForServiceType:SLServiceTypeTwitter]) {
-//        SLComposeViewController *tweetSheet = [SLComposeViewController
-//                                               composeViewControllerForServiceType:SLServiceTypeTwitter];
-//        [tweetSheet setInitialText:tweetString];
-//        NSLog(@"Post to Twitter");
-//        [self presentViewController:tweetSheet animated:YES completion:nil];
-//    } else {
-//        [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:NSLocalizedString(@"There is no twitter account available on your device. Please check your account settings and try again", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles:nil] show];
-//    }
-//}
 
 @end

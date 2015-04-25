@@ -42,13 +42,13 @@ typedef enum {
 @implementation MyRecipeViewController {
     NSArray *recipesArray;
     NSArray *imageArray;
-    IBOutlet UISearchBar *searchBar;
     NSString *parseClassName;
     
     NSString *selectedName;
     NSString *selectedIngredients;
     NSString *selectedInstructions;
     NSString *selectedType;
+    NSString *selectedNotes;
     NSString *selectedObjectID;
     PFObject *selectedPFObject;
     NSString *usernameString;
@@ -418,6 +418,7 @@ typedef enum {
         selectedType = [selectedObject objectForKey:@"Type"];
         selectedIngredients = [selectedObject objectForKey:@"Ingredients"];
         selectedInstructions = [selectedObject objectForKey:@"Instructions"];
+        selectedNotes = [selectedObject objectForKey:@"Notes"];
         selectedObjectID = [NSString stringWithFormat:@"%@", selectedObject.objectId];
         selectedPFObject = selectedObject;
     } else {
@@ -428,6 +429,7 @@ typedef enum {
         selectedType = [selectedObject objectForKey:@"Type"];
         selectedIngredients = [selectedObject objectForKey:@"Ingredients"];
         selectedInstructions = [selectedObject objectForKey:@"Instructions"];
+        selectedNotes = [selectedObject objectForKey:@"Notes"];
         selectedObjectID = [NSString stringWithFormat:@"%@", selectedObject.objectId];
         selectedPFObject = selectedObject;
     }
@@ -443,6 +445,7 @@ typedef enum {
         detailsViewController.passedIngredients = selectedIngredients;
         detailsViewController.passedInstructions = selectedInstructions;
         detailsViewController.passedUsername = usernameString;
+        detailsViewController.passedNotes = selectedNotes;
         detailsViewController.passedObjectID = selectedObjectID;
         detailsViewController.passedObject = selectedPFObject;
     }

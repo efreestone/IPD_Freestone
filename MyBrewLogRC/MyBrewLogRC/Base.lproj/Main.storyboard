@@ -45,6 +45,8 @@
             <string>Calibri</string>
             <string>Calibri</string>
             <string>Calibri</string>
+            <string>Calibri</string>
+            <string>Calibri</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -578,6 +580,64 @@
             </objects>
             <point key="canvasLocation" x="1402" y="-951"/>
         </scene>
+        <!--Log View Controller-->
+        <scene sceneID="AEg-ie-Saa">
+            <objects>
+                <viewController id="wew-jw-Kdx" customClass="LogViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="SMe-KO-Bur"/>
+                        <viewControllerLayoutGuide type="bottom" id="beb-mS-oWK"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="qjp-vL-TZM">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2z1-PV-xml">
+                                <rect key="frame" x="10" y="74" width="580" height="516"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <fontDescription key="fontDescription" name="Calibri" family="Calibri" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <connections>
+                                    <outlet property="delegate" destination="wew-jw-Kdx" id="f6q-YI-frE"/>
+                                </connections>
+                            </textView>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="amc-kB-xTt">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="64"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="64" id="HDj-Yz-vcn"/>
+                                </constraints>
+                                <items>
+                                    <navigationItem title="Title" id="5GQ-DY-Qwt">
+                                        <barButtonItem key="leftBarButtonItem" style="done" systemItem="done" id="NCd-JB-RC0">
+                                            <connections>
+                                                <action selector="doneClicked:" destination="wew-jw-Kdx" id="KRK-hQ-cKA"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                        </subviews>
+                        <color key="backgroundColor" red="0.9490196704864502" green="0.92156869173049927" blue="0.90196084976196289" alpha="1" colorSpace="deviceRGB"/>
+                        <constraints>
+                            <constraint firstItem="amc-kB-xTt" firstAttribute="top" secondItem="qjp-vL-TZM" secondAttribute="top" id="176-JY-hll"/>
+                            <constraint firstAttribute="bottom" secondItem="2z1-PV-xml" secondAttribute="bottom" constant="10" id="2MY-Ls-EgJ"/>
+                            <constraint firstItem="2z1-PV-xml" firstAttribute="top" secondItem="amc-kB-xTt" secondAttribute="bottom" constant="10" id="Fla-9l-8r6"/>
+                            <constraint firstItem="2z1-PV-xml" firstAttribute="leading" secondItem="qjp-vL-TZM" secondAttribute="leading" constant="10" id="Y64-MF-K7T"/>
+                            <constraint firstAttribute="width" secondItem="amc-kB-xTt" secondAttribute="width" id="dQ3-dz-EB2"/>
+                            <constraint firstAttribute="trailing" secondItem="2z1-PV-xml" secondAttribute="trailing" constant="10" id="pOF-fZ-qO0"/>
+                            <constraint firstAttribute="centerX" secondItem="amc-kB-xTt" secondAttribute="centerX" id="yDE-fL-44H"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="navBar" destination="amc-kB-xTt" id="YNg-pl-7sA"/>
+                        <outlet property="notesTextView" destination="2z1-PV-xml" id="fpb-Ym-5gU"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ftH-bC-IeH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2056" y="-1619"/>
+        </scene>
         <!--Recipe Details-->
         <scene sceneID="0fb-dY-lWO">
             <objects>
@@ -653,17 +713,32 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1XF-lI-Ge7">
+                                <rect key="frame" x="10" y="48" width="65" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="G3Q-RB-Vqi"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Calibri" family="Calibri" pointSize="22"/>
+                                <state key="normal" title="My Log">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="wew-jw-Kdx" kind="presentation" identifier="Log" id="3K1-jr-T3A"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.9490196704864502" green="0.92156869173049927" blue="0.90196084976196289" alpha="1" colorSpace="deviceRGB"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="bGQ-sj-RTv" secondAttribute="trailing" constant="10" id="1Uv-u4-ubV"/>
                             <constraint firstItem="Bta-xa-ox0" firstAttribute="leading" secondItem="qtt-gT-aeQ" secondAttribute="leading" constant="10" id="2hv-FH-k3A"/>
                             <constraint firstItem="iBz-OL-mqZ" firstAttribute="top" secondItem="ENt-Kz-aJt" secondAttribute="bottom" id="2rL-Bw-bA5"/>
+                            <constraint firstItem="Bta-xa-ox0" firstAttribute="top" secondItem="1XF-lI-Ge7" secondAttribute="bottom" id="6Jy-dI-doR"/>
                             <constraint firstItem="sii-2v-0a7" firstAttribute="leading" secondItem="lKx-7O-WzX" secondAttribute="trailing" constant="5" id="Dhq-Gu-LR5"/>
                             <constraint firstItem="Pir-jH-SAc" firstAttribute="top" secondItem="Bta-xa-ox0" secondAttribute="bottom" constant="5" id="EwK-lG-g4y"/>
                             <constraint firstItem="bGQ-sj-RTv" firstAttribute="leading" secondItem="qtt-gT-aeQ" secondAttribute="leading" constant="10" id="H0S-RA-PAd"/>
                             <constraint firstItem="877-Le-ptP" firstAttribute="top" secondItem="sii-2v-0a7" secondAttribute="bottom" constant="5" id="OFv-Gk-2Tt"/>
                             <constraint firstItem="877-Le-ptP" firstAttribute="top" secondItem="5Nf-S1-fWJ" secondAttribute="bottom" constant="5" id="PME-eR-VXp"/>
+                            <constraint firstItem="1XF-lI-Ge7" firstAttribute="leading" secondItem="qtt-gT-aeQ" secondAttribute="leading" constant="10" id="PRb-ZK-Nzs"/>
                             <constraint firstItem="sii-2v-0a7" firstAttribute="centerY" secondItem="5Nf-S1-fWJ" secondAttribute="centerY" id="Xbx-wA-Zzi"/>
                             <constraint firstAttribute="centerX" secondItem="iBz-OL-mqZ" secondAttribute="centerX" id="YV8-ZI-Cfb"/>
                             <constraint firstAttribute="centerX" secondItem="bGQ-sj-RTv" secondAttribute="centerX" id="Yit-Oa-qCa"/>
@@ -695,6 +770,7 @@
                         <outlet property="activeSwitch" destination="sii-2v-0a7" id="QE0-ja-ebF"/>
                         <outlet property="ingredientsTV" destination="Bta-xa-ox0" id="SGR-Yb-f5c"/>
                         <outlet property="instructionsTV" destination="bGQ-sj-RTv" id="ws7-pG-7Ub"/>
+                        <outlet property="logButton" destination="1XF-lI-Ge7" id="5BJ-BA-zqy"/>
                         <outlet property="nameLabel" destination="iBz-OL-mqZ" id="MLB-ML-nDX"/>
                         <outlet property="publicSwitch" destination="5Nf-S1-fWJ" id="V08-Ex-ACe"/>
                         <segue destination="8Wm-S4-3lb" kind="presentation" identifier="Edit" id="fSe-cm-Zxg"/>
