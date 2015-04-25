@@ -16,6 +16,7 @@
 @interface LogViewController () <UITextViewDelegate> {
     BOOL isPlaceholder;
     NSString *placeholderString;
+    BOOL shouldMoveCursor;
 }
 
 @end
@@ -27,9 +28,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    //Set title of the view
     self.navBar.topItem.title = [NSString stringWithFormat:@"Log for %@", titleString];
     
+    //Register for keyboard notifications
+    [self registerForKeyboardNotifications];
+    
+    //Set placeholder text
     placeholderString = @"This is a place for you to jot down and keep track of progess related stuff for your recipe. An example could be\n \"1-1-15 gravity at 1.040. Moving to carboy\"\n but feel free to use this as you see fit. This is NOT shared with your recipe so other users will not see it.";
     
     if (notesString == nil || [notesString isEqualToString:@""]) {
@@ -38,9 +43,10 @@
         isPlaceholder = YES;
         notesTextView.textColor = [UIColor lightGrayColor];
     }
-    
+    //Apply notes to textview. This is placeholder text if no notes exist
     notesTextView.text = notesString;
     
+    //Add border and corner radius to textview
     [[notesTextView layer] setBorderColor:[[UIColor lightGrayColor] CGColor]];
     [[notesTextView layer] setBorderWidth:0.5];
     [[notesTextView layer] setCornerRadius:7.5];
@@ -51,25 +57,29 @@
     // Dispose of any resources that can be recreated.
 }
 
+//Save notes if any were entered and dismiss log view
 -(IBAction)doneClicked:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
     passedObject[@"Notes"] = notesTextView.text;
     
+    //Make sure notes were entered and save if they were
     if (![notesTextView.text isEqualToString:@""] && ![notesTextView.text isEqualToString:placeholderString]) {
         NSLog(@"Notes were entered");
         [passedObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
             if (succeeded) {
                 NSLog(@"Note saved.");
+                //Pass notes back to details. This is to avoid needing to requery for the recipe on details to get new note (ie user clicks done after entering notes, and then clicks Log again)
+                self.detailsVC.passedNotes = notesTextView.text;
             } else {
                 NSLog(@"%@", error);
                 //Error alert
                 [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:NSLocalizedString(@"An error occured trying to save the note. Please try again.", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles:nil] show];
             }
         }];
-        self.detailsVC.passedNotes = notesTextView.text;
     }
 }
 
+//Did begin editing. Called when textview is selected
 -(void)textViewDidBeginEditing:(UITextView *)textView {
     if (isPlaceholder) {
         notesTextView.text = @"";
@@ -77,10 +87,85 @@
         isPlaceholder = NO;
         notesTextView.textColor = [UIColor blackColor];
     }
+    
+//    NSUInteger length = notesTextView.text.length;
+//    //notesTextView.selectedRange = NSMakeRange(0, length);
+//    notesTextView.selectedRange = NSMakeRange(length, 0);
+//    NSRange currentRange = [notesTextView selectedRange];
+//    
+//    [notesTextView scrollRangeToVisible:currentRange];
+//    if (notesTextView.text.length > 0) {
+//        NSLog(@"Is greater");
+//        // Get current selected range , this example assumes is an insertion point or empty selection
+//        UITextRange *selectedRange = [notesTextView selectedTextRange];
+//        
+//        // Calculate the new position, - for left and + for right
+//        UITextPosition *newPosition = [notesTextView positionFromPosition:selectedRange.start offset:-5];
+//        
+//        // Construct a new range using the object that adopts the UITextInput, our textfield
+//        UITextRange *newRange = [notesTextView textRangeFromPosition:newPosition toPosition:selectedRange.start];
+//        
+//        // Set new range
+//        [notesTextView setSelectedTextRange:newRange];
+//    }
+//    notesTextView.selectedTextRange = [notesTextView
+//                                   textRangeFromPosition:notesTextView.beginningOfDocument
+//                                   toPosition:notesTextView.endOfDocument];
+    shouldMoveCursor = YES;
 }
 
+- (void)textViewDidChangeSelection:(UITextView *)textView {
+    if(shouldMoveCursor) {
+        NSRange endRange = NSMakeRange(notesTextView.text.length, 0);
+        NSRange currentRange = [textView selectedRange];
+        if(!NSEqualRanges(endRange, currentRange))
+            [textView setSelectedRange:endRange];
+        shouldMoveCursor = NO;
+    }
+}
+
+//Dismiss keyboard whenever user touches outside of the textview
 -(IBAction)dismissKeyboard:(id)sender {
     [notesTextView resignFirstResponder];
+}
+
+//Register for notifications from the keyboard
+- (void)registerForKeyboardNotifications {
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardAppeared:)
+                                                 name:UIKeyboardDidShowNotification object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardHidden:)
+                                                 name:UIKeyboardWillHideNotification object:nil];
+}
+
+- (void)keyboardAppeared:(NSNotification*)notification {
+    NSDictionary* info = [notification userInfo];
+    CGSize keyboardSize = [[info objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
+    
+    //notesTextView.contentInset = UIEdgeInsetsMake(0, 0, keyboardSize.height, 0);
+    //notesTextView.scrollIndicatorInsets = notesTextView.contentInset;
+    
+    UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, keyboardSize.height, 0.0);
+    notesTextView.contentInset = contentInsets;
+    notesTextView.scrollIndicatorInsets = contentInsets;
+    
+    CGRect myRect = self.view.frame;
+    
+    myRect.size.height -= keyboardSize.height;
+    
+    if (!CGRectContainsPoint(myRect, notesTextView.frame.origin) ) {
+        
+        [notesTextView scrollRectToVisible:notesTextView.frame animated:YES];
+        
+    }
+    //[notesTextView setContentOffset:CGPointMake(0.0, notesTextView.frame.origin.y - keyboardSize.height + 150) animated:YES];
+}
+
+- (void)keyboardHidden:(NSNotification*)notification {
+    notesTextView.contentInset = UIEdgeInsetsZero;
+    notesTextView.scrollIndicatorInsets = UIEdgeInsetsZero;
 }
 
 /*
