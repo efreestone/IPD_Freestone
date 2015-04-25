@@ -94,6 +94,8 @@
     recipeType = @"Other";
     recipeNotes = @"";
     
+    [self registerForKeyboardNotifications];
+    
     //Grab user and username
     PFUser *user = [PFUser currentUser];
     NSString *usernameString = [user objectForKey:@"username"];
@@ -130,21 +132,64 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - TextView delegate
-
-//-(void)textViewDidEndEditing:(UITextView *)textView {
-//    NSLog(@"textViewDidEndEditing");
-//    [ingredientsTV resignFirstResponder];
-//    [self resignFirstResponder];
-//    [textView endEditing:YES];
-//}
-
-- (IBAction)dismissKeyboard:(id)sender {
-    [ingredientsTV resignFirstResponder];
-    [instructionsTV resignFirstResponder];
+//Register for notifications from the keyboard
+- (void)registerForKeyboardNotifications {
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardAppeared:)
+                                                 name:UIKeyboardDidShowNotification object:nil];
+    
+//    [[NSNotificationCenter defaultCenter] addObserver:self
+//                                             selector:@selector(keyboardWillBeHidden:)
+//                                                 name:UIKeyboardWillHideNotification object:nil];
 }
 
+//Called when the UIKeyboardDidShowNotification is sent.
+- (void)keyboardAppeared:(NSNotification*)aNotification {
+    NSLog(@"keyboardAppeared");
+    //Get keyboard size from userInfo
+    NSDictionary* info = [aNotification userInfo];
+    CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+    
+    //If instructions tv is active, reset frame to show tv based on keyboard
+    if ([instructionsTV isFirstResponder]) {
+        NSLog(@"Instructions TV");
+        float kbFloat = kbSize.height - 75;
+        [UIView animateWithDuration:0.2 animations:^{
+            [self.view setFrame:CGRectMake(0, -kbFloat, self.view.frame.size.width, self.view.frame.size.height)];
+        }];
+    }
+}
+
+//// Called when the UIKeyboardWillHideNotification is sent
+//- (void)keyboardWillBeHidden:(NSNotification*)aNotification {
+//    NSLog(@"keyboardWillBeHidden");
+//    //[self.view setFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+//}
+
+#pragma mark - TextView delegate
+
+//Called when textview becomes active
+-(void)textViewDidBeginEditing:(UITextView *)textView {
+    NSLog(@"textViewDidBeginEditing");
+}
+
+//Called when textview ends being active
+-(void)textViewDidEndEditing:(UITextView *)textView {
+    NSLog(@"textViewDidEndEditing");
+    //Reset frame of view
+    [UIView animateWithDuration:0.3 animations:^{
+        [self.view setFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+    }];
+}
+
+//Dismiss keyboard linked to touch up inside of UIControl (anywhere outside of textview)
+- (IBAction)dismissKeyboard:(id)sender {
+    [self dismissKeyboard];
+}
+
+//Dissmiss keyboard. Also hooks into buttons
 -(void)dismissKeyboard {
+    [recipeNameTF resignFirstResponder];
     [ingredientsTV resignFirstResponder];
     [instructionsTV resignFirstResponder];
 }

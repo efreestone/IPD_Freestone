@@ -332,7 +332,7 @@
                         <viewControllerLayoutGuide type="top" id="NIO-5A-ZyA"/>
                         <viewControllerLayoutGuide type="bottom" id="Czb-sQ-rkl"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="ibz-kt-3MR" customClass="UIControl">
+                    <view key="view" contentMode="scaleToFill" id="ibz-kt-3MR" userLabel="Scroll View" customClass="UIControl">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -367,6 +367,9 @@
                                 <color key="textColor" red="0.12549020349979401" green="0.12549020349979401" blue="0.12549020349979401" alpha="1" colorSpace="deviceRGB"/>
                                 <fontDescription key="fontDescription" name="Calibri" family="Calibri" pointSize="16"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <connections>
+                                    <outlet property="delegate" destination="8Wm-S4-3lb" id="UIA-Sk-tUv"/>
+                                </connections>
                             </textView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ingredients" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bfI-7g-5zF">
                                 <rect key="frame" x="261" y="132" width="78" height="21"/>
