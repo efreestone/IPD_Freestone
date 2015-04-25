@@ -26,5 +26,6 @@
 @property (strong, nonatomic) IBOutlet UITextView *notesTextView;
 
 -(IBAction)doneClicked:(id)sender;
+-(IBAction)dismissKeyboard:(id)sender;
 
 @end

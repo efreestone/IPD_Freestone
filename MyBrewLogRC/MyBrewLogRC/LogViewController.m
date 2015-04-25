@@ -30,7 +30,7 @@
     // Do any additional setup after loading the view.
     self.navBar.topItem.title = [NSString stringWithFormat:@"Log for %@", titleString];
     
-    placeholderString = @"This is a place for you to jot down and keep track of progess related stuff for your recipe. An example could be \"1-1-15 gravity at 0.9. Needs more time in carboy\", but feel free to use this as you see fit. This is NOT shared with your recipe so other users will not see it.";
+    placeholderString = @"This is a place for you to jot down and keep track of progess related stuff for your recipe. An example could be\n \"1-1-15 gravity at 1.040. Moving to carboy\"\n but feel free to use this as you see fit. This is NOT shared with your recipe so other users will not see it.";
     
     if (notesString == nil || [notesString isEqualToString:@""]) {
         //Set placeholder text if no notes exist for the recipe
@@ -55,7 +55,7 @@
     [self dismissViewControllerAnimated:YES completion:nil];
     passedObject[@"Notes"] = notesTextView.text;
     
-    if (![notesTextView.text isEqualToString:@""] || ![notesTextView.text isEqualToString:placeholderString]) {
+    if (![notesTextView.text isEqualToString:@""] && ![notesTextView.text isEqualToString:placeholderString]) {
         NSLog(@"Notes were entered");
         [passedObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
             if (succeeded) {
@@ -79,7 +79,9 @@
     }
 }
 
-
+-(IBAction)dismissKeyboard:(id)sender {
+    [notesTextView resignFirstResponder];
+}
 
 /*
 #pragma mark - Navigation
