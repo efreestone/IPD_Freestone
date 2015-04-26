@@ -35,7 +35,7 @@
     [self registerForKeyboardNotifications];
     
     //Set placeholder text
-    placeholderString = @"This is a place for you to jot down and keep track of progess related stuff for your recipe. An example could be\n \"1-1-15 gravity at 1.040. Moving to carboy\"\n but feel free to use this as you see fit. This is NOT shared with your recipe so other users will not see it.";
+    placeholderString = @"This is a place for you to jot down and track progess related stuff for your recipe. An example could be \"1-1-15 gravity at 1.040. Moving to carboy\" but feel free to use this as you see fit. This is NOT shared with your recipe so other users will not see it.";
     //If noteString is empty, replace with placeholder
     if (notesString == nil || [notesString isEqualToString:@""]) {
         //Set placeholder text if no notes exist for the recipe
@@ -81,6 +81,7 @@
 
 //Did begin editing. Called when textview is selected
 -(void)textViewDidBeginEditing:(UITextView *)textView {
+    NSLog(@"Did begin");
     if (isPlaceholder) {
         notesTextView.text = @"";
         NSLog(@"isPlaceholder");
@@ -117,6 +118,7 @@
 
 - (void)textViewDidChangeSelection:(UITextView *)textView {
     if(shouldMoveCursor) {
+        NSLog(@"Did Change w/ should move");
         NSRange endRange = NSMakeRange(notesTextView.text.length, 0);
         NSRange currentRange = [textView selectedRange];
         if(!NSEqualRanges(endRange, currentRange))
@@ -142,7 +144,7 @@
 }
 
 //Called when keyboard notifies appearing
-- (void)keyboardAppeared:(NSNotification*)notification {
+-(void)keyboardAppeared:(NSNotification*)notification {
     //Grab keyboard height and create CGSize and inset
     NSDictionary* info = [notification userInfo];
     CGSize keyboardSize = [[info objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
@@ -162,7 +164,7 @@
 }
 
 //Called when keyboard notifies disappearing
-- (void)keyboardHidden:(NSNotification*)notification {
+-(void)keyboardHidden:(NSNotification*)notification {
     notesTextView.contentInset = UIEdgeInsetsZero;
     notesTextView.scrollIndicatorInsets = UIEdgeInsetsZero;
 }

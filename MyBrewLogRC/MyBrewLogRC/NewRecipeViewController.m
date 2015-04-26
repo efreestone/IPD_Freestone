@@ -160,12 +160,6 @@
     }
 }
 
-//// Called when the UIKeyboardWillHideNotification is sent
-//- (void)keyboardWillBeHidden:(NSNotification*)aNotification {
-//    NSLog(@"keyboardWillBeHidden");
-//    //[self.view setFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
-//}
-
 #pragma mark - TextView delegate
 
 //Called when textview becomes active
@@ -458,7 +452,7 @@
         addNewLine = @"";
     }
     
-    NSString *timerWithNewLine = [NSString stringWithFormat:@"%@Timer:~ %@\n", addNewLine, formattedTime];
+    NSString *timerWithNewLine = [NSString stringWithFormat:@"%@Timer: %@\n", addNewLine, formattedTime];
     
     instructionsTVString = [NSString stringWithFormat:@"%@%@", currentInst, timerWithNewLine];
     instructionsTV.text = instructionsTVString;
