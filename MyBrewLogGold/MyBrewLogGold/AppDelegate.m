@@ -1,3 +1,8 @@
+// Elijah Freestone
+// IPY 1504
+// Week 4 - Release Candidate
+// April 26th, 2015
+
 //
 //  AppDelegate.m
 //  MyBrewLogGold
@@ -7,8 +12,13 @@
 //
 
 #import "AppDelegate.h"
+#import "TimersViewController.h"
+#import "BrowseViewController.h"
+#import <Parse/Parse.h>
 
-@interface AppDelegate ()
+@interface AppDelegate () {
+    TimersViewController *timerVC;
+}
 
 @end
 
@@ -16,6 +26,17 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    // [Optional] Power your app with Local Datastore. For more info, go to
+    // https://parse.com/docs/ios_guide#localdatastore/iOS
+        [Parse enableLocalDatastore];
+    
+    // Initialize Parse.
+    [Parse setApplicationId:@"HFCzzZqkKhg4PrVoCRQSJmRlCGCUFi1DckNMbx4D"
+                  clientKey:@"VJOEAlb0WMoPpvzdcwqxzAOTTBxr8eEAf9OyTAmw"];
+    
+    // [Optional] Track statistics around application opens.
+    [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
+    
     // Override point for customization after application launch.
     return YES;
 }
@@ -28,6 +49,13 @@
 - (void)applicationDidEnterBackground:(UIApplication *)application {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    
+    if (timerVC.firstTimer != nil) {
+        //Start local notification for timer
+        [timerVC startLocalNotification:timerVC.timerDate];
+        //Invalidate timer
+        [timerVC.firstTimer invalidate];
+    }
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
@@ -36,6 +64,16 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    self.eventManager = [[EventManager alloc] init];
+    
+    UITabBarController *tabController = (UITabBarController *)self.window.rootViewController;
+    
+    timerVC = (TimersViewController *)[[tabController viewControllers] objectAtIndex:2];
+    
+    // Construct URL to sound file
+    NSString *path = [NSString stringWithFormat:@"%@/bell.mp3", [[NSBundle mainBundle] resourcePath]];
+    NSURL *soundUrl = [NSURL fileURLWithPath:path];
+    timerVC.alarmPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:soundUrl error:nil];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
