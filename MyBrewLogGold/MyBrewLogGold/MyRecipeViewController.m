@@ -57,6 +57,7 @@ typedef enum {
     PFQuery *newItemQuery;
     AppDelegate *appDelegate;
     UIView *noRecipesView;
+    UITextField *searchTextField;
 }
 
 - (void)viewDidLoad {
@@ -589,23 +590,18 @@ typedef enum {
         self.recipeSearchResults = [[NSMutableArray alloc] init];
     }
     
-    //self.recipeSearchResults = nil;
-    
     //Query with search term
     PFQuery *query = [PFQuery queryWithClassName: parseClassName];
     [query whereKey:@"createdBy" equalTo:[PFUser currentUser].username];
-//    [query whereKeyExists:@"Name"];  //this is based on whatever query you are trying to accomplish
-//    [query whereKeyExists:@"createdBy"]; //this is based on whatever query you are trying to accomplish
     [query whereKey:@"Name" containsString:searchTerm];
     
-    //Pass query objects as Array
-    NSArray *results  = [query findObjects];
-    
-    //NSLog(@"Result: %@", results);
-    NSLog(@"filterResults %lu", (unsigned long)results.count);
+//    //Pass query objects as Array
+//    NSArray *results  = [query findObjects];
+//    
+//    //NSLog(@"Result: %@", results);
+//    NSLog(@"filterResults %lu", (unsigned long)results.count);
     
     //Grab searchbar textfield to apply color and border when no results found
-    UITextField *searchTextField;
     for (id object in [[[self.recipeSearchController.searchBar subviews] objectAtIndex:0] subviews]) {
         if ([object isKindOfClass:[UITextField class]]) {
             searchTextField = (UITextField *)object;
@@ -613,20 +609,43 @@ typedef enum {
         }
     }
     
-    if (results.count == 0) {
-        //self.browseSearchController.searchBar.backgroundColor = [UIColor grayColor];
-        searchTextField.textColor = [UIColor redColor];
-        searchTextField.layer.borderColor = [[UIColor redColor] CGColor];
-        searchTextField.layer.borderWidth = 1.0;
-    } else {
-        //self.browseSearchController.searchBar.backgroundColor = [UIColor clearColor];
-        searchTextField.textColor = [UIColor blackColor];
-        searchTextField.layer.borderColor = [[UIColor whiteColor] CGColor];
-        searchTextField.layer.borderWidth = 0.0;
-    }
+    //NSMutableArray *results;
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error){
+        if (!error) {
+            if (objects.count == 0) {
+                //self.browseSearchController.searchBar.backgroundColor = [UIColor grayColor];
+                searchTextField.textColor = [UIColor redColor];
+                searchTextField.layer.borderColor = [[UIColor redColor] CGColor];
+                searchTextField.layer.borderWidth = 1.0;
+            } else {
+                //self.browseSearchController.searchBar.backgroundColor = [UIColor clearColor];
+                searchTextField.textColor = [UIColor blackColor];
+                searchTextField.layer.borderColor = [[UIColor whiteColor] CGColor];
+                searchTextField.layer.borderWidth = 0.0;
+            }
+            //NSLog(@"Success in search query");
+            NSLog(@"Success in search query, filterResults %lu", (unsigned long)objects.count);
+            [self.recipeSearchResults addObjectsFromArray:objects];
+            [self.tableView reloadData];
+        } else {
+            NSLog(@"search query error");
+        }
+    }];
     
-    [self.recipeSearchResults addObjectsFromArray:results];
-    [self.tableView reloadData];
+//    if (results.count == 0) {
+//        //self.browseSearchController.searchBar.backgroundColor = [UIColor grayColor];
+//        searchTextField.textColor = [UIColor redColor];
+//        searchTextField.layer.borderColor = [[UIColor redColor] CGColor];
+//        searchTextField.layer.borderWidth = 1.0;
+//    } else {
+//        //self.browseSearchController.searchBar.backgroundColor = [UIColor clearColor];
+//        searchTextField.textColor = [UIColor blackColor];
+//        searchTextField.layer.borderColor = [[UIColor whiteColor] CGColor];
+//        searchTextField.layer.borderWidth = 0.0;
+//    }
+//    
+//    [self.recipeSearchResults addObjectsFromArray:results];
+//    [self.tableView reloadData];
     //[self loadObjects];
 }
 
@@ -639,6 +658,11 @@ typedef enum {
 //    self.recipeSearchResults = [[NSMutableArray alloc] init];
     [searchBar resignFirstResponder];
     [self loadObjects];
+    
+    //Reset searchbar colors in case search produced no results.
+    searchTextField.textColor = [UIColor blackColor];
+    searchTextField.layer.borderColor = [[UIColor whiteColor] CGColor];
+    searchTextField.layer.borderWidth = 0.0;
 }
 
 #pragma mark - Navigation

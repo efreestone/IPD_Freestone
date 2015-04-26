@@ -33,7 +33,6 @@ typedef enum {
 @implementation BrowseViewController {
     NSArray *recipesArray;
     NSArray *imageArray;
-    IBOutlet UISearchBar *searchBar;
     NSString *parseClassName;
     NSString *usernameString;
     
@@ -48,6 +47,7 @@ typedef enum {
     PFQuery *newItemQuery;
     NSIndexPath *selectedIndexPath;
     UIView *noRecipesView;
+    UITextField *searchTextField;
 }
 
 - (void)viewDidLoad {
@@ -159,7 +159,7 @@ typedef enum {
     
     //If browseSearchResults exists, populate table with search results
     if (self.browseSearchResults.count >= 1) {
-        //NSLog(@"Search results controller");
+        NSLog(@"Search results controller");
         //Get object from browseSearchResults array instead of regular query
         PFObject *searchedObject = [self.browseSearchResults objectAtIndex:indexPath.row];
         NSString *recipeType = [searchedObject objectForKey:@"Type"];
@@ -248,7 +248,8 @@ typedef enum {
             //[self refreshTable];
             break;
         default:
-//            [newItemQuery orderByDescending:@"updatedByUser"];
+            //Set default to descending by date. This is done because removing objects by the current user causes the default to be sorted by username.
+            [newItemQuery orderByDescending:@"updatedByUser"];
             NSLog(@"Sort default");
             break;
     }
@@ -348,7 +349,10 @@ typedef enum {
 - (void)updateSearchResultsForSearchController:(UISearchController *)searchController {
     NSString *searchString = searchController.searchBar.text;
     //[self searchForText:searchString scope:searchController.searchBar.selectedScopeButtonIndex];
-    [self filterResults:searchString];
+    //[self filterResults:searchString];
+    if (![searchString isEqualToString:@""]) {
+        [self filterResults:searchString];
+    }
     //[self.tableView reloadData];
 }
 
@@ -370,19 +374,13 @@ typedef enum {
     [query whereKeyExists:@"createdBy"]; //this is based on whatever query you are trying to accomplish
     [query whereKey:@"Name" containsString:searchTerm];
     
-    NSArray *results  = [query findObjects];
-    //    NSMutableArray *results;
-    //    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error){
-    //        [self.browseSearchResults addObjectsFromArray:objects];
-    //
-    //        [self.tableView reloadData];
-    //    }];
+    //NSArray *results  = [query findObjects];
     
     //NSLog(@"Result: %@", results);
-    NSLog(@"filterResults %lu", (unsigned long)results.count);
+    //NSLog(@"filterResults %lu", (unsigned long)results.count);
     
     //Grab searchbar textfield to apply color and border when no results found
-    UITextField *searchTextField;
+    
     for (id object in [[[self.browseSearchController.searchBar subviews] objectAtIndex:0] subviews]) {
         if ([object isKindOfClass:[UITextField class]]) {
             searchTextField = (UITextField *)object;
@@ -390,28 +388,51 @@ typedef enum {
         }
     }
     
-    if (results.count == 0) {
-        //self.browseSearchController.searchBar.backgroundColor = [UIColor grayColor];
-        searchTextField.textColor = [UIColor redColor];
-        searchTextField.layer.borderColor = [[UIColor redColor] CGColor];
-        searchTextField.layer.borderWidth = 1.0;
-    } else {
-        //self.browseSearchController.searchBar.backgroundColor = [UIColor clearColor];
-        searchTextField.textColor = [UIColor blackColor];
-        searchTextField.layer.borderColor = [[UIColor whiteColor] CGColor];
-        searchTextField.layer.borderWidth = 0.0;
-    }
-    
-    [self.browseSearchResults addObjectsFromArray:results];
-    [self.tableView reloadData];
-    //[self loadObjects];
+    //NSMutableArray *results;
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error){
+        if (!error) {
+            if (objects.count == 0) {
+                //self.browseSearchController.searchBar.backgroundColor = [UIColor grayColor];
+                searchTextField.textColor = [UIColor redColor];
+                searchTextField.layer.borderColor = [[UIColor redColor] CGColor];
+                searchTextField.layer.borderWidth = 1.0;
+            } else {
+                //self.browseSearchController.searchBar.backgroundColor = [UIColor clearColor];
+                searchTextField.textColor = [UIColor blackColor];
+                searchTextField.layer.borderColor = [[UIColor whiteColor] CGColor];
+                searchTextField.layer.borderWidth = 0.0;
+            }
+            NSLog(@"Success in search query");
+            [self.browseSearchResults addObjectsFromArray:objects];
+            [self.tableView reloadData];
+        } else {
+            NSLog(@"search query error");
+        }
+        
+    }];
 }
+
+////Cancel button on search bar clicked
+//- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
+//    NSLog(@"Cancel button clicked");
+//    //Clear out search results array
+//    [self.browseSearchResults removeAllObjects];
+//}
 
 //Cancel button on search bar clicked
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
     NSLog(@"Cancel button clicked");
     //Clear out search results array
     [self.browseSearchResults removeAllObjects];
+    self.browseSearchResults = nil;
+    //    self.recipeSearchResults = [[NSMutableArray alloc] init];
+    [searchBar resignFirstResponder];
+    [self loadObjects];
+    
+    //Reset searchbar colors in case search produced no results.
+    searchTextField.textColor = [UIColor blackColor];
+    searchTextField.layer.borderColor = [[UIColor whiteColor] CGColor];
+    searchTextField.layer.borderWidth = 0.0;
 }
 
 #pragma mark - Navigation
