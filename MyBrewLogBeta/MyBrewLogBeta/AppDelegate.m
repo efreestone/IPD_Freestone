@@ -69,10 +69,6 @@
     UITabBarController *tabController = (UITabBarController *)self.window.rootViewController;
     
     timerVC = (TimersViewController *)[[tabController viewControllers] objectAtIndex:2];
-    
-//    //Grab browse view controller and set sort enum. This is a workaround to fix default sort going
-//    BrowseViewController *browseVC = (BrowseViewController *)[[tabController viewControllers] objectAtIndex:1];
-//    browseVC.toSort = 10;
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
