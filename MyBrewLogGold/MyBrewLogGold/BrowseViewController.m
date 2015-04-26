@@ -354,8 +354,14 @@ typedef enum {
 
 //Filter query with search terms
 -(void)filterResults:(NSString *)searchTerm {
-    //Clear out search results array
-    [self.browseSearchResults removeAllObjects];
+    NSLog(@"filterResults");
+    //Check if array exists, clear out if it does and alloc if not
+    if (self.browseSearchResults != nil) {
+        //Clear out search results array
+        [self.browseSearchResults removeAllObjects];
+    } else {
+        self.browseSearchResults = [[NSMutableArray alloc] init];
+    }
     
     //Query with search term
     PFQuery *query = [PFQuery queryWithClassName: parseClassName];

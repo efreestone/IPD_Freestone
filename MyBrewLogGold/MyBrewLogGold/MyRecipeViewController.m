@@ -571,14 +571,25 @@ typedef enum {
 - (void)updateSearchResultsForSearchController:(UISearchController *)searchController {
     NSString *searchString = searchController.searchBar.text;
     //[self searchForText:searchString scope:searchController.searchBar.selectedScopeButtonIndex];
-    [self filterResults:searchString];
+    if (![searchString isEqualToString:@""]) {
+        [self filterResults:searchString];
+    }
+    
     //[self.tableView reloadData];
 }
 
 //Filter query with search terms
 -(void)filterResults:(NSString *)searchTerm {
-    //Clear out search results array
-    [self.recipeSearchResults removeAllObjects];
+    NSLog(@"filterResults");
+    //Check if array exists, clear out if it does and alloc if not
+    if (self.recipeSearchResults != nil) {
+        //Clear out search results array
+        [self.recipeSearchResults removeAllObjects];
+    } else {
+        self.recipeSearchResults = [[NSMutableArray alloc] init];
+    }
+    
+    //self.recipeSearchResults = nil;
     
     //Query with search term
     PFQuery *query = [PFQuery queryWithClassName: parseClassName];
