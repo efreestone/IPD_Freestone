@@ -88,33 +88,8 @@
         isPlaceholder = NO;
         notesTextView.textColor = [UIColor blackColor];
     }
-    
-//    NSUInteger length = notesTextView.text.length;
-//    //notesTextView.selectedRange = NSMakeRange(0, length);
-//    notesTextView.selectedRange = NSMakeRange(length, 0);
-//    NSRange currentRange = [notesTextView selectedRange];
-//    
-//    [notesTextView scrollRangeToVisible:currentRange];
-//    if (notesTextView.text.length > 0) {
-//        NSLog(@"Is greater");
-//        // Get current selected range , this example assumes is an insertion point or empty selection
-//        UITextRange *selectedRange = [notesTextView selectedTextRange];
-//        
-//        // Calculate the new position, - for left and + for right
-//        UITextPosition *newPosition = [notesTextView positionFromPosition:selectedRange.start offset:-5];
-//        
-//        // Construct a new range using the object that adopts the UITextInput, our textfield
-//        UITextRange *newRange = [notesTextView textRangeFromPosition:newPosition toPosition:selectedRange.start];
-//        
-//        // Set new range
-//        [notesTextView setSelectedTextRange:newRange];
-//    }
-//    notesTextView.selectedTextRange = [notesTextView
-//                                   textRangeFromPosition:notesTextView.beginningOfDocument
-//                                   toPosition:notesTextView.endOfDocument];
     shouldMoveCursor = YES;
 }
-
 
 - (void)textViewDidChangeSelection:(UITextView *)textView {
     if(shouldMoveCursor) {
@@ -160,7 +135,6 @@
     if (!CGRectContainsPoint(myRect, notesTextView.frame.origin) ) {
         [notesTextView scrollRectToVisible:notesTextView.frame animated:YES];
     }
-    //[notesTextView setContentOffset:CGPointMake(0.0, notesTextView.frame.origin.y - keyboardSize.height + 150) animated:YES];
 }
 
 //Called when keyboard notifies disappearing

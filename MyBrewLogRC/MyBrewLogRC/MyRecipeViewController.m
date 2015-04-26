@@ -624,6 +624,10 @@ typedef enum {
     NSLog(@"Cancel button clicked");
     //Clear out search results array
     [self.recipeSearchResults removeAllObjects];
+    self.recipeSearchResults = nil;
+//    self.recipeSearchResults = [[NSMutableArray alloc] init];
+    [searchBar resignFirstResponder];
+    [self loadObjects];
 }
 
 #pragma mark - Navigation
