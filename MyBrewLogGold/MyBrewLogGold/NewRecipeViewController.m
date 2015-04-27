@@ -49,6 +49,8 @@
     id buttonSender;
     
     BOOL browseCopy;
+    BOOL isMetric;
+    NSUserDefaults *userDefaults;
 }
 
 @end
@@ -67,6 +69,10 @@
     selectedTime = [NSDate date];
     
     parseClassName = @"newRecipe";
+    
+    //Grab user defaults and get units of measurement
+    userDefaults = [NSUserDefaults standardUserDefaults];
+    isMetric = [userDefaults boolForKey:@"isMetric"];
     
     //Set border and corner radius for textfield and textviews
     [[recipeNameTF layer] setBorderColor:[[UIColor lightGrayColor] CGColor]];
@@ -339,7 +345,7 @@
     NSLog(@"NewRec: %@", formattedQuantity);
     NSString *currentInst = ingredientsTV.text;
     
-    //Check if last line of string ends in new line, add before temp if it doesn't exist
+    //Check if last line of string ends in new line, add before if it doesn't exist
     NSString *addNewLine = @"";
     if (![currentInst hasSuffix:@"\n"]) {
         NSLog(@"new line");
@@ -398,7 +404,7 @@
     
     NSString *currentInst = instructionsTV.text;
     
-    //Check if last line of string ends in new line, add before temp if it doesn't exist
+    //Check if last line of string ends in new line, add before if it doesn't exist
     NSString *addNewLine = @"";
     if (![currentInst hasSuffix:@"\n"]) {
         NSLog(@"new line");
@@ -444,7 +450,7 @@
     NSLog(@"NewRec: %@", formattedTime);
     NSString *currentInst = instructionsTV.text;
     
-    //Check if last line of string ends in new line, add before temp if it doesn't exist
+    //Check if last line of string ends in new line, add before if it doesn't exist
     NSString *addNewLine = @"";
     if (![currentInst hasSuffix:@"\n"]) {
         NSLog(@"new line");
@@ -481,13 +487,6 @@
 //Grab temp selection
 -(void)tempSelected:(NSNumber *)wholeNumber smallUnit:(NSNumber *)pointNumber {
     NSString *currentInst = instructionsTV.text;
-//    NSString *lastChar = @"";
-//    //Get last 2 char
-//    if (currentInst.length >= 2) {
-//        NSLog(@"Last char");
-//        lastChar = [currentInst substringFromIndex: [currentInst length] - 2];
-//        //[state substringFromIndex: MAX([state length] - 2, 0)];
-//    }
     
     //Check if last line of string ends in new line, add before temp if it doesn't exist
     NSString *addNewLine = @"";
@@ -502,10 +501,15 @@
         addNewLine = @"";
     }
     
+    NSString *tempLetter = @"F";
+    if (isMetric) {
+        tempLetter = @"C";
+    }
+    
     //Grab input numbers. Whole numbers are left of decimal
     selectedBigUnit = [wholeNumber intValue];
     selectedSmallUnit = [pointNumber intValue];
-    NSString *formattedTemp = [NSString stringWithFormat:@"%@Temp: %ld.%ld °F \n", addNewLine, (long)selectedBigUnit, (long)selectedSmallUnit];
+    NSString *formattedTemp = [NSString stringWithFormat:@"%@Temp: %ld.%ld °%@\n", addNewLine, (long)selectedBigUnit, (long)selectedSmallUnit, tempLetter];
     //NSLog(@"Formatted %@", formattedTemp);
     
     instructionsTVString = [NSString stringWithFormat:@"%@%@", currentInst, formattedTemp];
