@@ -63,7 +63,10 @@ typedef enum {
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    //toSort = 10;
+//    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+//    BOOL isMetric = NO;
+//    [userDefaults setObject:[NSNumber numberWithBool:isMetric] forKey:@"isMetric"];
+//    [userDefaults synchronize];
     
     //Grab app delegate
     appDelegate = [[UIApplication sharedApplication] delegate];
@@ -474,6 +477,7 @@ typedef enum {
 - (BOOL)logInViewController:(PFLogInViewController *)logInController shouldBeginLogInWithUsername:(NSString *)username password:(NSString *)password {
     // Check if both fields are completed
     if (username && password && username.length && password.length) {
+        [self performSelector:@selector(requestEventsAccess) withObject:nil afterDelay:0.5];
         return YES; // Begin login process
     }
     

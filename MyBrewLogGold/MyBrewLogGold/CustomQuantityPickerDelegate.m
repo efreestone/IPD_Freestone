@@ -15,6 +15,8 @@
 
 @implementation CustomQuantityPickerDelegate {
     NSArray *measurementArray;
+    NSArray *imperialMeasurementArray;
+    NSArray *metricMeasurementArray;
     NSArray *ingredientArray;
     NSMutableArray *amountHundreds;
     NSMutableArray *amountTens;
@@ -24,13 +26,38 @@
     NSString *selectedOnes;
     NSString *selectedMeasurement;
     NSString *formattedQuantity;
+    
+    NSString *measurementKey;
 }
 
 //Init and build arrays
 - (id)init {
     if (self = [super init]) {
         //Create default arrays
-        measurementArray = [NSArray arrayWithObjects:@"qt", @"cup", @"gal", @"oz", @"lbs", nil];
+        //measurementArray = [NSArray arrayWithObjects:@"qt", @"cup", @"gal", @"oz", @"lbs", nil];
+        measurementKey = @"isMetric";
+        
+        imperialMeasurementArray = [NSArray arrayWithObjects:@"teaspoon", @"tablespoon", @"cup", @"fluid oz", @"pint", @"ounce", @"pound", nil];
+        
+        metricMeasurementArray = [NSArray arrayWithObjects:@"teaspoon", @"tablespoon", @"cup", @"milliliter", @"liter", @"gram", @"kilogram", nil];
+        
+        //Grab user defaults and check if measurement set to metric, setting array accordingly
+        NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+        if ([userDefaults valueForKey:measurementKey] != nil) {
+            BOOL isMetric = [userDefaults boolForKey:measurementKey];
+            if (!isMetric) {
+                NSLog(@"NOT isMetric");
+                measurementArray = [NSArray arrayWithArray:imperialMeasurementArray];
+            } else {
+                NSLog(@"isMetric");
+                measurementArray = [NSArray arrayWithArray:metricMeasurementArray];
+            }
+        } else {
+            NSLog(@"isMetric didn't exist, setting default to NO");
+            [userDefaults setBool:NO forKey:measurementKey];
+            [userDefaults synchronize];
+            measurementArray = [NSArray arrayWithArray:imperialMeasurementArray];
+        }
         
         amountHundreds = [[NSMutableArray alloc] init];
         amountTens = [[NSMutableArray alloc] init];

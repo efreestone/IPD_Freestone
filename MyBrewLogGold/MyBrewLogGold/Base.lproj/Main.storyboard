@@ -1080,6 +1080,9 @@
                                                         <segment title="Imperial"/>
                                                         <segment title="Metric"/>
                                                     </segments>
+                                                    <connections>
+                                                        <action selector="unitsSegmentIndexChanged:" destination="Woz-ZB-XNv" eventType="valueChanged" id="eOZ-md-lhT"/>
+                                                    </connections>
                                                 </segmentedControl>
                                             </subviews>
                                             <constraints>
@@ -1183,10 +1186,14 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="autoSyncSwitch" destination="Nfp-4l-srd" id="c1h-Td-VES"/>
+                        <outlet property="editRecipeSwitch" destination="eAW-Aj-YDI" id="W0D-Yu-JJ4"/>
                         <outlet property="editUserButton" destination="Fr6-1N-Qug" id="6nR-eL-9ks"/>
                         <outlet property="infoButton" destination="Gj8-G0-3Qd" id="DuB-Yd-uqR"/>
                         <outlet property="logOutButton" destination="RKq-wi-F6H" id="47N-pI-zxO"/>
+                        <outlet property="publicSwitch" destination="YK7-vD-XXC" id="1Vz-Kg-z7D"/>
                         <outlet property="tableView" destination="ua8-ZJ-37R" id="58B-7h-0f8"/>
+                        <outlet property="unitsSegment" destination="7dS-U1-3qJ" id="fJL-hr-PQL"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="q5e-Ot-bKj" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1201,6 +1208,6 @@
         <image name="timer-tab.png" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="fSe-cm-Zxg"/>
+        <segue reference="b29-uT-UxQ"/>
     </inferredMetricsTieBreakers>
 </document>

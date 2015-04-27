@@ -68,6 +68,7 @@
     
     parseClassName = @"newRecipe";
     
+    //Set border and corner radius for textfield and textviews
     [[recipeNameTF layer] setBorderColor:[[UIColor lightGrayColor] CGColor]];
     [[recipeNameTF layer] setBorderWidth:0.5];
     [[recipeNameTF layer] setCornerRadius:7.5];
@@ -79,12 +80,6 @@
     [[instructionsTV layer] setBorderColor:[[UIColor lightGrayColor] CGColor]];
     [[instructionsTV layer] setBorderWidth:0.5];
     [[instructionsTV layer] setCornerRadius:7.5];
-    
-//    [[addItemsSegment layer] setCornerRadius:15];
-//    addItemsSegment.clipsToBounds = YES;
-    
-//    UIImage *myNewImage = [[UIImage imageNamed:@"beer-segment.png"] resizableImageWithCapInsets:UIEdgeInsetsZero];
-//    [recipeTypeSegment setImage:myNewImage forSegmentAtIndex:0];
     
     //Create arrays for pickers
     recipeTypes = [NSArray arrayWithObjects:@"Beer", @"Wine", @"Other", nil];
@@ -102,6 +97,16 @@
     
     //Check if passedName exists. Only true when editing
     if (passedName != nil) {
+        //Set default index and change based on recipe type
+        int typeIndex = 2;
+        if ([passedType isEqualToString:@"Beer"]) {
+            typeIndex = 0;
+        } else if ([passedType isEqualToString:@"Wine"]) {
+            typeIndex = 1;
+        }
+        //Set segment to recipe type
+        recipeTypeSegment.selectedSegmentIndex = typeIndex;
+        
         NSLog(@"Passed Name not nil");
         if ([passedUsername isEqualToString: usernameString]) {
             NSLog(@"Username equals current");

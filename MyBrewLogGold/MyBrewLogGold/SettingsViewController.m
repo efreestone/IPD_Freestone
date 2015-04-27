@@ -22,14 +22,22 @@
 @implementation SettingsViewController {
     MyRecipeViewController *myRecipes;
     PFUser *currenUser;
+    NSUserDefaults *userDefaults;
 }
 
+@synthesize autoSyncSwitch, editRecipeSwitch, publicSwitch, unitsSegment;
+
 - (void)viewDidLoad {
-//    myRecipes = (MyRecipeViewController*)self.window.rootViewController;
-//    UIViewController *rootVC = self.parentViewController;
-//    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main"
-//                                                         bundle: nil];
-//    myRecipes = [storyboard instantiateViewControllerWithIdentifier:@"MyRecipe"];
+    //Grab user defaults and set elements accordingly
+    userDefaults = [NSUserDefaults standardUserDefaults];
+    
+    int unitIndex = 0;
+    if ([userDefaults boolForKey:@"isMetric"]) {
+        NSLog(@"isMetric");
+        unitIndex = 1;
+    }
+    
+    unitsSegment.selectedSegmentIndex = unitIndex;
     
     currenUser = [PFUser currentUser];
     [super viewDidLoad];
@@ -39,6 +47,18 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(IBAction)unitsSegmentIndexChanged:(id)sender {
+    if (unitsSegment.selectedSegmentIndex == 0) {
+        NSLog(@"index 0");
+        [userDefaults setBool:NO forKey:@"isMetric"];
+        [userDefaults synchronize];
+    } else {
+        NSLog(@"index 1");
+        [userDefaults setBool:YES forKey:@"isMetric"];
+        [userDefaults synchronize];
+    }
 }
 
 //Log user out

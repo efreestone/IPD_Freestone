@@ -20,4 +20,11 @@
 @property (strong, nonatomic) IBOutlet UIButton *editUserButton;
 @property (strong, nonatomic) IBOutlet UIButton *infoButton;
 
+@property (strong, nonatomic) IBOutlet UISwitch *autoSyncSwitch;
+@property (strong, nonatomic) IBOutlet UISwitch *editRecipeSwitch;
+@property (strong, nonatomic) IBOutlet UISwitch *publicSwitch;
+@property (strong, nonatomic) IBOutlet UISegmentedControl *unitsSegment;
+
+-(IBAction)unitsSegmentIndexChanged:(id)sender;
+
 @end
