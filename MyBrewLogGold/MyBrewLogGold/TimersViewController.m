@@ -27,7 +27,6 @@
     NSDate *pauseStart, *previousFireDate;
     BOOL timerPaused;
     
-    NSString *oneDescription;
     EKCalendar *recipeCalendar;
     id buttonSender;
 }
@@ -37,8 +36,9 @@
 @implementation TimersViewController
 
 //Synthesize for getters/setters
-@synthesize oneDescriptionLabel, timerOneLabel, onePauseButton, oneCancelButton, oneView;
-@synthesize firstTimer, secondTimer, timerDate, countdownSeconds;
+@synthesize oneDescriptionLabel, timerOneLabel, onePauseButton, oneCancelButton, oneView, oneDescription;
+@synthesize twoDescriptionLabel, timerTwoLabel, twoPauseButton, twoCancelButton, twoView, twoDescription;
+@synthesize firstTimer, secondTimer, timerDate, timerDateTwo, countdownSeconds, countdownSecondsOne, countdownSecondsTwo;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -61,15 +61,16 @@
 //        oneDescription = @"Description for timer";
         oneDescriptionLabel.text = oneDescription;
     }
-    
-   
+    if (twoDescription) {
+        twoDescriptionLabel.text = twoDescription;
+    }
     
     
     //oneView.hidden = YES;
     
-//    if ([UIApplication instancesRespondToSelector:@selector(registerUserNotificationSettings:)]) {
-//        [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert|UIUserNotificationTypeSound categories:nil]];
-//    }
+    if ([UIApplication instancesRespondToSelector:@selector(registerUserNotificationSettings:)]) {
+        [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert|UIUserNotificationTypeSound categories:nil]];
+    }
     
 //    NSString *recipeTitle = @"My Brew Log Test";
 //    NSInteger testInt = 120;
@@ -117,9 +118,9 @@
 -(void)startTimerFromDetails:(NSInteger)time withDetails:(NSString *)description {
     NSLog(@"Timer seconds = %ld", (long)time);
     countdownSeconds = time;
-    oneDescription = description;
-    if (countdownSeconds <= 86340) {
+    if (time <= 86340) {
         if (firstTimer == nil) {
+            countdownSecondsOne = time;
 //            oneView.hidden = NO;
             //oneDescriptionLabel.text = oneDescription;
             firstTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(runTimer) userInfo:nil repeats:YES];
@@ -127,12 +128,27 @@
             //Pass timer to app delegate to be invalidated and start local notification when app is backgrounded
             self.appDelegate.firstTimer = firstTimer;
             
+            oneDescription = description;
+            
+            oneDescriptionLabel.text = description;
+            
             timerDate = [NSDate date];
-            timerDate = [timerDate dateByAddingTimeInterval:countdownSeconds];
+            timerDate = [timerDate dateByAddingTimeInterval:countdownSecondsOne];
             //[self startLocalNotification:timerDate];
         } else if (secondTimer == nil) {
+            countdownSecondsTwo = time;
             //Second timer
             NSLog(@"Second timer");
+            secondTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(runTimerTwo) userInfo:nil repeats:YES];
+            
+            twoDescription = description;
+            
+            twoDescriptionLabel.text = description;
+            
+            timerDateTwo = [NSDate date];
+            timerDateTwo = [timerDateTwo dateByAddingTimeInterval:countdownSecondsTwo];
+        } else {
+            NSLog(@"No timers available");
         }
 
     } else {
@@ -140,17 +156,16 @@
         NSDate *calDate = [NSDate date];
         calDate = [calDate dateByAddingTimeInterval:countdownSeconds];
         [self createCalendarEvent:calDate withTitle:description];
-        
     }
 }
 
 -(void)runTimer {
-    countdownSeconds = countdownSeconds - 1;
+    countdownSecondsOne = countdownSecondsOne - 1;
     
     //Calculate hours/minutes/seconds from countdownSeconds
-    secondsInt = countdownSeconds % 60;
-    minutesInt = (countdownSeconds / 60) % 60;
-    hoursInt = (countdownSeconds / 3600) % 24;
+    secondsInt = countdownSecondsOne % 60;
+    minutesInt = (countdownSecondsOne / 60) % 60;
+    hoursInt = (countdownSecondsOne / 3600) % 24;
     //Display timer
 //    NSString *timerString = [NSString stringWithFormat:@"%.2d:%.2d:%.2d left", hoursInt, minutesInt, secondsInt];
     
@@ -163,13 +178,44 @@
             timerString = [NSString stringWithFormat:@"%.2d:%.2d:%.2d left", hoursInt, minutesInt, secondsInt];
         }
     }
-    //Display currnet countdown time
+    //Display current countdown time
     timerOneLabel.text = timerString;
     
     //Play sound and invalidate once time down to zero
-    if (countdownSeconds == 0) {
+    if (countdownSecondsOne == 0) {
         [firstTimer invalidate];
         firstTimer = nil;
+        [self.alarmPlayer play];
+        NSLog(@"Timer over");
+    }
+}
+
+-(void)runTimerTwo {
+    countdownSecondsTwo = countdownSecondsTwo - 1;
+    
+    //Calculate hours/minutes/seconds from countdownSeconds
+    secondsInt = countdownSecondsTwo % 60;
+    minutesInt = (countdownSecondsTwo / 60) % 60;
+    hoursInt = (countdownSecondsTwo / 3600) % 24;
+    //Display timer
+    //    NSString *timerString = [NSString stringWithFormat:@"%.2d:%.2d:%.2d left", hoursInt, minutesInt, secondsInt];
+    
+    if (hoursInt < 1) {
+        timerString = [NSString stringWithFormat:@"%.2d:%.2d left", minutesInt, secondsInt];
+    } else {
+        if (hoursInt < 10) {
+            timerString = [NSString stringWithFormat:@"%.1d:%.2d:%.2d left", hoursInt, minutesInt, secondsInt];
+        } else {
+            timerString = [NSString stringWithFormat:@"%.2d:%.2d:%.2d left", hoursInt, minutesInt, secondsInt];
+        }
+    }
+    //Display currnet countdown time
+    timerTwoLabel.text = timerString;
+    
+    //Play sound and invalidate once time down to zero
+    if (countdownSecondsTwo == 0) {
+        [secondTimer invalidate];
+        secondTimer = nil;
         [self.alarmPlayer play];
         NSLog(@"Timer over");
     }
@@ -205,10 +251,10 @@
     timerOneLabel.text = @"00:00";
 }
 
--(void)startLocalNotification:(NSDate *)fire {
+-(void)startLocalNotification:(NSDate *)fire withDescription:(NSString *)description {
     UILocalNotification *localNotification = [[UILocalNotification alloc] init];
     localNotification.fireDate = fire;
-    localNotification.alertBody = [NSString stringWithFormat:@"Alert for %@", oneDescription];
+    localNotification.alertBody = [NSString stringWithFormat:@"Alert for %@", description];
     localNotification.soundName = UILocalNotificationDefaultSoundName;
     [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
     NSLog(@"Local notifiaction started");
@@ -377,11 +423,11 @@
         
         if (countdownSeconds <= 86340) {
             //Add one to countdown to utilize runTimer to set up nstimer
-            countdownSeconds = countdownSeconds + 1;
-            [self runTimer];
-            [onePauseButton setTitle:@"Start" forState:UIControlStateNormal];
-            timerPaused = YES;
-            [self pauseTimer:firstTimer];
+//            countdownSeconds = countdownSeconds + 1;
+//            [self runTimer];
+//            [onePauseButton setTitle:@"Start" forState:UIControlStateNormal];
+//            timerPaused = YES;
+//            [self pauseTimer:firstTimer];
         }
         //[self addNewTimer:countdownSeconds withDetails:description];
         

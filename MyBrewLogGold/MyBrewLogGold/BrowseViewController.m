@@ -348,12 +348,10 @@ typedef enum {
 //Delegate method triggered when search text is entered
 - (void)updateSearchResultsForSearchController:(UISearchController *)searchController {
     NSString *searchString = searchController.searchBar.text;
-    //[self searchForText:searchString scope:searchController.searchBar.selectedScopeButtonIndex];
-    //[self filterResults:searchString];
+    //Make sure somethinf was entered before attempting to filter results
     if (![searchString isEqualToString:@""]) {
         [self filterResults:searchString];
     }
-    //[self.tableView reloadData];
 }
 
 //Filter query with search terms
@@ -370,17 +368,9 @@ typedef enum {
     //Query with search term
     PFQuery *query = [PFQuery queryWithClassName: parseClassName];
     [query whereKey:@"createdBy" notEqualTo:[PFUser currentUser].username];
-    [query whereKeyExists:@"Name"];  //this is based on whatever query you are trying to accomplish
-    [query whereKeyExists:@"createdBy"]; //this is based on whatever query you are trying to accomplish
     [query whereKey:@"Name" containsString:searchTerm];
     
-    //NSArray *results  = [query findObjects];
-    
-    //NSLog(@"Result: %@", results);
-    //NSLog(@"filterResults %lu", (unsigned long)results.count);
-    
     //Grab searchbar textfield to apply color and border when no results found
-    
     for (id object in [[[self.browseSearchController.searchBar subviews] objectAtIndex:0] subviews]) {
         if ([object isKindOfClass:[UITextField class]]) {
             searchTextField = (UITextField *)object;
@@ -388,9 +378,10 @@ typedef enum {
         }
     }
     
-    //NSMutableArray *results;
+    //Query Parse in background for objects matching the search term
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error){
         if (!error) {
+            //Change color of serch textfield if no items match search
             if (objects.count == 0) {
                 //self.browseSearchController.searchBar.backgroundColor = [UIColor grayColor];
                 searchTextField.textColor = [UIColor redColor];
@@ -412,20 +403,12 @@ typedef enum {
     }];
 }
 
-////Cancel button on search bar clicked
-//- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
-//    NSLog(@"Cancel button clicked");
-//    //Clear out search results array
-//    [self.browseSearchResults removeAllObjects];
-//}
-
 //Cancel button on search bar clicked
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
     NSLog(@"Cancel button clicked");
-    //Clear out search results array
+    //Clear out search results array and resign first responder before reloading table
     [self.browseSearchResults removeAllObjects];
     self.browseSearchResults = nil;
-    //    self.recipeSearchResults = [[NSMutableArray alloc] init];
     [searchBar resignFirstResponder];
     [self loadObjects];
     

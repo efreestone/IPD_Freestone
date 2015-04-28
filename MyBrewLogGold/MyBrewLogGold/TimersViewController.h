@@ -40,14 +40,20 @@
 @property (strong, nonatomic) NSTimer *firstTimer;
 @property (strong, nonatomic) NSTimer *secondTimer;
 @property (strong, nonatomic) NSDate *timerDate;
+@property (strong, nonatomic) NSDate *timerDateTwo;
 @property (nonatomic) NSInteger countdownSeconds;
+@property (nonatomic) NSInteger countdownSecondsOne;
+@property (nonatomic) NSInteger countdownSecondsTwo;
 @property (strong, nonatomic) AVAudioPlayer *alarmPlayer;
 
 @property (nonatomic) AppDelegate *appDelegate;
 
+@property (strong, nonatomic) NSString *oneDescription;
+@property (strong, nonatomic) NSString *twoDescription;
+
 -(IBAction)startTimer:(id)sender;
 -(void)startTimerFromDetails:(NSInteger)time withDetails:(NSString *)details;
--(void)startLocalNotification:(NSDate *)fire;
+-(void)startLocalNotification:(NSDate *)fire withDescription:(NSString *)description;
 -(void)timerPicked:(NSString *)formattedTime;
 
 @end

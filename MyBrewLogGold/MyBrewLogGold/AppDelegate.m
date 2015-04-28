@@ -52,9 +52,15 @@
     
     if (timerVC.firstTimer != nil) {
         //Start local notification for timer
-        [timerVC startLocalNotification:timerVC.timerDate];
+        [timerVC startLocalNotification:timerVC.timerDate withDescription:timerVC.oneDescription];
         //Invalidate timer
         [timerVC.firstTimer invalidate];
+    }
+    if (timerVC.secondTimer != nil) {
+        //Start local notification for timer
+        [timerVC startLocalNotification:timerVC.timerDateTwo withDescription:timerVC.twoDescription];
+        //Invalidate timer
+        [timerVC.secondTimer invalidate];
     }
 }
 

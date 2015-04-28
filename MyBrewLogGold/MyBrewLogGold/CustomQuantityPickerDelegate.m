@@ -21,6 +21,7 @@
     NSMutableArray *amountHundreds;
     NSMutableArray *amountTens;
     NSMutableArray *amountOnes;
+    NSMutableArray *amountTenths;
     NSString *selectedHundreds;
     NSString *selectedTens;
     NSString *selectedOnes;
@@ -37,7 +38,7 @@
         //measurementArray = [NSArray arrayWithObjects:@"qt", @"cup", @"gal", @"oz", @"lbs", nil];
         measurementKey = @"isMetric";
         
-        imperialMeasurementArray = [NSArray arrayWithObjects:@"teaspoon", @"tablespoon", @"cup", @"fluid oz", @"pint", @"ounce", @"pound", nil];
+        imperialMeasurementArray = [NSArray arrayWithObjects:@"teaspoon", @"tablespoon", @"cup", @"fluid oz", @"pint", @"ounce", @"pound", @"quart", @"gallon", nil];
         
         metricMeasurementArray = [NSArray arrayWithObjects:@"teaspoon", @"tablespoon", @"cup", @"milliliter", @"liter", @"gram", @"kilogram", nil];
         
@@ -68,6 +69,7 @@
             [amountHundreds addObject:stringVal];
             [amountTens addObject:stringVal];
             [amountOnes addObject:stringVal];
+            [amountTenths addObject:stringVal];
         }
         
         NSLog(@"meas: %lu", (unsigned long)[measurementArray count]);

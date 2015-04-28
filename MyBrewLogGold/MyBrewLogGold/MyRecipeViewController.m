@@ -179,14 +179,6 @@ typedef enum {
         NSLog(@"No user logged in");
         // Create the log in view controller
         CustomPFLoginViewController *logInViewController = [[CustomPFLoginViewController alloc] init];
-        //        logInViewController.logInView.logo = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"splash-logo.png"]];
-        //        logInViewController.logInView.logo.frame = CGRectMake(0, 0, 370, 170.6);
-        
-        logInViewController.fields = PFLogInFieldsUsernameAndPassword
-        | PFLogInFieldsLogInButton
-        | PFLogInFieldsSignUpButton
-        | PFLogInFieldsPasswordForgotten
-        | PFLogInFieldsDismissButton;
         
         [logInViewController setDelegate:self]; // Set ourselves as the delegate
         
@@ -355,8 +347,6 @@ typedef enum {
             //[newItemQuery orderByDescending:@"updatedByUser"];
             break;
     }
-    
-    //[newItemQuery orderByDescending:@"updatedByUser"];
     return newItemQuery;
 } //queryForTable close
 
@@ -397,14 +387,26 @@ typedef enum {
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        PFObject *object = [self.objects objectAtIndex:indexPath.row];
+        PFObject *object;
+        //Get the row from the data source.
+        if (self.recipeSearchResults != nil) {
+            //Search is active, object is from recipeSearchResults
+            object = [self.recipeSearchResults objectAtIndex:indexPath.row];
+        } else {
+            //No search, object is from standard query
+            object = [self.objects objectAtIndex:indexPath.row];
+        }
+        //Delete the row on Parse
         [object deleteInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+            if (!error) {
+                NSLog(@"Delete successful");
+            } else {
+                NSLog(@"Error deleting - %@", error.description);
+            }
+            
             [self.recipeSearchController setActive:NO];
             [self loadObjects];
             self.recipeSearchResults = nil;
-//            [self searchBarCancelButtonClicked:self.recipeSearchController.searchBar];
-//            [self.recipeSearchController.searchBar resignFirstResponder];
         }];
     } else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
@@ -539,48 +541,15 @@ typedef enum {
     NSLog(@"User dismissed the signUpViewController");
 }
 
-#pragma mark - Navigation
-
-//// In a storyboard-based application, you will often want to do a little preparation before navigation
-//- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-//    NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-//    
-//    PFObject *object = [self objectAtIndexPath:indexPath];
-//    selectedName = [object objectForKey:@"Name"];
-//    selectedType = [object objectForKey:@"Type"];
-//    selectedIngredients = [object objectForKey:@"Ingredients"];
-//    selectedInstructions = [object objectForKey:@"Instructions"];
-//    selectedObjectID = [NSString stringWithFormat:@"%@", object.objectId];
-//    selectedPFObject = object;
-//    
-//    //Verify identifier of push segue to Details view
-//    if ([segue.identifier isEqualToString:@"DetailView"]) {
-//        //Grab destination view controller
-//        RecipeDetailsViewController *detailsViewController = segue.destinationViewController;
-//        //Pass details over to be displayed
-//        if (detailsViewController != nil) {
-//            detailsViewController.passedName = selectedName;
-//            detailsViewController.passedType = selectedType;
-//            detailsViewController.passedIngredients = selectedIngredients;
-//            detailsViewController.passedInstructions = selectedInstructions;
-//            detailsViewController.passedUsername = usernameString;
-//            detailsViewController.passedObjectID = selectedObjectID;
-//            detailsViewController.passedObject = selectedPFObject;
-//        }
-//    }
-//}
-
 #pragma mark - Search
 
 //Delegate method triggered when search text is entered
 - (void)updateSearchResultsForSearchController:(UISearchController *)searchController {
     NSString *searchString = searchController.searchBar.text;
-    //[self searchForText:searchString scope:searchController.searchBar.selectedScopeButtonIndex];
+    //Make sure somethinf was entered before attempting to filter results
     if (![searchString isEqualToString:@""]) {
         [self filterResults:searchString];
     }
-    
-    //[self.tableView reloadData];
 }
 
 //Filter query with search terms
@@ -599,12 +568,6 @@ typedef enum {
     [query whereKey:@"createdBy" equalTo:[PFUser currentUser].username];
     [query whereKey:@"Name" containsString:searchTerm];
     
-//    //Pass query objects as Array
-//    NSArray *results  = [query findObjects];
-//    
-//    //NSLog(@"Result: %@", results);
-//    NSLog(@"filterResults %lu", (unsigned long)results.count);
-    
     //Grab searchbar textfield to apply color and border when no results found
     for (id object in [[[self.recipeSearchController.searchBar subviews] objectAtIndex:0] subviews]) {
         if ([object isKindOfClass:[UITextField class]]) {
@@ -613,16 +576,15 @@ typedef enum {
         }
     }
     
-    //NSMutableArray *results;
+    //Query Parse in background for objects matching the search term
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error){
         if (!error) {
+            //Change color of serch textfield if no items match search
             if (objects.count == 0) {
-                //self.browseSearchController.searchBar.backgroundColor = [UIColor grayColor];
                 searchTextField.textColor = [UIColor redColor];
                 searchTextField.layer.borderColor = [[UIColor redColor] CGColor];
                 searchTextField.layer.borderWidth = 1.0;
             } else {
-                //self.browseSearchController.searchBar.backgroundColor = [UIColor clearColor];
                 searchTextField.textColor = [UIColor blackColor];
                 searchTextField.layer.borderColor = [[UIColor whiteColor] CGColor];
                 searchTextField.layer.borderWidth = 0.0;
@@ -635,31 +597,14 @@ typedef enum {
             NSLog(@"search query error");
         }
     }];
-    
-//    if (results.count == 0) {
-//        //self.browseSearchController.searchBar.backgroundColor = [UIColor grayColor];
-//        searchTextField.textColor = [UIColor redColor];
-//        searchTextField.layer.borderColor = [[UIColor redColor] CGColor];
-//        searchTextField.layer.borderWidth = 1.0;
-//    } else {
-//        //self.browseSearchController.searchBar.backgroundColor = [UIColor clearColor];
-//        searchTextField.textColor = [UIColor blackColor];
-//        searchTextField.layer.borderColor = [[UIColor whiteColor] CGColor];
-//        searchTextField.layer.borderWidth = 0.0;
-//    }
-//    
-//    [self.recipeSearchResults addObjectsFromArray:results];
-//    [self.tableView reloadData];
-    //[self loadObjects];
 }
 
 //Cancel button on search bar clicked
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
     NSLog(@"Cancel button clicked");
-    //Clear out search results array
+    //Clear out search results array and resign first responder before reloading table
     [self.recipeSearchResults removeAllObjects];
     self.recipeSearchResults = nil;
-//    self.recipeSearchResults = [[NSMutableArray alloc] init];
     [searchBar resignFirstResponder];
     [self loadObjects];
     
