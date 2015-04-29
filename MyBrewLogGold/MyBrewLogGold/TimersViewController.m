@@ -85,36 +85,6 @@
     // Dispose of any resources that can be recreated.
 }
 
--(IBAction)startTimer:(id)sender {
-    countdownSeconds = 180;
-    firstTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(runTimer) userInfo:nil repeats:YES];
-}
-
--(void)addNewTimer:(NSInteger)time withDetails:(NSString *)description {
-    oneDescription = description;
-    
-    //Calculate hours/minutes/seconds from countdownSeconds
-    secondsInt = time % 60;
-    minutesInt = (time / 60) % 60;
-    hoursInt = (time / 3600) % 24;
-    //Display timer
-    //    NSString *timerString = [NSString stringWithFormat:@"%.2d:%.2d:%.2d left", hoursInt, minutesInt, secondsInt];
-    
-    if (hoursInt < 1) {
-        timerString = [NSString stringWithFormat:@"%.2d:%.2d left", minutesInt, secondsInt];
-    } else {
-        if (hoursInt < 10) {
-            timerString = [NSString stringWithFormat:@"%.1d:%.2d:%.2d left", hoursInt, minutesInt, secondsInt];
-        } else {
-            timerString = [NSString stringWithFormat:@"%.2d:%.2d:%.2d left", hoursInt, minutesInt, secondsInt];
-        }
-    }
-    
-    timerOneLabel.text = timerString;
-    [onePauseButton setTitle:@"Start" forState:UIControlStateNormal];
-    timerPaused = YES;
-}
-
 -(void)startTimerFromDetails:(NSInteger)time withDetails:(NSString *)description {
     NSLog(@"Timer seconds = %ld", (long)time);
     countdownSeconds = time;
@@ -149,8 +119,8 @@
             timerDateTwo = [timerDateTwo dateByAddingTimeInterval:countdownSecondsTwo];
         } else {
             NSLog(@"No timers available");
+            [self noTimerAvailableAlert];
         }
-
     } else {
         NSLog(@"Over 23:59");
         NSDate *calDate = [NSDate date];
@@ -290,7 +260,9 @@
             NSLog(@"%@", [error localizedDescription]);
         }
     } else {
+        //no calendar exists, alert user
         NSLog(@"Calendar doesn't exist");
+        [self noCalendarAvailableAlert];
     }
 }
 
@@ -392,7 +364,11 @@
     //Under 24 hours (No clicked)
     } else if (buttonIndex == 1) {
         NSLog(@"index 1");
-        [self showCountdownPicker:buttonSender];
+        if (firstTimer != nil && secondTimer != nil) {
+            [self noTimerAvailableAlert];
+        } else {
+            [self showCountdownPicker:buttonSender];
+        }
     //Cancel clicked
     } else {
         NSLog(@"Other index");
@@ -429,15 +405,42 @@
 //            timerPaused = YES;
 //            [self pauseTimer:firstTimer];
         }
-        //[self addNewTimer:countdownSeconds withDetails:description];
         
 //        timerOneLabel.text = timerString;
         
         [self startTimerFromDetails:countdownSeconds withDetails:description];
         
         //timersViewController.oneView.hidden = NO;
+    } else if (buttonIndex == 0) {
+        NSLog(@"AlertView index = 0");
+    } else {
+        NSLog(@"AlertView index = %ld", (long)buttonIndex);
     }
 }
+
+//Method to create and show alert when both timers are in use
+-(void)noTimerAvailableAlert {
+    NSString *alertString = @"Sorry, only two timers can be active at one time.";
+    
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"No Timer Available"
+                                                    message:alertString
+                                                   delegate:self
+                                          cancelButtonTitle:@"OK"
+                                          otherButtonTitles:nil];
+    [alert show];
+} //showAlert close
+
+//Method to create and show alert when no calendar available. This should only be the case if user did not grant calendar access to the application
+-(void)noCalendarAvailableAlert {
+    NSString *alertString = @"Sorry, the calendar for My Brew Log does not exist on your device so the event was not created. Please approve calendar access if you would like to use this feature.";
+    
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"No Calendar Available"
+                                                    message:alertString
+                                                   delegate:self
+                                          cancelButtonTitle:@"OK"
+                                          otherButtonTitles:nil];
+    [alert show];
+} //showAlert close
 
 /*
 #pragma mark - Navigation

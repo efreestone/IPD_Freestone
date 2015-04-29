@@ -51,7 +51,6 @@
 @property (strong, nonatomic) NSString *oneDescription;
 @property (strong, nonatomic) NSString *twoDescription;
 
--(IBAction)startTimer:(id)sender;
 -(void)startTimerFromDetails:(NSInteger)time withDetails:(NSString *)details;
 -(void)startLocalNotification:(NSDate *)fire withDescription:(NSString *)description;
 -(void)timerPicked:(NSString *)formattedTime;

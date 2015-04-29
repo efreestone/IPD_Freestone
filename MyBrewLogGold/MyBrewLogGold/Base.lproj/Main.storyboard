@@ -69,9 +69,9 @@
                                 </constraints>
                                 <items>
                                     <navigationItem title="Timers" id="uF7-mC-UO3">
-                                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="h7f-s2-fmY">
+                                        <barButtonItem key="rightBarButtonItem" title="+ New Timer" id="h7f-s2-fmY">
                                             <connections>
-                                                <segue destination="8Wm-S4-3lb" kind="presentation" id="e6B-dv-0B3"/>
+                                                <action selector="showTimerPicker:" destination="fGG-OC-mvn" id="2Vd-k3-ALG"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
@@ -86,9 +86,6 @@
                                 <state key="normal" title="+ New Timer">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <connections>
-                                    <action selector="showTimerPicker:" destination="fGG-OC-mvn" eventType="touchUpInside" id="awA-EL-Sz8"/>
-                                </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8lg-z9-8tw">
                                 <rect key="frame" x="163" y="109" width="275" height="170"/>
@@ -186,7 +183,7 @@
                                         <color key="textColor" red="0.12549020350000001" green="0.12549020350000001" blue="0.12549020350000001" alpha="1" colorSpace="deviceRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1:10:17 left" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a7I-DG-gM0">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a7I-DG-gM0">
                                         <rect key="frame" x="0.0" y="54" width="275" height="62"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="275" id="QGl-m9-QJk"/>
@@ -1208,6 +1205,6 @@
         <image name="timer-tab.png" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="b29-uT-UxQ"/>
+        <segue reference="fSe-cm-Zxg"/>
     </inferredMetricsTieBreakers>
 </document>
