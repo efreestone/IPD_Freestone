@@ -566,7 +566,9 @@ typedef enum {
     //Query with search term
     PFQuery *query = [PFQuery queryWithClassName: parseClassName];
     [query whereKey:@"createdBy" equalTo:[PFUser currentUser].username];
-    [query whereKey:@"Name" containsString:searchTerm];
+    //[query whereKey:@"Name" containsString:searchTerm];
+    //Create case-insensitive query, "i" modifier sets this in regex
+    [query whereKey:@"Name" matchesRegex:searchTerm modifiers:@"i"];
     
     //Grab searchbar textfield to apply color and border when no results found
     for (id object in [[[self.recipeSearchController.searchBar subviews] objectAtIndex:0] subviews]) {

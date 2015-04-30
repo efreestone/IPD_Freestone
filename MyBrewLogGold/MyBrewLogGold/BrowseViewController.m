@@ -365,10 +365,24 @@ typedef enum {
         self.browseSearchResults = [[NSMutableArray alloc] init];
     }
     
+    NSString *searTermTwo = searchTerm;
+    
     //Query with search term
     PFQuery *query = [PFQuery queryWithClassName: parseClassName];
     [query whereKey:@"createdBy" notEqualTo:[PFUser currentUser].username];
-    [query whereKey:@"Name" containsString:searchTerm];
+    //[query whereKey:@"Name" containsString:searchTerm];
+    //Create case-insensitive query, "i" modifier sets this in regex
+//    [query whereKey:@"Name" matchesRegex:searchTerm modifiers:@"i"];
+//    [query whereKey:@"createdBy" matchesRegex:searTermTwo modifiers:@"i"];
+    
+    PFQuery *nameQuery = [PFQuery queryWithClassName: parseClassName];
+    [nameQuery whereKey:@"createdBy" notEqualTo:[PFUser currentUser].username];
+    [nameQuery whereKey:@"Name" matchesRegex:searchTerm modifiers:@"i"];
+    PFQuery *usernameQuery = [PFQuery queryWithClassName: parseClassName];
+    [usernameQuery whereKey:@"createdBy" notEqualTo:[PFUser currentUser].username];
+    [usernameQuery whereKey:@"createdBy" matchesRegex:searTermTwo modifiers:@"i"];
+    
+    PFQuery *orQuery = [PFQuery orQueryWithSubqueries:@[nameQuery, usernameQuery]];
     
     //Grab searchbar textfield to apply color and border when no results found
     for (id object in [[[self.browseSearchController.searchBar subviews] objectAtIndex:0] subviews]) {
@@ -379,7 +393,7 @@ typedef enum {
     }
     
     //Query Parse in background for objects matching the search term
-    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error){
+    [orQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error){
         if (!error) {
             //Change color of serch textfield if no items match search
             if (objects.count == 0) {
