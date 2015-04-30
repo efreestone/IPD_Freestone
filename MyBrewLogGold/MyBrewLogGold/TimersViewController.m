@@ -25,7 +25,8 @@
     
     NSString *timerString;
     NSDate *pauseStart, *previousFireDate;
-    BOOL timerPaused;
+    NSDate *pauseStartTwo, *previousFireDateTwo;
+    BOOL timerPaused, timerPausedTwo;
     
     EKCalendar *recipeCalendar;
     id buttonSender;
@@ -85,10 +86,13 @@
     // Dispose of any resources that can be recreated.
 }
 
+//Start timer form details, also called when new timer button is used
 -(void)startTimerFromDetails:(NSInteger)time withDetails:(NSString *)description {
     NSLog(@"Timer seconds = %ld", (long)time);
     countdownSeconds = time;
+    //If timer is under 24 hours
     if (time <= 86340) {
+        //Check if first timer is being used
         if (firstTimer == nil) {
             countdownSecondsOne = time;
 //            oneView.hidden = NO;
@@ -106,6 +110,7 @@
             timerDate = [timerDate dateByAddingTimeInterval:countdownSecondsOne];
             //[self startLocalNotification:timerDate];
         } else if (secondTimer == nil) {
+        //First timer in use, check timer two
             countdownSecondsTwo = time;
             //Second timer
             NSLog(@"Second timer");
@@ -118,6 +123,7 @@
             timerDateTwo = [NSDate date];
             timerDateTwo = [timerDateTwo dateByAddingTimeInterval:countdownSecondsTwo];
         } else {
+        //Both timers in use, alert user
             NSLog(@"No timers available");
             [self noTimerAvailableAlert];
         }
@@ -129,6 +135,7 @@
     }
 }
 
+//Run timer one
 -(void)runTimer {
     countdownSecondsOne = countdownSecondsOne - 1;
     
@@ -160,6 +167,7 @@
     }
 }
 
+//Run timer two
 -(void)runTimerTwo {
     countdownSecondsTwo = countdownSecondsTwo - 1;
     
@@ -191,6 +199,7 @@
     }
 }
 
+//Pause timer one. This and resume were originally shared for both timers but it caused some odd behaviour when pausing both. Not as ideal but I have simply duplicated these (and related variables) to avoid any issues or conflicts between the two
 -(void)pauseTimer:(NSTimer *)timer {
     pauseStart = [NSDate date];
     previousFireDate = [timer fireDate];
@@ -199,12 +208,30 @@
     //onePauseButton = @"Restart";
 }
 
+//Pause two.
+-(void)pauseTimerTwo:(NSTimer *)timer {
+    pauseStartTwo = [NSDate date];
+    previousFireDateTwo = [timer fireDate];
+    [timer setFireDate:[NSDate distantFuture]];
+    timerPausedTwo = YES;
+    //onePauseButton = @"Restart";
+}
+
+//Resume timer one
 -(void)resumeTimer:(NSTimer *)timer {
     float pauseTime = -1 * [pauseStart timeIntervalSinceNow];
     [timer setFireDate:[previousFireDate initWithTimeInterval:pauseTime sinceDate:previousFireDate]];
     timerPaused = NO;
 }
 
+//Reseume timer two
+-(void)resumeTimerTwo:(NSTimer *)timer {
+    float pauseTime = -1 * [pauseStartTwo timeIntervalSinceNow];
+    [timer setFireDate:[previousFireDateTwo initWithTimeInterval:pauseTime sinceDate:previousFireDateTwo]];
+    timerPausedTwo = NO;
+}
+
+//Paused clicked for timer one
 -(IBAction)pauseClicked:(id)sender {
     if (!timerPaused) {
         [self pauseTimer:firstTimer];
@@ -215,12 +242,32 @@
     }
 }
 
+//Pause clicked for timer two
+-(IBAction)pauseClickedTwo:(id)sender {
+    if (!timerPausedTwo) {
+        [self pauseTimerTwo:secondTimer];
+        [twoPauseButton setTitle:@"Start" forState:UIControlStateNormal];
+    } else {
+        [self resumeTimer:secondTimer];
+        [twoPauseButton setTitle:@"Pause" forState:UIControlStateNormal];
+    }
+}
+
+//Cancel clicked for timer one
 -(IBAction)cancelClicked:(id)sender {
     [firstTimer invalidate];
     firstTimer = nil;
     timerOneLabel.text = @"00:00";
 }
 
+//Cancel clicked for timer two
+-(IBAction)cancelClickedTwo:(id)sender {
+    [secondTimer invalidate];
+    secondTimer = nil;
+    timerTwoLabel.text = @"00:00";
+}
+
+//Start local notification when app is backgrounded, this will notify the user only if they approved Push
 -(void)startLocalNotification:(NSDate *)fire withDescription:(NSString *)description {
     UILocalNotification *localNotification = [[UILocalNotification alloc] init];
     localNotification.fireDate = fire;
