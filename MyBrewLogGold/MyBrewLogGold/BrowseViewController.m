@@ -100,17 +100,10 @@ typedef enum {
     // Dispose of any resources that can be recreated.
 }
 
-//-(IBAction)onSortClick:(id)sender {
-//    if (searchBar.isHidden) {
-//        self.tableView.contentOffset = CGPointMake(0, -searchBar.frame.size.height + self.tableView.contentOffset.y);
-//        searchBar.hidden = NO;
-//        NSLog(@"show");
-//    } else if (!searchBar.isHidden) {
-//        self.tableView.contentOffset = CGPointMake(0, searchBar.frame.size.height + self.tableView.contentOffset.y);
-//        searchBar.hidden = YES;
-//        NSLog(@"hidden");
-//    }
-//}
+-(void)refreshTable:(int)withSort {
+    toSort = withSort;
+    [self loadObjects];
+}
 
 #pragma mark - PFQueryTableViewController
 
@@ -283,6 +276,7 @@ typedef enum {
 //Fired whenever a tableview cell is selected, including when search active
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     PFObject *object;
+    BOOL isFavorite = NO;
     //If browseSearchResults exists, process as search table
     if (self.browseSearchResults.count >= 1) {
         //NSLog(@"indexpath at search tableview is: %ld", (long)indexPath.row);
@@ -293,6 +287,8 @@ typedef enum {
         selectedInstructions = [object objectForKey:@"Instructions"];
         selectedObjectID = [NSString stringWithFormat:@"%@", object.objectId];
         selectedPFObject = object;
+        //isFavorite = [object ]
+        //[object whereKey:@"favorites" equalTo:[PFUser currentUser].objectId];
     } else {
         //Not search, process as standard selection
         //NSLog(@"indexpath at orignal tableview is: %@", [indexPath description]);
@@ -303,7 +299,19 @@ typedef enum {
         selectedInstructions = [object objectForKey:@"Instructions"];
         selectedObjectID = [NSString stringWithFormat:@"%@", object.objectId];
         selectedPFObject = object;
+        NSArray *favArray = [object objectForKey:@"favorites"];
+        if (favArray != nil && favArray.count > 0) {
+            NSString *userID = [PFUser currentUser].objectId;
+            NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF LIKE[cd] %@", userID];
+            NSArray *filtered = [favArray filteredArrayUsingPredicate:predicate];
+            if (filtered.count > 0) {
+                isFavorite = YES;
+                NSLog(@"is FAV!!");
+            }
+        }
     }
+    
+    NSLog(@"toSort = %u", toSort);
     
     //Grab destination view controller
     UIStoryboard *storyBoard = [self storyboard];
@@ -318,6 +326,9 @@ typedef enum {
         detailsViewController.passedUsername = usernameString;
         detailsViewController.passedObjectID = selectedObjectID;
         detailsViewController.passedObject = selectedPFObject;
+        detailsViewController.passedIsFavorite = isFavorite;
+        detailsViewController.passedSortInt = toSort;
+        detailsViewController.browseVC = self;
     }
     //Manually push details view
     [self.navigationController pushViewController:detailsViewController animated:YES];

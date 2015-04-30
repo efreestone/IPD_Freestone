@@ -22,4 +22,6 @@
 @property (nonatomic, strong) UISearchController *browseSearchController;
 @property (nonatomic, strong) NSMutableArray *browseSearchResults;
 
+-(void)refreshTable:(int)withSort;
+
 @end

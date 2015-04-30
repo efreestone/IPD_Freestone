@@ -27,7 +27,7 @@
 
 //Synthesize for getters/setters
 @synthesize nameLabel, usernameLabel, ingredientsTV, instructionsTV;
-@synthesize passedObject, passedName, passedType, passedIngredients, passedUsername, passedInstructions, passedObjectID;
+@synthesize passedObject, passedName, passedType, passedIngredients, passedUsername, passedInstructions, passedObjectID, passedIsFavorite, passedSortInt;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -40,6 +40,10 @@
     //Grab username and display
     usernameString = [passedObject objectForKey:@"createdBy"];
     usernameLabel.text = [NSString stringWithFormat:@"By: %@", usernameString];
+    
+    if (passedIsFavorite) {
+        [self.favoriteButton setTitle:@"Is Fav" forState:UIControlStateNormal];
+    }
     
     //Set rounded corners on ing and inst textviews
     [[ingredientsTV layer] setBorderColor:[[UIColor lightGrayColor] CGColor]];
@@ -73,20 +77,48 @@
 
 //Set object to favorites when fav selected
 -(IBAction)favoriteSelected:(id)sender {
-    PFQuery *editQuery = [PFQuery queryWithClassName:@"newRecipe"];
-    [editQuery getObjectInBackgroundWithId:passedObjectID block:^(PFObject *favObject, NSError *error) {
-        [favObject addUniqueObject:[PFUser currentUser].objectId forKey:@"favorites"];
-        [favObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-            if (!error) {
-                NSLog(@"Favorited Success");
-                //Create and show an alert
-                NSString *titleString = @"Favorite Recipe";
-                NSString *alertMessage = @"Recipe added to favorites. Select Favorite in the Browse Sort to see your Favorite Recipes";
-                [self showAlert:alertMessage withTitle:titleString];
+    PFQuery *favQuery = [PFQuery queryWithClassName:@"newRecipe"];
+    [favQuery getObjectInBackgroundWithId:passedObjectID block:^(PFObject *favObject, NSError *error) {
+        NSLog(@"passed ID = %@", passedObjectID);
+        if (!error) {
+            //Is not fav, add it
+            if (!passedIsFavorite) {
+                [favObject addUniqueObject:[PFUser currentUser].objectId forKey:@"favorites"];
+                [favObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                    if (succeeded) {
+                        NSLog(@"Favorited Success");
+                        //Create and show an alert
+                        NSString *titleString = @"Favorite Recipe";
+                        NSString *alertMessage = @"Recipe added to favorites. Select Favorite in the Browse Sort to see your Favorite Recipes";
+                        [self showAlert:alertMessage withTitle:titleString];
+                        //Set fav button and BOOL
+                        [self.favoriteButton setTitle:@"Is Fav" forState:UIControlStateNormal];
+                        passedIsFavorite = YES;
+                    } else {
+                        NSLog(@"Favorited add ERROR");
+                    }
+                }];
             } else {
-                NSLog(@"Favorited ERROR");
+            //Recipe is already fav, remove it
+                [favObject removeObject:[PFUser currentUser].objectId forKey:@"favorites"];
+                [favObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                    if (!error) {
+                        NSLog(@"Favorited Success");
+                        //Create and show an alert
+                        NSString *titleString = @"Favorite Recipe";
+                        NSString *alertMessage = @"Recipe removed from favorites";
+                        [self showAlert:alertMessage withTitle:titleString];
+                        //Set fav button and BOOL
+                        [self.favoriteButton setTitle:@"Favorite" forState:UIControlStateNormal];
+                        passedIsFavorite = NO;
+                        //Refresh browse table. This is to clear fav sort of unfavorited recipes.
+                        [self.browseVC refreshTable:passedSortInt];
+                    } else {
+                        NSLog(@"Favorited remove ERROR");
+                    }
+                }];
             }
-        }];
+        } //!error close
     }];
 }
 

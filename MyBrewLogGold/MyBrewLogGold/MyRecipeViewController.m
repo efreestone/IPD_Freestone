@@ -74,6 +74,7 @@ typedef enum {
     //Set default ACL to be read/write of current user only
     PFACL *defaultACL = [PFACL ACL];
     [defaultACL setPublicReadAccess:YES];
+    [defaultACL setPublicWriteAccess:YES];
     [PFACL setDefaultACL:defaultACL withAccessForCurrentUser:YES];
     
     parseClassName = @"newRecipe";

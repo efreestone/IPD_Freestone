@@ -13,6 +13,7 @@
 
 #import <UIKit/UIKit.h>
 #import <Parse/Parse.h>
+#import "BrowseViewController.h"
 
 @interface BrowseDetailsViewController : UIViewController
 
@@ -31,5 +32,8 @@
 @property (strong, nonatomic) NSString *passedUsername;
 @property (strong, nonatomic) NSString *passedObjectID;
 @property (strong, nonatomic) PFObject *passedObject;
+@property (nonatomic) BOOL passedIsFavorite;
+@property (nonatomic) int passedSortInt;
+@property (strong, nonatomic) BrowseViewController *browseVC;
 
 @end
