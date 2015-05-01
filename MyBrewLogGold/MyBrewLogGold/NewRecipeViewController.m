@@ -50,6 +50,7 @@
     
     BOOL browseCopy;
     BOOL isMetric;
+    BOOL isPrivate;
     NSUserDefaults *userDefaults;
 }
 
@@ -73,6 +74,7 @@
     //Grab user defaults and get units of measurement
     userDefaults = [NSUserDefaults standardUserDefaults];
     isMetric = [userDefaults boolForKey:@"isMetric"];
+    isPrivate = [userDefaults boolForKey:@"Private"];
     
     //Set border and corner radius for textfield and textviews
     [[recipeNameTF layer] setBorderColor:[[UIColor lightGrayColor] CGColor]];
@@ -615,6 +617,8 @@
                 editObject[@"Ingredients"] = recipeIngredients;
                 editObject[@"Instructions"] = recipeInstructions;
                 editObject[@"updatedByUser"] = updated;
+                editObject[@"Private"] = [NSNumber numberWithBool:isPrivate];
+            
                 [editObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
                     if (succeeded) {
                         NSLog(@"Edited item saved.");
@@ -642,8 +646,7 @@
             newRecipeObject[@"Instructions"] = recipeInstructions;
             newRecipeObject[@"createdBy"] = [PFUser currentUser].username;
             newRecipeObject[@"updatedByUser"] = updated;
-            
-            //newRecipeObject[@"array"] = ingredientArray;
+            newRecipeObject[@"Private"] = [NSNumber numberWithBool:isPrivate];
             
             [newRecipeObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
                 if (succeeded) {

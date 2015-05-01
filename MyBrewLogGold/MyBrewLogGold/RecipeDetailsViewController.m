@@ -24,6 +24,7 @@
     BOOL isCopy;
     BOOL isActive;
     BOOL isPrivate;
+    BOOL canEdit;
     AppDelegate *appDelegate;
     PFACL *objectACL;
 }
@@ -56,6 +57,10 @@
     
     //Grab ACL of the current recipe. Used for Public switch
     objectACL = [PFACL ACL];
+    
+    //Grab userDefaults and set edit accordingly. Edit to no means selecting edit for the recipe will copy instead
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    canEdit = [userDefaults boolForKey:@"Edit"];
     
     //Get active bool and set switch accordingly
     isActive = [passedObject valueForKey:@"Active"];
@@ -198,8 +203,13 @@
     switch (buttonIndex) {
         case 0: //Edit
             NSLog(@"0");
-            //Set copy BOOL
-            isCopy = NO;
+            //Set copy BOOL based on Edit userDefaults
+            if (canEdit) {
+                isCopy = NO;
+            } else {
+                isCopy = YES;
+            }
+            
             [self performSegueWithIdentifier:@"Edit" sender:self];
             break;
         case 1: //Copy

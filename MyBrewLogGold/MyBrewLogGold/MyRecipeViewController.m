@@ -63,19 +63,36 @@ typedef enum {
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-//    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-//    BOOL isMetric = NO;
-//    [userDefaults setObject:[NSNumber numberWithBool:isMetric] forKey:@"isMetric"];
-//    [userDefaults synchronize];
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    //Check edit bool and set to yes if it doesn't exist
+    if ([userDefaults objectForKey:@"Edit"]) {
+        [userDefaults setBool:YES forKey:@"Edit"];
+        [userDefaults synchronize];
+    }
+    //Check private bool and set to no if it doesn't exist
+    if ([userDefaults objectForKey:@"Private"] == nil) {
+        NSLog(@"Private bool nil");
+        [userDefaults setBool:NO forKey:@"Private"];
+        [userDefaults synchronize];
+    }
     
     //Grab app delegate
     appDelegate = [[UIApplication sharedApplication] delegate];
     
-    //Set default ACL to be read/write of current user only
+    //Set default ACL according to isPublic settings switch
     PFACL *defaultACL = [PFACL ACL];
-    [defaultACL setPublicReadAccess:YES];
-    [defaultACL setPublicWriteAccess:YES];
-    [PFACL setDefaultACL:defaultACL withAccessForCurrentUser:YES];
+    if ([userDefaults boolForKey:@"Private"]) {
+        NSLog(@"Private ACL");
+        [defaultACL setReadAccess:YES forUser:[PFUser currentUser]];
+        [defaultACL setWriteAccess:YES forUser:[PFUser currentUser]];
+        [defaultACL setPublicReadAccess:false];
+        [PFACL setDefaultACL:defaultACL withAccessForCurrentUser:YES];
+    } else {
+        NSLog(@"Public ACL");
+        [defaultACL setPublicReadAccess:YES];
+        [defaultACL setPublicWriteAccess:YES];
+        [PFACL setDefaultACL:defaultACL withAccessForCurrentUser:YES];
+    }
     
     parseClassName = @"newRecipe";
     
@@ -390,12 +407,14 @@ typedef enum {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         PFObject *object;
         //Get the row from the data source.
-        if (self.recipeSearchResults != nil) {
+        if (self.recipeSearchResults != nil && self.recipeSearchResults.count > 0) {
             //Search is active, object is from recipeSearchResults
             object = [self.recipeSearchResults objectAtIndex:indexPath.row];
+            NSLog(@"Search delete");
         } else {
             //No search, object is from standard query
             object = [self.objects objectAtIndex:indexPath.row];
+            NSLog(@"NOT Search delete");
         }
         //Delete the row on Parse
         [object deleteInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
