@@ -46,7 +46,6 @@
             <string>Calibri</string>
             <string>Calibri</string>
             <string>Calibri</string>
-            <string>Calibri</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -77,16 +76,6 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M13-jt-K4o">
-                                <rect key="frame" x="228" y="64" width="145" height="50"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="TlL-fA-LuK"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="Calibri" family="Calibri" pointSize="28"/>
-                                <state key="normal" title="+ New Timer">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8lg-z9-8tw">
                                 <rect key="frame" x="163" y="109" width="275" height="170"/>
                                 <subviews>
@@ -215,23 +204,29 @@
                                     <constraint firstItem="aVx-gR-fmV" firstAttribute="top" secondItem="fXS-Hg-RwE" secondAttribute="top" constant="5" id="oxb-bn-ssf"/>
                                 </constraints>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Only two timers can be active at any one time." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hhS-uN-bwN">
+                                <rect key="frame" x="163" y="64" width="275" height="41"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.9490196704864502" green="0.92156869173049927" blue="0.90196084976196289" alpha="1" colorSpace="deviceRGB"/>
                         <constraints>
                             <constraint firstAttribute="centerX" secondItem="8lg-z9-8tw" secondAttribute="centerX" id="BaZ-UA-MuG"/>
-                            <constraint firstItem="M13-jt-K4o" firstAttribute="top" secondItem="OiA-gH-U6C" secondAttribute="bottom" id="EaX-ff-jZw"/>
-                            <constraint firstItem="8lg-z9-8tw" firstAttribute="top" secondItem="M13-jt-K4o" secondAttribute="bottom" constant="-5" id="Eja-Xf-Evq"/>
                             <constraint firstAttribute="centerX" secondItem="OiA-gH-U6C" secondAttribute="centerX" id="F8g-DB-Zt1"/>
                             <constraint firstItem="OiA-gH-U6C" firstAttribute="width" secondItem="kBi-Xn-1r4" secondAttribute="width" id="Fcj-kd-q6m"/>
+                            <constraint firstItem="8lg-z9-8tw" firstAttribute="top" secondItem="hhS-uN-bwN" secondAttribute="bottom" constant="4" id="IVL-is-YBU"/>
                             <constraint firstItem="fXS-Hg-RwE" firstAttribute="top" secondItem="8lg-z9-8tw" secondAttribute="bottom" constant="10" id="RpV-kZ-4ZC"/>
-                            <constraint firstAttribute="centerX" secondItem="M13-jt-K4o" secondAttribute="centerX" id="jfv-YN-xhA"/>
+                            <constraint firstItem="hhS-uN-bwN" firstAttribute="top" secondItem="OiA-gH-U6C" secondAttribute="bottom" id="X3B-d8-axL"/>
                             <constraint firstAttribute="centerX" secondItem="fXS-Hg-RwE" secondAttribute="centerX" id="nGi-QJ-nZT"/>
+                            <constraint firstAttribute="centerX" secondItem="hhS-uN-bwN" secondAttribute="centerX" id="pIA-pU-5jr"/>
+                            <constraint firstItem="8lg-z9-8tw" firstAttribute="width" secondItem="hhS-uN-bwN" secondAttribute="width" id="pvA-OG-rYP"/>
                             <constraint firstItem="OiA-gH-U6C" firstAttribute="top" secondItem="kBi-Xn-1r4" secondAttribute="top" id="ymR-Md-ae0"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Timer" image="timer-tab.png" id="vnW-FC-FXO"/>
                     <connections>
-                        <outlet property="addNewTimerButton" destination="M13-jt-K4o" id="41r-UR-lSq"/>
                         <outlet property="oneCancelButton" destination="sb2-LE-Exk" id="yQi-OT-pZi"/>
                         <outlet property="oneDescriptionLabel" destination="ff8-JZ-hKf" id="KjF-xG-yso"/>
                         <outlet property="onePauseButton" destination="Yhc-Iy-aEx" id="HDH-dj-z5G"/>
