@@ -126,10 +126,6 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
--(IBAction)logButtonClicked:(id)sender {
-    
-}
-
 # pragma mark - AlertViews
 
 //Method to create and show alert view if timer format does not match
@@ -269,6 +265,7 @@
 
 //Public switch changed
 -(IBAction)publicSwitchChanged:(id)sender {
+    //Set ACL to public
     if ([publicSwitch isOn]) {
         NSLog(@"Switch is on");
         [objectACL setPublicReadAccess:true];
@@ -276,22 +273,15 @@
         //Set bool to represent if it is public or not. Much easier than trying to read ACL settings
         passedObject[@"Private"] = [NSNumber numberWithBool:NO];
     } else {
+    //Set ACL to private
         NSLog(@"Switch is off");
-        //[objectACL setPublicReadAccess:false];
-        //[objectACL setPublicWriteAccess:false];
-        //passedObject.ACL = [PFACL ACLWithUser:[PFUser currentUser]];
-        //[objectACL setWriteAccess:true forUser:[PFUser currentUser]];
         [objectACL setReadAccess:YES forUser:[PFUser currentUser]];
         [objectACL setWriteAccess:YES forUser:[PFUser currentUser]];
         [objectACL setPublicReadAccess:false];
         //Set bool to not public
         passedObject[@"Private"] = [NSNumber numberWithBool:YES];
-        
-        //    PFACL *defaultACL = [PFACL ACL];
-        //    [defaultACL setPublicReadAccess:YES];
-        //    [PFACL setDefaultACL:defaultACL withAccessForCurrentUser:YES];
     }
-    //Change ACL of the recipe
+    //Change ACL of the recipe and save
     [passedObject setACL:objectACL];
     [passedObject saveInBackgroundWithBlock:^(BOOL success, NSError *error){
         if (!error) {
@@ -308,11 +298,11 @@
     if ([activeSwitch isOn]) {
         NSLog(@"Switch is on");
         passedObject[@"Active"] = [NSNumber numberWithBool:YES];
-        
     } else {
         NSLog(@"Switch is off");
         passedObject[@"Active"] = [NSNumber numberWithBool:NO];
     }
+    //Save object with Active set
     [passedObject saveInBackgroundWithBlock:^(BOOL success, NSError *error){
         if (!error) {
             NSLog(@"Save successful - active");

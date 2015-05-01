@@ -58,27 +58,18 @@
     [[self.twoView layer] setBorderWidth:0.5];
     [[self.twoView layer] setCornerRadius:7.5];
     
+    //Set descriptions if they exist
     if (oneDescription.length != 0) {
-//        oneDescription = @"Description for timer";
         oneDescriptionLabel.text = oneDescription;
     }
     if (twoDescription) {
         twoDescriptionLabel.text = twoDescription;
     }
     
-    
-    //oneView.hidden = YES;
-    
+    //Check permissions for Push
     if ([UIApplication instancesRespondToSelector:@selector(registerUserNotificationSettings:)]) {
         [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert|UIUserNotificationTypeSound categories:nil]];
     }
-    
-//    NSString *recipeTitle = @"My Brew Log Test";
-//    NSInteger testInt = 120;
-//    NSDate *testDate = [NSDate date];
-//    testDate = [testDate dateByAddingTimeInterval:testInt];
-    
-    //[self createCalendarEvent:testDate withTitle:recipeTitle];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -95,12 +86,7 @@
         //Check if first timer is being used
         if (firstTimer == nil) {
             countdownSecondsOne = time;
-//            oneView.hidden = NO;
-            //oneDescriptionLabel.text = oneDescription;
             firstTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(runTimer) userInfo:nil repeats:YES];
-            
-            //Pass timer to app delegate to be invalidated and start local notification when app is backgrounded
-            self.appDelegate.firstTimer = firstTimer;
             
             oneDescription = description;
             
@@ -143,8 +129,6 @@
     secondsInt = countdownSecondsOne % 60;
     minutesInt = (countdownSecondsOne / 60) % 60;
     hoursInt = (countdownSecondsOne / 3600) % 24;
-    //Display timer
-//    NSString *timerString = [NSString stringWithFormat:@"%.2d:%.2d:%.2d left", hoursInt, minutesInt, secondsInt];
     
     if (hoursInt < 1) {
         timerString = [NSString stringWithFormat:@"%.2d:%.2d left", minutesInt, secondsInt];
@@ -175,8 +159,6 @@
     secondsInt = countdownSecondsTwo % 60;
     minutesInt = (countdownSecondsTwo / 60) % 60;
     hoursInt = (countdownSecondsTwo / 3600) % 24;
-    //Display timer
-    //    NSString *timerString = [NSString stringWithFormat:@"%.2d:%.2d:%.2d left", hoursInt, minutesInt, secondsInt];
     
     if (hoursInt < 1) {
         timerString = [NSString stringWithFormat:@"%.2d:%.2d left", minutesInt, secondsInt];
@@ -384,8 +366,6 @@
     NSInteger daysFromString = [numbersArray[2] intValue];
     NSInteger daysInt = 0;
     
-    //NSLog(@"M - %ld, W - %ld, D - %ld", (long)monthsFromString, (long)weeksFromString, (long)daysFromString);
-    
     if (monthsFromString != 00) {
         monthsInt = monthsFromString * 2592000;
         NSLog(@"Months in seconds = %ld", (long)monthsInt);
@@ -443,17 +423,6 @@
         if (description.length == 0) {
             description = @"No Description";
         }
-        
-        if (countdownSeconds <= 86340) {
-            //Add one to countdown to utilize runTimer to set up nstimer
-//            countdownSeconds = countdownSeconds + 1;
-//            [self runTimer];
-//            [onePauseButton setTitle:@"Start" forState:UIControlStateNormal];
-//            timerPaused = YES;
-//            [self pauseTimer:firstTimer];
-        }
-        
-//        timerOneLabel.text = timerString;
         
         [self startTimerFromDetails:countdownSeconds withDetails:description];
         

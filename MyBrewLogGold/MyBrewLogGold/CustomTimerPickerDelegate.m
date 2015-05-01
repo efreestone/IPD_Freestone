@@ -49,10 +49,6 @@
         weekString = @"0";
         dayString = @"0";
     }
-//    if (self.myRecipeVC == nil) {
-//        
-//    }
-//    self.timersVC = [[self.myRecipeVC.tabBarController viewControllers] objectAtIndex:2];
     return self;
 }
 

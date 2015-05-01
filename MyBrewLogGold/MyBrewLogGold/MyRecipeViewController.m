@@ -62,6 +62,12 @@ typedef enum {
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    //Grab timer VC and alloc sound
+    TimersViewController *timerVC = (TimersViewController *)[[self.navigationController.tabBarController viewControllers] objectAtIndex:2];
+    // Construct URL to sound file
+    NSString *path = [NSString stringWithFormat:@"%@/bell.mp3", [[NSBundle mainBundle] resourcePath]];
+    NSURL *soundUrl = [NSURL fileURLWithPath:path];
+    timerVC.alarmPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:soundUrl error:nil];
     
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     //Check edit bool and set to yes if it doesn't exist
@@ -98,7 +104,6 @@ typedef enum {
     
     //Set seperators. Not sure why but they disappeared after hooking up Parse
     self.myTableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
-    //self.tableView.separatorColor = [UIColor lightGrayColor];
     
     //Grab user and username
     PFUser *user = [PFUser currentUser];
@@ -133,10 +138,9 @@ typedef enum {
     //    testObject[@"foo"] = @"bar";
     //    [testObject saveInBackground];
     
+    //Create and set up search bar and related
     self.recipeSearchResults = [[NSMutableArray alloc] init];
-    
     self.recipeSearchController = [[UISearchController alloc] initWithSearchResultsController:nil];
-    
     self.recipeSearchController.searchBar.delegate = self;
     self.recipeSearchController.dimsBackgroundDuringPresentation = NO;
     self.recipeSearchController.searchResultsUpdater = self;
@@ -275,11 +279,10 @@ typedef enum {
             imageName = @"other-icon.png";
         }
         
-        //NSDate *updated = [object updatedAt];
+        //Grab date and set on table
         NSDate *updated = [object valueForKey:@"updatedByUser"];
         NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
         [dateFormat setDateFormat:@"MM-dd-yy"];
-        //cell.detailTextLabel.text = [NSString stringWithFormat:@"Lasted Updated: %@", [dateFormat stringFromDate:updated]];
         NSString *createdAtString = [NSString stringWithFormat:@"Created %@",[dateFormat stringFromDate:updated]];
         
         cell.recipeNameLabel.text = [searchedObject objectForKey:@"Name"];
@@ -308,8 +311,6 @@ typedef enum {
         
         cell.recipeNameLabel.text = [object objectForKey:@"Name"];
         cell.detailsLabel.text = createdAtString;
-        //    cell.recipeNameLabel.text = [recipesArray objectAtIndex:indexPath.row];
-        //cell.cellImage.image = [UIImage imageNamed:@"glasses.jpg"];
         cell.cellImage.image = [UIImage imageNamed:imageName];
     }
     
@@ -336,11 +337,6 @@ typedef enum {
     if ([PFUser currentUser]) {
         [newItemQuery whereKey:@"createdBy" equalTo:[PFUser currentUser].username];
     }
-
-//    //Set cache policy
-//    if ([self.objects count] == 0) {
-//        newItemQuery.cachePolicy = kPFCachePolicyNetworkElseCache;
-//    }
 
     //Set sort, toSort is set out of range of enum to start
     switch (toSort) {
@@ -481,6 +477,7 @@ typedef enum {
 
 # pragma mark - ActionSheet (sort)
 
+//Create and sort action sheet
 -(IBAction)showSortActionSheet:(id)sender {
     UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Sort Recipes by:"
                                                              delegate:self
@@ -489,7 +486,6 @@ typedef enum {
                                                     otherButtonTitles:@"Active", @"Name", @"Type", @"Newest", @"Oldest", nil];
     
     [actionSheet showInView:self.view];
-    
 }
 
 #pragma mark - PFLogInViewControllerDelegate
@@ -528,7 +524,6 @@ typedef enum {
 // Sent to the delegate to determine whether the sign up request should be submitted to the server.
 - (BOOL)signUpViewController:(PFSignUpViewController *)signUpController shouldBeginSignUp:(NSDictionary *)info {
     BOOL informationComplete = YES;
-    
     // loop through all of the submitted data
     for (id key in info) {
         NSString *field = [info objectForKey:key];
