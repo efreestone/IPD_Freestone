@@ -25,6 +25,8 @@
     NSUserDefaults *userDefaults;
     NSString *timerOneDesc;
     NSString *timerTwoDesc;
+    NSInteger countdownOne;
+    NSInteger countdownTwo;
 }
 
 @end
@@ -68,13 +70,18 @@
         //Grab dates to be saved in user defaults
         fireDateOne = timerVC.firstTimer.fireDate;
         pauseStartOne = [NSDate date];
+        countdownOne = timerVC.countdownSecondsOne;
         timerOneDesc = timerVC.oneDescriptionLabel.text;
         //Invalidate timer
         [timerVC.firstTimer invalidate];
+        timerVC.firstTimer = nil;
         //Set dates in user defaults
         [userDefaults setObject:fireDateOne forKey:@"fireDateOne"];
         [userDefaults setObject:pauseStartOne forKey:@"pauseStartOne"];
+        [userDefaults setInteger:countdownOne forKey:@"countdownOne"];
         [userDefaults setObject:timerOneDesc forKey:@"timerOneDesc"];
+        timerVC.timerOneLabel.text = @"00:00";
+        timerVC.oneDescriptionLabel.text = @"Timer #1 for Step in Recipe Name";
     }
     if (timerVC.secondTimer != nil) {
         //Start local notification for timer
@@ -82,13 +89,18 @@
         //Grab dates to be saved in user defaults
         fireDateTwo = timerVC.secondTimer.fireDate;
         pauseStartTwo = [NSDate date];
+        countdownTwo = timerVC.countdownSecondsTwo;
         timerTwoDesc = timerVC.twoDescriptionLabel.text;
         //Invalidate timer
         [timerVC.secondTimer invalidate];
+        timerVC.secondTimer = nil;
         //Set dates in user defaults
         [userDefaults setObject:fireDateTwo forKey:@"fireDateTwo"];
         [userDefaults setObject:pauseStartTwo forKey:@"pauseStartTwo"];
+        [userDefaults setInteger:countdownTwo forKey:@"countdownTwo"];
         [userDefaults setObject:timerTwoDesc forKey:@"timerTwoDesc"];
+        timerVC.timerTwoLabel.text = @"00:00";
+        timerVC.twoDescriptionLabel.text = @"Timer #2 for Step in Recipe Name";
     }
 }
 
@@ -112,30 +124,78 @@
     if ([userDefaults objectForKey:@"fireDateOne"]) {
         fireDateOne = [userDefaults objectForKey:@"fireDateOne"];
         pauseStartOne = [userDefaults objectForKey:@"pauseStartOne"];
+        countdownOne = [userDefaults integerForKey:@"countdownOne"];
+        timerOneDesc = [userDefaults objectForKey:@"timerOneDesc"];
+        
+        NSInteger timeSince = [pauseStartOne timeIntervalSinceNow];
+        NSInteger timePlus = timeSince + countdownOne;
+        NSLog(@"Time Plus 1 = %ld", (long)timePlus);
+        if (timePlus > 0) {
+            [timerVC startTimerFromDetails:timePlus withDetails:timerOneDesc];
+        } else {
+            [userDefaults removeObjectForKey:@"fireDateOne"];
+            [userDefaults removeObjectForKey:@"countdownOne"];
+            [userDefaults removeObjectForKey:@"pauseStartOne"];
+        }
     }
     if ([userDefaults objectForKey:@"fireDateTwo"]) {
         fireDateTwo = [userDefaults objectForKey:@"fireDateTwo"];
         pauseStartTwo = [userDefaults objectForKey:@"pauseStartTwo"];
+        countdownTwo = [userDefaults integerForKey:@"countdownTwo"];
+        timerTwoDesc = [userDefaults objectForKey:@"timerTwoDesc"];
+        
+        NSInteger timeSince = [pauseStartTwo timeIntervalSinceNow];
+        NSInteger timePlus = timeSince + countdownTwo;
+        NSLog(@"Time Plus 2 = %ld", (long)timePlus);
+        
+        if (timePlus > 0) {
+            [timerVC startTimerFromDetails:timePlus withDetails:timerTwoDesc];
+        } else {
+            [userDefaults removeObjectForKey:@"fireDateTwo"];
+            [userDefaults removeObjectForKey:@"countdownTwo"];
+            [userDefaults removeObjectForKey:@"pauseStartTwo"];
+        }
     }
     
-    if ([fireDateOne timeIntervalSinceNow] < 0.0) {
-        NSTimeInterval secondsOne = -1 * [pauseStartOne timeIntervalSinceNow];
-        //NSDate *minusDate = [fireDateOne dateByAddingTimeInterval:secondsOne];
-        NSLog(@"Fire Date has NOT passed, seconds = %f", secondsOne);
-        
-        NSDate *newFire = [fireDateOne initWithTimeInterval:secondsOne sinceDate:[NSDate date]];
-        double newFireSeconds = -[newFire timeIntervalSinceDate:[NSDate date]] * 86400;
-        
-        NSLog(@"Now = %@", [NSDate date]);
-        
-        NSLog(@"new fire seconds = %f", newFireSeconds);
-    } else {
-        NSLog(@"Fire Date has passed");
-    }
+//    if ([fireDateOne timeIntervalSinceNow] < 0.0) {
+//        NSInteger timeSince = [pauseStartOne timeIntervalSinceNow];
+//        NSInteger timePlus = timeSince + countdownOne;
+//        NSLog(@"Time Plus 1 = %ld", (long)timePlus);
+//        if (timePlus > 0) {
+//            [timerVC startTimerFromDetails:timePlus withDetails:timerOneDesc];
+//        } else {
+//            [userDefaults removeObjectForKey:@"fireDateTwo"];
+//            [userDefaults removeObjectForKey:@"countdownOne"];
+//            [userDefaults removeObjectForKey:@"pauseStartOne"];
+//        }
+//        
+////        NSTimeInterval secondsOne = -1 * [pauseStartOne timeIntervalSinceNow];
+////        //NSDate *minusDate = [fireDateOne dateByAddingTimeInterval:secondsOne];
+////        NSLog(@"Fire Date has NOT passed, seconds = %f", secondsOne);
+////        
+////        NSDate *newFire = [fireDateOne initWithTimeInterval:secondsOne sinceDate:[NSDate date]];
+////        double newFireSeconds = -[newFire timeIntervalSinceDate:[NSDate date]] * 86400;
+////        
+////        NSLog(@"Now = %@", [NSDate date]);
+////        
+////        NSLog(@"new fire seconds = %f", newFireSeconds);
+//    } else {
+//        NSLog(@"Fire Date has passed");
+//    }
     
-    if (fireDateTwo > [NSDate date]) {
-        
-    }
+//    if ([fireDateTwo timeIntervalSinceNow] < 0.0) {
+//        NSInteger timeSince = [pauseStartTwo timeIntervalSinceNow];
+//        NSInteger timePlus = timeSince + countdownTwo;
+//        NSLog(@"Time Plus 2 = %ld", (long)timePlus);
+//        
+//        if (timePlus > 0) {
+//            [timerVC startTimerFromDetails:timePlus withDetails:timerOneDesc];
+//        } else {
+//            [userDefaults removeObjectForKey:@"fireDateTwo"];
+//            [userDefaults removeObjectForKey:@"countdownTwo"];
+//            [userDefaults removeObjectForKey:@"pauseStartTwo"];
+//        }
+//    }
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {

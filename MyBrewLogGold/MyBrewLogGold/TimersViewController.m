@@ -30,6 +30,7 @@
     
     EKCalendar *recipeCalendar;
     id buttonSender;
+    NSUserDefaults *userDefaults;
 }
 
 @end
@@ -44,6 +45,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    userDefaults = [NSUserDefaults standardUserDefaults];
     
     //Grab app delegate and set calendar
     self.appDelegate = [[UIApplication sharedApplication] delegate];
@@ -148,6 +151,10 @@
         firstTimer = nil;
         [self.alarmPlayer play];
         NSLog(@"Timer over");
+        
+        [userDefaults removeObjectForKey:@"fireDateOne"];
+        [userDefaults removeObjectForKey:@"countdownOne"];
+        [userDefaults removeObjectForKey:@"pauseStartOne"];
     }
 }
 
@@ -178,6 +185,10 @@
         secondTimer = nil;
         [self.alarmPlayer play];
         NSLog(@"Timer over");
+        
+        [userDefaults removeObjectForKey:@"fireDateTwo"];
+        [userDefaults removeObjectForKey:@"countdownTwo"];
+        [userDefaults removeObjectForKey:@"pauseStartTwo"];
     }
 }
 
