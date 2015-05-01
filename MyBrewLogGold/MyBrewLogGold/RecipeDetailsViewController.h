@@ -33,6 +33,5 @@
 @property (strong, nonatomic) PFObject *passedObject;
 
 -(void)pressBackButton;
--(IBAction)logButtonClicked:(id)sender;
 
 @end

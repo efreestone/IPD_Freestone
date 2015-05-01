@@ -62,10 +62,7 @@
 
 //Share button clicked
 -(IBAction)shareClicked:(id)sender {
-//    NSString *titleString = @"Share Recipe";
-//    NSString *alertMessage = @"Recipe would have been shared via social networks, however this feature is not functional yet";
-//    [self showAlert:alertMessage withTitle:titleString];
-    [self postToTwitter];
+    [self createActivityViewForShare];
 }
 
 //Method to create and show alert view
@@ -140,21 +137,27 @@
     }
 }
 
-
-//Post to twitter. This is still lacking a link but there is no website interface to handle it anyways.
--(void)postToTwitter {
-    //Create string with username and score
-    NSString *tweetString = [NSString stringWithFormat:@"Check out this %@ recipe on My Brew Log (insert link) called %@ by %@", passedType, passedName, usernameString];
+//Create activity view controller to Facebook or Twitter
+-(void)createActivityViewForShare {
+    NSString *text = [NSString stringWithFormat:@"Check out my %@ recipe on @My_Brew_Log (insert link) called %@", passedType, passedName];
     
-    if ([SLComposeViewController isAvailableForServiceType:SLServiceTypeTwitter]) {
-        SLComposeViewController *tweetSheet = [SLComposeViewController
-                                               composeViewControllerForServiceType:SLServiceTypeTwitter];
-        [tweetSheet setInitialText:tweetString];
-        NSLog(@"Post to Twitter");
-        [self presentViewController:tweetSheet animated:YES completion:nil];
-    } else {
-        [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:NSLocalizedString(@"There is no twitter account available on your device. Please check your account settings and try again", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles:nil] show];
-    }
+    UIActivityViewController *activityController = [[UIActivityViewController alloc] initWithActivityItems:@[text] applicationActivities:nil];
+    
+    //Ignore all share options but facebook and twitter
+    activityController.excludedActivityTypes = @[UIActivityTypePostToWeibo,
+                                                 UIActivityTypeMessage,
+                                                 UIActivityTypeMail,
+                                                 UIActivityTypePrint,
+                                                 UIActivityTypeCopyToPasteboard,
+                                                 UIActivityTypeAssignToContact,
+                                                 UIActivityTypeSaveToCameraRoll,
+                                                 UIActivityTypeAddToReadingList,
+                                                 UIActivityTypePostToFlickr,
+                                                 UIActivityTypePostToVimeo,
+                                                 UIActivityTypePostToTencentWeibo,
+                                                 UIActivityTypeAirDrop];
+    
+    [self presentViewController:activityController animated:YES completion:nil];
 }
 
 

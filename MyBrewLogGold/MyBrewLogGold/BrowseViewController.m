@@ -54,13 +54,8 @@ typedef enum {
     [super viewDidLoad];
     //Set parse class name
     parseClassName = @"newRecipe";
-    //self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
-    self.browseTableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
-    //self.tableView.separatorColor = [UIColor lightGrayColor];
     
-//    //Set offset and hide search bar
-//    self.tableView.contentOffset = CGPointMake(0, (searchBar.frame.size.height) - self.tableView.contentOffset.y);
-//    searchBar.hidden = YES;
+    self.browseTableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     
     noRecipesView = [[UIView alloc] initWithFrame:self.view.frame];
     noRecipesView.backgroundColor = [UIColor clearColor];
@@ -119,8 +114,6 @@ typedef enum {
         self.textKey = @"text";
         // Whether the built-in pull-to-refresh is enabled
         self.pullToRefreshEnabled = YES;
-        // The title for this table in the Navigation Controller.
-        //self.title = @"My Contacts";
     }
     return self;
 }
@@ -214,11 +207,6 @@ typedef enum {
     //Exclude the current users objects
     [newItemQuery whereKey:@"createdBy" notEqualTo:[PFUser currentUser].username];
     
-    //Set cache policy
-//    if ([self.objects count] == 0) {
-//        newItemQuery.cachePolicy = kPFCachePolicyNetworkElseCache;
-//    }
-    
     //Set sort. toSort is an enum set by selecting a button in the sort action sheet
     switch (toSort) {
         case 1: //Favorites
@@ -246,8 +234,6 @@ typedef enum {
             NSLog(@"Sort default");
             break;
     }
-//    NSArray *queryResults = [newItemQuery findObjects];
-//    [PFObject pinAllInBackground:queryResults];
     return newItemQuery;
 } //queryForTable close
 
@@ -287,10 +273,8 @@ typedef enum {
         selectedInstructions = [object objectForKey:@"Instructions"];
         selectedObjectID = [NSString stringWithFormat:@"%@", object.objectId];
         selectedPFObject = object;
-        //isFavorite = [object ]
-        //[object whereKey:@"favorites" equalTo:[PFUser currentUser].objectId];
     } else {
-        //Not search, process as standard selection
+    //Not search, process as standard selection
         //NSLog(@"indexpath at orignal tableview is: %@", [indexPath description]);
         object = [self objectAtIndexPath:indexPath];
         selectedName = [object objectForKey:@"Name"];
@@ -300,6 +284,7 @@ typedef enum {
         selectedObjectID = [NSString stringWithFormat:@"%@", object.objectId];
         selectedPFObject = object;
         NSArray *favArray = [object objectForKey:@"favorites"];
+        //Check if object is a favorite
         if (favArray != nil && favArray.count > 0) {
             NSString *userID = [PFUser currentUser].objectId;
             NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF LIKE[cd] %@", userID];
@@ -311,7 +296,7 @@ typedef enum {
         }
     }
     
-    NSLog(@"toSort = %u", toSort);
+    //NSLog(@"toSort = %u", toSort);
     
     //Grab destination view controller
     UIStoryboard *storyBoard = [self storyboard];
@@ -381,10 +366,6 @@ typedef enum {
     //Query with search term
     PFQuery *query = [PFQuery queryWithClassName: parseClassName];
     [query whereKey:@"createdBy" notEqualTo:[PFUser currentUser].username];
-    //[query whereKey:@"Name" containsString:searchTerm];
-    //Create case-insensitive query, "i" modifier sets this in regex
-//    [query whereKey:@"Name" matchesRegex:searchTerm modifiers:@"i"];
-//    [query whereKey:@"createdBy" matchesRegex:searTermTwo modifiers:@"i"];
     
     PFQuery *nameQuery = [PFQuery queryWithClassName: parseClassName];
     [nameQuery whereKey:@"createdBy" notEqualTo:[PFUser currentUser].username];
@@ -408,12 +389,11 @@ typedef enum {
         if (!error) {
             //Change color of serch textfield if no items match search
             if (objects.count == 0) {
-                //self.browseSearchController.searchBar.backgroundColor = [UIColor grayColor];
+                //No results
                 searchTextField.textColor = [UIColor redColor];
                 searchTextField.layer.borderColor = [[UIColor redColor] CGColor];
                 searchTextField.layer.borderWidth = 1.0;
             } else {
-                //self.browseSearchController.searchBar.backgroundColor = [UIColor clearColor];
                 searchTextField.textColor = [UIColor blackColor];
                 searchTextField.layer.borderColor = [[UIColor whiteColor] CGColor];
                 searchTextField.layer.borderWidth = 0.0;
@@ -424,7 +404,6 @@ typedef enum {
         } else {
             NSLog(@"search query error");
         }
-        
     }];
 }
 

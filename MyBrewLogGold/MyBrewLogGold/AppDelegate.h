@@ -21,8 +21,5 @@
 
 @property (strong, nonatomic) EventManager *eventManager;
 
-@property (strong, nonatomic) NSTimer *firstTimer;
-@property (strong, nonatomic) NSTimer *secondTimer;
-
 @end
 

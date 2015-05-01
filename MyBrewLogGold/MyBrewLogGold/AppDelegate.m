@@ -18,6 +18,13 @@
 
 @interface AppDelegate () {
     TimersViewController *timerVC;
+    NSDate *fireDateOne;
+    NSDate *fireDateTwo;
+    NSDate *pauseStartOne;
+    NSDate *pauseStartTwo;
+    NSUserDefaults *userDefaults;
+    NSString *timerOneDesc;
+    NSString *timerTwoDesc;
 }
 
 @end
@@ -26,6 +33,7 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    userDefaults = [NSUserDefaults standardUserDefaults];
     // [Optional] Power your app with Local Datastore. For more info, go to
     // https://parse.com/docs/ios_guide#localdatastore/iOS
         [Parse enableLocalDatastore];
@@ -36,6 +44,10 @@
     
     // [Optional] Track statistics around application opens.
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
+    
+    if ([UIApplication instancesRespondToSelector:@selector(registerUserNotificationSettings:)]) {
+        [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert|UIUserNotificationTypeSound categories:nil]];
+    }
     
     // Override point for customization after application launch.
     return YES;
@@ -53,14 +65,30 @@
     if (timerVC.firstTimer != nil) {
         //Start local notification for timer
         [timerVC startLocalNotification:timerVC.timerDate withDescription:timerVC.oneDescription];
+        //Grab dates to be saved in user defaults
+        fireDateOne = timerVC.firstTimer.fireDate;
+        pauseStartOne = [NSDate date];
+        timerOneDesc = timerVC.oneDescriptionLabel.text;
         //Invalidate timer
         [timerVC.firstTimer invalidate];
+        //Set dates in user defaults
+        [userDefaults setObject:fireDateOne forKey:@"fireDateOne"];
+        [userDefaults setObject:pauseStartOne forKey:@"pauseStartOne"];
+        [userDefaults setObject:timerOneDesc forKey:@"timerOneDesc"];
     }
     if (timerVC.secondTimer != nil) {
         //Start local notification for timer
         [timerVC startLocalNotification:timerVC.timerDateTwo withDescription:timerVC.twoDescription];
+        //Grab dates to be saved in user defaults
+        fireDateTwo = timerVC.secondTimer.fireDate;
+        pauseStartTwo = [NSDate date];
+        timerTwoDesc = timerVC.twoDescriptionLabel.text;
         //Invalidate timer
         [timerVC.secondTimer invalidate];
+        //Set dates in user defaults
+        [userDefaults setObject:fireDateTwo forKey:@"fireDateTwo"];
+        [userDefaults setObject:pauseStartTwo forKey:@"pauseStartTwo"];
+        [userDefaults setObject:timerTwoDesc forKey:@"timerTwoDesc"];
     }
 }
 
@@ -80,6 +108,34 @@
     NSString *path = [NSString stringWithFormat:@"%@/bell.mp3", [[NSBundle mainBundle] resourcePath]];
     NSURL *soundUrl = [NSURL fileURLWithPath:path];
     timerVC.alarmPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:soundUrl error:nil];
+    
+    if ([userDefaults objectForKey:@"fireDateOne"]) {
+        fireDateOne = [userDefaults objectForKey:@"fireDateOne"];
+        pauseStartOne = [userDefaults objectForKey:@"pauseStartOne"];
+    }
+    if ([userDefaults objectForKey:@"fireDateTwo"]) {
+        fireDateTwo = [userDefaults objectForKey:@"fireDateTwo"];
+        pauseStartTwo = [userDefaults objectForKey:@"pauseStartTwo"];
+    }
+    
+    if ([fireDateOne timeIntervalSinceNow] < 0.0) {
+        NSTimeInterval secondsOne = -1 * [pauseStartOne timeIntervalSinceNow];
+        //NSDate *minusDate = [fireDateOne dateByAddingTimeInterval:secondsOne];
+        NSLog(@"Fire Date has NOT passed, seconds = %f", secondsOne);
+        
+        NSDate *newFire = [fireDateOne initWithTimeInterval:secondsOne sinceDate:[NSDate date]];
+        double newFireSeconds = -[newFire timeIntervalSinceDate:[NSDate date]] * 86400;
+        
+        NSLog(@"Now = %@", [NSDate date]);
+        
+        NSLog(@"new fire seconds = %f", newFireSeconds);
+    } else {
+        NSLog(@"Fire Date has passed");
+    }
+    
+    if (fireDateTwo > [NSDate date]) {
+        
+    }
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {

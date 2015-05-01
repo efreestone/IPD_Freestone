@@ -150,10 +150,6 @@
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardAppeared:)
                                                  name:UIKeyboardDidShowNotification object:nil];
-    
-//    [[NSNotificationCenter defaultCenter] addObserver:self
-//                                             selector:@selector(keyboardWillBeHidden:)
-//                                                 name:UIKeyboardWillHideNotification object:nil];
 }
 
 //Called when the UIKeyboardDidShowNotification is sent.
@@ -625,7 +621,6 @@
                         //Dismiss add item view
                         [self dismissViewControllerAnimated:YES completion:nil];
                         [self.myRecipeVC refreshTable];
-//                        [self.myRecipeVC.navigationController popToRootViewControllerAnimated:YES];
                         [self.recipeDetailsVC pressBackButton];
                     } else {
                         NSLog(@"%@", error);
@@ -641,7 +636,6 @@
             PFObject *newRecipeObject = [PFObject objectWithClassName:parseClassName];
             newRecipeObject[@"Type"] = recipeType;
             newRecipeObject[@"Name"] = recipeName;
-            //        newRecipeObject[@"Notes"] = recipeNotes;
             newRecipeObject[@"Ingredients"] = recipeIngredients;
             newRecipeObject[@"Instructions"] = recipeInstructions;
             newRecipeObject[@"createdBy"] = [PFUser currentUser].username;

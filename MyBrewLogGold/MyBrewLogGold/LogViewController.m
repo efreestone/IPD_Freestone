@@ -91,6 +91,7 @@
     shouldMoveCursor = YES;
 }
 
+//Move curse to end of notes
 - (void)textViewDidChangeSelection:(UITextView *)textView {
     if(shouldMoveCursor) {
         NSLog(@"Did Change w/ should move");
